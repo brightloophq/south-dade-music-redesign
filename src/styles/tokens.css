@@ -1,0 +1,267 @@
+/**
+ * Design tokens — Tailwind v4 @theme layer.
+ *
+ * Canonical spec: docs/redesign/04-design-system.md · 05-motion-system.md
+ * TypeScript mirror: src/tokens/*.ts — change both together.
+ *
+ * Everything declared in @theme generates Tailwind utilities automatically
+ * (e.g. --color-stage-900 → bg-stage-900, text-stage-900, border-stage-900).
+ * Values that have no Tailwind namespace (z-index, opacity intents, semantic
+ * aliases) are declared in :root below and consumed via var().
+ */
+
+@theme {
+  /* ---------------------------------------------------------------------
+   * Colour — Stage (the house), Spotlight (the light), Velvet (the curtain)
+   * ------------------------------------------------------------------- */
+  --color-stage-950: #070a12;
+  --color-stage-900: #0d1220;
+  --color-stage-800: #161e32;
+  --color-stage-700: #232e4a;
+  --color-stage-600: #35436a;
+
+  --color-spot-300: #ffd68a;
+  --color-spot-400: #ffc15c;
+  --color-spot-500: #f5a524;
+  --color-spot-600: #d4870e;
+  --color-spot-700: #a66908;
+
+  --color-velvet-500: #b12a4b;
+  --color-velvet-600: #8b1e3f;
+  --color-velvet-700: #6e1631;
+
+  /* Warm-tinted neutrals. Cool greys fight the amber. */
+  --color-n-0: #ffffff;
+  --color-n-50: #faf9f7;
+  --color-n-100: #f2f0ec;
+  --color-n-200: #e5e2dc;
+  --color-n-300: #d2cec6;
+  --color-n-400: #a9a49a;
+  --color-n-500: #777269;
+  --color-n-600: #59554d;
+  --color-n-700: #403d37;
+  --color-n-800: #2a2823;
+  --color-n-900: #171613;
+
+  --color-success: #1f7a4c;
+  --color-warn: #9a5b00;
+  --color-error: #b3261e;
+  --color-info: #1f5c8b;
+
+  /* ---------------------------------------------------------------------
+   * Typography — two families, self-hosted via next/font
+   * ------------------------------------------------------------------- */
+  --font-display: var(--font-archivo), ui-sans-serif, system-ui, sans-serif;
+  --font-body: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
+
+  /* Fluid scale, computed across 375px → 1440px */
+  --text-display-xl: clamp(2.5rem, 1.4437rem + 4.507vw, 5.5rem);
+  --text-display-xl--line-height: 1.15;
+  --text-display-xl--letter-spacing: -0.03em;
+  --text-display-lg: clamp(2.125rem, 1.4648rem + 2.8169vw, 4rem);
+  --text-display-lg--line-height: 1.15;
+  --text-display-lg--letter-spacing: -0.025em;
+  --text-display-md: clamp(1.875rem, 1.4789rem + 1.6901vw, 3rem);
+  --text-display-md--line-height: 1.15;
+  --text-display-md--letter-spacing: -0.02em;
+
+  --text-heading-lg: clamp(1.625rem, 1.4049rem + 0.939vw, 2.25rem);
+  --text-heading-lg--line-height: 1.3;
+  --text-heading-lg--letter-spacing: -0.015em;
+  --text-heading-md: clamp(1.375rem, 1.243rem + 0.5634vw, 1.75rem);
+  --text-heading-md--line-height: 1.3;
+  --text-heading-md--letter-spacing: -0.01em;
+  --text-heading-sm: clamp(1.1875rem, 1.1215rem + 0.2817vw, 1.375rem);
+  --text-heading-sm--line-height: 1.3;
+
+  --text-body-lg: clamp(1.125rem, 1.081rem + 0.1878vw, 1.25rem);
+  --text-body-lg--line-height: 1.6;
+  --text-body-md: clamp(1rem, 0.978rem + 0.0939vw, 1.0625rem);
+  --text-body-md--line-height: 1.6;
+  --text-body-sm: clamp(0.875rem, 0.853rem + 0.0939vw, 0.9375rem);
+  --text-body-sm--line-height: 1.6;
+
+  --text-label: 0.8125rem;
+  --text-label--line-height: 1.3;
+  --text-label--letter-spacing: 0.08em;
+
+  --text-stat: clamp(3rem, 1.9437rem + 4.507vw, 6rem);
+  --text-stat--line-height: 1;
+  --text-stat--letter-spacing: -0.04em;
+
+  --tracking-bill: 0.12em;
+  --leading-body-es: 1.7;
+
+  /* ---------------------------------------------------------------------
+   * Spacing — 4px base unit, 8px layout rhythm
+   * ------------------------------------------------------------------- */
+  --spacing: 4px;
+
+  /* ---------------------------------------------------------------------
+   * Radius — moderate and consistent. Heavy rounding breaks the teen constraint.
+   * ------------------------------------------------------------------- */
+  --radius-none: 0px;
+  --radius-sm: 4px;
+  --radius-md: 8px;
+  --radius-lg: 16px;
+  --radius-xl: 24px;
+  --radius-full: 9999px;
+
+  /* ---------------------------------------------------------------------
+   * Breakpoints
+   * ------------------------------------------------------------------- */
+  --breakpoint-sm: 480px;
+  --breakpoint-md: 768px;
+  --breakpoint-lg: 1024px;
+  --breakpoint-xl: 1280px;
+  --breakpoint-2xl: 1536px;
+
+  /* ---------------------------------------------------------------------
+   * Container widths — content max 1440px, prose 68ch
+   * ------------------------------------------------------------------- */
+  --container-prose: 68ch;
+  --container-narrow: 768px;
+  --container-content: 1200px;
+  --container-wide: 1440px;
+
+  /* ---------------------------------------------------------------------
+   * Shadows — always warm-tinted, derived from n-900. Never pure black on light.
+   * ------------------------------------------------------------------- */
+  --shadow-elev-1: 0 1px 2px rgba(23, 22, 19, 0.06);
+  --shadow-elev-2: 0 4px 12px rgba(23, 22, 19, 0.08);
+  --shadow-elev-3: 0 12px 32px rgba(23, 22, 19, 0.12);
+  --shadow-elev-4: 0 24px 64px rgba(23, 22, 19, 0.16);
+  --shadow-dark-modal: 0 12px 32px rgba(0, 0, 0, 0.4);
+  --shadow-dark-lightbox: 0 24px 64px rgba(0, 0, 0, 0.55);
+  /* The brand's visual signature. Primary CTA and active showcase image only. */
+  --shadow-spotlight: 0 0 0 1px #d4870e, 0 8px 24px rgba(245, 165, 36, 0.24);
+
+  /* ---------------------------------------------------------------------
+   * Motion — four curves, no component invents its own
+   * ------------------------------------------------------------------- */
+  --ease-stage: cubic-bezier(0.22, 1, 0.36, 1);
+  --ease-spot: cubic-bezier(0.34, 1.36, 0.64, 1);
+  --ease-curtain: cubic-bezier(0.65, 0, 0.35, 1);
+  --ease-exit: cubic-bezier(0.4, 0, 1, 1);
+}
+
+/* -----------------------------------------------------------------------
+ * Values with no Tailwind theme namespace.
+ * Consumed as `z-(--z-header)`, `duration-(--duration-base)`, etc.
+ * --------------------------------------------------------------------- */
+:root {
+  /* Durations (ms) */
+  --duration-instant: 100ms;
+  --duration-fast: 180ms;
+  --duration-base: 280ms;
+  --duration-slow: 420ms;
+  --duration-slower: 640ms;
+  --duration-cinematic: 900ms;
+
+  /* Z-index. Skip link sits above everything — it is the first tab stop. */
+  --z-below: -1;
+  --z-base: 0;
+  --z-raised: 10;
+  --z-sticky: 100;
+  --z-header: 200;
+  --z-drawer: 300;
+  --z-overlay: 400;
+  --z-modal: 500;
+  --z-popover: 600;
+  --z-toast: 700;
+  --z-skip-link: 900;
+
+  /* Opacity, named by intent */
+  --opacity-disabled: 0.4;
+  --opacity-muted: 0.6;
+  --opacity-hairline-on-dark: 0.2;
+  --opacity-veil: 0.85;
+  --opacity-scrim: 0.92;
+  --opacity-header-ground: 0.96;
+
+  /* Section rhythm */
+  --section-compact: 48px;
+  --section-comfortable: 64px;
+  --section-spacious: 96px;
+  --section-feature: 128px;
+
+  /* Grid gutters and margins */
+  --grid-gutter: 16px;
+  --grid-margin: 20px;
+
+  /* Touch target floor */
+  --touch-target-min: 44px;
+
+  /* ---------------------------------------------------------------------
+   * Semantic aliases (04-design-system.md §1).
+   * Components reference these, never raw palette values.
+   * Defaults are the LIGHT register — "The Desk".
+   * ------------------------------------------------------------------- */
+  --color-surface-page: var(--color-n-50);
+  --color-surface-raised: var(--color-n-0);
+  --color-surface-sunken: var(--color-n-100);
+  --color-border-default: var(--color-n-200);
+  --color-text-primary: var(--color-n-900);
+  --color-text-secondary: var(--color-n-600);
+  --color-text-muted: var(--color-n-500);
+  --color-action-primary-bg: var(--color-spot-500);
+  --color-action-primary-fg: var(--color-stage-950);
+  --color-action-secondary-bg: var(--color-velvet-600);
+  --color-action-secondary-fg: var(--color-n-0);
+  --color-link-default: var(--color-velvet-700);
+  --color-focus-ring: var(--color-spot-500);
+  --color-focus-ring-offset: var(--color-n-50);
+}
+
+/* -----------------------------------------------------------------------
+ * The DARK register — "The House".
+ * Applied by [data-register="house"] rather than a media query: the two
+ * registers are an information architecture, not a user preference.
+ * See docs/redesign/final-art-direction.md §2.
+ * --------------------------------------------------------------------- */
+[data-register='house'] {
+  --color-surface-page: var(--color-stage-900);
+  --color-surface-raised: var(--color-stage-800);
+  --color-surface-sunken: var(--color-stage-950);
+  --color-border-default: var(--color-stage-700);
+  --color-text-primary: var(--color-n-0);
+  --color-text-secondary: var(--color-n-300);
+  --color-text-muted: var(--color-n-400);
+  --color-link-default: var(--color-spot-400);
+  --color-focus-ring-offset: var(--color-stage-950);
+}
+
+/* Responsive section rhythm and grid, per 04-design-system.md §3–4 */
+@media (min-width: 480px) {
+  :root {
+    --grid-margin: 24px;
+  }
+}
+
+@media (min-width: 768px) {
+  :root {
+    --section-compact: 64px;
+    --section-comfortable: 96px;
+    --section-spacious: 128px;
+    --section-feature: 160px;
+    --grid-gutter: 24px;
+    --grid-margin: 32px;
+  }
+}
+
+@media (min-width: 1024px) {
+  :root {
+    --grid-margin: 48px;
+  }
+}
+
+@media (min-width: 1280px) {
+  :root {
+    --section-compact: 96px;
+    --section-comfortable: 128px;
+    --section-spacious: 160px;
+    --section-feature: 192px;
+    --grid-gutter: 32px;
+    --grid-margin: 64px;
+  }
+}

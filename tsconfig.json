@@ -19,13 +19,18 @@
       }
     ],
     "paths": {
-      "@/*": ["./*"]
+      "@/*": ["./src/*"]
     }
   },
   "include": [
     "next-env.d.ts",
     "**/*.ts",
     "**/*.tsx",
+    // TypeScript's `**` does not match dot-directories, so .storybook needs
+    // listing explicitly — otherwise its config is neither typechecked nor
+    // available to react-docgen.
+    ".storybook/**/*.ts",
+    ".storybook/**/*.tsx",
     ".next/types/**/*.ts",
     ".next/dev/types/**/*.ts",
     "**/*.mts"

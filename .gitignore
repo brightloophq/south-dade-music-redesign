@@ -30,8 +30,14 @@ yarn-debug.log*
 yarn-error.log*
 .pnpm-debug.log*
 
-# env files (can opt-in for committing if needed)
+# env files — secrets never get committed.
+# The template is the one deliberate exception: it documents every variable the
+# project reads, with no values in it.
 .env*
+!.env.example
+
+# storybook build output — a generated artifact, not source
+storybook-static
 
 # vercel
 .vercel

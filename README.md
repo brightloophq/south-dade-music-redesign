@@ -1,36 +1,85 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# South Dade Music
 
-## Getting Started
+Redesign of the South Dade Music website — a music academy in Florida City, Florida.
 
-First, run the development server:
+Next.js 16 (App Router, Turbopack) · React 19 · TypeScript · Tailwind CSS 4 · GSAP 3
+
+## Getting started
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+npm install
+cp .env.example .env.local   # then fill in what you need
+npm run dev                  # http://localhost:3000
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Nothing in `.env.local` is required to run the site. The variables only enable
+optional tooling — image generation and the motion debug panel.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Scripts
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+| Script | What it does |
+| --- | --- |
+| `npm run dev` | Development server |
+| `npm run build` | Production build |
+| `npm run start` | Serve a production build |
+| `npm run lint` | ESLint |
+| `npm run typecheck` | `tsc --noEmit` |
+| `npm run check` | typecheck + lint + build |
+| `npm run probe:motion` | Verify the motion layer in a real browser — see below |
+| `npm run storybook` | Component laboratory on :6006 |
+| `npm run generate:image` | Generate an atmospheric asset (see `docs/redesign/`) |
 
-## Learn More
+## Verifying motion
 
-To learn more about Next.js, take a look at the following resources:
+Typecheck, lint and build **cannot** tell you whether the motion layer runs.
+Three consecutive phases of this project passed all three while the homepage was
+silently frozen: a capability gate had resolved to `false` on ordinary hardware,
+a GSAP plugin was never registered, and a colour ramp's only caller had been
+deleted. None of that is visible to a static check.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+`npm run probe:motion` drives the real page in headless Chrome and asserts that
+light travels, the grade evolves, the week counter advances and the flare fires.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+```bash
+npm run dev                                        # terminal 1
+npm run probe:motion                               # terminal 2 — dev mode
+npm run probe:motion http://localhost:3100/ --production
+```
 
-## Deploy on Vercel
+**Requires a system Chrome or Edge.** The probe uses `playwright-core`, which
+ships no browser binaries by design — one diagnostic script does not justify a
+~150 MB download. Searched paths are in `CHROME_CANDIDATES` at the top of
+`scripts/motion-probe.mjs`; add yours if it differs.
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+Dev mode reads the diagnostics store and reports every timeline individually.
+Production mode asserts the opposite: that the instrumentation is *gone* and the
+film runs anyway. See `docs/implementation/delivery-readiness.md`.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## Motion debug panel
+
+Set `NEXT_PUBLIC_MOTION_DEBUG=true` in `.env.local` for a live overlay showing
+GSAP state, capability resolution, and per-timeline progress.
+
+It is gated on that flag **and** `NODE_ENV !== 'production'`, so a production
+build strips it even if the flag is left on. The diagnostics store behind it
+compiles to empty functions in production — verified by scanning the build
+output, not assumed.
+
+## Layout
+
+```
+src/app/          routes (only the homepage is built so far)
+src/components/   ui/ · layout/ · home/ · motion/
+src/lib/motion/   gsap setup, film/ timelines, camera, light, diagnostics
+src/tokens/       design tokens — the single source of colour/type/space
+src/content/      verified copy, extracted from the live site
+docs/             extraction, strategy, art direction, implementation reports
+scripts/          generate-image.mjs · motion-probe.mjs
+```
+
+## Status
+
+The homepage is built. The other 28 routes referenced by the navigation and
+homepage CTAs — including `/contact/book-a-trial` — do not exist yet, so those
+links 404. Several content decisions are still gated pending client sign-off
+(pricing, teacher names, photo consent); see the decision gates in `docs/`.

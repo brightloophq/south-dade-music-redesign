@@ -1,0 +1,145 @@
+{
+  "$comment": "Every call to action found across the estate, including CTAs that render as plain text with no link ('dead CTAs').",
+  "extractionDate": "2026-08-05",
+  "totalCTAInstances": "40+ linked, 20 dead",
+  "distinctDestinations": 3,
+
+  "primaryConversionEndpoint": {
+    "url": "https://link.apisystem.tech/widget/survey/0IIXocvyYpPeFVbD5HPB",
+    "platform": "LeadConnector / HighLevel (GoHighLevel) survey widget",
+    "type": "external survey form",
+    "appearsOn": "every page of southdademusic.com, including the 404 template",
+    "criticalIssue": "One widget serves every intent. Trial bookings, 90-day program enquiries and $450 camp reservations all submit the same form. Intent cannot be segmented at capture, and no per-intent tracking is possible."
+  },
+
+  "ctaLabels": [
+    {
+      "label": "Book a Trial Lesson",
+      "destination": "https://link.apisystem.tech/widget/survey/0IIXocvyYpPeFVbD5HPB",
+      "location": "sticky site header",
+      "occurrences": "every page",
+      "intent": "trial"
+    },
+    {
+      "label": "Schedule a Trial Lesson",
+      "destination": "https://link.apisystem.tech/widget/survey/0IIXocvyYpPeFVbD5HPB",
+      "location": "hero block (rendered twice on most interior pages), body sections, footer CTA block",
+      "occurrences": "30+ across the site",
+      "intent": "trial"
+    },
+    {
+      "label": "Schedule a Trial Lesson",
+      "destination": "https://southdademusic.com/contact-enroll/",
+      "location": "body of /about/ (×2), /bass-guitar-lessons/, /ukulele-lessons/",
+      "occurrences": 4,
+      "intent": "trial",
+      "defect": "SAME LABEL, DIFFERENT DESTINATION. Four instances send the visitor to an internal page that contains no form, instead of to the booking widget."
+    },
+    {
+      "label": "Book 90-Day Stage Experience",
+      "destination": "https://link.apisystem.tech/widget/survey/0IIXocvyYpPeFVbD5HPB",
+      "location": "homepage hero",
+      "occurrences": 1,
+      "intent": "flagship program",
+      "defect": "Resolves to the generic trial widget. The site's single most important CTA is not distinguishable from a generic trial booking."
+    },
+    {
+      "label": "Reserve My Child's Seat",
+      "destination": "https://link.apisystem.tech/widget/survey/0IIXocvyYpPeFVbD5HPB",
+      "location": "/summer-jam-music-camp-2026/ (×2), /summercamp/ (×2)",
+      "occurrences": 4,
+      "intent": "camp reservation",
+      "defect": "Same generic widget. A parent committing to a $450 camp with a non-refundable deposit sees the same form as a free trial enquiry. No payment step exists on-site."
+    },
+    {
+      "label": "Enroll Now",
+      "destination": "https://southdademusic.com/contact-enroll/",
+      "location": "/summercamp/ only",
+      "occurrences": 1,
+      "intent": "camp enrolment",
+      "defect": "DEAD END. Leads to a page with no enrolment form, no camp information, and no payment path."
+    },
+    {
+      "label": "Explore Program",
+      "destination": "/band-builders/, /early-childhood/, /summer-programs/, /90-day-stage-program/, /private-lessons/",
+      "location": "homepage program cards (rendered 3× = 15 instances), /programs/ cards (5 instances)",
+      "occurrences": 20,
+      "intent": "navigation"
+    },
+    {
+      "label": "Explore Instrument",
+      "destination": "/piano-lessons/, /guitar-lessons/, /drum-lessons/, /bass-guitar-lessons/, /ukulele-lessons/, /violin-lessons/",
+      "location": "/instruments/ cards",
+      "occurrences": 6,
+      "intent": "navigation"
+    },
+    {
+      "label": "Go Home",
+      "destination": "https://southdademusic.com/",
+      "location": "404 template",
+      "occurrences": 2,
+      "intent": "recovery"
+    },
+    {
+      "label": "Request a Trial Lesson",
+      "destination": "LeadConnector funnel step (JS-driven, no resolvable href in scrape)",
+      "location": "try.southdademusic.com",
+      "occurrences": 4,
+      "intent": "trial",
+      "note": "Separate platform, separate form, separate lead pool from the main site."
+    }
+  ],
+
+  "deadCTAs": {
+    "description": "Text that reads as a call to action but carries no link. Concentrated at the bottom of instrument and program pages - the exact point of highest purchase intent.",
+    "instances": [
+      { "text": "📞 Contact us to schedule a piano lesson", "page": "/piano-lessons/" },
+      { "text": "📍 Visit our South Dade studio", "page": "/piano-lessons/" },
+      { "text": "🌐 Explore all music programs online", "page": "/piano-lessons/" },
+      { "text": "📞 Contact us to schedule a lesson", "page": "/guitar-lessons/, /violin-lessons/, /singing-lessons/" },
+      { "text": "📍 Visit our South Dade studio", "page": "/guitar-lessons/, /violin-lessons/, /singing-lessons/" },
+      { "text": "🌐 Explore all music programs online", "page": "/guitar-lessons/, /violin-lessons/, /singing-lessons/" },
+      { "text": "📞 Contact us to schedule a lesson", "page": "/drum-lessons/" },
+      { "text": "📍 Visit our South Dade studio", "page": "/drum-lessons/" },
+      { "text": "🌐 Explore our music programs online", "page": "/drum-lessons/" },
+      { "text": "📞 Contact us to learn more or enroll", "page": "/group-music-lessons/" },
+      { "text": "📍 Visit our South Dade location", "page": "/group-music-lessons/" },
+      { "text": "🌐 Explore all music programs online", "page": "/group-music-lessons/" },
+      { "text": "Contact us today to schedule your lesson and begin your music journey.", "page": "/instruments/" },
+      { "text": "Getting started is simple, and kids really enjoy the experience.", "page": "/summer-programs/", "note": "The closing 'Get Started' section has NO CTA of any kind." }
+    ],
+    "impact": "Six of the seven instrument pages and both orphan program pages end with an unlinked contact prompt. Every one of these pages loses the visitor at the moment of highest intent."
+  },
+
+  "formsOnSite": {
+    "count": 0,
+    "note": "southdademusic.com contains ZERO native forms - no contact form, no enquiry form, no enrolment form, no newsletter signup. 100% of lead capture depends on an external third-party widget."
+  },
+
+  "paymentActions": {
+    "onSitePayment": false,
+    "note": "The camp requires a non-refundable down payment 'today', but no payment mechanism, price checkout, or payment-processor reference exists on the site. Payment presumably happens inside the LeadConnector widget or offline - unverified, and the deposit amount is never disclosed."
+  },
+
+  "conversionPathAnalysis": {
+    "byIntent": {
+      "wantsATrialLesson": "Works - header CTA is present on every page.",
+      "wantsPricingBeforeCommitting": "BLOCKED - no price is published for any lesson or program. The only prices on the site are the $450/$400 camp fees and the $25 spot hold.",
+      "wantsToBookCamp": "Partially blocked - the camp CTA is a generic enquiry widget with no seat selection, no payment, and no stated deposit amount. Both 2026 sessions have already ended.",
+      "wantsToUseAStepUpScholarship": "BLOCKED - the scholarship page has no application steps, no eligibility criteria, no document list, no link to Step Up for Students, and no scholarship-specific CTA.",
+      "wantsToAskAQuestion": "Degraded - no contact form; must phone or email, and two different email addresses are published.",
+      "wantsToSeePastPerformances": "BLOCKED - /performances/ has six undated photos and no events; both event URLs 404.",
+      "isASpanishSpeakingParent": "BLOCKED - 'full bilingual support' is claimed but no Spanish content, switcher or hreflang exists.",
+      "wantsToMeetTheTeachers": "BLOCKED - no instructor is named or profiled anywhere on the site."
+    },
+    "topRecommendations": [
+      "Publish pricing, or at minimum a price range, for every program",
+      "Add a native contact form and a scholarship-specific enquiry flow",
+      "Split the conversion widget by intent so trial, camp and scholarship leads are attributable",
+      "Link every dead CTA at the foot of the instrument pages",
+      "Fix the four 'Schedule a Trial Lesson' links that point to a formless page",
+      "Remove or repoint the 'Enroll Now' dead end on /summercamp/",
+      "Add a real camp checkout with the deposit amount disclosed before commitment"
+    ]
+  }
+}

@@ -1,0 +1,227 @@
+{
+  "$comment": "Four-route comparison of the summer offering, as instructed. One product is spread across four indexable URLs in four different states of completeness.",
+  "extractionDate": "2026-08-05",
+  "productName": "Summer Jam Music Camp 2026",
+  "routeCount": 4,
+  "canonicalRecommendation": "https://southdademusic.com/summer-jam-music-camp-2026/",
+
+  "routes": [
+    {
+      "route": "/summer-jam-music-camp-2026/",
+      "programName": "SUMMER JAM MUSIC CAMP 2026",
+      "httpStatus": 200,
+      "published": "2026-05-08",
+      "lastModified": "2026-05-15",
+      "isNavTarget": true,
+      "navNote": "The main navigation's 'Summer Programs' link points here.",
+      "dates": {
+        "session1": "June 8 – June 26, 2026 (Monday to Friday)",
+        "session2": "July 6 – July 24, 2026 (Monday to Friday)"
+      },
+      "times": {
+        "blockA": "8:00 AM – 12:00 PM (Default)",
+        "blockB": "12:30 PM – 4:30 PM (Waitlist Only - open only after first session is full)"
+      },
+      "ageRange": "Students must be between ages 7 and 15",
+      "price": {
+        "standard": "$450 per session (60 instructional hours)",
+        "payInFull": "$400 per child if paid upfront in full"
+      },
+      "deposit": {
+        "required": true,
+        "amount": null,
+        "terms": "A non-refundable down payment is required today to reserve your child's seat.",
+        "balance": "The remaining balance is due 14 days prior to the start date."
+      },
+      "capacity": "15 students per block. Max 30 students per session. Only 60 total seats for the entire summer.",
+      "location": "601 W Palm Dr Unit 1157, Florida City, FL 33034",
+      "schedule": "Monday to Friday, 4 hours per day, 3 weeks per session",
+      "includedActivities": [
+        "3 Weeks of Structured Music Instruction",
+        "Beginner Friendly Training",
+        "All Instruments Provided",
+        "Daily Snacks Included",
+        "Group Activities & Social Time",
+        "End-of-Camp Concert",
+        "Parent Invitation to Attend",
+        "Safe, Supervised Environment"
+      ],
+      "instrumentsTaught": "piano, drums, vocals, ukulele and ensemble playing",
+      "performancePromise": "Every student prepares for a final recital in front of family. / By the end of Summer Jam Music Camp, they step onto the stage for our End-of-Camp Concert.",
+      "refundTerms": "The down payment required to hold your spot is strictly non-refundable. The remaining balance is due 14 days prior to the start date. All registrations are final and non-refundable due to limited enrollment and advance planning for instructors and materials. Each seat is reserved specifically for your child to maintain small group quality.",
+      "behavioralPolicy": "Students must be between ages 7 and 15 and able to follow group directions. We reserve the right to decline camp enrollment for severe behavioral disruptions to protect the safe group environment of our community.",
+      "enrollmentLink": "https://link.apisystem.tech/widget/survey/0IIXocvyYpPeFVbD5HPB (label: 'Reserve My Child's Seat')",
+      "faqCount": 9,
+      "testimonialsShown": true,
+      "uniqueContent": "Canonical version - full offer, all 9 FAQs, testimonial block, capacity warning. No content unique to it alone.",
+      "duplicateContent": "Body content is duplicated in full at /summercamp/.",
+      "status": "OUTDATED - both 2026 sessions ended before the scrape date (2026-08-05) and the page still says 'Secure your child's place before sessions fill up.'"
+    },
+
+    {
+      "route": "/summercamp/",
+      "programName": "Summer Camp (H1) / SUMMER JAM MUSIC CAMP 2026 (H2)",
+      "httpStatus": 200,
+      "published": "2026-03-16",
+      "lastModified": "2026-04-27",
+      "isNavTarget": false,
+      "dates": {
+        "session1": "June 8 – June 26, 2026 (Monday to Friday)",
+        "session2": "July 6 – July 24, 2026 (Monday to Friday)"
+      },
+      "times": {
+        "blockA": "8:00 AM – 12:00 PM (Default)",
+        "blockB": "12:30 PM – 4:30 PM (Waitlist Only)"
+      },
+      "ageRange": "Ages 7-15",
+      "price": {
+        "standard": "$450 per session (60 instructional hours)",
+        "payInFull": "$400 per child if paid upfront in full"
+      },
+      "deposit": {
+        "required": true,
+        "amount": null,
+        "terms": "A non-refundable down payment is required today to reserve your child's seat.",
+        "balance": "The remaining balance is due 14 days prior to the start date."
+      },
+      "capacity": "15 students per block. Max 30 students per session. Only 60 total seats for the entire summer.",
+      "location": "601 W Palm Dr Unit 1157, Florida City, FL 33034",
+      "schedule": "Monday to Friday, 4 hours per day, 3 weeks per session",
+      "includedActivities": ["identical 8-item list to the canonical route"],
+      "instrumentsTaught": "piano, drums, vocals, ukulele and ensemble playing",
+      "performancePromise": "Every student prepares for a final recital in front of family.",
+      "refundTerms": "Identical to the canonical route.",
+      "behavioralPolicy": "Identical to the canonical route.",
+      "enrollmentLink": "https://link.apisystem.tech/widget/survey/0IIXocvyYpPeFVbD5HPB ('Reserve My Child's Seat') PLUS an 'Enroll Now' button pointing to https://southdademusic.com/contact-enroll/",
+      "faqCount": 9,
+      "testimonialsShown": true,
+      "uniqueContent": "1) Four pillar ICONS (/wp-content/uploads/2026/04/m1000x1000.png and 2026/03/m1000x1000-1.png, -2.png, -3.png) which the canonical route renders as plain text. 2) An 'Enroll Now' CTA to /contact-enroll/. 3) Testimonial heading reads 'What Parents Are Saying' instead of 'Trusted by South Dade Families'.",
+      "duplicateContent": "All commercial terms, dates, prices, capacity, FAQs and refund policy are word-for-word identical to /summer-jam-music-camp-2026/.",
+      "status": "OUTDATED and DUPLICATE. The 'Enroll Now' CTA leads to a page with no enrolment form - a dead-end conversion path."
+    },
+
+    {
+      "route": "/summer-programs/",
+      "programName": "Summer Programs",
+      "httpStatus": 200,
+      "published": "2026-04-28",
+      "lastModified": "2026-05-08",
+      "isNavTarget": false,
+      "navNote": "Linked from the homepage and /programs/ 'Explore Program' cards - so the site links two different URLs under the same 'Summer Programs' label.",
+      "dates": null,
+      "datesNote": "NO DATES in the body. The hero says only '3 Weeks'.",
+      "times": null,
+      "ageRange": "Ages 7-15 (hero only)",
+      "price": null,
+      "priceNote": "NO PRICE anywhere on the page.",
+      "deposit": null,
+      "capacity": "Limited to 15 Students Per Block (hero only)",
+      "location": "Florida City (hero only, no street address)",
+      "schedule": null,
+      "includedActivities": ["Try different instruments", "Play songs they like", "Make music with other students", "Explore different styles", "Jam sessions", "Popular songs", "Simple songwriting", "Music games"],
+      "instrumentsTaught": null,
+      "performancePromise": "At the end of the program, students MAY get a chance to perform. It does not have to be a big stage.",
+      "performanceConflict": true,
+      "refundTerms": null,
+      "behavioralPolicy": null,
+      "enrollmentLink": "https://link.apisystem.tech/widget/survey/0IIXocvyYpPeFVbD5HPB (hero only, labelled 'Schedule a Trial Lesson')",
+      "enrollmentDefect": "The closing 'Get Started' section contains NO call to action at all - no link, no price, no dates.",
+      "faqCount": 0,
+      "testimonialsShown": false,
+      "uniqueContent": "Evergreen narrative summer copy (Learning Music in a Fun Way, For Beginners and Experienced Students, Playing Music Together, More Than Just Practice, Make Summer Meaningful). This prose exists nowhere else and is year-agnostic.",
+      "duplicateContent": "Hero facts (3 weeks, ages 7-15, 15 per block, Florida City) duplicate the camp pages. Shares both images with the camp pages.",
+      "status": "CURRENT in the sense that it is undated, but commercially incomplete - a parent cannot book, price, or diagnose dates from this page, and it does not link to the page that has them."
+    },
+
+    {
+      "route": "/summer-camp/",
+      "programName": "Summer Camp",
+      "httpStatus": 200,
+      "published": "2026-03-16",
+      "lastModified": "2026-03-16",
+      "isNavTarget": false,
+      "dates": null,
+      "times": null,
+      "ageRange": null,
+      "price": null,
+      "deposit": null,
+      "capacity": null,
+      "location": null,
+      "schedule": null,
+      "includedActivities": [],
+      "instrumentsTaught": null,
+      "performancePromise": null,
+      "refundTerms": null,
+      "behavioralPolicy": null,
+      "enrollmentLink": "https://link.apisystem.tech/widget/survey/0IIXocvyYpPeFVbD5HPB (hero button only)",
+      "faqCount": 0,
+      "testimonialsShown": false,
+      "uniqueContent": "NONE - the page is empty. Hero block rendered twice, plus header and footer. Zero body content.",
+      "duplicateContent": "N/A - no content to duplicate.",
+      "status": "EMPTY STUB. Created 2026-03-16, never edited. HTTP 200, no noindex, present in the sitemap. Can rank for camp queries and deliver a blank page."
+    }
+  ],
+
+  "comparison": {
+    "factsThatAgreeAcrossRoutes": [
+      "3-week duration",
+      "Ages 7-15",
+      "15 students per block",
+      "Florida City location",
+      "$450 standard / $400 pay-in-full (both full routes)",
+      "Session dates (both full routes)",
+      "Capacity 15/30/60 (both full routes)",
+      "Refund policy (both full routes)"
+    ],
+    "factsThatConflictAcrossRoutes": [
+      {
+        "field": "performancePromise",
+        "values": [
+          { "route": "/summer-jam-music-camp-2026/ and /summercamp/", "value": "Every student prepares for a final recital in front of family" },
+          { "route": "/summer-programs/", "value": "students may get a chance to perform" }
+        ]
+      },
+      {
+        "field": "location precision",
+        "values": [
+          { "route": "camp pages", "value": "601 W Palm Dr Unit 1157" },
+          { "route": "/contact-enroll/", "value": "601 W Palm Dr Unit 117" },
+          { "route": "try.southdademusic.com", "value": "601 W Palm Dr Unit 115 (text) / unit 117 (map)" }
+        ]
+      },
+      {
+        "field": "enrollment path",
+        "values": [
+          { "route": "/summer-jam-music-camp-2026/", "value": "Reserve My Child's Seat -> external widget" },
+          { "route": "/summercamp/", "value": "Enroll Now -> /contact-enroll/ (no form) AND Reserve My Child's Seat -> external widget" },
+          { "route": "/summer-programs/", "value": "Schedule a Trial Lesson (hero only); no CTA in the closing section" },
+          { "route": "/summer-camp/", "value": "Schedule a Trial Lesson (hero only)" }
+        ]
+      }
+    ],
+    "informationOnlyOnOneRoute": {
+      "pillarIcons": "/summercamp/ only",
+      "evergreenSummerProse": "/summer-programs/ only",
+      "nothing": "/summer-camp/ contributes nothing"
+    }
+  },
+
+  "unresolvedQuestions": [
+    "What is the non-refundable down payment AMOUNT? It is required 'today' and is non-refundable, but the figure appears nowhere.",
+    "Can Step Up PEP/UA scholarships be applied to camp tuition? Never addressed.",
+    "Is there a sibling discount? Never addressed.",
+    "Does every camper perform, or 'may' they?",
+    "Which unit number is the camp actually held in - 1157 or 117?",
+    "Will there be a 2027 camp? Both 2026 sessions have passed and all pages still solicit reservations.",
+    "What happens to the non-refundable deposit if the academy cancels a session? Not addressed.",
+    "Is there an allergy or dietary policy for the 'Daily Snacks Included'? Not addressed.",
+    "Is there a medical, emergency-contact, or pickup-authorisation form? None published."
+  ],
+
+  "recommendation": {
+    "keep": "/summer-jam-music-camp-2026/ as the canonical camp page - but restructure it as a dated instance under an evergreen parent.",
+    "merge": "Fold the evergreen prose from /summer-programs/ into a permanent /camps parent page, and keep dated child pages per year.",
+    "redirect": "/summercamp/ and /summer-camp/ -> canonical camp page. Salvage the four pillar icons from /summercamp/ first.",
+    "urgent": "/summer-camp/ is empty and indexable - remove or redirect immediately on the current site, ahead of the redesign."
+  }
+}

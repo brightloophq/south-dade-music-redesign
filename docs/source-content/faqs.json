@@ -1,0 +1,204 @@
+{
+  "$comment": "All FAQs found across the estate, grouped by set. 7 site-wide + 9 camp + 24 instrument/program = 40 unique Q&A pairs. Duplicated instances are noted, not repeated.",
+  "extractionDate": "2026-08-05",
+  "uniqueFAQs": 40,
+
+  "sets": [
+    {
+      "setName": "Site-wide FAQ (canonical commercial terms)",
+      "appearsOn": ["https://southdademusic.com/", "https://southdademusic.com/resources/"],
+      "identical": true,
+      "count": 7,
+      "note": "This set carries the only published pricing, guarantee, age and scholarship terms on the entire site. Rendered verbatim on both pages.",
+      "faqs": [
+        {
+          "question": "What ages do you teach?",
+          "answer": "South Dade Music provides private and group music instruction for children, teens, and adults. Our primary market focus is families with children ages 3–18, including early-childhood programs for ages 3–6, as well as adults seeking beginner or returning instruction.",
+          "containsCriticalClaim": ["age range 3-18", "early childhood 3-6", "private AND group instruction"],
+          "conflictsWith": "Six instrument pages state all lessons are private."
+        },
+        {
+          "question": "Do you accept Step Up scholarships?",
+          "answer": "Yes, South Dade Music partners with Step Up for Students as an approved provider. We accept PEP (Personalized Education Program) and UA (Unique Abilities) scholarships. Please note that these scholarships are administered and awarded by Step Up for Students, not by South Dade Music.",
+          "containsCriticalClaim": ["approved provider status", "PEP", "UA", "administration disclaimer"],
+          "conflictsWith": "/step-up-accessibility/ says only 'works within the Step Up framework' and omits the disclaimer."
+        },
+        {
+          "question": "Are lessons available in Spanish?",
+          "answer": "Yes. A large portion of our families are Spanish-speaking, so providing an effective, parent-friendly Spanish language experience that improves trust and connection is a high priority. We offer full bilingual support across our core programs and enrollment processes so Spanish-only parents have complete clarity.",
+          "containsCriticalClaim": ["full bilingual support"],
+          "conflictsWith": "No Spanish content, language switcher or hreflang exists anywhere on the site."
+        },
+        {
+          "question": "Do students perform live?",
+          "answer": "Yes. We actively engage in community outreach through free performances and collaborative ensembles like choirs, orchestras, and modern band. Our core framework is built around a live showcase, and every student performs in a live showcase within 90 days.",
+          "containsCriticalClaim": ["free performances", "choirs, orchestras, modern band", "every student performs within 90 days"],
+          "conflictsWith": "/90-day-stage-program/ says students 'get the chance to perform'. /violin-lessons/ treats orchestras as external. No choir or orchestra is offered anywhere on the site. /early-childhood/ describes no performance at all."
+        },
+        {
+          "question": "Is this just regular music lessons?",
+          "answer": "No. This is a performance program. Students attend two classes weekly: one for skill, one for band application.",
+          "containsCriticalClaim": ["two classes weekly"],
+          "conflictsWith": "All seven instrument pages state one lesson per week. /private-lessons/ says 'weekly private lessons'."
+        },
+        {
+          "question": "What if my child is too shy?",
+          "answer": "That is exactly what we train for. We use a Gradual Exposure Ladder to move them from isolation to community safely.",
+          "containsCriticalClaim": ["Gradual Exposure Ladder methodology"],
+          "conflictsWith": null,
+          "note": "The methodology is named twice on the site and never explained."
+        },
+        {
+          "question": "How does the trial work?",
+          "answer": "It is a 90-Day Stage Experience Preview. We hold your spot for $25, which is credited to your tuition upon enrollment. This preview is backed by our Stage-Ready Guarantee: if your child is not prepared to step on stage at the end of the 90-day cycle, we will continue coaching them at no additional charge until they are ready.",
+          "containsCriticalClaim": ["$25 spot hold", "credited to tuition", "Stage-Ready Guarantee"],
+          "conflictsWith": "Every other page says only 'Schedule a Trial Lesson' with no price or terms. /private-lessons/ says 'Start with a trial lesson' with no cost stated."
+        }
+      ]
+    },
+
+    {
+      "setName": "Summer Jam Music Camp FAQ",
+      "appearsOn": ["https://southdademusic.com/summer-jam-music-camp-2026/", "https://southdademusic.com/summercamp/"],
+      "identical": true,
+      "count": 9,
+      "note": "The only place on the site where a refund policy, behavioural policy or attendance policy is published.",
+      "faqs": [
+        { "question": "Is this camp beginner-friendly?", "answer": "Yes. No prior music experience is required. The program is designed for beginners." },
+        { "question": "Are instruments provided?", "answer": "Yes. All instruments used during camp are provided by the academy.", "conflictsWith": "/ukulele-lessons/ says having an instrument at home is 'essential'." },
+        { "question": "What should my child bring?", "answer": "Comfortable clothing and a positive attitude. All music materials are handled by us." },
+        { "question": "Are snacks included?", "answer": "Yes. Daily snacks are provided during camp hours.", "note": "No allergy or dietary policy stated." },
+        { "question": "Will parents be invited?", "answer": "Yes. Parents are invited to attend the End-of-Camp Concert." },
+        { "question": "What if my child misses a day?", "answer": "While regular attendance is encouraged, instructors will guide students to stay on track.", "note": "Does not state whether missed days are refundable or made up. Read alongside the non-refundable policy, absence carries no remedy." },
+        { "question": "Can I choose the session timing?", "answer": "To maintain our strict 15-student limit, all enrollments default to the Morning Block (8:00 AM – 12:00 PM). The Afternoon Block (12:30 PM – 4:30 PM) is only opened for enrollment once the morning session reaches full capacity." },
+        { "question": "Is there a refund policy?", "answer": "The down payment required to hold your spot is strictly non-refundable. The remaining balance is due 14 days prior to the start date. All registrations are final and non-refundable due to limited enrollment and advance planning for instructors and materials. Each seat is reserved specifically for your child to maintain small group quality.", "containsCriticalClaim": ["strictly non-refundable deposit", "balance due 14 days prior", "all registrations final"], "note": "The deposit AMOUNT is never stated anywhere. Should be legally reviewed for consumer-protection compliance." },
+        { "question": "Are there behavioral requirements?", "answer": "Yes. Students must be between ages 7 and 15 and able to follow group directions. We reserve the right to decline camp enrollment for severe behavioral disruptions to protect the safe group environment of our community.", "containsCriticalClaim": ["ages 7-15", "right to decline enrollment"], "note": "Sits in tension with the Unique Abilities (special needs) scholarship positioning. Legal review recommended." }
+      ]
+    },
+
+    {
+      "setName": "Piano Lessons FAQ",
+      "appearsOn": ["https://southdademusic.com/piano-lessons/"],
+      "count": 5,
+      "faqs": [
+        { "question": "What age can kids start piano lessons?", "answer": "Most children can begin piano lessons around age 5 or 6, depending on attention span and readiness." },
+        { "question": "Are private piano lessons better for kids?", "answer": "Yes. Private lessons allow instructors to tailor lessons specifically to your child's pace and learning needs." },
+        { "question": "Does my child need a piano at home?", "answer": "A keyboard is enough to start. Your instructor can recommend equipment as lessons progress." },
+        { "question": "How often should kids take piano lessons?", "answer": "One lesson per week is ideal for steady progress and skill development." },
+        { "question": "Do you teach beginners?", "answer": "Absolutely. Our piano program is beginner-friendly and designed for first-time students." }
+      ]
+    },
+
+    {
+      "setName": "Guitar Lessons FAQ",
+      "appearsOn": ["https://southdademusic.com/guitar-lessons/"],
+      "count": 5,
+      "faqs": [
+        { "question": "What age can kids start guitar lessons?", "answer": "Most children can begin guitar lessons around age 6 or 7, depending on hand size and focus." },
+        { "question": "Do I need experience to start guitar lessons?", "answer": "No experience is required. Our guitar teachers specialize in beginner instruction." },
+        { "question": "Do I need my own guitar?", "answer": "Yes, having a guitar at home helps with practice. Your instructor can recommend the right size." },
+        { "question": "How often should guitar lessons be taken?", "answer": "One private lesson per week is ideal for steady progress." },
+        { "question": "Are lessons one-on-one?", "answer": "Yes, all guitar lessons at South Dade Music are private.", "conflictsWith": "/group-music-lessons/ lists guitar among group instruments." }
+      ]
+    },
+
+    {
+      "setName": "Drum Lessons FAQ",
+      "appearsOn": ["https://southdademusic.com/drum-lessons/"],
+      "count": 5,
+      "faqs": [
+        { "question": "What age can kids start drum lessons?", "answer": "Most children can begin drum lessons around age 5 or 6, depending on coordination and focus level." },
+        { "question": "Are private drum lessons better for kids?", "answer": "Yes. Private lessons allow instructors to tailor lessons specifically to your child's pace and learning style." },
+        { "question": "Do you offer online drum lessons for kids?", "answer": "Yes, we provide live online drum lessons for kids with experienced instructors.", "containsCriticalClaim": ["online lessons"], "note": "The only online-delivery claim in the entire estate." },
+        { "question": "Does my child need their own drum set?", "answer": "A practice pad is enough to start. Instructors will guide you on equipment as lessons progress." },
+        { "question": "How often should my child take drum lessons?", "answer": "Most students benefit from one private lesson per week for steady improvement." }
+      ]
+    },
+
+    {
+      "setName": "Violin Lessons FAQ",
+      "appearsOn": ["https://southdademusic.com/violin-lessons/"],
+      "count": 5,
+      "faqs": [
+        { "question": "What age can kids start violin lessons?", "answer": "Most children can begin violin lessons around age 5 or 6, depending on readiness and focus." },
+        { "question": "Do students need experience to start?", "answer": "No experience is required. Our violin teachers specialize in beginner instruction." },
+        { "question": "Does my child need a violin at home?", "answer": "Yes, a properly sized violin is recommended. Instructors can help with sizing guidance." },
+        { "question": "How often should violin lessons be taken?", "answer": "One private lesson per week is ideal for steady progress." },
+        { "question": "Are violin lessons one-on-one?", "answer": "Yes, all violin lessons at South Dade Music are private.", "conflictsWith": "/resources/ claims the academy runs orchestras." }
+      ]
+    },
+
+    {
+      "setName": "Bass Guitar Lessons FAQ",
+      "appearsOn": ["https://southdademusic.com/bass-guitar-lessons/"],
+      "count": 4,
+      "faqs": [
+        { "question": "What age can kids start bass?", "answer": "Most can begin around age 7 or 8, depending on hand size and readiness." },
+        { "question": "Are private lessons better?", "answer": "Yes, they allow mentors to tailor instruction to your specific musical path." },
+        { "question": "Do I need a bass at home?", "answer": "A starter bass and small amp are enough to begin." },
+        { "question": "How often are lessons?", "answer": "One session per week is ideal for steady growth." }
+      ]
+    },
+
+    {
+      "setName": "Ukulele Lessons FAQ",
+      "appearsOn": ["https://southdademusic.com/ukulele-lessons/"],
+      "count": 4,
+      "note": "Questions 2 and 4 are verbatim identical to the bass FAQ.",
+      "faqs": [
+        { "question": "What age can kids start ukulele?", "answer": "Most can begin around age 5 or 6, depending on readiness." },
+        { "question": "Are private lessons better?", "answer": "Yes, they allow mentors to tailor instruction to your specific musical path.", "duplicateOf": "bass FAQ Q2" },
+        { "question": "Do I need a ukulele at home?", "answer": "Yes, having an instrument for practice is essential for progress.", "conflictsWith": "Camp FAQ: 'All instruments used during camp are provided by the academy.'" },
+        { "question": "How often are lessons?", "answer": "One session per week is ideal for steady growth.", "duplicateOf": "bass FAQ Q4" }
+      ]
+    },
+
+    {
+      "setName": "Singing Lessons FAQ",
+      "appearsOn": ["https://southdademusic.com/singing-lessons/"],
+      "count": 5,
+      "orphanPage": true,
+      "faqs": [
+        { "question": "What age can kids start singing lessons?", "answer": "Most children can begin singing lessons around age 5 or 6, depending on focus and readiness." },
+        { "question": "Do kids need experience to start singing lessons?", "answer": "No experience is required. Our singing lessons are beginner-friendly." },
+        { "question": "Are singing lessons private?", "answer": "Yes, all singing lessons at South Dade Music are private.", "conflictsWith": "/group-music-lessons/ lists vocals among group instruments; /resources/ claims choirs." },
+        { "question": "How often should kids take singing lessons?", "answer": "One private lesson per week is ideal for steady vocal improvement." },
+        { "question": "Will singing lessons damage my child's voice?", "answer": "No. Our instructors teach proper vocal technique to protect and strengthen young voices.", "note": "A safety claim that should be backed by stated instructor qualifications. None are published on the main site." }
+      ]
+    },
+
+    {
+      "setName": "Group Music Lessons FAQ",
+      "appearsOn": ["https://southdademusic.com/group-music-lessons/"],
+      "count": 5,
+      "orphanPage": true,
+      "faqs": [
+        { "question": "What age are group music lessons best for?", "answer": "Group lessons are ideal for kids ages 6 and up, depending on maturity and attention span." },
+        { "question": "Do kids need experience to join group music classes?", "answer": "Beginner-friendly options are available. Some programs may require basic experience." },
+        { "question": "How many students are in each group?", "answer": "Group sizes are kept small to ensure quality instruction and engagement.", "note": "Does not answer the question - no number is given." },
+        { "question": "What instruments are included in group music lessons?", "answer": "Programs may include guitar, drums, keyboard, vocals, and band-style instruments.", "conflictsWith": "The guitar and singing pages both state all lessons in those instruments are private." },
+        { "question": "Can my child switch to private lessons later?", "answer": "Yes. Many students transition from group lessons to private instruction." }
+      ]
+    }
+  ],
+
+  "gapAnalysis": {
+    "questionsAParentWouldAskThatAreNeverAnswered": [
+      "How much do lessons cost?",
+      "How long is a lesson?",
+      "What is the tuition for the 90-Day Stage Program?",
+      "How much is the camp down payment?",
+      "What is the cancellation / make-up policy for lessons? (/piano-lessons/ claims 'supportive make-up policies' but none are published)",
+      "Is there a registration fee, materials fee, or recital fee?",
+      "Can PEP/UA scholarships be used for camp?",
+      "Do you offer sibling or multi-lesson discounts?",
+      "What is the teacher-to-student ratio in group classes?",
+      "Who are the teachers and what are their qualifications?",
+      "Where do I park and how do I get in?",
+      "What is the term length / can I stop at any time?",
+      "Is there a trial for group classes and camp, or only private lessons?"
+    ],
+    "structuredData": "No FAQPage schema markup was observed on any page. All 40 FAQs are plain HTML - no rich-result eligibility.",
+    "duplicationNote": "The 7-item site-wide set is rendered twice (homepage + /resources/). The 9-item camp set is rendered twice (/summer-jam-music-camp-2026/ + /summercamp/). Consolidating to one canonical FAQ location is recommended."
+  }
+}

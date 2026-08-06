@@ -1,0 +1,271 @@
+{
+  "$comment": "Verified source information only. Every value is quoted from a scraped page and attributed. Where sources disagree, ALL variants are listed with their sources and the conflict is flagged - no preferred version has been chosen.",
+  "extractionDate": "2026-08-05",
+
+  "businessName": {
+    "value": "South Dade Music",
+    "sources": ["footer sitewide (Copyright © 2026 South Dade Music. All Rights Reserved.)", "og:site_name 'South Dade Music -'"],
+    "conflict": true,
+    "note": "og:site_name has a trailing ' -' artifact on every page."
+  },
+
+  "alternativeBusinessNames": [
+    {
+      "value": "South Dade Music Academy",
+      "sources": [
+        "try.southdademusic.com page title and body ('South Dade Music Academy (SDMA)')",
+        "/events/month/2025-03/ index metadata ('Events for March 2025 – South Dade Music Academy')",
+        "testimonial - Mariana Gennevie Olvera ('joined south dade music academy')",
+        "testimonial - Brian Silverio ('hosted by South Dade music Academy')",
+        "testimonial - John Granada ('recommend South dade music academy')",
+        "/singing-lessons/ body ('The South Dade Music Academy is a local music institution')"
+      ]
+    },
+    {
+      "value": "SDMA",
+      "sources": ["try.southdademusic.com"]
+    },
+    {
+      "value": "South Dade Music LLC",
+      "sources": ["try.southdademusic.com footer ('© 2025 South Dade Music LLC. All rights reserved.')"],
+      "note": "Only appearance of a legal entity name anywhere in the estate."
+    }
+  ],
+
+  "address": {
+    "conflict": true,
+    "variants": [
+      {
+        "value": "601 W Palm Dr Unit 117, Florida City, FL 33034, United States",
+        "sources": ["/contact-enroll/ body copy", "/contact-enroll/ meta description", "try.southdademusic.com embedded Google Maps place link (query_place_id decodes to 'unit 117')"]
+      },
+      {
+        "value": "601 W Palm Dr Unit 1157, Florida City, FL 33034",
+        "sources": ["/summer-jam-music-camp-2026/ Camp Details", "/summercamp/ Camp Details"]
+      },
+      {
+        "value": "601 W Palm Dr Unit 115, Florida City, FL 33034, United States",
+        "sources": ["try.southdademusic.com Location heading (text)"]
+      }
+    ],
+    "commonElements": {
+      "street": "601 W Palm Dr",
+      "city": "Florida City",
+      "state": "FL",
+      "postalCode": "33034",
+      "country": "United States"
+    },
+    "note": "Street, city, state and ZIP agree across all sources. Only the unit number differs - three values. try.southdademusic.com contradicts itself: text says Unit 115, its own map link resolves to unit 117."
+  },
+
+  "telephoneNumbers": [
+    {
+      "value": "786-753-9509",
+      "displayVariants": ["786-753-9509"],
+      "hrefVariants": ["tel:7867539509", "tel:786-753-9509"],
+      "sources": ["sitewide footer", "/contact-enroll/ body", "/contact-enroll/ meta description"],
+      "scope": "main site"
+    },
+    {
+      "value": "+1-786-386-1982",
+      "sources": ["try.southdademusic.com Phone heading"],
+      "scope": "lead-gen subdomain",
+      "conflict": true
+    }
+  ],
+
+  "emailAddresses": [
+    {
+      "value": "info@southdademusic.com",
+      "sources": ["sitewide footer 'Contact Us' block"],
+      "scope": "sitewide"
+    },
+    {
+      "value": "contact@southdademusic.com",
+      "sources": ["/contact-enroll/ body copy", "/contact-enroll/ meta description"],
+      "scope": "contact page body",
+      "conflict": true
+    }
+  ],
+
+  "openingHours": {
+    "value": "Mon - Sat (8:00am - 6:00pm) Sun - Closed",
+    "sources": ["sitewide footer only"],
+    "structured": {
+      "monday": "08:00-18:00",
+      "tuesday": "08:00-18:00",
+      "wednesday": "08:00-18:00",
+      "thursday": "08:00-18:00",
+      "friday": "08:00-18:00",
+      "saturday": "08:00-18:00",
+      "sunday": "closed"
+    },
+    "note": "Hours appear ONLY in the footer. They are absent from /contact-enroll/ body and from try.southdademusic.com. No holiday schedule, no term dates, no closure calendar published.",
+    "unverified": "Instrument pages repeatedly promise 'After-school and evening availability'. Evening availability past 6:00pm is not supported by the published hours."
+  },
+
+  "serviceArea": {
+    "value": ["Florida City", "Homestead", "Cutler Bay", "Palmetto Bay", "and nearby areas"],
+    "sources": ["/90-day-stage-program/", "/private-lessons/", "/band-builders/", "/early-childhood/", "/summer-programs/"],
+    "regionLabel": "South Miami-Dade",
+    "note": "Identical sentence on five pages: 'We serve families in Florida City, Homestead, Cutler Bay, Palmetto Bay, and nearby areas.' Instrument pages instead use the vaguer 'South Dade and nearby communities'."
+  },
+
+  "ageGroups": {
+    "conflict": true,
+    "variants": [
+      { "value": "children ages 3-18", "context": "primary market focus", "sources": ["/resources/ FAQ", "homepage FAQ"] },
+      { "value": "ages 3-6", "context": "early-childhood programs", "sources": ["/resources/ FAQ", "homepage FAQ", "/early-childhood/ ('for kids around ages 3 to 6')"] },
+      { "value": "adults", "context": "beginner or returning instruction", "sources": ["/resources/ FAQ", "/private-lessons/", "/programs/ (Adults segment)", "try.southdademusic.com"] },
+      { "value": "ages 7-15", "context": "Summer Jam Music Camp", "sources": ["/summer-jam-music-camp-2026/", "/summercamp/", "/summer-programs/ hero"] },
+      { "value": "ages 6 and up", "context": "group music lessons", "sources": ["/group-music-lessons/ FAQ"] },
+      { "value": "age 3", "context": "youngest starting age", "sources": ["try.southdademusic.com ('just starting at age 3')"] }
+    ],
+    "instrumentStartAges": {
+      "piano": "around age 5 or 6",
+      "guitar": "around age 6 or 7",
+      "drums": "around age 5 or 6",
+      "violin": "around age 5 or 6",
+      "ukulele": "around age 5 or 6",
+      "bass": "around age 7 or 8",
+      "voice": "around age 5 or 6"
+    },
+    "gap": "No summer option exists for ages 3-6; camp floor is 7."
+  },
+
+  "languages": [
+    {
+      "value": "English",
+      "sources": ["site html lang=en-US"]
+    },
+    {
+      "value": "Spanish",
+      "claim": "Yes. A large portion of our families are Spanish-speaking... We offer full bilingual support across our core programs and enrollment processes so Spanish-only parents have complete clarity.",
+      "sources": ["/resources/ FAQ", "homepage FAQ", "homepage Step Up block ('Spanish language support available')", "homepage CTA block ('English & Spanish support')"],
+      "unverified": true,
+      "note": "CRITICAL GAP: the claim of 'full bilingual support across our core programs and enrollment processes' is not evidenced anywhere. There is no Spanish version of any page, no language switcher, no hreflang tag, and the external booking widget was not verified for Spanish. One testimonial is in Spanish (Maria carolina Linares). The claim as written is not currently supported by the website."
+    }
+  ],
+
+  "mission": {
+    "primary": "Our mission is to provide simple and clear music education for families searching for Music Lessons Near Me and trusted Kids Music Classes South Dade. We focus on skill building, confidence, and real progress in a supportive environment.",
+    "source": "homepage Mission Statement",
+    "note": "SEO keyword phrases are embedded directly in the mission statement.",
+    "aboutPageVariant": {
+      "vision": "Our vision is to build a strong music community where every student has the opportunity to learn, perform, and grow.",
+      "mission": "Our mission is to provide high quality instruction through Kids Piano Lessons South Dade, vocal training, and Group Music Lessons South Dade. We focus on confidence, creativity, and steady progress for every learner.",
+      "source": "/about/ Vision & Mission"
+    },
+    "origin": "South Dade Music was created with a simple mission to make music education accessible and meaningful for every student.",
+    "originSource": "/about/ Our Story"
+  },
+
+  "brandPositioning": {
+    "tagline": "Build Community. Make Music.",
+    "taglineSources": ["/90-day-stage-program/", "/private-lessons/", "/band-builders/", "/early-childhood/", "/summer-programs/"],
+    "footerPositioning": "Home of the 90-Day Stage Program™ where every student performs in a live showcase within 90 days.",
+    "footerSource": "sitewide footer",
+    "heroPromise": "Every Student Steps on Stage Within 90 Days.",
+    "heroSource": "homepage",
+    "differentiators": [
+      "Performance-first: 'No. This is a performance program.' (/resources/)",
+      "Community over transaction: 'Community driven, not transactional' (/about/); 'a shared community experience rather than a transactional service' (/bass-guitar-lessons/, /ukulele-lessons/)",
+      "Gradual Exposure Ladder methodology (/resources/, homepage)",
+      "Four pillars: Participation, Exposure, Exceution [sic], Community (homepage)"
+    ],
+    "conflictingPositioning": {
+      "value": "Make Music Fun, Personal, and Unforgettable / No pressure. Just passion, progress, and a whole lot of fun.",
+      "source": "try.southdademusic.com",
+      "note": "The subdomain sells a low-pressure, fun-first positioning with no mention of the 90-Day Stage Program, the guarantee, or the performance requirement. Two incompatible brand promises are live simultaneously."
+    }
+  },
+
+  "scholarshipPrograms": [
+    {
+      "name": "Step Up for Students",
+      "description": "a state-supported scholarship program that helps families access educational services, including music education",
+      "source": "/step-up-accessibility/"
+    },
+    {
+      "name": "PEP (Personalized Education Program)",
+      "description": "supports families who choose flexible, customized learning options for their children",
+      "accepted": true,
+      "sources": ["/step-up-accessibility/", "/resources/ FAQ", "homepage FAQ", "/private-lessons/"]
+    },
+    {
+      "name": "UA (Unique Abilities)",
+      "description": "provides support for students with special needs, allowing access to enriching programs in a supportive environment",
+      "accepted": true,
+      "sources": ["/step-up-accessibility/", "/resources/ FAQ", "homepage FAQ", "/private-lessons/"]
+    }
+  ],
+
+  "scholarshipStatusClaims": {
+    "conflict": true,
+    "variants": [
+      { "value": "Approved Step Up for Students provider", "source": "homepage Step Up block" },
+      { "value": "South Dade Music partners with Step Up for Students as an approved provider", "source": "/resources/ FAQ and homepage FAQ" },
+      { "value": "South Dade Music works within the Step Up framework", "source": "/step-up-accessibility/" },
+      { "value": "We also accept Step Up for Students scholarships (PEP and UA)", "source": "/private-lessons/" }
+    ],
+    "disclaimer": {
+      "value": "Please note that these scholarships are administered and awarded by Step Up for Students, not by South Dade Music.",
+      "sources": ["/resources/ FAQ", "homepage FAQ"],
+      "note": "Absent from /step-up-accessibility/, the dedicated scholarship page."
+    },
+    "gaps": [
+      "Eligibility criteria never stated ('eligible students' undefined)",
+      "No application steps, no required documents, no link to stepupforstudents.org",
+      "Camp pages do not state whether PEP/UA can be applied to camp tuition",
+      "No stated scholarship coverage amount or what portion of tuition it offsets"
+    ]
+  },
+
+  "accessibilitySupport": {
+    "statedApproach": "All students learn together in the same supportive environment. Instruction is adapted to individual needs while maintaining high expectations, creativity, and community.",
+    "source": "/step-up-accessibility/ Our Inclusive Approach",
+    "inclusionModel": "South Dade Music works within the Step Up framework to offer eligible students access to private lessons and programs without creating separate tracks or experiences.",
+    "homepageClaim": "Inclusive programs for all learners",
+    "specialNeedsRoute": "Unique Abilities (UA) scholarship",
+    "gaps": [
+      "No physical accessibility information: no mention of step-free access, parking, restroom accessibility, or sensory accommodations at 601 W Palm Dr",
+      "No website accessibility statement, no WCAG conformance claim",
+      "Observed a11y defects in source: placeholder alt text ('Image 1', 'Image 2', 'Image 3' on /resources/), filename-as-alt ('26690-2048x1365' on /members/), missing alt on all six performance gallery images, and H2 misuse as body lead-ins on /bass-guitar-lessons/ and /ukulele-lessons/",
+      "Camp page reserves the right to decline enrollment for 'severe behavioral disruptions' - this sits in tension with the UA special-needs positioning and should be legally reviewed"
+    ]
+  },
+
+  "socialLinks": {
+    "found": [],
+    "note": "CRITICAL FINDING: zero social media links exist anywhere on the live site - no Instagram, Facebook, YouTube, TikTok, WhatsApp, or Google Business Profile. The only evidence of a social presence is the word 'Instagram' in the index metadata of the now-404 /events/month/2025-03/ archive. The homepage CTA block says 'Call, text, or WhatsApp' but no WhatsApp link is present. Social profiles must be recovered from the owner."
+  },
+
+  "instructorsNamed": [
+    { "name": "Mr. Lopez / Professor Lopez", "mentions": 5, "sources": ["testimonials on main site", "testimonial John Granada on try. subdomain"], "note": "Most-referenced instructor. Never named on any page - appears only inside customer testimonials." },
+    { "name": "Professor Joshua", "mentions": 1, "sources": ["testimonial - Claudia Olivar"], "note": "May be the same person as Mr. Lopez (Joshua Lopez) - unconfirmed." },
+    { "name": "Alberto", "mentions": 1, "sources": ["testimonial - Maria carolina Linares ('The teacher Alberto so really good!!')"] }
+  ],
+
+  "claimsRequiringVerification": [
+    "Which unit number is correct: 117, 1157, or 115",
+    "Which phone number is current: 786-753-9509 or +1-786-386-1982",
+    "Which email is monitored: info@ or contact@",
+    "Legal entity name and whether 'South Dade Music Academy' is a DBA",
+    "Exact approved status with Step Up for Students and the compliant phrasing to use",
+    "Whether '90-Day Stage Program' is a registered trademark (™ used in footer)",
+    "Instructor credentials - 'university-trained pros' and 'trained at top music schools' (try. subdomain only)",
+    "'Full bilingual support across our core programs and enrollment processes' - no Spanish content exists on the site",
+    "Whether online lessons are genuinely offered (claimed on /drum-lessons/ only)",
+    "Whether choirs and orchestras are genuinely operated (claimed on /resources/ only)",
+    "Whether every student truly performs within 90 days, given the guarantee concedes some are not ready",
+    "The non-refundable camp down payment AMOUNT - never stated",
+    "Tuition for lessons and for the 90-Day Stage Program - never stated anywhere",
+    "'Supportive make-up policies' (/piano-lessons/) - no policy is published",
+    "Whether PEP/UA can be applied to summer camp tuition",
+    "Photo release consent for identifiable minors in the P1088xxx/DSCF/IMG performance images",
+    "Image licensing for third-party stock: ozel-gitar-kursu-*.png (Turkish), 20240420_Impulse-Day_visuel_site-*.jpg (French), 0_p-NH2ecjjuoHdJct-*.png",
+    "Step Up for Students logo usage rights (two logo files in the theme)",
+    "Instagram handle and any other social profiles",
+    "Full event history - the only event record (March 15 2025) now 404s"
+  ]
+}

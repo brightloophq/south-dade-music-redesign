@@ -1,0 +1,203 @@
+{
+  "$comment": "Third-party systems detected from rendered page content, link targets, asset hosts and generator meta tags. Scope limit: this was a content extraction, not a full script/tag audit - client-side tracking tags embedded in <script> were not enumerated. Absence below means 'not observed in the extracted content', not 'proven absent'.",
+  "extractionDate": "2026-08-05",
+  "auditScope": "Rendered markdown, link targets, image hosts, and metadata across 26 live pages plus one subdomain.",
+
+  "bookingSystems": [
+    {
+      "name": "LeadConnector / HighLevel (GoHighLevel)",
+      "detectedVia": "https://link.apisystem.tech/widget/survey/0IIXocvyYpPeFVbD5HPB",
+      "widgetId": "0IIXocvyYpPeFVbD5HPB",
+      "type": "survey / lead-capture widget",
+      "usedFor": ["Book a Trial Lesson", "Schedule a Trial Lesson", "Book 90-Day Stage Experience", "Reserve My Child's Seat"],
+      "coverage": "Every page of southdademusic.com, including the 404 template",
+      "confidence": "high",
+      "notes": "apisystem.tech is a white-label domain in the HighLevel family. This single widget is the site's only lead-capture mechanism. No calendar/scheduler UI was observed - it is a survey form, not a booking calendar."
+    },
+    {
+      "name": "LeadConnector funnel (try.southdademusic.com)",
+      "detectedVia": "favicon stcdn.leadconnectorhq.com, assets on assets.cdn.filesafe.space, images proxied via images.leadconnectorhq.com, URL redirect to /offer-page",
+      "type": "hosted funnel / landing page",
+      "usedFor": "Request a Trial Lesson",
+      "confidence": "high",
+      "notes": "A SECOND, separate HighLevel property. Different phone number, different address, different brand name. Leads captured here are in a separate flow from the main site with no cross-attribution."
+    }
+  ],
+
+  "paymentSystems": [
+    {
+      "name": null,
+      "detected": false,
+      "confidence": "high (absence)",
+      "notes": "No Stripe, PayPal, Square, Authorize.net or any checkout was observed on southdademusic.com. The camp requires a non-refundable down payment 'today' with no on-site payment path and no disclosed amount. Payment is presumably collected inside the HighLevel widget or offline - UNVERIFIED. This must be confirmed before rebuilding the enrolment flow."
+    }
+  ],
+
+  "forms": [
+    {
+      "name": "HighLevel survey widget",
+      "location": "external (link.apisystem.tech)",
+      "nativeToSite": false
+    },
+    {
+      "name": "Request a Trial Lesson",
+      "location": "try.southdademusic.com (HighLevel funnel-native)",
+      "nativeToSite": false
+    }
+  ],
+  "formsNote": "ZERO native forms exist on southdademusic.com. No contact form, no enquiry form, no enrolment form, no newsletter signup, no member login.",
+
+  "crmTools": [
+    {
+      "name": "HighLevel (GoHighLevel) CRM",
+      "detectedVia": "inferred from the LeadConnector widget and funnel - HighLevel bundles CRM, pipelines and automation with its forms/funnels",
+      "confidence": "medium (inferred, not directly observed)",
+      "subAccountsObserved": ["rqeXVUxgFrTFuIbzjASG", "UILNiCB9NyQf3albBKfn", "0NjpOuVSolJrUgZhjNoq"],
+      "notes": "Three distinct HighLevel sub-account identifiers appear in asset URLs on the subdomain, suggesting either multiple sub-accounts, an agency parent account, or assets borrowed from a template account. Ownership of the HighLevel account (agency vs client) must be confirmed - it holds the lead database."
+    }
+  ],
+
+  "emailMarketingTools": [
+    {
+      "name": "HighLevel (assumed, bundled)",
+      "confidence": "low",
+      "notes": "No Mailchimp, Klaviyo, ConvertKit or standalone ESP was observed. No newsletter signup exists anywhere on the site. If email marketing runs, it runs through HighLevel."
+    }
+  ],
+
+  "analytics": [
+    {
+      "name": null,
+      "detected": false,
+      "confidence": "low (absence not proven)",
+      "notes": "No analytics provider was observable in the extracted content. GA4, GTM and similar load via <script> tags which this extraction did not enumerate. A direct tag audit is required. Given the site runs a HighLevel funnel and a separate WordPress site with no shared attribution, conversion tracking is very likely incomplete regardless."
+    }
+  ],
+
+  "metaPixel": [
+    {
+      "name": "Meta (Facebook) Pixel",
+      "detected": false,
+      "confidence": "low (absence not proven)",
+      "notes": "Not observable in extracted content. Requires a script-level audit. Note that no Facebook page is linked from anywhere on the site."
+    }
+  ],
+
+  "googleServices": [
+    {
+      "name": "Google Maps",
+      "detectedVia": "try.southdademusic.com static map image and place link (query_place_id=EjM2MDEgVyBQYWxtIERyIHVuaXQgMTE3...)",
+      "confidence": "high",
+      "notes": "The ONLY Google Maps presence in the estate is on the subdomain. southdademusic.com has no map at all. The place_id confirms a Google Business Profile record exists for '601 W Palm Dr unit 117'."
+    },
+    {
+      "name": "Google Business Profile",
+      "detectedVia": "inferred - the place_id above, plus 14 testimonials whose format and content strongly indicate Google reviews",
+      "confidence": "medium",
+      "notes": "No GBP link, review widget, or aggregate rating appears on any page. This is a significant unused asset."
+    },
+    {
+      "name": "Google Fonts",
+      "detected": false,
+      "confidence": "low",
+      "notes": "Not observable in extracted content; would require a script/stylesheet audit."
+    },
+    {
+      "name": "Firebase Storage (highlevel-backend.appspot.com)",
+      "detectedVia": "the static map image URL on try.southdademusic.com",
+      "confidence": "high",
+      "notes": "HighLevel's own backend storage, not a direct Google integration by the business."
+    }
+  ],
+
+  "videoPlatforms": [
+    {
+      "name": null,
+      "detected": false,
+      "confidence": "high (absence)",
+      "notes": "NO YouTube, Vimeo, Wistia or self-hosted video appears anywhere in the estate. Zero video assets were found across 26 pages. For a performance-based academy this is a major content gap."
+    }
+  ],
+
+  "socialMediaLinks": [
+    {
+      "platform": null,
+      "detected": false,
+      "confidence": "high (absence)",
+      "notes": "ZERO social links on any live page - no Instagram, Facebook, YouTube, TikTok, X, LinkedIn or WhatsApp. The only trace is the word 'Instagram' in the index metadata of the now-404 /events/month/2025-03/ archive, indicating a profile existed and the link was lost in migration. The homepage advertises 'Call, text, or WhatsApp' with no WhatsApp link present."
+    }
+  ],
+
+  "scholarshipPortals": [
+    {
+      "name": "Step Up for Students",
+      "linked": false,
+      "confidence": "high",
+      "notes": "PEP and UA scholarships are promoted on 4+ pages and the homepage renders two Step Up for Students LOGO images (/wp-content/themes/south-dade-music/images/step-up-for-students-1.png and -2.png), but there is NO link to stepupforstudents.org, no application portal, no eligibility checker and no document list. Third-party logo usage rights need confirmation."
+    }
+  ],
+
+  "externalEnrollmentLinks": [
+    {
+      "url": "https://link.apisystem.tech/widget/survey/0IIXocvyYpPeFVbD5HPB",
+      "purpose": "all enrolment, trial and camp reservation intents",
+      "platform": "HighLevel"
+    }
+  ],
+
+  "cmsAndPlatform": {
+    "cms": "WordPress 7.0.2",
+    "pageBuilder": "WPBakery Page Builder",
+    "seoPlugin": "All in One SEO (AIOSEO) 4.9.9",
+    "theme": "south-dade-music (custom theme - /wp-content/themes/south-dade-music/)",
+    "customPostTypes": ["media_slider (public, leaking /media_slider/ and /media_slider/slider/ URLs)"],
+    "removedPlugin": "The Events Calendar - removed while its URLs remained published; /event/... and /events/month/... now 404",
+    "detectedVia": "generator meta tags on every page"
+  },
+
+  "thirdPartyAssetHosts": [
+    {
+      "host": "cmscustom-staginglink2.com",
+      "type": "AGENCY STAGING SERVER",
+      "severity": "critical",
+      "usage": "Hero background image on 14+ pages: https://cmscustom-staginglink2.com/south-dade-music/wp/wp-content/uploads/2026/01/how-music-education-has-changed-impact-on-learning-space-design.jpg",
+      "notes": "Production pages load a hero image from a third-party staging domain the business does not control. If that server goes away, 14 pages lose their hero. It also publicly exposes the agency's staging path structure (/south-dade-music/wp/). The identical file EXISTS on the live domain and is used correctly on /resources/ and /performances/ - so this is an unintended leak, not a CDN strategy. Also affects the 404 template."
+    },
+    {
+      "host": "s.w.org",
+      "type": "WordPress emoji CDN",
+      "severity": "low",
+      "usage": "Emoji images (🎹 🎸 🥁 🎻 🎤 📞 📍 🌐) on five instrument pages",
+      "notes": "Standard WordPress behaviour; adds external requests per page load. Should be replaced with native emoji or SVG in a rebuild."
+    },
+    {
+      "host": "images.leadconnectorhq.com / assets.cdn.filesafe.space",
+      "type": "HighLevel asset CDN",
+      "severity": "medium",
+      "usage": "All 18 images on try.southdademusic.com",
+      "notes": "The subdomain has no assets on infrastructure the business controls. If the HighLevel account lapses, the entire funnel and its imagery disappear."
+    }
+  ],
+
+  "criticalFindings": [
+    "Lead capture is 100% dependent on a single third-party HighLevel widget with no on-site fallback form.",
+    "Two disconnected HighLevel properties (main site widget + try. funnel) with different phone numbers, no cross-linking and no shared attribution.",
+    "No payment system observable despite a non-refundable camp deposit being 'required today'.",
+    "No analytics or pixel observable in content - requires a script-level audit before any redesign, or historical data will be lost.",
+    "No video platform integration at all - zero video across the estate.",
+    "No social media links anywhere; an Instagram profile appears to have been lost in migration.",
+    "A staging domain is serving production images on 14+ pages.",
+    "Step Up for Students logos are used with no link and unconfirmed licensing.",
+    "HighLevel account ownership (agency vs business) is unknown and holds the lead database."
+  ],
+
+  "requiredBeforeRedesign": [
+    "Run a script-level tag audit (GA4, GTM, Meta Pixel, any conversion tags) and record measurement IDs",
+    "Confirm who owns the HighLevel account and export the lead/contact database",
+    "Confirm how camp deposits are actually collected",
+    "Recover Instagram and any other social handles",
+    "Confirm the Google Business Profile and claim the review corpus",
+    "Decide the fate of try.southdademusic.com - retire, align, or keep as a paid-traffic LP",
+    "Remove all cmscustom-staginglink2.com references and re-point to local assets"
+  ]
+}

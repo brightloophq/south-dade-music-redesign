@@ -1,0 +1,255 @@
+{
+  "$comment": "One entry per instrument with a live page, plus entries for instruments sold without a page. All values quoted from source. 'null' means the source is silent - not that the answer is no.",
+  "extractionDate": "2026-08-05",
+  "instrumentsWithPages": 7,
+  "instrumentsOnHubPage": 6,
+  "instrumentsSoldWithoutAPage": 1,
+
+  "instruments": [
+    {
+      "name": "Piano",
+      "sourceUrl": "https://southdademusic.com/piano-lessons/",
+      "inNav": true,
+      "onInstrumentHub": true,
+      "description": "Our piano program builds strong basics. Students learn hand position, rhythm, music reading, and song practice.",
+      "lessonFormat": "Private, one-on-one",
+      "recommendedAge": "around age 5 or 6, depending on attention span and readiness",
+      "skillLevel": "Beginner-friendly; 'designed for first-time students'",
+      "lessonFrequency": "One lesson per week",
+      "equipmentNeeded": "A keyboard is enough to start. Your instructor can recommend equipment as lessons progress.",
+      "benefits": ["Improved focus and concentration", "Strong hand-eye coordination", "Better memory and listening skills", "Increased confidence and discipline", "Creative expression through music"],
+      "curriculum": ["Proper hand positioning and posture", "Reading basic music notation", "Rhythm, timing, and coordination", "Playing songs they enjoy", "Musical confidence and focus"],
+      "programConnections": [],
+      "FAQs": [
+        { "q": "What age can kids start piano lessons?", "a": "Most children can begin piano lessons around age 5 or 6, depending on attention span and readiness." },
+        { "q": "Are private piano lessons better for kids?", "a": "Yes. Private lessons allow instructors to tailor lessons specifically to your child's pace and learning needs." },
+        { "q": "Does my child need a piano at home?", "a": "A keyboard is enough to start. Your instructor can recommend equipment as lessons progress." },
+        { "q": "How often should kids take piano lessons?", "a": "One lesson per week is ideal for steady progress and skill development." },
+        { "q": "Do you teach beginners?", "a": "Absolutely. Our piano program is beginner-friendly and designed for first-time students." }
+      ],
+      "callsToAction": [{ "label": "Schedule a Trial Lesson", "target": "https://link.apisystem.tech/widget/survey/0IIXocvyYpPeFVbD5HPB" }],
+      "deadCTAs": ["Contact us to schedule a piano lesson", "Visit our South Dade studio", "Explore all music programs online"],
+      "imageReferences": ["/wp-content/uploads/2026/01/m1000x1000.jpg", "/wp-content/uploads/2026/05/P1088524.jpg", "/wp-content/uploads/2026/05/P1088542.png"],
+      "imageSubjectMatch": true,
+      "claimsRequiringVerification": ["'Supportive make-up policies' - no make-up or cancellation policy is published anywhere on the site", "'One lesson per week' contradicts /resources/ 'two classes weekly'"]
+    },
+    {
+      "name": "Guitar",
+      "sourceUrl": "https://southdademusic.com/guitar-lessons/",
+      "inNav": true,
+      "onInstrumentHub": true,
+      "description": "If you are looking for a skilled Guitar Teacher Near Me, our guitar lessons cover chords, strumming patterns, and song playing. We teach both acoustic and electric guitar.",
+      "lessonFormat": "Private only - 'all guitar lessons at South Dade Music are private'",
+      "recommendedAge": "around age 6 or 7, depending on hand size and focus",
+      "skillLevel": "No experience required; beginner-focused",
+      "lessonFrequency": "One private lesson per week",
+      "equipmentNeeded": "Yes, having a guitar at home helps with practice. Your instructor can recommend the right size.",
+      "benefits": ["Improved focus and discipline", "Better coordination and listening skills", "Increased confidence and creativity", "Stress relief and self-expression", "A lifelong appreciation for music"],
+      "curriculum": ["Proper guitar posture and hand positioning", "Basic chords and strumming patterns", "Simple melodies and songs", "Rhythm, timing, and coordination", "Music reading fundamentals"],
+      "programConnections": [],
+      "FAQs": [
+        { "q": "What age can kids start guitar lessons?", "a": "Most children can begin guitar lessons around age 6 or 7, depending on hand size and focus." },
+        { "q": "Do I need experience to start guitar lessons?", "a": "No experience is required. Our guitar teachers specialize in beginner instruction." },
+        { "q": "Do I need my own guitar?", "a": "Yes, having a guitar at home helps with practice. Your instructor can recommend the right size." },
+        { "q": "How often should guitar lessons be taken?", "a": "One private lesson per week is ideal for steady progress." },
+        { "q": "Are lessons one-on-one?", "a": "Yes, all guitar lessons at South Dade Music are private." }
+      ],
+      "callsToAction": [{ "label": "Schedule a Trial Lesson", "target": "https://link.apisystem.tech/widget/survey/0IIXocvyYpPeFVbD5HPB" }],
+      "deadCTAs": ["Contact us to schedule a lesson", "Visit our South Dade studio", "Explore all music programs online"],
+      "imageReferences": ["/wp-content/uploads/2026/01/m1000x1000-1.jpg", "/wp-content/uploads/2026/05/P1088541.jpg", "/wp-content/uploads/2026/05/P1088542.png"],
+      "imageSubjectMatch": true,
+      "claimsRequiringVerification": ["'All guitar lessons are private' directly contradicts /group-music-lessons/ which lists guitar among group instruments, and contradicts Band Builders"]
+    },
+    {
+      "name": "Drums",
+      "sourceUrl": "https://southdademusic.com/drum-lessons/",
+      "inNav": true,
+      "onInstrumentHub": true,
+      "description": "Our Private Drum Lessons help students understand rhythm, timing, and coordination. With one on one attention, students learn faster and gain confidence.",
+      "lessonFormat": "Private, one-on-one - IN-PERSON AND ONLINE",
+      "recommendedAge": "around age 5 or 6, depending on coordination and focus level",
+      "skillLevel": "No prior experience required",
+      "lessonFrequency": "One private lesson per week",
+      "equipmentNeeded": "A practice pad is enough to start. Instructors will guide you on equipment as lessons progress.",
+      "benefits": ["Improved focus and concentration", "Better hand-eye coordination", "Increased confidence and self-expression", "Strong sense of rhythm and timing", "Healthy outlet for energy and creativity"],
+      "curriculum": ["Proper grip, posture, and drum technique", "Rhythm, timing, and coordination", "Reading basic drum notation", "Playing beats, fills, and simple songs", "Listening skills and musical discipline"],
+      "programConnections": [],
+      "onlineDelivery": {
+        "offered": true,
+        "claim": "We offer both in-person and online drum lessons for kids... Online lessons use the same high-quality curriculum as in-person lessons.",
+        "features": ["Live, interactive instruction", "One-on-one private teaching", "Structured lesson plans", "Real-time feedback and guidance"],
+        "note": "UNIQUE TO THIS PAGE - no other page in the estate mentions online lessons."
+      },
+      "FAQs": [
+        { "q": "What age can kids start drum lessons?", "a": "Most children can begin drum lessons around age 5 or 6, depending on coordination and focus level." },
+        { "q": "Are private drum lessons better for kids?", "a": "Yes. Private lessons allow instructors to tailor lessons specifically to your child's pace and learning style." },
+        { "q": "Do you offer online drum lessons for kids?", "a": "Yes, we provide live online drum lessons for kids with experienced instructors." },
+        { "q": "Does my child need their own drum set?", "a": "A practice pad is enough to start. Instructors will guide you on equipment as lessons progress." },
+        { "q": "How often should my child take drum lessons?", "a": "Most students benefit from one private lesson per week for steady improvement." }
+      ],
+      "callsToAction": [{ "label": "Schedule a Trial Lesson", "target": "https://link.apisystem.tech/widget/survey/0IIXocvyYpPeFVbD5HPB" }],
+      "deadCTAs": ["Contact us to schedule a lesson", "Visit our South Dade studio", "Explore our music programs online"],
+      "imageReferences": ["/wp-content/uploads/2026/02/m1000x1000-2.jpg", "/wp-content/uploads/2026/05/P1088662.jpg", "/wp-content/uploads/2026/05/P1088659.jpg"],
+      "imageSubjectMatch": true,
+      "claimsRequiringVerification": ["Are online lessons genuinely offered? If yes, why is this the only page saying so? If no, remove.", "How do online lessons reconcile with 'every student performs in a live showcase within 90 days'?"]
+    },
+    {
+      "name": "Bass Guitar",
+      "sourceUrl": "https://southdademusic.com/bass-guitar-lessons/",
+      "inNav": true,
+      "onInstrumentHub": true,
+      "description": "Bass guitar lessons are great for students who want to learn rhythm and groove. The bass plays an important role in music by supporting the beat and connecting different instruments together.",
+      "lessonFormat": "Private, one-on-one mentorship",
+      "recommendedAge": "around age 7 or 8, depending on hand size and readiness",
+      "skillLevel": "No prior musical experience required",
+      "lessonFrequency": "One session per week",
+      "equipmentNeeded": "A starter bass and small amp are enough to begin.",
+      "benefits": ["Improved focus, discipline, and concentration", "Stronger rhythmic coordination and physical awareness", "Better collaborative listening and teamwork skills", "Increased confidence through public performance", "Creative expression and original music creation"],
+      "curriculum": ["Proper hand positioning and fingerstyle technique", "Reading music notation and understanding tabs", "Rhythm, timing, and 'locking in' with the drums", "Creating original basslines for modern band pathways", "Musical confidence and collaborative focus"],
+      "programConnections": ["modern band pathways", "collaborative ensembles"],
+      "FAQs": [
+        { "q": "What age can kids start bass?", "a": "Most can begin around age 7 or 8, depending on hand size and readiness." },
+        { "q": "Are private lessons better?", "a": "Yes, they allow mentors to tailor instruction to your specific musical path." },
+        { "q": "Do I need a bass at home?", "a": "A starter bass and small amp are enough to begin." },
+        { "q": "How often are lessons?", "a": "One session per week is ideal for steady growth." }
+      ],
+      "callsToAction": [
+        { "label": "Schedule a Trial Lesson", "target": "https://link.apisystem.tech/widget/survey/0IIXocvyYpPeFVbD5HPB" },
+        { "label": "Schedule a Trial Lesson", "target": "https://southdademusic.com/contact-enroll/" }
+      ],
+      "imageReferences": ["/wp-content/uploads/2026/05/121cdee4-aca2-4eaa-adae-571929831e2a.jpg", "/wp-content/uploads/2026/05/IMG_2582-scaled.jpg", "/wp-content/uploads/2026/05/MG_0957-scaled.png"],
+      "imageSubjectMatch": "unverified - UUID filename, subject unknown",
+      "claimsRequiringVerification": ["'instructors who are active performers' - appears only here and on the ukulele page", "Near-duplicate content with /ukulele-lessons/ (5 sections verbatim)"]
+    },
+    {
+      "name": "Violin",
+      "sourceUrl": "https://southdademusic.com/violin-lessons/",
+      "inNav": true,
+      "onInstrumentHub": true,
+      "description": "Students looking for experienced Violin Teachers Near Me trust our supportive teaching style. We focus on posture, bow control, tone, and rhythm.",
+      "lessonFormat": "Private only - 'all violin lessons at South Dade Music are private'",
+      "recommendedAge": "around age 5 or 6, depending on readiness and focus",
+      "skillLevel": "No experience required; beginner instruction specialty",
+      "lessonFrequency": "One private lesson per week",
+      "equipmentNeeded": "Yes, a properly sized violin is recommended. Instructors can help with sizing guidance.",
+      "benefits": ["Improved focus and discipline", "Better hand-eye coordination", "Strong listening skills", "Increased confidence and self-expression", "Appreciation for classical and modern music"],
+      "curriculum": ["Correct violin posture and bow hold", "Basic finger placement and tone production", "Reading music notation", "Rhythm, timing, and coordination", "Playing simple songs and exercises"],
+      "programConnections": [],
+      "FAQs": [
+        { "q": "What age can kids start violin lessons?", "a": "Most children can begin violin lessons around age 5 or 6, depending on readiness and focus." },
+        { "q": "Do students need experience to start?", "a": "No experience is required. Our violin teachers specialize in beginner instruction." },
+        { "q": "Does my child need a violin at home?", "a": "Yes, a properly sized violin is recommended. Instructors can help with sizing guidance." },
+        { "q": "How often should violin lessons be taken?", "a": "One private lesson per week is ideal for steady progress." },
+        { "q": "Are violin lessons one-on-one?", "a": "Yes, all violin lessons at South Dade Music are private." }
+      ],
+      "callsToAction": [{ "label": "Schedule a Trial Lesson", "target": "https://link.apisystem.tech/widget/survey/0IIXocvyYpPeFVbD5HPB" }],
+      "deadCTAs": ["Contact us to schedule a lesson", "Visit our South Dade studio", "Explore all music programs online"],
+      "imageReferences": ["/wp-content/uploads/2026/01/m1000x1000-1.jpg", "/wp-content/uploads/2026/05/P1088570-1.jpg", "/wp-content/uploads/2026/05/P1088639.jpg"],
+      "imageSubjectMatch": false,
+      "imageDefect": "Hero image m1000x1000-1.jpg is the GUITAR photo used on /instruments/ and /guitar-lessons/.",
+      "claimsRequiringVerification": ["'All violin lessons are private' contradicts /resources/ claim of operating orchestras", "Does South Dade Music actually run an orchestra? This page treats orchestras as something students join elsewhere."]
+    },
+    {
+      "name": "Ukulele",
+      "sourceUrl": "https://southdademusic.com/ukulele-lessons/",
+      "inNav": true,
+      "onInstrumentHub": true,
+      "description": "Ukulele lessons are perfect for beginners who want a fun and simple way to start music. The instrument is easy to hold and quick to learn, making it great for younger students.",
+      "lessonFormat": "Private, one-on-one mentorship",
+      "recommendedAge": "around age 5 or 6, depending on readiness",
+      "skillLevel": "No prior musical experience required",
+      "lessonFrequency": "One session per week",
+      "equipmentNeeded": "Yes, having an instrument for practice is essential for progress.",
+      "benefits": ["Improved focus, discipline, and concentration", "Stronger hand-eye coordination and physical awareness", "Better collaborative listening and teamwork skills", "Increased confidence through public performance", "Creative expression and original music creation"],
+      "curriculum": ["Proper hand positioning and strumming techniques", "Reading music notation and understanding chord charts", "Rhythm, timing, and melodic coordination", "Creating original music through modern pathways", "Musical confidence and collaborative focus"],
+      "programConnections": ["Summer Jam Music Camp (ukulele is one of four camp instruments)", "collaborative ensembles"],
+      "FAQs": [
+        { "q": "What age can kids start ukulele?", "a": "Most can begin around age 5 or 6, depending on readiness." },
+        { "q": "Are private lessons better?", "a": "Yes, they allow mentors to tailor instruction to your specific musical path." },
+        { "q": "Do I need a ukulele at home?", "a": "Yes, having an instrument for practice is essential for progress." },
+        { "q": "How often are lessons?", "a": "One session per week is ideal for steady growth." }
+      ],
+      "callsToAction": [
+        { "label": "Schedule a Trial Lesson", "target": "https://link.apisystem.tech/widget/survey/0IIXocvyYpPeFVbD5HPB" },
+        { "label": "Schedule a Trial Lesson", "target": "https://southdademusic.com/contact-enroll/" }
+      ],
+      "imageReferences": ["/wp-content/uploads/2026/01/m1000x1000.jpg", "/wp-content/uploads/2026/05/P1088524.jpg", "/wp-content/uploads/2026/05/P1088542.png"],
+      "imageSubjectMatch": false,
+      "imageDefect": "Hero image m1000x1000.jpg is the PIANO photo from /instruments/. No image on the page shows a ukulele.",
+      "claimsRequiringVerification": ["Near-duplicate content with /bass-guitar-lessons/ (5 sections verbatim)", "'Instrument at home is essential' conflicts with the /instruments/ card positioning it as the low-barrier starter, and with the camp claim that all instruments are provided"]
+    },
+    {
+      "name": "Voice / Singing",
+      "sourceUrl": "https://southdademusic.com/singing-lessons/",
+      "inNav": false,
+      "onInstrumentHub": false,
+      "orphan": true,
+      "description": "The singing lessons for kids that South Dade Music provides for children are designed to be enjoyable, well-structured, and supportive, making them ideal for young students.",
+      "lessonFormat": "Private only - 'all singing lessons at South Dade Music are private'",
+      "recommendedAge": "around age 5 or 6, depending on focus and readiness",
+      "skillLevel": "No experience required; beginner-friendly",
+      "lessonFrequency": "One private lesson per week",
+      "equipmentNeeded": "None - 'Singing is a great starting point for many children because it doesn't require an instrument.'",
+      "benefits": ["Increased confidence and self-expression", "Improved listening and memory skills", "Better posture and breathing", "Emotional expression through music", "Strong communication skills"],
+      "curriculum": ["Proper breathing techniques", "Pitch control and vocal accuracy", "Clear pronunciation and diction", "Rhythm and timing", "Confidence while singing"],
+      "programConnections": ["Summer Jam Music Camp (vocals is one of four camp instruments)", "referenced heavily on /programs/ as 'Singing Lessons For Kids'"],
+      "FAQs": [
+        { "q": "What age can kids start singing lessons?", "a": "Most children can begin singing lessons around age 5 or 6, depending on focus and readiness." },
+        { "q": "Do kids need experience to start singing lessons?", "a": "No experience is required. Our singing lessons are beginner-friendly." },
+        { "q": "Are singing lessons private?", "a": "Yes, all singing lessons at South Dade Music are private." },
+        { "q": "How often should kids take singing lessons?", "a": "One private lesson per week is ideal for steady vocal improvement." },
+        { "q": "Will singing lessons damage my child's voice?", "a": "No. Our instructors teach proper vocal technique to protect and strengthen young voices." }
+      ],
+      "callsToAction": [{ "label": "Schedule a Trial Lesson", "target": "https://link.apisystem.tech/widget/survey/0IIXocvyYpPeFVbD5HPB" }],
+      "deadCTAs": ["Contact us to schedule a lesson", "Visit our South Dade studio", "Explore all music programs online"],
+      "imageReferences": ["/wp-content/uploads/2026/01/m1000x1000-1.jpg"],
+      "imageSubjectMatch": false,
+      "imageDefect": "Hero image is the GUITAR photo (third page reusing it). No vocal imagery on the page.",
+      "claimsRequiringVerification": [
+        "Page contains live editorial notes ('Internal link suggestion', 'Internal Links to Add') visible to visitors",
+        "'All singing lessons are private' conflicts with /group-music-lessons/ listing vocals as a group offering and /resources/ claiming choirs",
+        "Vocal safety claim should be backed by instructor qualification",
+        "Why is a core offering an orphan page?"
+      ]
+    },
+    {
+      "name": "Keyboard",
+      "sourceUrl": null,
+      "inNav": false,
+      "onInstrumentHub": false,
+      "orphan": true,
+      "hasNoPage": true,
+      "description": null,
+      "lessonFormat": null,
+      "recommendedAge": null,
+      "skillLevel": null,
+      "lessonFrequency": null,
+      "equipmentNeeded": null,
+      "benefits": [],
+      "curriculum": [],
+      "programConnections": [],
+      "FAQs": [],
+      "callsToAction": [],
+      "imageReferences": ["/wp-content/uploads/2026/01/instruments-we-teach-7.png"],
+      "soldOn": [
+        "homepage 'Instruments We Teach' strip (7th tile, labelled 'Keyboard Lessons')",
+        "/private-lessons/ instrument list",
+        "/group-music-lessons/ FAQ ('Programs may include guitar, drums, keyboard, vocals, and band-style instruments')"
+      ],
+      "claimsRequiringVerification": [
+        "Keyboard is advertised in three places but has no page, no detail, and no destination link. Decide: is keyboard a distinct offering from piano, or should it be folded into the piano page?"
+      ]
+    }
+  ],
+
+  "crossCuttingFindings": {
+    "lessonFormatContradiction": "Five instrument pages state ALL lessons in that instrument are private (guitar, violin, singing explicitly; piano, drums, bass, ukulele implicitly). /group-music-lessons/, /band-builders/, /programs/ and try.southdademusic.com all sell group instruction in the same instruments. /resources/ states the standard offer is 'two classes weekly: one for skill, one for band application'. These cannot all be true.",
+    "frequencyContradiction": "Every instrument page says one lesson per week. /resources/ says two classes weekly. Unresolved.",
+    "pricingAbsent": "No instrument page states any price, lesson length, or package structure. Lesson duration (30/45/60 min) is never mentioned anywhere on the site.",
+    "scholarshipAbsent": "No instrument page mentions PEP/UA eligibility.",
+    "guaranteeAbsent": "No instrument page mentions the Stage-Ready Guarantee or the 90-day promise.",
+    "deadCTAPattern": "Five instrument pages end with an emoji contact block ('Contact us to schedule a lesson', 'Visit our South Dade studio', 'Explore all music programs online') rendered as plain text with no links. Every instrument page loses the visitor at the bottom of the funnel.",
+    "imageSubjectMismatches": ["violin page uses a guitar photo", "ukulele page uses a piano photo", "singing page uses a guitar photo"],
+    "templateDuplication": "bass + ukulele share five verbatim sections; piano/guitar/violin/drums/singing share a different template with machine-translated register."
+  }
+}

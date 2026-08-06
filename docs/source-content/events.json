@@ -1,0 +1,71 @@
+{
+  "$comment": "Event inventory. The site's entire event infrastructure is broken - both event URLs return HTTP 404. Metadata below was captured from the Phase 1 discovery index and is NOT verified against a live page.",
+  "extractionDate": "2026-08-05",
+  "liveEventPages": 0,
+  "brokenEventPages": 2,
+
+  "events": [
+    {
+      "title": "Bazaar and Flea Market Performance",
+      "sourceUrl": "https://southdademusic.com/event/bazaar-and-flea-market-performance",
+      "httpStatus": 404,
+      "date": "March 15, 2025",
+      "time": "10:00 am",
+      "location": null,
+      "description": null,
+      "descriptionAvailable": "Only the index snippet survives: 'This event has passed. Bazaar and Flea Market Performance. March 15, 2025 @ 10:00 am.'",
+      "eventType": "Community outreach performance",
+      "relatedProgram": "Supports the /resources/ claim: 'We actively engage in community outreach through free performances'",
+      "imageReferences": [],
+      "outdated": true,
+      "verified": false,
+      "verificationNote": "Date and time come from search-index metadata for a URL that no longer resolves. Must be confirmed with the owner before any reuse.",
+      "migrationRecommendation": "DO NOT migrate the URL. Recover the real event record from the owner and rebuild as part of a new Performances/Events section. If external links point here, 301 to the new performances page."
+    },
+    {
+      "title": "Events for March 2025",
+      "sourceUrl": "https://southdademusic.com/events/month/2025-03/",
+      "httpStatus": 404,
+      "date": "March 2025 (month archive)",
+      "time": null,
+      "location": null,
+      "description": null,
+      "descriptionAvailable": "Index snippet: 'Empowering musicians of all levels with quality lessons and expert guidance. Join South Dade Music and let your passion for music thrive! Instagram.'",
+      "eventType": "Calendar month archive (The Events Calendar plugin)",
+      "relatedProgram": null,
+      "imageReferences": [],
+      "outdated": true,
+      "verified": false,
+      "verificationNote": "Two significant details in the snippet: the page title used 'South Dade Music Academy', and the footer referenced Instagram - the only evidence of any social media presence in the entire estate.",
+      "migrationRecommendation": "Archive. Do not rebuild the /events/month/YYYY-MM/ URL pattern. Recover the Instagram handle and the full event history from the owner."
+    }
+  ],
+
+  "performanceEvidence": {
+    "note": "Although no event pages work, several performance references exist across the estate. These are the only surviving records of what the academy actually stages.",
+    "sources": [
+      { "type": "photo gallery", "location": "/performances/, /, /about/", "detail": "Six images (P1088527, DSCF3094, P1088689, P1088608, P1088597, P1088570) - unedited camera filenames, all uploaded 2026/05, apparently from a single showcase shoot. No date, venue or event name is published for them." },
+      { "type": "testimonial", "reviewer": "Dexter", "detail": "'The concert was a heartwarming showcase of the kids' talent, joy, and hard work' - references a concert with no date." },
+      { "type": "testimonial", "reviewer": "Brian Silverio", "detail": "'Had the pleasure of attending a lovely event hosted by South Dade music Academy... it was clear how much care and dedication went into organizing the showcase.'" },
+      { "type": "testimonial", "reviewer": "romi", "detail": "'my niece was in the show and she's been having so much fun at practice'" },
+      { "type": "testimonial", "reviewer": "Charles Percy (try. subdomain)", "detail": "'I am the grandpa of two of the performers Dexter & Michael Munroe... to see my gran kids worshiping the Lord' - implies a faith-based performance context not documented anywhere on the main site." },
+      { "type": "camp claim", "location": "/summer-jam-music-camp-2026/, /summercamp/", "detail": "'End-of-Camp Concert' with 'Parent Invitation to Attend'. Two 2026 concerts implied (end of Session 1, end of Session 2) - both now past. No record published." },
+      { "type": "program claim", "location": "/resources/, homepage", "detail": "'every student performs in a live showcase within 90 days' implies roughly four showcase cycles per year. None is documented." },
+      { "type": "photo", "location": "/summer-programs/, /summer-jam-music-camp-2026/", "detail": "PHOTO-2025-06-28-19-06-09.jpg - filename dates it to 28 June 2025, 19:06, i.e. an evening event during the 2025 summer camp period." }
+    ]
+  },
+
+  "findings": {
+    "criticalGap": "A business whose entire brand promise is 'every student performs in a live showcase within 90 days' publishes ZERO event records. There is no upcoming-events listing, no past-showcase archive, no dates, no venues, and no video. The only event page that ever existed now returns 404.",
+    "pluginRemoval": "The Events Calendar plugin appears to have been removed while its URLs stayed in the sitemap. Both /event/... and /events/month/... 404 with a noindex 404 template.",
+    "sitemapPollution": "Both dead URLs were returned by the Phase 1 site map, meaning they are still discoverable and may still be indexed.",
+    "lostSocialSignal": "The March 2025 archive footer referenced Instagram. The current site links to no social profile at all.",
+    "recommendationForRedesign": [
+      "Build a real Events/Showcases section with structured Event schema",
+      "Backfill past showcases with dates, venues and photo sets before launch",
+      "Publish the recurring showcase cadence so the 90-day promise is verifiable",
+      "Recover and link social profiles",
+      "301 both dead URLs to the new performances section"
+    ]
+  }
+}

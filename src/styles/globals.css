@@ -1,0 +1,483 @@
+@import 'tailwindcss';
+@import './tokens.css';
+
+/* -----------------------------------------------------------------------
+ * Base layer
+ * --------------------------------------------------------------------- */
+@layer base {
+  *,
+  *::before,
+  *::after {
+    box-sizing: border-box;
+  }
+
+  html {
+    /* Anchors and skip links land below the sticky header. */
+    scroll-padding-top: calc(var(--header-height, 80px) + 16px);
+    -webkit-text-size-adjust: 100%;
+  }
+
+  /*
+   * Smooth scrolling is opted into by the motion layer (Lenis), never by the
+   * browser — so that reduced-motion users and no-JS users get instant jumps.
+   */
+  html:not(.lenis) {
+    scroll-behavior: auto;
+  }
+
+  body {
+    background-color: var(--color-surface-page);
+    color: var(--color-text-primary);
+    font-family: var(--font-body);
+    font-size: var(--text-body-md);
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    font-synthesis-weight: none;
+    text-rendering: optimizeLegibility;
+  }
+
+  /* Spanish body copy — accented ascenders need room (04 §2). */
+  :lang(es) body,
+  :lang(es) p,
+  :lang(es) li {
+    line-height: var(--leading-body-es);
+  }
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    font-family: var(--font-display);
+    font-weight: 600;
+    text-wrap: balance;
+  }
+
+  p {
+    text-wrap: pretty;
+  }
+
+  /* Tabular numerals everywhere a figure could shift layout while animating. */
+  [data-numeric],
+  time,
+  output {
+    font-variant-numeric: tabular-nums;
+  }
+
+  img,
+  picture,
+  video,
+  canvas,
+  svg {
+    display: block;
+    max-width: 100%;
+  }
+
+  /* -------------------------------------------------------------------
+   * Focus. Never reduced, never animated, always full strength.
+   * (05-motion-system.md §16 rule 9)
+   *
+   * The offset is 3px rather than 2px: at 2px the ring touches the glyph
+   * edges of the label tokens and reads as a border rather than a ring.
+   * ----------------------------------------------------------------- */
+  :focus-visible {
+    outline: 2px solid var(--color-focus-ring);
+    outline-offset: 3px;
+    border-radius: var(--radius-sm);
+  }
+
+  /*
+   * Anchors landed on from the in-page skip links get a brief, non-animated
+   * acknowledgement so a keyboard user can see where they arrived. Colour
+   * only — no movement, and it decays without a transition under reduced
+   * motion because the rule below is scoped to `motion-safe`.
+   */
+  :target {
+    scroll-margin-top: calc(var(--header-height, 80px) + 2rem);
+  }
+
+  /*
+   * Selection inside the House register. The default amber-on-dark selection
+   * is unreadable against `stage-950`; this keeps it legible in both rooms.
+   */
+  [data-register='house'] ::selection {
+    background-color: var(--color-spot-500);
+    color: var(--color-stage-950);
+  }
+
+  /* Remove the default outline only where :focus-visible is supported. */
+  :focus:not(:focus-visible) {
+    outline: none;
+  }
+
+  ::selection {
+    background-color: var(--color-spot-300);
+    color: var(--color-stage-950);
+  }
+
+  /* Honour a coarse pointer: no sticky hover states on touch. */
+  @media (hover: none) {
+    * {
+      -webkit-tap-highlight-color: transparent;
+    }
+  }
+}
+
+/* -----------------------------------------------------------------------
+ * Reduced motion.
+ *
+ * Not a degraded experience — a first-class alternative presentation.
+ * Opacity is generally safe; transform generally is not. Vestibular triggers
+ * come from movement, not from fading. (05-motion-system.md §14)
+ *
+ * `[data-motion="reduced"]` mirrors the OS preference AND the manual footer
+ * toggle, so both paths hit the same rules.
+ * --------------------------------------------------------------------- */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+[data-motion='reduced'] *,
+[data-motion='reduced'] *::before,
+[data-motion='reduced'] *::after {
+  animation-duration: 0.01ms !important;
+  animation-iteration-count: 1 !important;
+  transition-duration: 0.01ms !important;
+  scroll-behavior: auto !important;
+}
+
+/* Focus indicators are exempt — they are never reduced. */
+@media (prefers-reduced-motion: reduce) {
+  :focus-visible {
+    outline: 2px solid var(--color-focus-ring) !important;
+    outline-offset: 2px !important;
+  }
+}
+
+/* -----------------------------------------------------------------------
+ * Utilities
+ * --------------------------------------------------------------------- */
+
+/* -----------------------------------------------------------------------
+ * The light field.
+ *
+ * One notional lamp travels the document; every atmospheric layer reads its
+ * position from here. Defaults are the reduced-motion resting position, so the
+ * page is correctly lit before any script runs.
+ * --------------------------------------------------------------------- */
+:root {
+  --light-x: 72;
+  --light-y: 28;
+  --light-intensity: 1;
+  --light-flare: 0;
+  --scroll-progress: 0;
+
+  /* The grade. Defaults to the ivory stop — the most neutral point on the ramp. */
+  --atmos-tint: 250 246 238;
+  --atmos-warmth: 0.34;
+  --vignette: 0.22;
+}
+
+/* -----------------------------------------------------------------------
+ * Tactility.
+ *
+ * The Desk sections were flat #FAF9F7 — clean, and completely untactile. A
+ * warm uncoated paper tooth multiplied into the ground gives them a surface:
+ * the same trick a printed programme uses, and the reason good stock feels
+ * expensive in the hand.
+ *
+ * Applied as a second background layer rather than a pseudo-element, so it
+ * cannot disturb stacking or hit-testing anywhere.
+ * --------------------------------------------------------------------- */
+[data-register='desk'] {
+  background-image: url('/images/generated/atmos-paper-tooth.jpg');
+  background-size: 760px;
+  background-repeat: repeat;
+  background-blend-mode: multiply;
+}
+
+/* -----------------------------------------------------------------------
+ * Reflected floor light.
+ *
+ * Every House section gets a warm bounce rising off its lower edge — light
+ * hitting boards and coming back up. Real stages have this; flat dark
+ * gradients do not, and its absence is why CSS "dark sections" read as fields
+ * of colour rather than as rooms.
+ * --------------------------------------------------------------------- */
+/*
+ * Scoped to `section` deliberately. The header adopts `data-register="house"`
+ * while it floats over the hero, and the mobile drawer carries it too — neither
+ * is a room with a floor, and a bounce inside a 64px header would just be a
+ * smear across the navigation.
+ */
+section[data-register='house'] {
+  position: relative;
+}
+
+section[data-register='house']::after {
+  content: '';
+  position: absolute;
+  inset-inline: 0;
+  bottom: 0;
+  height: 34%;
+  pointer-events: none;
+  background: linear-gradient(
+    to top,
+    rgb(245 165 36 / calc(0.07 + var(--atmos-warmth, 0.3) * 0.06)),
+    transparent
+  );
+}
+
+/* -----------------------------------------------------------------------
+ * Cinematic image treatment.
+ *
+ * Atmospheric plates are graded rather than used raw: contrast pulled back so
+ * blacks stay open, saturation eased so amber never turns orange, and a soft
+ * edge falloff so nothing terminates at a hard rectangle. Together these are
+ * the difference between a photograph placed on a page and one lit into it.
+ *
+ * A static filter rasterises once and costs nothing; no filter is ever
+ * animated in a scroll loop.
+ * --------------------------------------------------------------------- */
+@utility plate {
+  filter: contrast(0.92) saturate(0.94) brightness(1.02);
+  -webkit-mask-image: radial-gradient(120% 100% at 50% 50%, #000 55%, transparent 100%);
+  mask-image: radial-gradient(120% 100% at 50% 50%, #000 55%, transparent 100%);
+}
+
+/**
+ * Section melt.
+ *
+ * No House section terminates at a line. A gradient bleed at the top and
+ * bottom edge dissolves it into whatever sits next, so the acts read as
+ * continuous rather than stacked.
+ */
+@utility melt-b {
+  &::before {
+    content: '';
+    position: absolute;
+    inset-inline: 0;
+    bottom: 0;
+    height: 10rem;
+    z-index: 1;
+    pointer-events: none;
+    background: linear-gradient(to bottom, transparent, var(--melt-to, #070a12));
+  }
+}
+
+/**
+ * Emerge — content revealed by light passing over it, not by fading up.
+ *
+ * `--emerge` defaults to 1 (fully revealed). The motion layer sets it to 0 only
+ * after confirming it can animate, so no-JS and reduced-motion visitors see
+ * everything immediately.
+ */
+[data-emerge] {
+  --emerge: 1;
+  --emerge-angle: 104deg;
+  --emerge-feather: 46%;
+
+  -webkit-mask-image: linear-gradient(
+    var(--emerge-angle),
+    #000 calc(var(--emerge) * (100% + var(--emerge-feather)) - var(--emerge-feather)),
+    transparent calc(var(--emerge) * (100% + var(--emerge-feather)))
+  );
+  mask-image: linear-gradient(
+    var(--emerge-angle),
+    #000 calc(var(--emerge) * (100% + var(--emerge-feather)) - var(--emerge-feather)),
+    transparent calc(var(--emerge) * (100% + var(--emerge-feather)))
+  );
+}
+
+/* A mask is only worth its compositor layer while it is actually sweeping. */
+@media (prefers-reduced-motion: reduce) {
+  [data-emerge] {
+    -webkit-mask-image: none;
+    mask-image: none;
+  }
+}
+
+[data-motion='reduced'] [data-emerge] {
+  -webkit-mask-image: none;
+  mask-image: none;
+}
+
+/**
+ * Film grain. Stepped, not interpolated — real grain resamples, it does not
+ * slide. Eight positions on a 0.8s loop.
+ */
+@keyframes grain-shift {
+  0% {
+    background-position: 0 0;
+  }
+  12.5% {
+    background-position: -14px 7px;
+  }
+  25% {
+    background-position: 9px -12px;
+  }
+  37.5% {
+    background-position: -6px 15px;
+  }
+  50% {
+    background-position: 13px 4px;
+  }
+  62.5% {
+    background-position: -11px -9px;
+  }
+  75% {
+    background-position: 5px 12px;
+  }
+  87.5% {
+    background-position: -13px -4px;
+  }
+  100% {
+    background-position: 0 0;
+  }
+}
+
+/**
+ * Lens breathing. A near-imperceptible scale and drift on hero grounds, so the
+ * frame is never quite still. ~1.5% over 22 seconds — below conscious notice,
+ * felt as "alive" rather than seen as movement.
+ */
+@keyframes lens-breathe {
+  0%,
+  100% {
+    transform: scale(1.015) translate3d(0, 0, 0);
+  }
+  50% {
+    transform: scale(1.035) translate3d(-0.6%, -0.4%, 0);
+  }
+}
+
+/* -----------------------------------------------------------------------
+ * THE FILM
+ * --------------------------------------------------------------------- */
+
+/**
+ * SplitText line masks.
+ *
+ * GSAP's `mask: 'lines'` wraps each line in a clipping parent; this guarantees
+ * the clip even if a line box is taller than its content, and stops a masked
+ * line from creating a scroll container.
+ */
+.film-line {
+  will-change: transform;
+}
+
+/**
+ * The First Note reframe.
+ *
+ * The second measured state for `Flip`. The numeral steps back and to the
+ * corner so the caption can take the frame — the camera reframing on the
+ * moment, not a resize. Flip measures both states and animates the delta on
+ * transform alone.
+ */
+[data-j-numeral].is-reframed {
+  font-size: clamp(4rem, 11vw, 9rem);
+  opacity: 0.55;
+}
+
+/**
+ * The hero scroll affordance.
+ *
+ * The only permitted looping animation in the viewport (05-motion-system.md
+ * §16 rule 22), and it sits outside the reading area. Applied with the
+ * `motion-safe:` variant so it stops entirely under reduced motion.
+ */
+@keyframes hero-drift {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(6px);
+  }
+}
+
+/** Prose measure — 60–75 characters (04-design-system.md §2). */
+@utility measure {
+  max-width: var(--container-prose);
+}
+
+@utility measure-tight {
+  max-width: 45ch;
+}
+
+/**
+ * The Archivo width axis — the brand's typographic signature.
+ * Expanded for poster statements, condensed for dated ledger lines.
+ */
+@utility font-condensed {
+  font-stretch: 87.5%;
+}
+
+@utility font-wide {
+  font-stretch: 106%;
+}
+
+@utility font-expanded {
+  font-stretch: 112%;
+}
+
+/**
+ * Screen-reader-only, with a `focus` variant that reveals in place.
+ * Used by the skip link.
+ */
+@utility sr-only-focusable {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+  border-width: 0;
+
+  &:focus-visible {
+    position: fixed;
+    width: auto;
+    height: auto;
+    margin: 0;
+    overflow: visible;
+    clip-path: none;
+    white-space: normal;
+  }
+}
+
+/**
+ * Content is present at first paint, then enhanced. Never `opacity: 0` in base
+ * CSS — a JS failure must not produce a blank page.
+ * (05-motion-system.md §4 rule 5)
+ *
+ * The motion layer sets `data-animate-ready` on <html> only once GSAP has
+ * confirmed it can run, at which point reveal targets may start hidden.
+ */
+[data-animate-ready='true'] [data-animate]:not([data-animate-done='true']) {
+  will-change: transform, opacity;
+}
+
+/* Lenis — only active when the motion layer decides smooth scrolling applies. */
+html.lenis,
+html.lenis body {
+  height: auto;
+}
+
+.lenis.lenis-smooth {
+  scroll-behavior: auto !important;
+}
+
+.lenis.lenis-stopped {
+  overflow: clip;
+}

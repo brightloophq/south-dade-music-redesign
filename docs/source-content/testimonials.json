@@ -1,0 +1,147 @@
+{
+  "$comment": "14 unique testimonials found across the estate. Names are reproduced exactly as published, including capitalisation. duplicateCount = total rendered instances across all scraped pages.",
+  "extractionDate": "2026-08-05",
+  "uniqueTestimonials": 14,
+  "totalRenderedInstances": 111,
+  "renderPattern": "Six main-site pages each render a 12-item testimonial block followed by a repeat of the first 6 items = 18 cards per page for 12 unique reviews. Pages: /, /about/, /programs/, /summer-jam-music-camp-2026/, /summercamp/. try.southdademusic.com renders a separate set of 3.",
+
+  "testimonials": [
+    {
+      "reviewerName": "Julian Paz",
+      "testimonial": "I want to take a moment to express my heartfelt gratitude to Mr. Lopez for his profound impact on my nephew's musical journey. His music classes have been a true beacon of joy and inspiration in their lives. He is more than just an exceptional teacher; he is a wonderfully caring educator with a genuine passion for music that shines through in every lesson. From their first class, my children felt an undeniable connection to music, eagerly anticipating each session. Under Mr. Lopez's thoughtful guidance, his love for music has blossomed in ways I never imagined possible. I sincerely appreciate the warmth and encouragement he brings to his teaching, fostering musical skills and a lasting enthusiasm for creativity.",
+      "sourcePage": ["/", "/about/", "/programs/", "/summer-jam-music-camp-2026/", "/summercamp/"],
+      "duplicateCount": 10,
+      "probableSource": "Google Business Profile review",
+      "permissionOrVerificationNeeded": true,
+      "notes": "Internally inconsistent: opens about 'my nephew' then switches to 'my children'. Longest review on the site; likely truncated or reformatted in any redesign. No rating, date, or platform attribution shown."
+    },
+    {
+      "reviewerName": "Mariana Olvera",
+      "testimonial": "Amazing music school! Love their dedication to the community! My kids love this school and learning so much! They're making my dream come true of having talented kids!",
+      "sourcePage": ["/", "/about/", "/programs/", "/summer-jam-music-camp-2026/", "/summercamp/"],
+      "duplicateCount": 10,
+      "probableSource": "Google Business Profile review",
+      "permissionOrVerificationNeeded": true,
+      "notes": "Possibly the same reviewer as 'Mariana Gennevie Olvera' - two entries, similar names, both referencing their kids. Should be de-duplicated or confirmed as two distinct people."
+    },
+    {
+      "reviewerName": "Claudia Olivar",
+      "testimonial": "Excellent music teacher. My daughter has been in Professor Lopez's classes for a short time and has learned a lot. Professor Joshua is patient, kind, enthusiastic, and an excellent person. I feel very lucky to have found such a professional music teacher close to home.",
+      "sourcePage": ["/", "/about/", "/programs/", "/summer-jam-music-camp-2026/", "/summercamp/", "try.southdademusic.com"],
+      "duplicateCount": 11,
+      "probableSource": "Google Business Profile review",
+      "permissionOrVerificationNeeded": true,
+      "notes": "The ONLY testimonial appearing on both the main site and the subdomain. On try.southdademusic.com it carries a 5-star rating; on the main site no rating is displayed. Names two instructor identities ('Professor Lopez', 'Professor Joshua') that may be one person."
+    },
+    {
+      "reviewerName": "Mariana Gennevie Olvera",
+      "testimonial": "My son Aaron has been building his confidence since he joined south dade music academy! I love the dedication they give to the kids here. You can tell they're passionate about what they do! We are glad to be part of this family! 🙂",
+      "sourcePage": ["/", "/about/", "/programs/", "/summer-jam-music-camp-2026/", "/summercamp/"],
+      "duplicateCount": 10,
+      "probableSource": "Google Business Profile review",
+      "permissionOrVerificationNeeded": true,
+      "notes": "Names a minor ('my son Aaron'). Uses the 'south dade music academy' name. Possible duplicate reviewer with 'Mariana Olvera'."
+    },
+    {
+      "reviewerName": "Nikin Shah",
+      "testimonial": "My daughter comes here, and it is great. Mr. Lopez is her teacher, and she always says the class is great, and she loves it. She has made friends and is very happy! Such a great music class.",
+      "sourcePage": ["/", "/about/", "/programs/", "/summer-jam-music-camp-2026/", "/summercamp/"],
+      "duplicateCount": 10,
+      "probableSource": "Google Business Profile review",
+      "permissionOrVerificationNeeded": true,
+      "notes": null
+    },
+    {
+      "reviewerName": "J Val",
+      "testimonial": "Amazing teachers that are very passionate and patient in what they do. My kids love the classes.",
+      "sourcePage": ["/", "/about/", "/programs/", "/summer-jam-music-camp-2026/", "/summercamp/"],
+      "duplicateCount": 10,
+      "probableSource": "Google Business Profile review",
+      "permissionOrVerificationNeeded": true,
+      "notes": "Abbreviated display name."
+    },
+    {
+      "reviewerName": "Dexter",
+      "testimonial": "The concert was a heartwarming showcase of the kids' talent, joy, and hard work, leaving us all proud and inspired.",
+      "sourcePage": ["/", "/about/", "/programs/", "/summer-jam-music-camp-2026/", "/summercamp/"],
+      "duplicateCount": 5,
+      "probableSource": "Google Business Profile review",
+      "permissionOrVerificationNeeded": true,
+      "notes": "PERFORMANCE-SPECIFIC and currently unused on /performances/. Note: 'Dexter' is also named as a performer (a minor) in Charles Percy's review on the subdomain - unclear whether this reviewer is the same person or a relative."
+    },
+    {
+      "reviewerName": "Maria carolina Linares",
+      "testimonial": "Es Genial la escuela 100% recommendada! I recommend this music school!! The teacher Alberto so really good!!",
+      "sourcePage": ["/", "/about/", "/programs/", "/summer-jam-music-camp-2026/", "/summercamp/"],
+      "duplicateCount": 5,
+      "probableSource": "Google Business Profile review",
+      "permissionOrVerificationNeeded": true,
+      "notes": "The site's ONLY Spanish-language content, and it is a customer review rather than published copy. Directly relevant to the 'full bilingual support' claim. Names instructor 'Alberto', who appears nowhere else on the site."
+    },
+    {
+      "reviewerName": "romi",
+      "testimonial": "love how involved kids are in learning music !! my niece was in the show and she's been having so much fun at practice !",
+      "sourcePage": ["/", "/about/", "/programs/", "/summer-jam-music-camp-2026/", "/summercamp/"],
+      "duplicateCount": 5,
+      "probableSource": "Google Business Profile review",
+      "permissionOrVerificationNeeded": true,
+      "notes": "Lowercase display name as published. Performance-related ('my niece was in the show')."
+    },
+    {
+      "reviewerName": "Brian Silverio",
+      "testimonial": "Had the pleasure of attending a lovely event hosted by South Dade music Academy, and it was truly heartwarming. The young performers were incredibly talented, and it was clear how much care and dedication went into organizing the showcase. A beautiful celebration of music and can't wait for the next one!",
+      "sourcePage": ["/", "/about/", "/programs/", "/summer-jam-music-camp-2026/", "/summercamp/"],
+      "duplicateCount": 5,
+      "probableSource": "Google Business Profile review",
+      "permissionOrVerificationNeeded": true,
+      "notes": "PERFORMANCE-SPECIFIC and unused on /performances/. Strongest available social proof for the showcase model. Uses the 'South Dade music Academy' name."
+    },
+    {
+      "reviewerName": "Elizabeth Garcia",
+      "testimonial": "My daughter love the school, the teachers are really professional and children oriented. Best music school in Homestead.",
+      "sourcePage": ["/", "/about/", "/programs/", "/summer-jam-music-camp-2026/", "/summercamp/"],
+      "duplicateCount": 5,
+      "probableSource": "Google Business Profile review",
+      "permissionOrVerificationNeeded": true,
+      "notes": "Says 'Best music school in Homestead' although the business address is Florida City. Useful local-SEO signal for the Homestead service area."
+    },
+    {
+      "reviewerName": "Yaimarelys Grandales",
+      "testimonial": "Best music school, my son has made a lot of progress in just a few months, the best teacher, Mr. Lopez",
+      "sourcePage": ["/", "/about/", "/programs/", "/summer-jam-music-camp-2026/", "/summercamp/"],
+      "duplicateCount": 5,
+      "probableSource": "Google Business Profile review",
+      "permissionOrVerificationNeeded": true,
+      "notes": "'progress in just a few months' - loosely supports the 90-day progress claim, though it does not mention a performance."
+    },
+    {
+      "reviewerName": "John Granada",
+      "testimonial": "Grateful to God for Mr. Lopez and all that he does to equip students that share his passion for music. Appreciate his patience with our son. Definitely recommend South dade music academy.",
+      "sourcePage": ["try.southdademusic.com"],
+      "duplicateCount": 1,
+      "probableSource": "Google Business Profile review (displayed with 5 stars on the funnel page)",
+      "permissionOrVerificationNeeded": true,
+      "notes": "UNIQUE TO THE SUBDOMAIN - not on the main site. Recoverable content. Contains religious language; confirm with the owner whether that fits the intended brand voice before reuse."
+    },
+    {
+      "reviewerName": "Charles Percy",
+      "testimonial": "Great experience Good job I am the grandpa of two of the performers Dexter & Michael Munroe Was an emotional moment for me to see my gran kids worshiping the Lord God bless you all",
+      "sourcePage": ["try.southdademusic.com"],
+      "duplicateCount": 1,
+      "probableSource": "Google Business Profile review (displayed with 5 stars on the funnel page)",
+      "permissionOrVerificationNeeded": true,
+      "notes": "UNIQUE TO THE SUBDOMAIN. ⚠️ NAMES TWO IDENTIFIABLE MINORS in full ('Dexter & Michael Munroe'). Do not republish without explicit guardian consent, or redact the names. Also describes a worship performance, which implies a faith-based event context not reflected anywhere on the main site."
+    }
+  ],
+
+  "findings": {
+    "ratingsDisplayed": "The main site displays NO star ratings, NO review dates, and NO platform attribution on any testimonial. try.southdademusic.com displays 5 stars on all three of its testimonials.",
+    "aggregateRating": "No aggregate rating, review count, or Google/Facebook review widget appears anywhere. No Review or AggregateRating structured data was observed.",
+    "verificationRisk": "All 14 read as genuine third-party reviews (varied voice, typos, mixed languages, specific names). None is attributed to a source on the main site, which weakens both credibility and FTC-style substantiation. Original review URLs should be captured.",
+    "instructorNames": "Testimonials are the ONLY place any instructor is named: Mr./Professor Lopez (5 reviews), Professor Joshua (1), Alberto (1). The site itself never names or introduces a single teacher.",
+    "minorsNamed": ["Aaron (Mariana Gennevie Olvera)", "Dexter (Charles Percy)", "Michael Munroe (Charles Percy)"],
+    "unusedPerformanceProof": "Three performance-specific testimonials (Dexter, Brian Silverio, romi) do not appear on /performances/, the page they would most support.",
+    "duplicationDefect": "12 reviews rendered 18 times per page across 5 pages. The first 6 reviews each appear twice on every page they occur on. This is a slider/loop misconfiguration, not an editorial choice.",
+    "recommendationForRedesign": "De-duplicate to 14 unique entries, add source attribution and dates, capture star ratings, redact or obtain consent for named minors, and surface performance-specific reviews on the performances page."
+  }
+}

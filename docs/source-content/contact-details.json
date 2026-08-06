@@ -1,0 +1,190 @@
+{
+  "$comment": "Every contact data point found, with its exact source. Conflicts are listed side by side and NOT resolved.",
+  "extractionDate": "2026-08-05",
+
+  "phoneNumbers": [
+    {
+      "display": "786-753-9509",
+      "href": "tel:7867539509",
+      "e164Guess": "+17867539509",
+      "locations": ["sitewide footer 'Contact Us' block (every page)"],
+      "scope": "main site",
+      "primary": true
+    },
+    {
+      "display": "786-753-9509",
+      "href": "tel:786-753-9509",
+      "locations": ["/contact-enroll/ body copy"],
+      "scope": "contact page",
+      "note": "Same number, different href format from the footer on the same page. Inconsistent tel: formatting sitewide."
+    },
+    {
+      "display": "+1-786-386-1982",
+      "href": null,
+      "e164Guess": "+17863861982",
+      "locations": ["try.southdademusic.com 'Phone' heading"],
+      "scope": "lead-gen subdomain",
+      "conflict": true,
+      "note": "COMPLETELY DIFFERENT NUMBER from the main site. Not a formatting variant - different digits."
+    }
+  ],
+
+  "emailAddresses": [
+    {
+      "value": "info@southdademusic.com",
+      "href": "mailto:info@southdademusic.com",
+      "locations": ["sitewide footer 'Contact Us' block (every page)"],
+      "scope": "sitewide"
+    },
+    {
+      "value": "contact@southdademusic.com",
+      "href": "mailto:contact@southdademusic.com",
+      "locations": ["/contact-enroll/ body copy", "/contact-enroll/ meta description"],
+      "scope": "contact page",
+      "conflict": true,
+      "note": "The contact page publishes a different address in its body than the footer directly beneath it."
+    },
+    {
+      "value": null,
+      "locations": ["try.southdademusic.com"],
+      "note": "The subdomain publishes NO email address at all."
+    }
+  ],
+
+  "addresses": [
+    {
+      "full": "601 W Palm Dr Unit 117, Florida City, FL 33034, United States",
+      "unit": "117",
+      "locations": ["/contact-enroll/ body copy", "/contact-enroll/ meta description", "try.southdademusic.com embedded Google Maps place_id (decodes to '601 W Palm Dr unit 117, Florida City, FL 33034, USA')"],
+      "corroboration": "Strongest - appears on the designated contact page AND is the address registered in the Google Maps place record."
+    },
+    {
+      "full": "601 W Palm Dr Unit 1157, Florida City, FL 33034",
+      "unit": "1157",
+      "locations": ["/summer-jam-music-camp-2026/ Camp Details", "/summercamp/ Camp Details"],
+      "conflict": true,
+      "note": "Possibly a typo for 117 or 115. This is the address a parent would drive to for camp drop-off."
+    },
+    {
+      "full": "601 W Palm Dr Unit 115, Florida City, FL 33034, United States",
+      "unit": "115",
+      "locations": ["try.southdademusic.com 'Location' heading"],
+      "conflict": true,
+      "note": "The subdomain's own map link resolves to unit 117, contradicting its own text on the same page."
+    }
+  ],
+
+  "addressComponents": {
+    "streetAddress": "601 W Palm Dr",
+    "unitNumber": "CONFLICT - 117 / 1157 / 115",
+    "addressLocality": "Florida City",
+    "addressRegion": "FL",
+    "postalCode": "33034",
+    "addressCountry": "United States",
+    "note": "Everything except the unit number is consistent across all sources."
+  },
+
+  "openingHours": {
+    "display": "Mon - Sat (8:00am - 6:00pm) Sun - Closed",
+    "locations": ["sitewide footer only"],
+    "structured": {
+      "monday": { "opens": "08:00", "closes": "18:00" },
+      "tuesday": { "opens": "08:00", "closes": "18:00" },
+      "wednesday": { "opens": "08:00", "closes": "18:00" },
+      "thursday": { "opens": "08:00", "closes": "18:00" },
+      "friday": { "opens": "08:00", "closes": "18:00" },
+      "saturday": { "opens": "08:00", "closes": "18:00" },
+      "sunday": "closed"
+    },
+    "gaps": [
+      "Absent from /contact-enroll/ body - the page a visitor opens to find them",
+      "Absent from try.southdademusic.com entirely",
+      "No holiday closures, term dates, or seasonal hours published",
+      "Instrument pages repeatedly promise 'After-school and evening availability', which conflicts with a 6:00pm close"
+    ]
+  },
+
+  "mapsAndDirections": {
+    "mainSite": {
+      "embeddedMap": false,
+      "directionsLink": false,
+      "note": "The contact page has no map, no directions link, no parking guidance and no entrance instructions."
+    },
+    "subdomain": {
+      "embeddedMap": true,
+      "mapImage": "https://images.leadconnectorhq.com/... (Google Static Map via firebasestorage highlevel-backend)",
+      "mapLink": "https://www.google.com/maps/search/?api=1&query=Google&query_place_id=EjM2MDEgVyBQYWxtIERyIHVuaXQgMTE3LCBGbG9yaWRhIENpdHksIEZMIDMzMDM0LCBVU0EiJBoiChYKFAoSCWXr2iXN4NmIEZxHLziC2BMXEgh1bml0IDExNw",
+      "note": "The only map anywhere in the estate is on the lead-gen subdomain, and it points to unit 117 while the page text says unit 115."
+    }
+  },
+
+  "messagingChannels": {
+    "whatsapp": {
+      "claimed": true,
+      "claimText": "Call, text, or WhatsApp",
+      "claimLocations": ["homepage 'Ready to Get Started?' block", "/programs/ 'Ready to Get Started?' block"],
+      "linkPresent": false,
+      "note": "WhatsApp is advertised twice but no wa.me link, no WhatsApp button and no WhatsApp number are present anywhere."
+    },
+    "sms": {
+      "claimed": true,
+      "claimText": "Call, text, or WhatsApp",
+      "linkPresent": false,
+      "note": "No sms: link. Whether 786-753-9509 accepts SMS is unstated."
+    },
+    "liveChat": { "present": false },
+    "contactForm": {
+      "present": false,
+      "note": "NO contact form exists anywhere on southdademusic.com, including on /contact-enroll/. All enquiries route to an external survey widget or to phone/email."
+    }
+  },
+
+  "responsePromises": [
+    {
+      "claim": "Quick response times",
+      "locations": ["homepage 'Ready to Get Started?' block", "/programs/ 'Ready to Get Started?' block"],
+      "quantified": false
+    },
+    {
+      "claim": "English & Spanish support",
+      "locations": ["homepage", "/programs/"],
+      "quantified": false,
+      "verified": false
+    },
+    {
+      "claim": "Quick support if you have questions",
+      "locations": ["/private-lessons/"],
+      "quantified": false
+    },
+    {
+      "claim": "Quick help if you have questions",
+      "locations": ["/summer-programs/"],
+      "quantified": false
+    }
+  ],
+
+  "socialProfiles": {
+    "found": [],
+    "note": "ZERO social media links exist on any live page. The only trace is the word 'Instagram' in the index metadata of the now-404 /events/month/2025-03/ page. No Facebook, YouTube, TikTok, or Google Business Profile link appears anywhere, despite all 14 testimonials appearing to originate from Google reviews."
+  },
+
+  "conversionEndpoint": {
+    "url": "https://link.apisystem.tech/widget/survey/0IIXocvyYpPeFVbD5HPB",
+    "platform": "LeadConnector / HighLevel (GoHighLevel) survey widget",
+    "occurrences": "Every page of the main site - 40+ CTA instances",
+    "labelsUsed": ["Book a Trial Lesson", "Schedule a Trial Lesson", "Book 90-Day Stage Experience", "Reserve My Child's Seat"],
+    "note": "A single widget URL serves every intent on the site. A parent reserving a $450 camp seat and a parent booking a trial lesson submit the identical form, so intent cannot be distinguished at the point of capture."
+  },
+
+  "actionsRequired": [
+    "Confirm the correct unit number (117 / 1157 / 115) and correct it on the camp pages and the subdomain",
+    "Confirm which phone number is monitored and consolidate",
+    "Confirm which email is monitored and consolidate",
+    "Publish hours on the contact page, not only in the footer",
+    "Add a real contact form and an embedded map with directions and parking",
+    "Add a WhatsApp link or remove the claim",
+    "Recover and publish social profiles",
+    "Split the conversion widget by intent (trial vs camp vs scholarship enquiry)",
+    "Add LocalBusiness / MusicSchool structured data once the address is confirmed"
+  ]
+}

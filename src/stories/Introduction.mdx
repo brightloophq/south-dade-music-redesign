@@ -1,0 +1,114 @@
+import { Meta } from '@storybook/addon-docs/blocks'
+
+<Meta title="Foundations/Introduction" />
+
+# South Dade Music — Component Laboratory
+
+The foundation built in Phase 4, rendered in isolation.
+
+**No marketing content lives here.** These are the reusable primitives: tokens, layout,
+UI, forms, navigation shell and motion. The homepage and page sections are Phase 5 and
+have not been built.
+
+---
+
+## Two toolbar controls
+
+The design system varies along exactly two axes, and both are in the toolbar above.
+
+### Register — House or Desk
+
+> **The site has two rooms.**
+>
+> **The House** — dark, lit, composed. Where a parent is persuaded.
+> **The Desk** — light, plain, specific. Where a parent decides.
+
+Switch the **Register** control and every story re-renders in the other room. The same
+markup and the same class names produce both: setting `data-register` re-points the
+semantic colour aliases, so no component carries register-specific styling.
+
+There is a third option, **Both**, which renders the story side by side.
+
+This is not a colour-scheme preference. The two rooms are an *information architecture*
+— using `prefers-color-scheme` would hand the decision to the operating system.
+See **Foundations → Theme Registers**.
+
+### Motion — full or reduced
+
+Reduced motion is a **first-class alternative presentation, not a degraded one**. Every
+story must be viewable both ways, and the motion stories are specifically built to be
+checked under both settings.
+
+See **Foundations → Reduced Motion**.
+
+---
+
+## What to look at first
+
+| Story | Why |
+|---|---|
+| **Foundations → Tokens** | Colour, type scale, spacing, elevation, motion — rendered from the same TypeScript the app imports. Contrast ratios are computed at render time, not copied from the spec. |
+| **Foundations → Theme Registers** | The House/Desk system, the five laws, and the route→register contract. |
+| **Foundations → Reduced Motion** | The global policy, and every primitive under both settings. |
+| **UI → Button** | The most rule-bound component in the system — price disclosure, real links vs real buttons, loading without layout shift. |
+| **Forms → Primitives** | Controls throw outside `FormField`. An unlabelled input is not buildable by accident. |
+| **Layout Shell → Navigation & Footer** | Why every nav item is muted, and why the footer contact block is empty. |
+
+---
+
+## Why so much is disabled or muted
+
+The laboratory reflects the real state of the project. Nothing here is broken:
+
+- **Nav items render as plain text, not links.** Every route carries a `status` —
+  `live`, `planned` or `gated`. Only `live` items become links, so the foundation
+  cannot ship a link to a page that does not exist. Nothing is `live` yet.
+- **The primary CTA has no price.** Gate **B-8** — no price is published for any
+  product, and the label must not invent one.
+- **The search control is disabled.** A search box that returns nothing is worse than
+  no search box.
+- **`EN | ES` is a static indicator, not a control.** Gate **B-6** — the bilingual
+  claim is made sitewide and delivered nowhere.
+- **The footer contact block is empty.** Phase 2 found two phone numbers, two email
+  addresses and three unit numbers across the estate. Publishing the wrong one sends a
+  parent to the wrong door.
+- **No photography.** All 18 genuine photographs are consent-blocked at gate **I-1**.
+
+These are owner decisions, not engineering gaps. The full list is in
+`docs/implementation/phase-4-foundation-report.md` §8.
+
+---
+
+## Accessibility
+
+The academy serves Unique Abilities scholarship students, so accessibility is a market
+requirement rather than a compliance chore.
+
+Every story is scanned by the **Accessibility** panel (axe). Findings are reported
+rather than failing the story, so laboratory entries that deliberately demonstrate a
+banned combination — such as amber text on white at 2.04:1 — still render with the
+finding visible.
+
+Worth checking by hand in any story:
+
+- **Tab** — the skip link is the first stop; focus rings are 2px `spot-500` at 2px
+  offset, never reduced and never animated.
+- **Escape** — closes menus and the mobile drawer.
+- **The mega-menu never traps focus**; the mobile drawer does. That distinction is
+  deliberate: a menu is not a dialog.
+
+---
+
+## Source of truth
+
+The specification lives in `docs/redesign/`. Where a story cites a rule it names the
+file and section, so the laboratory and the specification can be checked against each
+other.
+
+| Document | Covers |
+|---|---|
+| `04-design-system.md` | Colour, type, spacing, grid, elevation, components |
+| `05-motion-system.md` | Motion language, timing, prohibitions, performance budgets |
+| `02-information-architecture.md` | Sitemap, navigation, conversion hierarchy |
+| `08-content-model.md` | Content shapes, consent and publication rules |
+| `final-art-direction.md` | The House and the Desk |

@@ -1,0 +1,254 @@
+{
+  "$comment": "One entry per program. 'null' means the source is silent. Verbatim quotes are preserved for every commercial claim.",
+  "extractionDate": "2026-08-05",
+
+  "programs": [
+    {
+      "name": "90-Day Stage Program",
+      "trademarked": "'90-Day Stage Program™' appears in the sitewide footer; the ™ is NOT used on the program page itself",
+      "sourceUrl": "https://southdademusic.com/90-day-stage-program/",
+      "summary": "A step-by-step plan that helps students prepare for a live performance in about three months. Positioned sitewide as the flagship offer: 'Home of the 90-Day Stage Program™ where every student performs in a live showcase within 90 days.'",
+      "targetAge": "Kids and teens (no numeric range stated on the program page)",
+      "lessonFormat": {
+        "onProgramPage": null,
+        "perResourcesFAQ": "Students attend two classes weekly: one for skill, one for band application.",
+        "note": "The program page never states how often the program meets."
+      },
+      "duration": {
+        "variants": [
+          { "value": "Every Student Steps on Stage Within 90 Days.", "source": "homepage hero eyebrow" },
+          { "value": "a structured 12-week program", "source": "homepage hero body" },
+          { "value": "Weeks 1-10: Skill Development & Rehearsal / Week 11: Peer Exposure (Class mein performance) / Week 12: Dress Rehearsal & Live Showcase", "source": "homepage and /programs/ cards" },
+          { "value": "in about three months", "source": "/90-day-stage-program/" },
+          { "value": "At the end of the 90 days", "source": "/90-day-stage-program/" }
+        ],
+        "conflict": true,
+        "note": "12 weeks = 84 days, not 90. The product name, the hero claim and the week breakdown do not reconcile."
+      },
+      "structure": {
+        "weekByWeek": ["Weeks 1-10: Skill Development & Rehearsal", "Week 11: Peer Exposure (Class mein performance)", "Week 12: Dress Rehearsal & Live Showcase"],
+        "narrativeSteps": ["Step 1: Build the Foundation", "Step 2: Practice Like a Performer", "Step 3: Get Ready for the Stage"],
+        "note": "Two incompatible descriptions of the same program: a 12-week grid (homepage, /programs/) and a 3-step narrative with no week numbers (program page). 'Class mein performance' contains an untranslated Hindi/Urdu word, live in production."
+      },
+      "frequency": "Not stated on the program page; 'two classes weekly' per /resources/",
+      "performanceComponent": {
+        "conflict": true,
+        "variants": [
+          { "value": "every student performs in a live showcase within 90 days", "source": "sitewide footer, /resources/ FAQ, homepage FAQ", "strength": "unconditional" },
+          { "value": "Every Student Steps on Stage Within 90 Days.", "source": "homepage hero", "strength": "unconditional" },
+          { "value": "At the end of the 90 days, students get the chance to perform.", "source": "/90-day-stage-program/", "strength": "conditional" },
+          { "value": "Students get opportunities to take part in small recitals and community events when they feel ready.", "source": "homepage Performances block", "strength": "conditional, student-gated" }
+        ]
+      },
+      "tuitionOrPricing": null,
+      "tuitionNote": "NO PRICE IS PUBLISHED ANYWHERE for the flagship program. The only monetary figure associated with it is the $25 spot-hold for the preview.",
+      "trial": {
+        "name": "90-Day Stage Experience Preview",
+        "price": "$25",
+        "terms": "We hold your spot for $25, which is credited to your tuition upon enrollment.",
+        "source": "/resources/ FAQ and homepage FAQ",
+        "note": "The $25 figure appears on exactly two pages. Every other page says only 'Schedule a Trial Lesson' with no terms."
+      },
+      "scholarshipEligible": null,
+      "scholarshipNote": "Not mentioned on the program page. /private-lessons/ says PEP/UA are accepted for lessons generally.",
+      "guarantee": {
+        "name": "Stage-Ready Guarantee",
+        "text": "If your child is not prepared to step on stage at the end of the 90-day cycle, we will continue coaching them at no additional charge until they are ready",
+        "sources": ["homepage 'Our Stage-Ready Guarantee' block", "/resources/ FAQ trial answer"],
+        "note": "NOT stated on the 90-Day Stage Program page itself. Logically concedes that not every student performs within 90 days, contradicting the unconditional footer claim."
+      },
+      "methodology": "Gradual Exposure Ladder - 'We use a Gradual Exposure Ladder to move them from isolation to community safely.' (/resources/, homepage). Never explained further anywhere.",
+      "enrollmentAction": { "label": "Schedule a Trial Lesson", "target": "https://link.apisystem.tech/widget/survey/0IIXocvyYpPeFVbD5HPB" },
+      "relatedPrograms": ["Private Lessons (the 'skill' class)", "Band Builders (the 'band application' class)"],
+      "relatedProgramsNote": "The program page links to NEITHER, and neither links back. The composition of the flagship offer is invisible to visitors.",
+      "serviceArea": "Florida City, Homestead, Cutler Bay, Palmetto Bay, and nearby areas",
+      "claimsRequiringVerification": [
+        "90 days vs 12 weeks vs three months - which is contractually correct?",
+        "Does EVERY student perform, or do students 'get the chance'?",
+        "What is the tuition?",
+        "Does the program require enrolment in both a private lesson and Band Builders? At what combined cost?",
+        "Is '90-Day Stage Program' a registered trademark?",
+        "Unsourced research claim: 'music programs that offer real performance opportunities help students develop confidence and stronger skills over time'",
+        "Does the program apply to Early Childhood students aged 3-6, who have no performance component described?"
+      ]
+    },
+
+    {
+      "name": "Private Lessons",
+      "sourceUrl": "https://southdademusic.com/private-lessons/",
+      "summary": "One-on-one instruction for kids, teens and adults across seven instruments, with a stated progression path from trial to live performance.",
+      "targetAge": "kids, teens, and adults - 'anyone can start at any time'",
+      "lessonFormat": "One-on-one",
+      "duration": null,
+      "durationNote": "Lesson length (30/45/60 min) is never stated anywhere on the site.",
+      "frequency": "Weekly - 'Continue with weekly private lessons'",
+      "instrumentsOffered": ["Piano", "Guitar", "Drums", "Violin", "Bass Guitar", "Ukulele", "Keyboard"],
+      "learningPath": ["Start with a trial lesson", "Continue with weekly private lessons", "Join group programs or bands", "Perform in live events"],
+      "performanceComponent": "Recitals and performances, Community events, Group music sessions, Creative projects. No 90-day promise stated.",
+      "tuitionOrPricing": null,
+      "scholarshipEligible": {
+        "value": true,
+        "text": "We also accept Step Up for Students scholarships (PEP and UA), which helps many families afford lessons.",
+        "note": "This is the only PROGRAM page that mentions scholarships."
+      },
+      "guarantee": null,
+      "enrollmentAction": { "label": "Schedule a Trial Lesson", "target": "https://link.apisystem.tech/widget/survey/0IIXocvyYpPeFVbD5HPB" },
+      "relatedPrograms": ["Band Builders (step 3 of its own path)", "90-Day Stage Program"],
+      "relatedProgramsNote": "Links to neither, despite naming group programs and bands as step 3.",
+      "flexibility": ["Flexible lesson times", "Easy trial lesson booking", "Quick support if you have questions", "Programs for beginners and advanced students"],
+      "claimsRequiringVerification": [
+        "'Weekly' here vs 'two classes weekly' in /resources/",
+        "Keyboard is listed but has no page",
+        "Trial is described with no price here but $25 in /resources/"
+      ]
+    },
+
+    {
+      "name": "Band Builders",
+      "sourceUrl": "https://southdademusic.com/band-builders/",
+      "summary": "A group music program where kids come together to play as a team, learning ensemble skills and performing as a band.",
+      "targetAge": "kids and teens (no numeric range)",
+      "lessonFormat": "Group",
+      "duration": null,
+      "frequency": null,
+      "frequencyNote": "No session length, weekly schedule, or term length stated anywhere on the page.",
+      "prerequisite": {
+        "conflict": true,
+        "variants": [
+          "Students already taking private lessons (listed under 'Who Is This Program For?')",
+          "Beginners who are ready for group learning (also listed under 'Who Is This Program For?')",
+          "Step 2 of the stated path requires 'Build basic skills in private lessons'"
+        ],
+        "note": "The page both requires and does not require prior private lessons."
+      },
+      "curriculum": ["Play music together in a group", "Learn how bands work", "Practice timing and coordination", "Build confidence while performing", "How to follow a band leader", "Understand how different instruments work together"],
+      "softSkills": ["Confidence in front of others", "How to work as a team", "Responsibility and consistency", "Communication and listening skills"],
+      "performanceComponent": {
+        "value": "Performance opportunities may include: Recitals, Community events, Small concerts",
+        "strength": "conditional - 'may include'"
+      },
+      "groupSize": null,
+      "tuitionOrPricing": null,
+      "scholarshipEligible": null,
+      "guarantee": null,
+      "enrollmentAction": { "label": "Schedule a Trial Lesson", "target": "https://link.apisystem.tech/widget/survey/0IIXocvyYpPeFVbD5HPB" },
+      "learningPath": ["Start with a trial lesson", "Build basic skills in private lessons", "Join Band Builders", "Practice and perform with a group"],
+      "relatedPrograms": ["Private Lessons", "90-Day Stage Program (Band Builders is the 'band application' half)"],
+      "relatedProgramsNote": "Links to neither. The link between Band Builders and the 90-Day Stage Program exists only in a /resources/ FAQ answer.",
+      "serviceArea": "Florida City, Homestead, Cutler Bay, Palmetto Bay, and nearby areas",
+      "claimsRequiringVerification": [
+        "Is prior private-lesson experience required or not?",
+        "What is the group size, age banding, session length and schedule?",
+        "Is Band Builders included in 90-Day Stage Program tuition or billed separately?",
+        "'may include' performances vs the sitewide guarantee that every student performs"
+      ]
+    },
+
+    {
+      "name": "Early Childhood",
+      "sourceUrl": "https://southdademusic.com/early-childhood/",
+      "summary": "Play-based group music classes for young children focused on rhythm, movement and sound recognition rather than instrument mastery.",
+      "targetAge": "for kids around ages 3 to 6",
+      "lessonFormat": "Group; 'In some cases, parents can also be part of the class, especially for younger kids'",
+      "duration": null,
+      "frequency": null,
+      "frequencyNote": "No class length, schedule or term stated.",
+      "curriculum": ["Singing easy songs", "Moving to music", "Clapping simple rhythms", "Playing small instruments", "Listening and copying sounds"],
+      "socialSkills": ["Taking turns", "Listening to others", "Following simple instructions", "Being part of a group"],
+      "instrumentsIntroduced": ["Small drums or percussion", "Simple rhythm tools", "Basic keyboard sounds"],
+      "equipmentNeeded": "None - instruments provided in class",
+      "performanceComponent": null,
+      "performanceNote": "CONFLICT: no performance component is described at all, yet the sitewide promise is 'every student performs in a live showcase within 90 days'. The page explicitly says mastery 'comes later'.",
+      "tuitionOrPricing": null,
+      "scholarshipEligible": null,
+      "guarantee": null,
+      "enrollmentAction": { "label": "Schedule a Trial Lesson", "target": "https://link.apisystem.tech/widget/survey/0IIXocvyYpPeFVbD5HPB" },
+      "relatedPrograms": [],
+      "serviceArea": "Florida City, Homestead, Cutler Bay, Palmetto Bay, and nearby areas",
+      "claimsRequiringVerification": [
+        "Does the 90-day showcase promise apply to 3-year-olds?",
+        "Class length, ratio, schedule, price - none published",
+        "Is parent attendance required, optional, or age-dependent? 'In some cases' is undefined.",
+        "Age overlap with Group Music Lessons (6+) is unexplained"
+      ]
+    },
+
+    {
+      "name": "Group Music Lessons",
+      "sourceUrl": "https://southdademusic.com/group-music-lessons/",
+      "orphan": true,
+      "summary": "Small-group instruction building fundamentals, ensemble skills and confidence, with a band-program pathway.",
+      "targetAge": "ages 6 and up, depending on maturity and attention span",
+      "lessonFormat": "Group; small group sizes",
+      "duration": null,
+      "frequency": "Consistent weekly group sessions",
+      "availability": "after-school and weekend availability",
+      "groupSize": "Group sizes are kept small to ensure quality instruction and engagement (no number given)",
+      "instrumentsOffered": "Programs may include guitar, drums, keyboard, vocals, and band-style instruments",
+      "skillLevel": "Beginner-friendly options are available. Some programs may require basic experience.",
+      "curriculum": ["Basic music fundamentals", "Rhythm, timing, and listening skills", "Instrument coordination", "Ensemble playing techniques", "Confidence through group performance"],
+      "performanceComponent": "Confidence through group performance; Preparing for performances (band program)",
+      "tuitionOrPricing": null,
+      "scholarshipEligible": null,
+      "guarantee": null,
+      "enrollmentAction": { "label": "Schedule a Trial Lesson", "target": "https://link.apisystem.tech/widget/survey/0IIXocvyYpPeFVbD5HPB" },
+      "deadCTAs": ["Contact us to learn more or enroll", "Visit our South Dade location", "Explore all music programs online"],
+      "relatedPrograms": ["Band Builders (duplicated content, not linked)", "Private Lessons (mentioned as a comparison, not linked)"],
+      "claimsRequiringVerification": [
+        "Live editorial notes in production: 'Internal link suggestion: Private Music Lessons' and 'Internal Links to Add: ...'",
+        "Group instruments include guitar and vocals - contradicts the guitar and singing pages, which state all lessons in those instruments are private",
+        "What is the actual group size?",
+        "Orphan page for a format sold across the site"
+      ]
+    },
+
+    {
+      "name": "Summer Programs / Summer Jam Music Camp",
+      "sourceUrl": "https://southdademusic.com/summer-jam-music-camp-2026/",
+      "duplicateUrls": ["https://southdademusic.com/summercamp/", "https://southdademusic.com/summer-programs/", "https://southdademusic.com/summer-camp/"],
+      "summary": "A three-week screen-free day camp culminating in an End-of-Camp Concert. See camps.json for the full four-route comparison.",
+      "targetAge": "Students must be between ages 7 and 15",
+      "lessonFormat": "Group day camp; 'Daily hands-on training in piano, drums, vocals, ukulele and ensemble playing'",
+      "duration": "3 Weeks of Structured Music Instruction; 60 instructional hours per session",
+      "frequency": "Monday to Friday, 4 hours per day",
+      "performanceComponent": {
+        "conflict": true,
+        "variants": [
+          { "value": "Every student prepares for a final recital in front of family", "source": "/summer-jam-music-camp-2026/ and /summercamp/" },
+          { "value": "At the end of the program, students may get a chance to perform.", "source": "/summer-programs/" }
+        ]
+      },
+      "tuitionOrPricing": {
+        "standard": "$450 per session (60 instructional hours)",
+        "payInFull": "$400 per child if paid upfront in full",
+        "deposit": "A non-refundable down payment is required today to reserve your child's seat",
+        "depositAmount": null,
+        "balanceTerms": "The remaining balance is due 14 days prior to the start date"
+      },
+      "scholarshipEligible": null,
+      "scholarshipNote": "Camp pages never state whether PEP/UA can be applied.",
+      "guarantee": null,
+      "refundPolicy": "The down payment required to hold your spot is strictly non-refundable. The remaining balance is due 14 days prior to the start date. All registrations are final and non-refundable due to limited enrollment and advance planning for instructors and materials.",
+      "enrollmentAction": { "label": "Reserve My Child's Seat", "target": "https://link.apisystem.tech/widget/survey/0IIXocvyYpPeFVbD5HPB" },
+      "enrollmentNote": "Resolves to the SAME widget as 'Schedule a Trial Lesson'. A camp reservation and a trial booking submit the identical form.",
+      "relatedPrograms": [],
+      "status": "EXPIRED - Session 1 (June 8-26 2026) and Session 2 (July 6-24 2026) both ended before the 2026-08-05 scrape date. Pages still live and still selling.",
+      "claimsRequiringVerification": [
+        "What is the down payment amount?",
+        "Can PEP/UA be applied to camp?",
+        "Does every camper perform, or 'may' they?",
+        "Unit 1157 vs Unit 117 - which is the camp location?",
+        "Is there a 2027 camp? Both 2026 sessions have passed and pages still say 'Secure your child's place'."
+      ]
+    }
+  ],
+
+  "crossProgramFindings": {
+    "pricingCoverage": "Only the summer camp publishes a price. Neither the flagship 90-Day Stage Program nor private lessons, group lessons, Band Builders or Early Childhood publish any tuition figure.",
+    "durationCoverage": "Only the camp states session length. Lesson duration is never stated for any lesson-based program.",
+    "guaranteeCoverage": "The Stage-Ready Guarantee is stated on 2 pages (homepage, /resources/) and on none of the 6 program pages.",
+    "scholarshipCoverage": "PEP/UA are mentioned on 1 of 6 program pages (/private-lessons/).",
+    "programInterlinking": "Zero. No program page links to any other program page. The 90-Day Stage Program, Private Lessons and Band Builders form one product per /resources/, yet none of the three references the others.",
+    "navigationGaps": "Group Music Lessons and Singing Lessons are live but absent from the nav and from /programs/. The nav's 'Summer Programs' link points to /summer-jam-music-camp-2026/ while the /programs/ card for the same label points to /summer-programs/."
+  }
+}
