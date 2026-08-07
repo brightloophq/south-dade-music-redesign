@@ -50,13 +50,18 @@ export type ButtonProps = ButtonAsButton | ButtonAsLink
  * causes mis-clicks (05-motion-system.md §11 rule 3).
  */
 /*
- * Radius is 0 everywhere in this direction. The base carries no radius at all;
- * only `primary` opts into the pill, because the primary action is the single
- * reason the radius exception exists (Visual Specification.md §G).
+ * Radius is 0 everywhere in this direction, so the base declares **no radius
+ * utility at all** — an unstyled element is already square.
+ *
+ * It must not declare `rounded-none`: tailwind-merge does not treat that as
+ * conflicting with the arbitrary-property form `rounded-(--radius-full)`, so
+ * both classes survived the merge and source order won. That silently squared
+ * off the primary CTA — the single radius exception in the whole direction
+ * (Visual Specification.md §C, §G).
  */
 const base = cn(
   'relative inline-flex items-center justify-center gap-2',
-  'rounded-none font-display font-semibold whitespace-nowrap',
+  'font-display font-semibold whitespace-nowrap',
   'transition-[background-color,box-shadow,border-color,color]',
   'duration-(--duration-fast) ease-(--ease-stage)',
   'disabled:pointer-events-none disabled:opacity-(--opacity-disabled)',

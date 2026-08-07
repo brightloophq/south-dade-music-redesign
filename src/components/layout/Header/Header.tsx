@@ -2,13 +2,11 @@
 
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
-import { Search } from 'lucide-react'
 
 import { primaryCta } from '@/config/navigation'
 import { siteConfig } from '@/config/site'
 import { Button } from '@/components/ui/Button'
 import { Container } from '@/components/ui/Container'
-import { Icon } from '@/components/ui/Icon'
 import { useScrollDirection } from '@/hooks/useScrollDirection'
 import { cn } from '@/lib/utils/cn'
 
@@ -90,39 +88,28 @@ export function Header({ overHero, className }: HeaderProps) {
 
         <Navigation className="flex-1 justify-center" />
 
+        {/*
+          Removed during Tier 1: a disabled search control and a static
+          "EN | ES" indicator.
+
+          The search was an icon — icon rows are banned outright — and a control
+          that could never do anything. The language indicator was worse: gate
+          B-6 is open, no Spanish tree exists, and the design brief §19 is
+          explicit that a language switcher must not be designed as though it
+          exists today. A static EN|ES badge still tells a Spanish-speaking
+          parent that a Spanish site is waiting for them.
+
+          Both return when the capability does.
+        */}
         <div className="flex shrink-0 items-center gap-2">
-          {/*
-            Search placeholder. Disabled until a search index exists — a search
-            box that returns nothing is worse than no search box.
-          */}
-          <button
-            type="button"
-            disabled
-            aria-label="Search (not yet available)"
-            title="Search is not yet available"
-            className="hidden size-11 items-center justify-center rounded-(--radius-md) text-(--color-text-muted) opacity-(--opacity-disabled) lg:inline-flex"
-          >
-            <Icon icon={Search} size="inline" />
-          </button>
-
-          {/*
-            Language switch placeholder. ⚠️ Gate B-6 — the bilingual claim is
-            currently made sitewide and delivered nowhere. Rendered as a static
-            indicator, not a control, so it promises nothing.
-          */}
-          <span
-            data-gate="B-6"
-            className="hidden items-center gap-1 rounded-(--radius-sm) border border-(--color-border-default) px-2 py-1 font-body text-label font-semibold tracking-[0.08em] text-(--color-text-muted) lg:inline-flex"
-          >
-            <span aria-current="true" className="text-(--color-text-primary)">
-              EN
-            </span>
-            <span aria-hidden="true">|</span>
-            <span title="Spanish is not yet available">ES</span>
-          </span>
-
           {primaryCta.status === 'live' ? (
-            <Button href={primaryCta.href} variant="primary" size="md" className="hidden sm:inline-flex">
+            <Button
+              href={primaryCta.href}
+              variant="primary"
+              size="md"
+              price={primaryCta.priceSuffix ?? undefined}
+              className="hidden sm:inline-flex"
+            >
               {primaryCta.label}
             </Button>
           ) : (

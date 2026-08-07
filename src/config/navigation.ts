@@ -79,14 +79,27 @@ export const primaryNavigation: readonly NavItem[] = [
  * non-disclosure failure (04-design-system.md §7 rule 2). Until the price is
  * published the label must NOT invent one.
  */
+/**
+ * ⚠️ Corrected during Tier 1.
+ *
+ * This was `planned` and gated on B-8, which disabled the trial button on
+ * every page that renders a header. Two things were wrong with that:
+ *
+ *   1. **B-8 gates tuition, not the trial.** The $25 spot-hold is
+ *      verbatim-extracted and publishable — established in the Phase 4
+ *      foundation report and already shipping on the homepage.
+ *   2. **The destination now exists.** `/contact/book-a-trial` was built as
+ *      Tier 1 route 1; before that it 404'd, which is why it was disabled.
+ *
+ * The price ships in the label because disclosing it on 2 pages out of 26 was
+ * the estate's largest conversion failure.
+ */
 export const primaryCta: PrimaryCta = {
   id: 'book-trial',
   label: 'Book a Trial',
-  /** Appended once B-8 closes: `Book a Trial — $25`. */
-  priceSuffix: null,
+  priceSuffix: '$25',
   href: '/contact/book-a-trial',
-  status: 'planned',
-  gate: 'B-8',
+  status: 'live',
 }
 
 /**
