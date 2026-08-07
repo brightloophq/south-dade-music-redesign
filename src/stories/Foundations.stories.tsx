@@ -179,10 +179,14 @@ export const TypographyScale: Story = {
                   fontWeight: spec.weight,
                   letterSpacing: spec.tracking,
                   lineHeight: spec.leading,
-                  fontVariantNumeric: token === 'stat' ? 'tabular-nums' : undefined,
+                  fontStyle: 'italic' in spec && spec.italic ? 'italic' : undefined,
+                  // The ghost numeral is architecture, not text: it only reads
+                  // correctly against its own ground at 3–5% contrast.
+                  opacity: token === 'ghost' ? 0.4 : undefined,
+                  fontVariantNumeric: token === 'ghost' ? 'tabular-nums' : undefined,
                 }}
               >
-                {token === 'stat' ? '90 · 12 · $450' : 'In 90 days, your child takes a stage'}
+                {token === 'ghost' ? '12' : 'In 90 days, your child takes a stage'}
               </p>
               <code className="mt-2 block font-body text-body-sm text-(--color-text-muted)">{spec.clamp}</code>
             </div>

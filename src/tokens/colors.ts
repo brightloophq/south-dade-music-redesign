@@ -1,64 +1,84 @@
 /**
- * Colour tokens — canonical source: docs/redesign/04-design-system.md §1
+ * Colour tokens — approved direction "The Film" (7 Aug 2026).
+ * Canonical spec: docs/approved-design/Visual Specification.md §B
  *
- * Three families: Stage (the darkened house), Spotlight (the light),
- * Velvet (the curtain), plus a warm neutral ramp and a functional set.
+ * Colour is a **temperature arc, not a palette.** Grounds are rooms, not a
+ * lightness ramp: the walk is blue-black and cold, memory is brown-black and
+ * warm, the house is ivory. Nobody names these; everybody feels that the past
+ * is a different temperature from the stage.
  *
- * ⚠️ These values are mirrored into `src/styles/tokens.css` (@theme), which is
- * what generates the Tailwind utilities. Change both together — see
- * docs/implementation/phase-4-foundation-report.md "Token drift".
+ * ⚠️ Mirrored into `src/styles/tokens.css` (@theme), which generates the
+ * Tailwind utilities. Change both together.
  */
 
-/** The darkened house. A blue-black, never a true black. */
+/**
+ * The grounds. One per movement.
+ *
+ * These are namespaced `ground` deliberately: the legacy `stage` ramp below
+ * still exists for UI depth on dark, and a bare `stage` would silently mean two
+ * different things.
+ */
+export const ground = {
+  pitch: '#05070B',
+  wing: '#0E121B',
+  memory: '#17120C',
+  stage: '#0D1220',
+  flash: '#FFF3DC',
+  house: '#F7F4EE',
+} as const
+
+/** Retained for UI depth on dark — borders, sunken surfaces. Not grounds. */
 export const stage = {
-  950: '#070A12',
+  950: '#05070B',
   900: '#0D1220',
-  800: '#161E32',
-  700: '#232E4A',
-  600: '#35436A',
-} as const
-
-/** The light. Primary accent. */
-export const spot = {
-  300: '#FFD68A',
-  400: '#FFC15C',
-  500: '#F5A524',
-  600: '#D4870E',
-  700: '#A66908',
-} as const
-
-/** The curtain. Secondary accent. */
-export const velvet = {
-  500: '#B12A4B',
-  600: '#8B1E3F',
-  700: '#6E1631',
+  800: '#0E121B',
+  700: '#242C3D',
+  600: '#3A4256',
 } as const
 
 /**
- * Warm-tinted neutrals. Cool greys fight the amber and make photography look clinical.
+ * Spotlight is ONE light, not a ramp.
  *
- * ⚠️ Two values differ from docs/redesign/04-design-system.md §1, deliberately.
- * The documented ratios did not hold when computed:
- *   n-500  #7C776D → 4.23:1 on n-50 (doc claims 4.6:1 AA)  → corrected to #777269 (4.54:1)
- *   n-600  #5A564E → 6.94:1 on n-50 (doc claims 7.3:1 AAA) → corrected to #59554D (7.05:1)
- * Both are imperceptible shifts that make the design system's own accessibility
- * promises true. **Requires sign-off at gate D-1 before the tokens are frozen.**
+ * `500` is the light itself. `700` is the amber-derived dark used where amber
+ * must speak as text on a light ground — amber at full strength is 1.9:1 on
+ * house and is banned as text.
  */
-export const neutral = {
-  0: '#FFFFFF',
-  50: '#FAF9F7',
-  100: '#F2F0EC',
-  200: '#E5E2DC',
-  300: '#D2CEC6',
-  400: '#A9A49A',
-  500: '#777269',
-  600: '#59554D',
-  700: '#403D37',
-  800: '#2A2823',
-  900: '#171613',
+export const spot = {
+  500: '#E9A23B',
+  700: '#8A5A1B',
 } as const
 
-/** All four pass 4.5:1 on `n-50` and on white. */
+/**
+ * ⚠️ RETIRED. A second accent breaks the amber budget.
+ *
+ * Kept only so stale references fail soft into the text colour rather than
+ * throwing. Remove in cleanup once no component references them.
+ */
+export const velvet = {
+  500: '#17120C',
+  600: '#17120C',
+  700: '#17120C',
+} as const
+
+/** Warm neutrals, re-anchored to the ivory house ground. */
+export const neutral = {
+  0: '#FFFFFF',
+  50: '#F7F4EE',
+  100: '#EFEBE1',
+  200: '#D8D2C4',
+  300: '#BFB9AA',
+  400: '#A39A86',
+  /** ⚠️ Corrected from #7A7364 (4.285:1 — fails AA). See tokens.css. */
+  500: '#746E61',
+  600: '#58524A',
+  700: '#403D37',
+  800: '#2A2823',
+  900: '#17120C',
+} as const
+
+/** Secondary voice on dark grounds. */
+export const ash = '#8A8578'
+
 export const functional = {
   success: '#1F7A4C',
   warn: '#9A5B00',
@@ -66,58 +86,60 @@ export const functional = {
   info: '#1F5C8B',
 } as const
 
-export const palette = { stage, spot, velvet, neutral, functional } as const
+export const palette = { ground, stage, spot, velvet, neutral, ash, functional } as const
+
+/**
+ * The amber ration — four uses on the entire homepage, fixed.
+ *
+ * Amber is light, never decoration: not a border, not a hover, not a link
+ * colour. Exported as data so a review can assert against it by name.
+ */
+export const amberUses = [
+  'seam-of-light',
+  'the-source',
+  'release-flash',
+  'primary-cta-fill',
+] as const
 
 /**
  * Semantic aliases. Components reference these, never raw palette values.
- * Each maps to a CSS custom property declared in `src/styles/tokens.css`.
+ * Defaults are the LIGHT register — "The Desk". `[data-register='house']`
+ * re-points them to the film grounds.
  */
 export const semanticColors = {
   surfacePage: 'var(--color-surface-page)',
-  surfacePageDark: 'var(--color-surface-page-dark)',
   surfaceRaised: 'var(--color-surface-raised)',
-  surfaceRaisedDark: 'var(--color-surface-raised-dark)',
   surfaceSunken: 'var(--color-surface-sunken)',
   borderDefault: 'var(--color-border-default)',
-  borderDark: 'var(--color-border-dark)',
   textPrimary: 'var(--color-text-primary)',
-  textPrimaryDark: 'var(--color-text-primary-dark)',
   textSecondary: 'var(--color-text-secondary)',
-  textSecondaryDark: 'var(--color-text-secondary-dark)',
   textMuted: 'var(--color-text-muted)',
-  textAccentDark: 'var(--color-text-accent-dark)',
   actionPrimaryBg: 'var(--color-action-primary-bg)',
   actionPrimaryFg: 'var(--color-action-primary-fg)',
   actionSecondaryBg: 'var(--color-action-secondary-bg)',
   actionSecondaryFg: 'var(--color-action-secondary-fg)',
   linkDefault: 'var(--color-link-default)',
-  linkDark: 'var(--color-link-dark)',
   focusRing: 'var(--color-focus-ring)',
 } as const
 
 /**
- * Contrast pairs verified against docs/redesign/04-design-system.md §1.
- * Exported so an automated checker can assert them in CI rather than trusting
- * the table in the docs.
+ * Contrast pairs, computed in Visual Specification.md §B and re-asserted here
+ * so a checker can verify them rather than trusting a table in a document.
  */
 export const contrastContract = [
-  { fg: neutral[900], bg: neutral[50], min: 7, note: 'body on light' },
-  { fg: neutral[600], bg: neutral[50], min: 7, note: 'secondary on light' },
-  { fg: neutral[500], bg: neutral[50], min: 4.5, note: 'muted on light' },
-  { fg: neutral[0], bg: stage[900], min: 7, note: 'body on dark' },
-  { fg: spot[400], bg: stage[900], min: 7, note: 'accent text on dark' },
-  { fg: stage[950], bg: spot[500], min: 7, note: 'primary CTA' },
-  { fg: neutral[0], bg: velvet[600], min: 7, note: 'secondary CTA' },
-  { fg: velvet[700], bg: neutral[0], min: 7, note: 'links on light' },
+  { fg: ground.house, bg: ground.pitch, min: 7, note: 'body on dark — 18.1:1' },
+  { fg: neutral[900], bg: ground.house, min: 7, note: 'body on house — 15.6:1' },
+  { fg: ground.stage, bg: spot[500], min: 7, note: 'CTA text on amber — 9.4:1' },
+  { fg: ash, bg: ground.pitch, min: 4.5, note: 'ash on dark — 5.3:1' },
+  { fg: neutral[500], bg: ground.house, min: 4.5, note: 'muted on house — 4.6:1' },
 ] as const
 
 /**
- * ⚠️ HARD RULE (04-design-system.md §1): `spot-500` on white is ~2.0:1.
- * Spotlight is never body text on light backgrounds — fill, highlight, or text
- * on dark only. Listed here so a lint rule can reference it by name.
+ * ⚠️ HARD RULE (Visual Specification.md §B): amber on house is **1.9:1** —
+ * confirmed failing, never set as text. Amber is a fill or a light, never type.
  */
 export const bannedCombinations = [
-  { fg: spot[500], bg: neutral[0], reason: '~2.0:1 — fails all text contrast' },
-  { fg: spot[500], bg: neutral[50], reason: '~2.0:1 — fails all text contrast' },
-  { fg: spot[400], bg: neutral[0], reason: 'fails all text contrast' },
+  { fg: spot[500], bg: ground.house, reason: '1.9:1 — never as text' },
+  { fg: spot[500], bg: neutral[0], reason: 'fails all text contrast' },
+  { fg: spot[500], bg: ground.flash, reason: 'fails all text contrast' },
 ] as const

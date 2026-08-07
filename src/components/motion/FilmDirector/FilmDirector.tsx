@@ -13,13 +13,15 @@ import { reportDiagnostics, resetDiagnostics } from '@/lib/motion/diagnostics'
  *
  * Everything the page does on scroll is created here:
  *
- *   GradeTimeline      the colour evolution, document-wide
- *   HeroTimeline       the opening shot, and its scrubbed exit
- *   WalkTimeline       the light searches; the Reframe is revealed by its passage
- *   JourneyTimeline    pinned. the walk down the boards
- *   FirstNoteTimeline  nested at the `twelve` label. the event
- *   FinaleTimeline     the shaft, then houselights
- *   EmergeBatch        everything else, lit in groups rather than faded up
+ *   OpeningTimeline      shot 01 — the seam at rest. The load screen.
+ *   WingsTimeline        shot 02 — the door opens a hand's width
+ *   MemoryTimeline       shot 03 — the temperature drops to brown-black
+ *   WalkTimeline         shots 04–06 — PINNED №1. Scroll becomes footsteps
+ *   ReleaseTimeline      shot 07  — PINNED №2. 1.5s still / 400ms / 1.8s
+ *   HouselightsTimeline  shot 07B — the dimmer rise out of the dark
+ *
+ * There is no batch reveal. Every appearance in this film is by light, and
+ * `EmergeBatch` was removed with the rest of the fade-up vocabulary.
  *
  * ## Why one director and not per-component effects
  *
@@ -129,17 +131,23 @@ export function FilmDirector() {
           const { cinema } = mmContext.conditions as { cinema: boolean; handheld: boolean }
 
           context.add(() => {
-            // Colour first: it is the only thing that spans the whole document.
-            film.GradeTimeline(filmContext)
-            film.HeroTimeline(filmContext)
-            film.WalkTimeline(filmContext)
+            film.OpeningTimeline(filmContext)
+            film.WingsTimeline(filmContext)
+            film.MemoryTimeline(filmContext)
 
-            // The pin is desktop-only. Everywhere else the Journey plays as a
-            // static composition with all twelve weeks legible.
-            if (cinema) film.JourneyTimeline(filmContext)
+            /*
+             * Both pins are desktop-only. On handheld the walk is three plain
+             * swipe-height frames and the release is a static flash frame —
+             * "mobile is a re-cut, not a squeeze" (The Film.html §I). The
+             * static markup is what ships by default; the pin is the
+             * enhancement, so doing nothing here is the correct mobile cut.
+             */
+            if (cinema) {
+              film.WalkTimeline(filmContext)
+              film.ReleaseTimeline(filmContext)
+            }
 
-            film.FinaleTimeline(filmContext)
-            film.EmergeBatch(filmContext)
+            film.HouselightsTimeline(filmContext)
           })
 
           /*

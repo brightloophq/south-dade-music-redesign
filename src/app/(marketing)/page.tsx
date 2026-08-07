@@ -1,19 +1,9 @@
 import type { Metadata } from 'next'
 
-import {
-  FinalCta,
-  Hero,
-  MusicLessons,
-  NinetyDayJourney,
-  PerformanceGallery,
-  Programs,
-  Reframe,
-  Scholarship,
-  Testimonials,
-  TheTurn,
-  TwelveWeeks,
-} from '@/components/home'
-import { AtmosphereLayer } from '@/components/motion/Atmosphere'
+import { Desk, HouseLights, Opening, Reframe, TheRelease, TheWalk } from '@/components/home'
+import { FilmGrain, Letterbox } from '@/components/film'
+import { FilmDirector } from '@/components/motion/FilmDirector'
+import { MotionDebugPanel } from '@/components/motion/MotionDebugPanel'
 import { homeMeta } from '@/content/home'
 import { buildMetadata } from '@/lib/seo/metadata'
 
@@ -24,51 +14,65 @@ export const metadata: Metadata = buildMetadata({
 })
 
 /**
- * The homepage.
+ * The homepage — "The Film".
  *
- * Canonical specification: `docs/homepage/`.
- * Refinement rationale: `docs/implementation/phase-5d-polish-report.md`.
+ * Canonical specification: `docs/approved-design/The Film.html` (visual source
+ * of truth), `Visual Specification.md` (rules), `HANDOFF.md` (mapping).
  *
- * ## The emotional shape
+ * ## It is not a stack of sections
  *
- * The page is a held breath and an exhale, not a list of sections. Two
- * full-viewport silences — the Reframe and the Turn — carry the whole arc, and
- * everything between them is either proof or logistics.
+ *   > "There are no sections. There is a building, and you walk through it."
  *
- *   🎭 Hero          promise, substantiated in the same screen
- *   🎭 Reframe       ▁ SILENCE ▁ the persuasive hinge. 23 words, no CTA
- *   🎭 Journey       the weeks accumulate. one enormous numeral
- *   📋 Twelve Weeks  drama hands off to substance
- *   📋 Programs      the running order
- *   📋 Lessons       the cast list
- *   🎭 Performances  the proof layer — the page's longest quiet
- *   📋 Testimonials  three voices at unequal scale
- *   📋 Scholarships  plain, procedural, civic
- *   🎭 The Turn      ▁ SILENCE ▁ the one shout. what they are really buying
- *   📋 Final CTA     houselights. the page ends in the light, at a decision
+ * The page is one continuous space with a temperature that changes as you move
+ * through it. Six movements are the film, in the dark, letterboxed and grained;
+ * seven are the desk, in the light, where the transaction happens. The join
+ * between them is the only cut in the whole page.
  *
- * Note the rhythm: House and Desk alternate five times, and the two darkest
- * moments sit at the quarter and three-quarter marks — so the page never
- * settles into a predictable cadence.
+ *   ● pitch   Opening      the seam under the door. Four words.
+ *   ● memory  Reframe      the hinge, in the warmest dark
+ *   ● wing    The Turn     one thought, held
+ *   ● wing    The Walk     PINNED №1 — scroll becomes footsteps
+ *   ● flash   The Release  PINNED №2 — 1.5s still · 400ms flash · 1.8s rise
+ *   ○ house   The Desk     programme, weeks, lessons, evidence, voices, terms
  *
- * ⚠️ Structured data is deliberately absent. `seoConfig.structuredData.enabled`
- * is false pending gates B-4, B-5, I-8 and the contact reconciliation.
+ * ## Why the film comes first and is long
+ *
+ * The dark is what the light is paid for. Four movements of it buy 400
+ * milliseconds of warm white, and shortening the dark to "get to the content
+ * faster" is the one change that would destroy the page. The desk is
+ * deliberately ordinary by comparison: it has to be trustworthy, not moving.
+ *
+ * ## Global film devices
+ *
+ * `Letterbox` and `FilmGrain` are page-level and own their own presence via a
+ * shared sentinel on the first desk movement — so they cannot disagree about
+ * where the film ends, and they behave correctly with no JavaScript motion.
+ *
+ * `FilmDirector` owns every timeline and the Light character. It is mounted
+ * directly rather than through the old `AtmosphereLayer`, which also carried
+ * a dust-mote canvas, a global colour wash and a follow-spot cursor. None of
+ * those survive this direction: the cursor is on the prohibited list outright,
+ * and a global tint wash would contaminate the per-movement grounds that are
+ * now the whole colour idea.
+ *
+ * ⚠️ Structured data remains disabled pending gates B-4, B-5, I-8 and the
+ * contact reconciliation.
  */
 export default function HomePage() {
   return (
     <>
-      <AtmosphereLayer />
-      <Hero />
+      <FilmDirector />
+      <Letterbox />
+      <FilmGrain />
+
+      <Opening />
       <Reframe />
-      <NinetyDayJourney />
-      <TwelveWeeks />
-      <Programs />
-      <MusicLessons />
-      <PerformanceGallery />
-      <Testimonials />
-      <Scholarship />
-      <TheTurn />
-      <FinalCta />
+      <TheWalk />
+      <TheRelease />
+      <HouseLights />
+      <Desk />
+
+      <MotionDebugPanel />
     </>
   )
 }

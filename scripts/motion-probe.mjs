@@ -2,11 +2,13 @@
 /**
  * Motion runtime probe — development diagnostic tool.
  *
- * Drives the homepage in a real headless Chrome and reports what the motion
- * layer is ACTUALLY doing: console errors, GSAP registration, live
- * ScrollTrigger count, capability resolution, timeline progress while
- * scrolling, canvas state, and the HTTP status of every image the browser
- * really requested.
+ * Drives the homepage in a real headless Chrome and asserts THE FILM — the six
+ * named timelines, the two pinned sequences, the letterbox retracting at the
+ * house lights, the grain stopping at the desk, the seam opening 3px→9px, and
+ * the shout slot still being the typeset blank.
+ *
+ * It samples the direction's own instruments rather than generic scroll
+ * effects, so a regression in any of them is a regression in the direction.
  *
  * This exists because three consecutive phases passed typecheck, lint and build
  * while the motion layer was silently disabled at runtime. A static check
@@ -122,9 +124,9 @@ line(`  ${URL_UNDER_TEST}`)
 /*
  * Wait for the director's own ready signal rather than `networkidle`.
  *
- * `networkidle` never settles on this page — the dust canvas and the scrub
- * timelines keep the main thread busy enough that Playwright's heuristic never
- * sees a quiet window, so it just burned the full 60s timeout. `data-animate-ready`
+ * `networkidle` never settles on this page — the scrub timelines keep the main
+ * thread busy enough that Playwright's heuristic never sees a quiet window, so
+ * it just burned the full 60s timeout. `data-animate-ready`
  * is set by FilmDirector after registerGsap() and document.fonts.ready resolve,
  * which is precisely the moment the film is armed.
  *
@@ -169,6 +171,16 @@ const readState = () =>
       vignette: cs.getPropertyValue('--vignette').trim(),
       tint: cs.getPropertyValue('--atmos-tint').trim(),
       canvas: canvas ? { w: canvas.width, h: canvas.height, display: getComputedStyle(canvas).display } : null,
+      /*
+       * The shout ships as a typeset blank until the owner supplies the word.
+       * "empty" is the CORRECT state — if this ever reports text, someone
+       * invented the largest word on the site.
+       */
+      shoutSlot: (() => {
+        const el = document.querySelector('[data-shout-slot]')
+        if (!el) return 'missing'
+        return (el.textContent ?? '').trim() === '' ? 'empty' : 'FILLED'
+      })(),
       diag: window.__MOTION_DIAGNOSTICS__ ?? null,
       // Delivery-safety surface: what a visitor could actually observe.
       debugGlobals: Object.keys(window).filter((k) => /^__(MOTION|GSAP|NEXT_DEBUG)/.test(k)),
@@ -238,54 +250,52 @@ if (!diag && PRODUCTION_MODE) {
 // ---------------------------------------------------------------------------
 // Scroll the page and watch things actually change
 // ---------------------------------------------------------------------------
-head('STEP 4 — SCROLLING THE FILM')
+head('STEP 4 — WALKING THE FILM')
+
+/*
+ * Sample the film's own instruments rather than generic scroll effects: the
+ * letterbox height, the grain opacity, the seam width and the walk progress.
+ * These are the four things the direction is actually made of, so a regression
+ * in any of them is a regression in the direction.
+ */
 const samples = []
 const height = await page.evaluate(() => document.documentElement.scrollHeight - window.innerHeight)
 
 for (let i = 0; i <= 20; i += 1) {
   const target = Math.round((height * i) / 20)
   await page.evaluate((y) => window.scrollTo(0, y), target)
-  await page.waitForTimeout(220)
+  // The house-lights retraction runs 1.8s; sample long enough to see it settle.
+  await page.waitForTimeout(320)
 
   const s = await page.evaluate(() => {
-    const cs = getComputedStyle(document.documentElement)
-    const numeral = document.querySelector('[data-j-numeral]')
+    const root = getComputedStyle(document.documentElement)
+    const opening = document.querySelector('[data-film="opening"]')
+    const grain = document.querySelector('[data-film-grain]')
+    const num = (v) => Number.parseFloat(v) || 0
     return {
       y: Math.round(window.scrollY),
-      lx: Number.parseFloat(cs.getPropertyValue('--light-x')) || 0,
-      li: Number.parseFloat(cs.getPropertyValue('--light-intensity')) || 0,
-      flare: Number.parseFloat(cs.getPropertyValue('--light-flare')) || 0,
-      vig: Number.parseFloat(cs.getPropertyValue('--vignette')) || 0,
-      tint: cs.getPropertyValue('--atmos-tint').trim(),
-      week: numeral?.textContent?.trim() ?? '—',
+      letterbox: num(root.getPropertyValue('--letterbox-h')),
+      grain: grain ? Number.parseFloat(getComputedStyle(grain).opacity) : -1,
+      seam: opening ? num(getComputedStyle(opening).getPropertyValue('--seam-width')) : 0,
+      spill: opening ? num(getComputedStyle(opening).getPropertyValue('--seam-spill')) : 0,
+      lightIntensity: num(root.getPropertyValue('--light-intensity')),
     }
   })
   samples.push(s)
 }
 
-line('     scrollY  light-x  intens  flare  vignette  week   tint')
+line('     scrollY   letterbox   grain    seam   spill   light')
 for (const s of samples) {
   line(
-    `   ${String(s.y).padStart(7)}  ${s.lx.toFixed(1).padStart(7)}  ${s.li.toFixed(2).padStart(6)}  ${s.flare.toFixed(2).padStart(5)}  ${s.vig.toFixed(2).padStart(8)}  ${s.week.padStart(4)}   ${s.tint}`,
+    `   ${String(s.y).padStart(7)}   ${s.letterbox.toFixed(1).padStart(9)}   ${s.grain.toFixed(3).padStart(5)}   ${s.seam.toFixed(1).padStart(5)}   ${String(Math.round(s.spill)).padStart(5)}   ${s.lightIntensity.toFixed(2).padStart(5)}`,
   )
 }
 
 // ---------------------------------------------------------------------------
-// Assertions
+// Assertions — the direction, not generic motion
 // ---------------------------------------------------------------------------
 head('STEP 5 — ASSERTIONS')
 
-/*
- * Separate two very different kinds of console output.
- *
- * Only the homepage is built so far, so Next's prefetch of any in-viewport link
- * to an unbuilt route legitimately 404s — currently /contact/book-a-trial, the
- * trial CTA. That is a build-order fact, not a defect in the motion layer, and
- * it resolves itself as the remaining pages land.
- *
- * Everything else is real noise, and the delivery contract is that a production
- * build emits none of it.
- */
 const routeNotFound = failedResponses.filter((r) => r.startsWith('404'))
 const diagnosticNoise = [
   ...consoleErrors.filter((e) => !/Failed to load resource.*404/i.test(e)),
@@ -296,46 +306,56 @@ if (routeNotFound.length) {
   for (const r of [...new Set(routeNotFound)]) line(`        ${r}`)
   line()
 }
-const weeks = [...new Set(samples.map((s) => s.week))].filter((w) => /^\d+$/.test(w))
-const lightMoved = Math.max(...samples.map((s) => s.lx)) - Math.min(...samples.map((s) => s.lx))
-const intensityVaried = Math.max(...samples.map((s) => s.li)) - Math.min(...samples.map((s) => s.li))
-const vignetteVaried = Math.max(...samples.map((s) => s.vig)) - Math.min(...samples.map((s) => s.vig))
-const tints = new Set(samples.map((s) => s.tint))
-const maxFlare = Math.max(...samples.map((s) => s.flare))
+
+const timelines = Object.values(before.diag?.timelines ?? {})
+const named = timelines.map((t) => t.name)
+const REQUIRED = ['Opening', 'Wings', 'Memory', 'Walk', 'Release', 'Houselights']
+const missing = REQUIRED.filter((n) => !named.includes(n))
+const pinned = timelines.filter((t) => t.pinned).map((t) => t.name)
+
+const letterboxMax = Math.max(...samples.map((s) => s.letterbox))
+const letterboxMin = Math.min(...samples.map((s) => s.letterbox))
+const grainMax = Math.max(...samples.map((s) => s.grain))
+const grainMin = Math.min(...samples.map((s) => s.grain))
+const seamMax = Math.max(...samples.map((s) => s.seam))
+const spillMax = Math.max(...samples.map((s) => s.spill))
 
 const instrumentationChecks = [
-  ['GSAP registered', Boolean(before.diag?.scrollTriggerRegistered), String(before.diag?.scrollTriggerRegistered)],
-  ['ScrollTrigger count > 0', (before.diag?.scrollTriggerCount ?? 0) > 0, String(before.diag?.scrollTriggerCount ?? 0)],
-  ['Lenis driving scroll', Boolean(before.diag?.lenisInitialised), String(before.diag?.lenisInitialised)],
-  ['all timelines created', Object.values(before.diag?.timelines ?? {}).every((t) => t.created), `${Object.values(before.diag?.timelines ?? {}).filter((t) => t.created).length}/${Object.keys(before.diag?.timelines ?? {}).length}`],
+  ['six timelines created', missing.length === 0, missing.length ? `missing ${missing.join(', ')}` : named.join(', ')],
+  ['exactly two pinned', pinned.length === 2, pinned.join(' + ') || 'none'],
+  ['the two pins are Walk + Release', pinned.includes('Walk') && pinned.includes('Release'), pinned.join(' + ')],
+  ['all timelines found their trigger', timelines.every((t) => t.triggerFound), `${timelines.filter((t) => t.triggerFound).length}/${timelines.length}`],
 ]
 
-/** Only meaningful in a production build, where the panel must NOT exist. */
 const deliveryChecks = [
   ['no debug overlay', !before.debugOverlay, before.debugOverlay ? 'PRESENT' : 'absent'],
   ['no debug globals', before.debugGlobals.length === 0, before.debugGlobals.join(',') || 'none'],
-  ['no diagnostic console noise', diagnosticNoise.length === 0, diagnosticNoise.length ? diagnosticNoise[0].slice(0, 80) : `0 (${routeNotFound.length} unbuilt-route prefetch 404s ignored)`],
-  ['motion runs without panel', lightMoved > 5 && tints.size > 2, `Δlight ${lightMoved.toFixed(1)}, ${tints.size} tints`],
 ]
 
 const results = [
   ['no page errors', pageErrors.length === 0, `${pageErrors.length}`],
   ...(PRODUCTION_MODE ? deliveryChecks : instrumentationChecks),
-  ['no missing-plugin warnings', !consoleWarnings.some((w) => /Missing plugin|Invalid property scrollTrigger/i.test(w)), String(consoleWarnings.filter((w) => /Missing plugin|Invalid property/i.test(w)).length)],
-  ['canvas present & sized', Boolean(before.canvas && before.canvas.w > 0), before.canvas ? `${before.canvas.w}×${before.canvas.h}` : 'absent'],
-  ['light travels', lightMoved > 5, `Δ${lightMoved.toFixed(1)}`],
-  ['light intensity varies', intensityVaried > 0.05, `Δ${intensityVaried.toFixed(2)}`],
-  ['vignette breathes', vignetteVaried > 0.05, `Δ${vignetteVaried.toFixed(2)}`],
-  ['colour grade evolves', tints.size > 2, `${tints.size} tints`],
-  ['week counter changes', weeks.length > 3, weeks.join(',')],
-  ['First Note flare fires', maxFlare > 0.1, `max ${maxFlare.toFixed(2)}`],
+  ['no diagnostic console noise', diagnosticNoise.length === 0, diagnosticNoise.length ? diagnosticNoise[0].slice(0, 70) : `0 (${routeNotFound.length} unbuilt-route 404s ignored)`],
+  ['no missing-plugin warnings', !consoleWarnings.some((w) => /Missing plugin|Invalid property/i.test(w)), '0'],
+  // The letterbox must be a real 60px through the film and gone at the desk.
+  ['letterbox reaches 60px', letterboxMax >= 59, `max ${letterboxMax.toFixed(1)}px`],
+  ['letterbox retracts to 0', letterboxMin <= 1, `min ${letterboxMin.toFixed(1)}px`],
+  // Grain is film-only: present in the dark, absent below the house lights.
+  ['grain present in the film', grainMax >= 0.03, `max ${grainMax.toFixed(3)}`],
+  ['grain absent at the desk', grainMin <= 0.005, `min ${grainMin.toFixed(3)}`],
+  // The seam is the whole reveal mechanism for the hero.
+  ['the seam opens to 9px', seamMax >= 8.5, `max ${seamMax.toFixed(1)}px`],
+  ['the amber spills', spillMax >= 200, `max ${Math.round(spillMax)}px`],
+  // The shout ships as a typeset blank until the owner supplies the word.
+  ['shout slot present and empty', before.shoutSlot === 'empty', String(before.shoutSlot)],
 ]
 
 let failed = 0
 for (const [name, ok, detail] of results) {
   if (!ok) failed += 1
-  line(`  ${ok ? 'PASS' : 'FAIL'}  ${name.padEnd(26)} ${detail}`)
+  line(`  ${ok ? 'PASS' : 'FAIL'}  ${name.padEnd(30)} ${detail}`)
 }
+
 
 head('STEP 6 — IMAGE REQUESTS MADE BY THE BROWSER')
 const seen = new Map()

@@ -37,15 +37,22 @@ export const sectionPadding = {
 export type Density = keyof typeof sectionPadding
 
 /**
- * Moderate, consistent radii. Heavy rounding reads as a children's product and
- * breaks the teen constraint; zero radius reads corporate.
+ * Radius is ZERO — approved direction, Visual Specification.md §C.
+ *
+ *   > "Radius: 0 everywhere except the CTA pill (999px), full stop."
+ *
+ * Radius is the single strongest component-library tell there is. The scale is
+ * kept as an API so existing components compile unchanged; every step now
+ * resolves to 0. `full` survives for one reason only: the primary action is a
+ * pill, and that exception is the whole reason the token still exists.
  */
 export const radius = {
   none: '0px',
-  sm: '4px',
-  md: '8px',
-  lg: '16px',
-  xl: '24px',
+  sm: '0px',
+  md: '0px',
+  lg: '0px',
+  xl: '0px',
+  /** The CTA pill. The only rounded thing on the site. */
   full: '9999px',
 } as const
 
@@ -60,13 +67,45 @@ export const breakpoints = {
 
 export type Breakpoint = keyof typeof breakpoints
 
+/**
+ * The grid. Mirrors `--grid-margin` / `--grid-gutter` in tokens.css.
+ *
+ * The 150px margin at ≥1280px is **the film margin** — the line every
+ * subtitle-hung line of type in movements 1–6 sits on, and the line the amber
+ * seam travels along. It is not generic page padding; moving it breaks the
+ * relationship between the light and the words.
+ *
+ * Mobile is 24px, not 20 — also part of the film margin decision.
+ */
 export const grid = {
-  xs: { columns: 4, gutter: '16px', margin: '20px' },
+  xs: { columns: 4, gutter: '16px', margin: '24px' },
   sm: { columns: 4, gutter: '16px', margin: '24px' },
   md: { columns: 8, gutter: '24px', margin: '32px' },
   lg: { columns: 12, gutter: '24px', margin: '48px' },
-  xl: { columns: 12, gutter: '32px', margin: '64px' },
-  '2xl': { columns: 12, gutter: '32px', margin: 'auto' },
+  /** The film margin. */
+  xl: { columns: 12, gutter: '32px', margin: '150px' },
+  '2xl': { columns: 12, gutter: '32px', margin: '150px' },
+} as const
+
+/**
+ * Composition laws, kept as data so a review can assert them by name.
+ * Visual Specification.md §C.
+ */
+export const compositionLaws = {
+  /** No bordered, filled or elevated containers of any kind. */
+  cardsPermitted: false,
+  /** Depth is light, never a drop shadow. */
+  shadowsPermitted: false,
+  /** Lists are separated by 1px hairlines — a rule, not a card edge. */
+  hairlineOnDark: '#242C3D',
+  hairlineOnHouse: '#D8D2C4',
+  /** Content sits in columns 2–8 through the film, opening to 2–11 at the desk. */
+  filmColumns: [2, 8],
+  deskColumns: [2, 11],
+  /** Nothing is centred, ever. */
+  centredPermitted: false,
+  /** 60px bars, film movements only. */
+  letterboxBar: '60px',
 } as const
 
 /** Content max-width 1440px. Prose 68ch. Full-bleed for photography only. */

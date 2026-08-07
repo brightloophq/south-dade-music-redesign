@@ -8,6 +8,15 @@
  */
 
 export const duration = {
+  /**
+   * The three structural beats of the film. These are not preferences — the
+   * release is 400ms because a longer flash reads as a transition rather than
+   * a cut, and the stillness is 1500ms because that is how long nerve takes.
+   * Visual Specification.md §H.
+   */
+  release: 400,
+  still: 1500,
+  houselights: 1800,
   /** State flips — checkbox, toggle, tab underline. */
   instant: 100,
   /** Hover, focus ring, small colour transitions. */

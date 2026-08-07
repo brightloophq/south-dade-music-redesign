@@ -1,10 +1,9 @@
-export { Hero } from './Hero'
+/**
+ * The homepage, movement by movement.
+ * Canonical spec: docs/approved-design/The Film.html
+ */
+export { Opening } from './Opening'
 export { Reframe } from './Reframe'
-export { NinetyDayJourney, TwelveWeeks } from './NinetyDayJourney'
-export { Programs } from './Programs'
-export { MusicLessons } from './MusicLessons'
-export { PerformanceGallery } from './PerformanceGallery'
-export { Testimonials } from './Testimonials'
-export { Scholarship } from './Scholarship'
-export { TheTurn } from './TheTurn'
-export { FinalCta } from './FinalCta'
+export { TheWalk } from './TheWalk'
+export { TheRelease, HouseLights } from './TheRelease'
+export { Desk } from './Desk'

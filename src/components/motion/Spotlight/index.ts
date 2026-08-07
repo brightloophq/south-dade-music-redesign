@@ -1,1 +1,0 @@
-export { SpotlightCursor } from './SpotlightCursor'

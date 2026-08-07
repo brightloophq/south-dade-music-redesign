@@ -40,9 +40,15 @@ export const motionConfig = {
     maxScrollVh: 300,
     /** Desktop and large tablet only. Below `lg`, degrade to stacked steps. */
     minBreakpoint: 'lg' as const,
+    /**
+     * Re-allocated for "The Film" (7 Aug 2026). Still exactly two — the budget
+     * is unchanged, its two slots are now spent on the walk and the release.
+     * Visual Specification.md §H.6: "the two pinned-sequence budget is spent
+     * entirely on movement 5 (the journey) and the release."
+     */
     approved: [
-      { id: 'ninety-day-timeline', routes: ['/', '/programs/90-day-stage-program'] },
-      { id: 'exposure-ladder', routes: ['/programs/90-day-stage-program', '/about'], gate: 'B-3' },
+      { id: 'the-walk', routes: ['/'] },
+      { id: 'the-release', routes: ['/'] },
     ],
   },
 

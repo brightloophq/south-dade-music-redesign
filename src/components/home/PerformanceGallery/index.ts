@@ -1,1 +1,0 @@
-export { PerformanceGallery } from './PerformanceGallery'

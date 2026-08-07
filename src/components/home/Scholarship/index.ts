@@ -1,1 +1,0 @@
-export { Scholarship } from './Scholarship'

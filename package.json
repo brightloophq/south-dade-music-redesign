@@ -9,7 +9,9 @@
     "lint": "eslint",
     "typecheck": "tsc --noEmit",
     "check": "npm run typecheck && npm run lint && npm run build",
+    "check:tokens": "node scripts/check-tokens.mjs",
     "probe:motion": "node scripts/motion-probe.mjs",
+    "build:fonts": "node scripts/build-fonts.mjs",
     "storybook": "storybook dev -p 6006",
     "build-storybook": "storybook build",
     "generate:image": "node scripts/generate-image.mjs"
@@ -39,6 +41,7 @@
     "eslint-config-next": "16.3.0",
     "playwright-core": "^1.62.1",
     "storybook": "^10.5.6",
+    "subset-font": "^2.5.0",
     "tailwindcss": "^4",
     "typescript": "^5",
     "vite": "^7.3.6"

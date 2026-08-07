@@ -112,9 +112,15 @@
     outline: none;
   }
 
+  /*
+   * Selection is inverted ink, not amber. Amber is rationed to four light
+   * events (Visual Specification.md §B) and a selection highlight is not one
+   * of them — it is generic UI decoration, which is exactly the use the
+   * direction forbids.
+   */
   ::selection {
-    background-color: var(--color-spot-300);
-    color: var(--color-stage-950);
+    background-color: var(--color-text-primary);
+    color: var(--color-surface-page);
   }
 
   /* Honour a coarse pointer: no sticky hover states on touch. */

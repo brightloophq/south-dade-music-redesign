@@ -1,40 +1,42 @@
 /**
  * Elevation, shadows, z-index and opacity tokens.
- * Canonical source: docs/redesign/04-design-system.md §5
+ * Canonical spec: docs/approved-design/Visual Specification.md §C
  *
- * Dark-first surfaces mean shadows work differently. Elevation is expressed
- * through surface value first, shadow second. Shadows are always warm-tinted
- * (derived from n-900), never pure black on light.
+ *   > "Shadows: none. Depth is the amber radial glow only, and only at the two
+ *   > journey/release moments."
+ *
+ * Every drop shadow is `none`. Depth comes from the light source alone — a
+ * shadow that does not agree with the light is a lie about the room.
  */
 
 export const shadow = {
   none: 'none',
-  1: '0 1px 2px rgba(23, 22, 19, 0.06)',
-  2: '0 4px 12px rgba(23, 22, 19, 0.08)',
-  3: '0 12px 32px rgba(23, 22, 19, 0.12)',
-  4: '0 24px 64px rgba(23, 22, 19, 0.16)',
-  /** Dark-theme modal shadows are cool and deep; surfaces carry elevation otherwise. */
-  darkModal: '0 12px 32px rgba(0, 0, 0, 0.4)',
-  darkLightbox: '0 24px 64px rgba(0, 0, 0, 0.55)',
+  1: 'none',
+  2: 'none',
+  3: 'none',
+  4: 'none',
+  darkModal: 'none',
+  darkLightbox: 'none',
   /**
-   * The visual signature of the brand. Reserved for the primary CTA and the
-   * active showcase image. Loses meaning if applied broadly.
+   * The ONE glow. Not a shadow and not a CTA ring — it is the amber radial that
+   * appears at the mark and at the release, and nowhere else.
    */
-  spotlight: '0 0 0 1px #D4870E, 0 8px 24px rgba(245, 165, 36, 0.24)',
+  spotlight: '0 0 46px 12px rgba(233, 162, 59, 0.4)',
 } as const
 
 export type ShadowToken = keyof typeof shadow
 
 /**
- * Elevation levels pair a surface value with a shadow, per theme.
- * Rule: never more than two elevation levels visible in one viewport region.
+ * Elevation levels are retained as an API so existing components keep compiling,
+ * but every level now resolves to a flat surface with no shadow. There are no
+ * raised surfaces in this direction because there are no cards.
  */
 export const elevation = {
-  0: { light: { surface: 'var(--color-n-50)', shadow: shadow.none }, dark: { surface: 'var(--color-stage-900)', shadow: shadow.none } },
-  1: { light: { surface: 'var(--color-n-0)', shadow: shadow[1] }, dark: { surface: 'var(--color-stage-800)', shadow: shadow.none } },
-  2: { light: { surface: 'var(--color-n-0)', shadow: shadow[2] }, dark: { surface: 'var(--color-stage-800)', shadow: shadow.none } },
-  3: { light: { surface: 'var(--color-n-0)', shadow: shadow[3] }, dark: { surface: 'var(--color-stage-800)', shadow: shadow.darkModal } },
-  4: { light: { surface: 'var(--color-n-0)', shadow: shadow[4] }, dark: { surface: 'var(--color-stage-800)', shadow: shadow.darkLightbox } },
+  0: { light: { surface: 'var(--color-n-50)', shadow: shadow.none }, dark: { surface: 'var(--color-ground-wing)', shadow: shadow.none } },
+  1: { light: { surface: 'var(--color-n-50)', shadow: shadow.none }, dark: { surface: 'var(--color-ground-wing)', shadow: shadow.none } },
+  2: { light: { surface: 'var(--color-n-50)', shadow: shadow.none }, dark: { surface: 'var(--color-ground-wing)', shadow: shadow.none } },
+  3: { light: { surface: 'var(--color-n-50)', shadow: shadow.none }, dark: { surface: 'var(--color-ground-wing)', shadow: shadow.none } },
+  4: { light: { surface: 'var(--color-n-50)', shadow: shadow.none }, dark: { surface: 'var(--color-ground-wing)', shadow: shadow.none } },
 } as const
 
 export type ElevationLevel = keyof typeof elevation

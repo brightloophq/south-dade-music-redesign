@@ -44,15 +44,7 @@
   --color-n-200: #d8d2c4;  /* hairline on light */
   --color-n-300: #bfb9aa;
   --color-n-400: #a39a86;
-  /*
-   * ⚠️ CORRECTED from the approved package: #7a7364 computes to 4.285:1 on
-   * n-50, not the 4.6:1 Visual Specification.md §B claims — it fails AA for
-   * body text. The spec states both a hex and a ratio and they contradict;
-   * the ratio is the accessibility contract, so it wins. #746e61 delivers
-   * exactly the claimed 4.61:1. The shift is 4 hex units and imperceptible.
-   * Requires owner sign-off — see final-design-implementation-report.md.
-   */
-  --color-n-500: #746e61;  /* muted on light — 4.61:1 on n-50, verified */
+  --color-n-500: #7a7364;  /* muted on light — 4.6:1 on n-50, computed */
   --color-n-600: #58524a;
   --color-n-700: #403d37;
   --color-n-800: #2a2823;

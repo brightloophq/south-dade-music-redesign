@@ -7,6 +7,12 @@ export { Parallax, type ParallaxProps } from './Parallax'
 export { Emerge, type EmergeProps } from './Emerge'
 export { FilmDirector } from './FilmDirector'
 export { MotionDebugPanel } from './MotionDebugPanel'
-export { Atmosphere, Grade, Grain, AtmosphereLayer } from './Atmosphere'
-export { SpotlightCursor } from './Spotlight'
+/*
+ * Retired by the approved direction "The Film":
+ *   AtmosphereLayer  superseded — the page mounts FilmDirector directly
+ *   Grain            superseded by components/film/FilmGrain (film movements only)
+ *   Atmosphere       dust motes are not part of this direction
+ *   Grade            a global tint wash fights the per-movement grounds
+ *   SpotlightCursor  custom cursors are on the prohibited list
+ */
 export { useRevealOnScroll, type RevealConfig } from './useRevealOnScroll'

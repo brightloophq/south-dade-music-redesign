@@ -49,9 +49,14 @@ export type ButtonProps = ButtonAsButton | ButtonAsLink
  * Hover never translates — moving the click target between intent and click
  * causes mis-clicks (05-motion-system.md §11 rule 3).
  */
+/*
+ * Radius is 0 everywhere in this direction. The base carries no radius at all;
+ * only `primary` opts into the pill, because the primary action is the single
+ * reason the radius exception exists (Visual Specification.md §G).
+ */
 const base = cn(
   'relative inline-flex items-center justify-center gap-2',
-  'rounded-(--radius-md) font-semibold whitespace-nowrap',
+  'rounded-none font-display font-semibold whitespace-nowrap',
   'transition-[background-color,box-shadow,border-color,color]',
   'duration-(--duration-fast) ease-(--ease-stage)',
   'disabled:pointer-events-none disabled:opacity-(--opacity-disabled)',
@@ -59,25 +64,33 @@ const base = cn(
 )
 
 const variantClass: Record<ButtonVariant, string> = {
-  /** Book a Trial, Reserve a Seat. **One per page.** */
+  /**
+   * The trial action. Amber pill, stage-blue text — 8.6:1.
+   * This is amber use №4 of 4, and the only rounded object on the site.
+   */
   primary: cn(
-    'bg-spot-500 text-stage-950',
-    'hover:bg-spot-600 hover:shadow-elev-2',
-    'active:bg-spot-700 active:shadow-none',
+    'rounded-(--radius-full) bg-spot-500 text-(--color-ground-stage)',
+    'hover:brightness-105 active:brightness-95',
   ),
-  /** Second action — e.g. Watch a showcase. */
-  secondary: cn('bg-velvet-600 text-n-0', 'hover:bg-velvet-700 hover:shadow-elev-1', 'active:bg-velvet-700'),
+  /**
+   * No fill, 1px underline on hover, no pill shape. Velvet is retired — a
+   * second accent breaks the amber budget.
+   */
+  secondary: cn(
+    'bg-transparent text-(--color-text-primary)',
+    'underline-offset-[6px] decoration-1 hover:underline',
+  ),
   /** Inline, low emphasis. */
-  ghost: cn('bg-transparent text-(--color-link-default)', 'hover:bg-n-100'),
-  /** Learn more, See details. */
+  ghost: cn('bg-transparent text-(--color-link-default)', 'hover:underline hover:underline-offset-4'),
+  /** Learn more, See details. A hairline, not a card edge. */
   outline: cn(
-    'bg-transparent text-(--color-link-default) border border-n-300',
-    'hover:border-velvet-700 hover:bg-n-100',
+    'bg-transparent text-(--color-text-primary) border border-(--color-border-default)',
+    'hover:border-(--color-text-primary)',
   ),
   /** Reads as a link but sized as a control. */
   text: cn('bg-transparent text-(--color-link-default) underline underline-offset-4 decoration-1', 'hover:decoration-2'),
   /** Icon-only. Requires `aria-label`. */
-  icon: cn('bg-transparent text-(--color-text-primary) rounded-(--radius-full)', 'hover:bg-n-100'),
+  icon: cn('bg-transparent text-(--color-text-primary) rounded-(--radius-full)', 'hover:bg-(--color-surface-sunken)'),
   /**
    * The spotlight glow — the visual signature of the brand. Reserved for the
    * single most important conversion action on the page. Used broadly it loses
@@ -109,7 +122,7 @@ const variantClass: Record<ButtonVariant, string> = {
 const sizeClass: Record<ButtonSize, string> = {
   sm: 'h-9 px-4 text-body-sm',
   md: 'h-11 px-6 text-body-md',
-  lg: 'h-13 px-8 text-body-lg',
+  lg: 'min-h-13 px-8 py-[17px] text-body-md',
   xl: 'h-15 px-10 text-body-lg',
 }
 
