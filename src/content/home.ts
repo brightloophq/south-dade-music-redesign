@@ -1,3 +1,6 @@
+import { instrumentPages } from './lessons'
+import { programEntries } from './programs'
+
 /**
  * Homepage content.
  *
@@ -197,62 +200,15 @@ export const twelveWeeks = {
  * ⚠️ No price appears on any card. Gate B-8: `tuitionOrPricing` is `null` for
  * every programme except the camp.
  */
-export const programs = [
-  {
-    id: 'ninety-day',
-    name: '90-Day Stage Program',
-    href: '/programs/90-day-stage-program',
-    summary:
-      'A step-by-step plan that helps students prepare for a live performance in about three months.',
-    facts: ['12 weeks', 'Kids and teens', 'Ends in a live showcase'],
-    flagship: true,
-  },
-  {
-    id: 'private-lessons',
-    name: 'Private Lessons',
-    href: '/programs/private-lessons',
-    summary:
-      'One-on-one instruction for kids, teens and adults across seven instruments.',
-    facts: ['One-on-one', 'Weekly', 'Any age, any time'],
-    flagship: false,
-  },
-  {
-    id: 'band-builders',
-    name: 'Band Builders',
-    href: '/programs/band-builders',
-    summary:
-      'A group program where kids come together to play as a team, learning ensemble skills and performing as a band.',
-    facts: ['Group', 'Kids and teens', 'Play in a band'],
-    flagship: false,
-  },
-  {
-    id: 'group-lessons',
-    name: 'Group Music Lessons',
-    href: '/programs/group-lessons',
-    summary:
-      'Small-group instruction building fundamentals, ensemble skills and confidence.',
-    facts: ['Small groups', 'Ages 6 and up', 'Weekly'],
-    flagship: false,
-  },
-  {
-    id: 'early-childhood',
-    name: 'Early Childhood',
-    href: '/programs/early-childhood',
-    summary:
-      'Play-based group classes for young children focused on rhythm, movement and sound recognition.',
-    facts: ['Group', 'Ages 3–6', 'Parents can join'],
-    flagship: false,
-  },
-  {
-    id: 'summer-camp',
-    name: 'Summer Jam Music Camp',
-    href: '/camps',
-    summary:
-      'A three-week screen-free day camp culminating in an End-of-Camp Concert.',
-    facts: ['3 weeks', 'Ages 7–15', '60 instructional hours'],
-    flagship: false,
-  },
-] as const
+/**
+ * The playbill's six entries.
+ *
+ * ⚠️ Derived from `programs.ts`, which is canonical as of Tier 2 — the same
+ * business fact must not live in two content modules. `route` is `null` for
+ * the three programmes whose pages are Tier 3; the playbill renders those
+ * unlinked rather than pointing at a 404.
+ */
+export const programs = programEntries
 
 export const programsSection = {
   /** ✍️ AUTHORED. */
@@ -273,15 +229,19 @@ export const programsSection = {
  * It is **omitted** here rather than linked to a route that does not exist —
  * the current site's homepage carries a Keyboard tile with no destination.
  */
-export const instruments = [
-  { id: 'piano', name: 'Piano', href: '/lessons/piano', startAge: 'From about 5 or 6' },
-  { id: 'guitar', name: 'Guitar', href: '/lessons/guitar', startAge: 'From about 6 or 7' },
-  { id: 'drums', name: 'Drums', href: '/lessons/drums', startAge: 'From about 5 or 6' },
-  { id: 'bass', name: 'Bass Guitar', href: '/lessons/bass', startAge: 'From about 7 or 8' },
-  { id: 'violin', name: 'Violin', href: '/lessons/violin', startAge: 'From about 5 or 6' },
-  { id: 'ukulele', name: 'Ukulele', href: '/lessons/ukulele', startAge: 'From about 5 or 6' },
-  { id: 'voice', name: 'Voice', href: '/lessons/voice', startAge: 'From about 5 or 6' },
-] as const
+/**
+ * The seven instruments.
+ *
+ * ⚠️ Derived from `lessons.ts`, which is canonical as of Tier 2. Routes are
+ * the original flat URLs (`/piano-lessons`), which is what actually exists —
+ * the homepage previously linked to `/lessons/piano`, which never did.
+ */
+export const instruments = instrumentPages.map((i) => ({
+  id: i.id,
+  name: i.name,
+  href: i.route,
+  startAge: i.startsAround,
+}))
 
 export const lessonsSection = {
   /** ✍️ AUTHORED. */

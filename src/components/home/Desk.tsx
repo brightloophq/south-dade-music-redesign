@@ -106,16 +106,34 @@ function Programs() {
                 >
                   No.&nbsp;{index + 1}
                 </span>
-                <Link
-                  href={program.href}
-                  className={
-                    flagship
-                      ? 'font-body text-display-md italic text-(--color-text-primary) underline-offset-[6px] hover:underline'
-                      : 'font-body text-heading-md italic text-(--color-text-primary) underline-offset-[6px] hover:underline'
-                  }
-                >
-                  {program.name}
-                </Link>
+                {/*
+                  Three programmes have no page yet (Tier 3). They render as
+                  plain text rather than as links to a 404 — the playbill still
+                  lists everything the business offers, but nothing here lies
+                  about where it goes.
+                */}
+                {program.route ? (
+                  <Link
+                    href={program.route}
+                    className={
+                      flagship
+                        ? 'font-body text-display-md italic text-(--color-text-primary) underline-offset-[6px] hover:underline'
+                        : 'font-body text-heading-md italic text-(--color-text-primary) underline-offset-[6px] hover:underline'
+                    }
+                  >
+                    {program.name}
+                  </Link>
+                ) : (
+                  <span
+                    className={
+                      flagship
+                        ? 'font-body text-display-md italic text-(--color-text-primary)'
+                        : 'font-body text-heading-md italic text-(--color-text-primary)'
+                    }
+                  >
+                    {program.name}
+                  </span>
+                )}
               </li>
             )
           })}

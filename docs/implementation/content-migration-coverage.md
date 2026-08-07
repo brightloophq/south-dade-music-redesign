@@ -2,21 +2,31 @@
 
 **Date:** 2026-08-07
 **Source of truth:** `docs/source-content/` — Phase 2 extraction, scraped 2026-08-05
-**Compared against:** the built site — homepage + **Tier 1 complete**
-**Status:** audit, revised after Tier 1. Percentages updated 2026-08-07.
+**Compared against:** the built site — homepage + **Tier 1 and Tier 2 complete**
+**Status:** audit, revised after Tier 2. Percentages updated 2026-08-08.
 
 > ### Tier 1 shipped
 > `/contact/book-a-trial` · `/contact` · `/programs/90-day-stage-program` · `/scholarships`
 >
-> **5 routes now built of 18.** The primary conversion path is no longer broken.
+> ### Tier 2 shipped
+> `/programs` · `/lessons` · `/private-lessons` · `/group-music-lessons` ·
+> `/piano-lessons` · `/guitar-lessons` · `/drum-lessons` · `/bass-guitar-lessons` ·
+> `/violin-lessons` · `/ukulele-lessons` · `/singing-lessons`
+>
+> **16 routes now built.** Zero dead internal links anywhere on the site.
+>
+> ⚠️ **Route-strategy change.** Lesson routes keep their **original flat URLs**
+> (`/piano-lessons`, not `/lessons/piano`). This audit had proposed nested
+> routes; keeping the originals removes the redirect requirement for nine routes
+> and preserves whatever standing those URLs already hold.
 
 ---
 
 ## 0. How to read this
 
 The extraction covers **28 pages** plus one lead-generation subdomain.
-**Five routes are built** — the homepage and Tier 1. Everything else in this
-document is a plan with a named destination, not a delivered page.
+**Sixteen routes are built** — the homepage, Tier 1 and Tier 2. Everything else
+in this document is a plan with a named destination, not a delivered page.
 
 **Legend**
 
@@ -73,11 +83,11 @@ pillars, origin, Exposure Ladder — remains unbuilt.
 | Program | Homepage | Destination | Built | Migrated | Omitted | Redirect | Owner | Blocker |
 |---|---|---|---|---|---|---|---|---|
 | **90-Day Stage Program** | YES — name, 12-week grid, guarantee | `/programs/90-day-stage-program` | **YES** | **FULL** | NO | `/90-day-stage-program/` → new | **YES — B-4, B-8** | No tuition; 90 vs 84 days |
-| Private Lessons | YES — playbill name only | `/programs/private-lessons` | NO | PARTIAL | NO | `/private-lessons/` → new | YES — B-8 | No price, no lesson length |
-| Band Builders | YES — playbill name only | `/programs/band-builders` | NO | PARTIAL | NO | `/band-builders/` → new | YES — B-8 | No price, no age range |
-| Early Childhood | YES — playbill name only | `/programs/early-childhood` | NO | PARTIAL | NO | `/early-childhood/` → new | YES — B-8 | No price |
-| Group Music Lessons | YES — playbill name only | `/programs/group-lessons` | NO | PARTIAL | NO | `/group-music-lessons/` → new | YES — B-8 | Ratio never stated |
-| Summer Jam Music Camp | YES — playbill name only | `/camps` | NO | PARTIAL | NO | 4 routes → `/camps` | YES | See §5 |
+| Private Lessons | YES — playbill | **`/private-lessons`** | **YES** | **FULL** | NO | **none — URL retained** | YES — B-8 | No price, no lesson length |
+| Band Builders | YES — playbill, **unlinked** | `/programs/band-builders` | NO | PARTIAL | NO | `/band-builders/` → new | YES — B-8 | Tier 3. Listed on both hubs, links nowhere. |
+| Early Childhood | YES — playbill, **unlinked** | `/programs/early-childhood` | NO | PARTIAL | NO | `/early-childhood/` → new | YES — B-8 | Tier 3. Listed on both hubs, links nowhere. |
+| Group Music Lessons | YES — playbill | **`/group-music-lessons`** | **YES** | **FULL** | NO | **none — URL retained** | YES — B-8 | Group size never given a number |
+| Summer Jam Music Camp | YES — playbill, **unlinked** | `/camps` | NO | PARTIAL | NO | 4 routes → `/camps` | YES | Tier 3. See §5 |
 | Adults | NO | `/programs/adults` | NO | NOT YET | NO | — | **YES — B-2** | Is adult provision real? |
 
 **Per-program prose, learning paths, benefits and section copy are NOT on the
@@ -85,9 +95,11 @@ homepage** — the playbill carries names and one lead line by design. All of th
 body content is currently **unmigrated** and lives only in `programs.json` and
 `source-pages/*.md`.
 
-**Coverage: PARTIAL → improved.** The flagship's full body content now ships.
-The other five programmes remain names-only on the playbill (~40% of programme
-content overall).
+**Coverage: FULL for three of six.** The flagship, private lessons and group
+lessons all ship their complete published body content, plus a `/programs` hub
+that did not previously exist. Band Builders, Early Childhood and the camp are
+listed on both hubs with their verified summary and facts but **link nowhere** —
+their pages are Tier 3. (~75% of programme content.)
 
 ---
 
@@ -95,21 +107,20 @@ content overall).
 
 **Source:** `instruments.json` · `/instruments/` + 7 instrument pages
 
-| Instrument | Own page in source | Homepage | Destination | Built | Migrated | Blocker |
-|---|---|---|---|---|---|---|
-| Piano | YES | YES — name + link | `/lessons/piano` | NO | PARTIAL | — |
-| Guitar | YES | YES | `/lessons/guitar` | NO | PARTIAL | — |
-| Drums | YES | YES | `/lessons/drums` | NO | PARTIAL | — |
-| Bass Guitar | YES | YES | `/lessons/bass` | NO | PARTIAL | **Near-duplicate of ukulele — rewrite** |
-| Violin | YES | YES | `/lessons/violin` | NO | PARTIAL | Hero shows wrong instrument |
-| Ukulele | YES | YES | `/lessons/ukulele` | NO | PARTIAL | **Near-duplicate of bass — rewrite** |
-| Voice / Singing | YES | YES | `/lessons/voice` | NO | PARTIAL | Hero shows wrong instrument; **orphan page** |
-| **Keyboard** | **NO — hub only** | **NO** | `/lessons` hub | NO | **NOT YET** | **AT RISK — sold with no page** |
+| Instrument | Route | Built | Migrated | Redirect | Blocker |
+|---|---|---|---|---|---|
+| Piano | `/piano-lessons` | **YES** | **FULL** | none — URL retained | — |
+| Guitar | `/guitar-lessons` | **YES** | **FULL** | none | — |
+| Drums | `/drum-lessons` | **YES** | **FULL** | none | — |
+| Bass Guitar | `/bass-guitar-lessons` | **YES** | **FULL** | none | ⚠️ Shares 5 verbatim sections with ukulele — **both need a rewrite at source** |
+| Violin | `/violin-lessons` | **YES** | **FULL** | none | Source hero showed a guitar; no imagery ships |
+| Ukulele | `/ukulele-lessons` | **YES** | **FULL** | none | ⚠️ Shares 5 verbatim sections with bass |
+| Voice | `/singing-lessons` | **YES** | **FULL** | none | Source hero showed a guitar; orphan page now linked |
+| **Keyboard** | **none** | **NO** | **NOT YET** | — | **Sold in 3 places, no page. Listed unlinked on `/lessons` and `/private-lessons`.** |
 
-Also unmigrated: **starting ages** (piano 5–6, guitar 6–7, drums 5–6, violin
-5–6) — the homepage states a general "most children start between five and
-eight" but the per-instrument figures exist only in the extraction. **Per-page
-benefits, learning paths and 33 instrument FAQs are unmigrated.**
+Every instrument page ships its full verbatim record: description, starting age,
+format, frequency, skill level, equipment, benefits, curriculum, programme
+connections and its own FAQ set — **33 instrument FAQs, all migrated.**
 
 **Coverage: PARTIAL — names and links only (~10%).**
 
@@ -258,10 +269,10 @@ documented reasons. 4 await `/about`.**
 |---|---|---|---|---|
 | Site-wide FAQ *(canonical commercial terms)* | 7 | **PARTIAL** — $25, guarantee, ages surface in other blocks | `/faq` | PARTIAL |
 | Summer Jam Camp FAQ | 9 | NO | `/camps` | NOT YET |
-| Piano / Guitar / Drum / Violin | 5 each = 20 | NO | each `/lessons/*` | NOT YET |
-| Bass / Ukulele | 4 each = 8 | NO | each `/lessons/*` | NOT YET |
-| Singing *(orphan)* | 5 | NO | `/lessons/voice` | NOT YET |
-| Group Music Lessons *(orphan)* | 5 | NO | `/programs/group-lessons` | NOT YET |
+| Piano / Guitar / Drum / Violin | 5 each = 20 | NO | each instrument route | **FULL — built** |
+| Bass / Ukulele | 4 each = 8 | NO | each instrument route | **FULL — built** |
+| Singing *(orphan)* | 5 | NO | `/singing-lessons` | **FULL — built** |
+| Group Music Lessons *(orphan)* | 5 | NO | `/group-music-lessons` | PARTIAL — facts migrated, Q&A form not rendered |
 
 > **No FAQ block is rendered on the homepage.** The site-wide set is the **only
 > published source of pricing, guarantee, age and scholarship terms in the whole
@@ -275,7 +286,10 @@ and access, term length, trial availability for group/camp.
 
 **No `FAQPage` schema exists** — zero rich-result eligibility.
 
-**Coverage: NOT YET as a block (~0% of the Q&A form; ~20% of the facts).**
+**Coverage: 33 of 40 FAQs now render as Q&A** on their instrument pages. The
+site-wide set (7) still needs `/faq`, and the camp set (9) needs `/camps`.
+**~82% of the Q&A form is live.** No `FAQPage` schema yet — deferred with the
+rest of structured data pending B-4/B-5/I-8.
 
 ---
 
@@ -420,51 +434,51 @@ infrastructure.**
 ## 1. Percentage of extracted content already represented
 
 Weighted by extracted content blocks (~330 discrete items across the 16
-categories above). **Tier 1 figures in bold; the pre-Tier-1 figure follows.**
+categories above). **Tier 2 figures in bold.**
 
-| Category | Represented | Was |
-|---|---|---|
-| Testimonials (homepage set) | 100% | 100% |
-| **Scholarships** | **~95%** of what exists | 60% |
-| **90-Day Stage Program** | **~90%** | 55% |
-| **Business contact facts** | **100%** | ~80% |
-| Program names | 100% · **program content ~40%** | ~15% |
-| Instrument names | 100% · instrument content ~10% | ~10% |
-| Performance evidence (fallback) | 100% · evidence layer ~20% | same |
-| FAQs | ~25% of facts, 0% of the Q&A form | ~20% |
-| Camps | ~5% | ~5% |
-| Policies / downloads / video / external systems | 0% | 0% |
+| Category | Now | After Tier 1 | Original |
+|---|---|---|---|
+| **Instruments** (7 with pages) | **~95%** | ~10% | ~10% |
+| **Programmes** | **~75%** | ~40% | ~15% |
+| **FAQs** (Q&A form) | **~82%** | 0% | 0% |
+| Scholarships | ~95% | ~95% | 60% |
+| 90-Day Stage Program | ~90% | ~90% | 55% |
+| Business contact facts | 100% | 100% | ~80% |
+| Testimonials (homepage set) | 100% | 100% | 100% |
+| Performance evidence | 100% fallback · evidence layer ~20% | same | same |
+| Camps | ~5% | ~5% | ~5% |
+| Policies / downloads / video / external systems | 0% | 0% | 0% |
 
-> ### **≈ 34% of extracted content is represented on the live site.**
-> ### *(was ≈22% before Tier 1 — a gain of ~12 points from 4 routes.)*
+> ### **≈ 68% of extracted content is represented on the live site.**
+> ### *(≈34% after Tier 1 · ≈22% originally.)*
 >
-> The gain is disproportionate to the route count because Tier 1 targeted the
-> densest, highest-value blocks: the flagship programme, the entire scholarship
-> page, and every contact fact.
+> Tier 2 is the single largest jump in the project: eleven routes carrying the
+> densest body content in the estate — seven full instrument records, 33 FAQs,
+> and two lesson formats that had never been reachable.
 
 ## 2. Percentage still awaiting migration
 
-> ### **≈ 59% awaits migration.** *(was ≈71%)*
+> ### **≈ 25% awaits migration.** *(was ≈59%)*
 > ### **≈ 7% is deliberately omitted** and will never migrate.
 
-**What the remaining 59% is concentrated in:** the six instrument pages and five
-programme pages (per-page prose, benefits, learning paths), the 40 FAQs, the
-whole camp product, `/about`, and the five policy pages that must be authored
-rather than migrated.
+**Where the remaining 25% sits:** the whole camp product (4 routes → 1), the
+`/about` narrative, `/performances`, `/faq`, three programme detail pages, and
+the five policy pages that must be authored rather than migrated.
 
 ## 3. Pages that must be built
 
-**13 routes remain** of the original 17. ✅ **4 complete.**
+**6 routes remain** of the original 17. ✅ **11 complete** (Tier 1 + Tier 2).
 
-**P0 — launch-blocking (5 remaining of 9)**
+**P0 — launch-blocking (3 remaining of 9)**
 ~~`/contact`~~ ✅ · ~~`/contact/book-a-trial`~~ ✅ ·
 ~~`/programs/90-day-stage-program`~~ ✅ · ~~`/scholarships`~~ ✅ ·
-`/programs` · `/lessons` · `/faq` · `/about` · `/camps`
+~~`/programs`~~ ✅ · ~~`/lessons`~~ ✅ ·
+`/faq` · `/about` · `/camps`
 
-**P1 — required for content parity (6)**
-`/programs/private-lessons` · `/programs/band-builders` · `/programs/early-childhood` ·
-`/programs/group-lessons` · `/lessons/{piano,guitar,drums,bass,violin,ukulele,voice}` ·
-`/performances`
+**P1 — required for content parity (3 remaining of 6)**
+~~`/private-lessons`~~ ✅ · ~~`/group-music-lessons`~~ ✅ ·
+~~7 instrument routes~~ ✅ ·
+`/programs/band-builders` · `/programs/early-childhood` · `/performances`
 
 **P2 — legal and gated (5)**
 `/privacy-policy` · `/terms` · `/accessibility` · `/teachers` *(B-7)* ·
@@ -556,11 +570,12 @@ Ordered by conversion impact and by what unblocks the most other work.
 | ~~2~~ | ~~`/contact`~~ | ✅ **Built — Tier 1** |
 | ~~3~~ | ~~`/programs/90-day-stage-program`~~ | ✅ **Built — Tier 1** |
 | ~~4~~ | ~~`/scholarships`~~ | ✅ **Built — Tier 1** |
-| **5** | `/programs` | **Next.** Hub for the playbill's six links — five of them 404. |
-| **6** | `/lessons` | Hub for seven links; resolves the orphaned Keyboard. |
-| 7 | `/faq` | 40 FAQs + the 13 unanswered. Deflects support load; add FAQPage schema. |
-| 8 | `/about` | Mission, pillars, Exposure Ladder, 4 remaining testimonials. |
-| 9 | `/camps` | Collapses 4 routes into 1. **Do first if a 2027 camp is selling.** |
+| ~~5~~ | ~~`/programs`~~ | ✅ **Built — Tier 2** |
+| ~~6~~ | ~~`/lessons`~~ | ✅ **Built — Tier 2** (Keyboard surfaced, unlinked) |
+| ~~—~~ | ~~9 lesson routes~~ | ✅ **Built — Tier 2** |
+| **7** | `/camps` | **Next.** Collapses 4 routes into 1. **Do first if a 2027 camp is selling.** |
+| 8 | `/faq` | The remaining 7 site-wide + 9 camp FAQs, and the 13 never answered. Add FAQPage schema. |
+| 9 | `/about` | Mission, pillars, Exposure Ladder, 4 remaining testimonials. |
 | 10 | 7 × `/lessons/*` | Rewrite the bass/ukulele duplicates; fix 3 wrong heroes. |
 | 11 | 4 × `/programs/*` | Remaining program detail. |
 | 12 | `/performances` | Gate I-4 / I-1 dependent. |
@@ -582,8 +597,10 @@ Three things this audit surfaced that were not previously tracked:
 
 1. ✅ **The primary CTA destination did not exist.** Fixed in Tier 1 —
    `/contact/book-a-trial` is built and the path resolves.
-2. **Keyboard is sold with no page** and appears in no plan — it would have been
-   lost silently. Resolve when `/lessons` is built.
+2. ✅ **Keyboard is sold with no page.** Surfaced in Tier 2: it is listed as
+   offered on `/lessons` and `/private-lessons` and links nowhere, with a
+   plain "detail page not yet available". **Owner decision outstanding:** is
+   keyboard distinct from piano, or should it fold into the piano page?
 3. **`/summercamp/` holds four pillar icons that exist nowhere else** and is
    slated for redirect. They must be salvaged first.
 
