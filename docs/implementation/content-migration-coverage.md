@@ -13,7 +13,11 @@
 > `/piano-lessons` · `/guitar-lessons` · `/drum-lessons` · `/bass-guitar-lessons` ·
 > `/violin-lessons` · `/ukulele-lessons` · `/singing-lessons`
 >
-> **16 routes now built.** Zero dead internal links anywhere on the site.
+> ### Tier 3 shipped
+> `/camps` · `/faq` · `/about` · `/performances` ·
+> `/programs/band-builders` · `/programs/early-childhood`
+>
+> **22 routes now built.** Zero dead internal links anywhere on the site.
 >
 > ⚠️ **Route-strategy change.** Lesson routes keep their **original flat URLs**
 > (`/piano-lessons`, not `/lessons/piano`). This audit had proposed nested
@@ -175,7 +179,16 @@ frequency remain withheld, and all three are blocked at source.
 | Refund policy (verbatim) | NO | NOT YET | Recommend legal review |
 | 9 camp FAQs | NO | NOT YET | — |
 
-**Coverage: NOT YET — name only. Four routes must collapse to one.**
+**Coverage: FULL for everything publishable.** `/camps` ships the complete
+camp record — schedule, ages, blocks, capacity, instruments, what is included,
+the concert, 2026 pricing, all 9 FAQs, and the refund and behavioural terms in
+full.
+
+⚠️ **No reservation CTA ships.** Both 2026 sessions ended before extraction and
+all four source routes still solicit bookings; the page states the sessions have
+finished and routes interest to contact. ⚠️ **No address** — the camp pages say
+Unit 1157 while contact says Unit 117 (I-8), so the page links to `/contact`
+rather than pick a side. ⚠️ **Deposit amount still unpublished.**
 
 ---
 
@@ -267,8 +280,8 @@ documented reasons. 4 await `/about`.**
 
 | Set | Count | Homepage | Destination | Migrated |
 |---|---|---|---|---|
-| Site-wide FAQ *(canonical commercial terms)* | 7 | **PARTIAL** — $25, guarantee, ages surface in other blocks | `/faq` | PARTIAL |
-| Summer Jam Camp FAQ | 9 | NO | `/camps` | NOT YET |
+| Site-wide FAQ *(canonical commercial terms)* | 7 | facts surface in other blocks | `/faq` | **PARTIAL — 4 of 7 ship** |
+| Summer Jam Camp FAQ | 9 | NO | `/camps` + `/faq` | **FULL — built** |
 | Piano / Guitar / Drum / Violin | 5 each = 20 | NO | each instrument route | **FULL — built** |
 | Bass / Ukulele | 4 each = 8 | NO | each instrument route | **FULL — built** |
 | Singing *(orphan)* | 5 | NO | `/singing-lessons` | **FULL — built** |
@@ -433,41 +446,45 @@ infrastructure.**
 
 ## 1. Percentage of extracted content already represented
 
-Weighted by extracted content blocks (~330 discrete items across the 16
-categories above). **Tier 2 figures in bold.**
+Weighted by extracted content blocks (~330 discrete items). **Tier 3 in bold.**
 
-| Category | Now | After Tier 1 | Original |
-|---|---|---|---|
-| **Instruments** (7 with pages) | **~95%** | ~10% | ~10% |
-| **Programmes** | **~75%** | ~40% | ~15% |
-| **FAQs** (Q&A form) | **~82%** | 0% | 0% |
-| Scholarships | ~95% | ~95% | 60% |
-| 90-Day Stage Program | ~90% | ~90% | 55% |
-| Business contact facts | 100% | 100% | ~80% |
-| Testimonials (homepage set) | 100% | 100% | 100% |
-| Performance evidence | 100% fallback · evidence layer ~20% | same | same |
-| Camps | ~5% | ~5% | ~5% |
-| Policies / downloads / video / external systems | 0% | 0% | 0% |
+| Category | Now | After T2 | After T1 | Original |
+|---|---|---|---|---|
+| Instruments | ~95% | ~95% | ~10% | ~10% |
+| **Programmes** | **~95%** | ~75% | ~40% | ~15% |
+| **FAQs** (published answers) | **~94%** | ~82% | 0% | 0% |
+| **Camps** | **~90%** | ~5% | ~5% | ~5% |
+| **About / brand narrative** | **~85%** | 0% | 0% | 0% |
+| **Performances** | **~90%** of what exists | ~20% | ~20% | ~20% |
+| Scholarships | ~95% | ~95% | ~95% | 60% |
+| 90-Day Stage Program | ~90% | ~90% | ~90% | 55% |
+| Business contact facts | 100% | 100% | 100% | ~80% |
+| Testimonials | 100% of the vetted set | 100% | 100% | 100% |
+| Policies / downloads / video / external systems | 0% | 0% | 0% | 0% |
 
-> ### **≈ 68% of extracted content is represented on the live site.**
-> ### *(≈34% after Tier 1 · ≈22% originally.)*
+> ### **≈ 89% of extracted content is represented on the live site.**
+> ### *(≈68% after Tier 2 · ≈34% after Tier 1 · ≈22% originally.)*
 >
-> Tier 2 is the single largest jump in the project: eleven routes carrying the
-> densest body content in the estate — seven full instrument records, 33 FAQs,
-> and two lesson formats that had never been reachable.
+> Every source page with migratable content now has a destination that exists.
 
 ## 2. Percentage still awaiting migration
 
-> ### **≈ 25% awaits migration.** *(was ≈59%)*
+> ### **≈ 4% awaits migration.** *(was ≈25%)*
 > ### **≈ 7% is deliberately omitted** and will never migrate.
 
-**Where the remaining 25% sits:** the whole camp product (4 routes → 1), the
-`/about` narrative, `/performances`, `/faq`, three programme detail pages, and
-the five policy pages that must be authored rather than migrated.
+**The remaining 4% is not migration work.** It is:
+
+- **Five policy pages that must be authored** — privacy, terms, accessibility,
+  the lesson cancellation policy and the photo-consent form. **None exists at
+  source**, so there is nothing to migrate; they have to be written.
+- **Two routes fully blocked on gates** — `/teachers` (B-7: no instructor is
+  named anywhere) and `/programs/adults` (B-2: is adult provision real).
+- **External-system work** — the HighLevel lead export, the analytics tag audit,
+  the redirect map, and re-pointing the staging-domain images.
 
 ## 3. Pages that must be built
 
-**6 routes remain** of the original 17. ✅ **11 complete** (Tier 1 + Tier 2).
+**0 content routes remain** of the original 17. ✅ **17 complete** (Tiers 1–3).
 
 **P0 — launch-blocking (3 remaining of 9)**
 ~~`/contact`~~ ✅ · ~~`/contact/book-a-trial`~~ ✅ ·

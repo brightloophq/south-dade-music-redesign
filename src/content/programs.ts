@@ -134,3 +134,84 @@ export const programsHub = {
   pricingNote:
     'Tuition is not published online. Ask us when you book a trial and we will give you the figures for the programme you are considering.',
 } as const
+
+// ---------------------------------------------------------------------------
+// Programme detail — Tier 3
+// ---------------------------------------------------------------------------
+
+/** ✅ VERBATIM from `/band-builders/`. */
+export const bandBuilders = {
+  id: 'band-builders',
+  name: 'Band Builders',
+  route: '/programs/band-builders',
+  lead: 'Band Builders is a group music program where kids come together to play as a team.',
+  /** ✅ VERBATIM. */
+  students: [
+    'Play music together in a group',
+    'Learn how bands work',
+    'Practice timing and coordination',
+    'Build confidence while performing',
+  ],
+  /** ✅ VERBATIM. */
+  audience: [
+    'Students already taking private lessons',
+    'Kids who want to play with others',
+    'Beginners who are ready for group learning',
+    'Students who enjoy teamwork and creativity',
+  ],
+  /** ✅ VERBATIM — the numbered path, in source order. */
+  howItWorks: [
+    'Start with a trial lesson',
+    'Build basic skills in private lessons',
+    'Join Band Builders',
+    'Practice and perform with a group',
+  ],
+  /**
+   * ✅ VERBATIM — note the conditional. The source says performance
+   * opportunities "**may** include", which is weaker than the sitewide
+   * "every student performs" claim. The conditional is preserved exactly.
+   */
+  performance: {
+    qualifier: 'Performance opportunities may include:',
+    items: ['Recitals', 'Community events', 'Small concerts'],
+  },
+  /** ⚠️ Gate B-8. No tuition. No numeric age range is published either. */
+  tuition: null,
+  ageRange: null,
+} as const
+
+/** ✅ VERBATIM from `/early-childhood/`. */
+export const earlyChildhood = {
+  id: 'early-childhood',
+  name: 'Early Childhood',
+  route: '/programs/early-childhood',
+  /** ✅ VERBATIM. */
+  lead: 'This program is for kids around ages 3 to 6. It is simple, playful, and designed to help them learn while they are having fun.',
+  /** ✅ VERBATIM. */
+  inClass: [
+    'Singing easy songs',
+    'Moving to music',
+    'Clapping simple rhythms',
+    'Playing small instruments',
+    'Listening and copying sounds',
+  ],
+  /** ✅ VERBATIM. */
+  activeNote: 'Classes are active. Kids are not sitting still for long.',
+  /** ✅ VERBATIM. */
+  social: [
+    'Taking turns',
+    'Listening to others',
+    'Following simple instructions',
+    'Being part of a group',
+  ],
+  /** ✅ VERBATIM. */
+  firstInstruments: ['Small drums or percussion', 'Simple rhythm tools', 'Basic keyboard sounds'],
+  /** ✅ VERBATIM — the expectation-setting line, which is the point of the page. */
+  expectation:
+    'We do not expect kids to master instruments at this age. That comes later. Right now, they just explore.',
+  /** ✅ VERBATIM. */
+  parents:
+    'In some cases, parents can also be part of the class, especially for younger kids. This helps children feel even more comfortable.',
+  /** ⚠️ Gate B-8. */
+  tuition: null,
+} as const
