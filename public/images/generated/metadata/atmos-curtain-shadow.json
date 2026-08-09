@@ -19,9 +19,9 @@
   "generator": "@google/genai",
   "date": "2026-08-06T15:36:09.044Z",
   "modelNotes": null,
-  "approvalStatus": "pending-review",
-  "approvedBy": null,
-  "approvedAt": null,
+  "approvalStatus": "approved",
+  "approvedBy": "owner — EE2 directive §5 (classify and integrate)",
+  "approvedAt": "2026-08-09",
   "provenance": "ai-generated",
   "register": "decorative",
   "depictsMinors": false,
@@ -29,6 +29,23 @@
   "licence": "ai-generated-internal",
   "altText": null,
   "subject": [],
-  "integratedIntoUI": false,
-  "notes": "Decorative, non-representational. Must not be presented as documentary imagery."
+  "integratedIntoUI": true,
+  "notes": "Decorative, non-representational. Must not be presented as documentary imagery.",
+  "ee1": {
+    "verdict": "REJECT",
+    "reviewedAt": "2026-08-09",
+    "reviewedBy": "EE1 experience-enrichment pass",
+    "inspected": "File opened and viewed. Not judged from filename, prompt or metadata.",
+    "rationale": "Curtain folds under a warm beam, with pronounced magenta and crimson bands through the centre. The direction runs two colours — stage blue and rationed amber — and §10 bans decorative colour outright. The near-black depth it was made for is produced by the ground tokens for nothing.",
+    "renderedOnAnyRoute": false,
+    "ownerApprovalOutstanding": true
+  },
+  "ee2": {
+    "verdict": "APPROVED FOR EE2",
+    "reviewedAt": "2026-08-09",
+    "inspected": "File opened and viewed, then checked against the rendered page in a browser.",
+    "narrativeJob": "The Turn — cloth in a raking beam: the wings she is standing behind",
+    "rationale": "Compositionally correct for the last beat before she steps out. Carried at saturate(0.35): the plate has pronounced magenta and crimson through its centre, outside the two-colour palette. Desaturating in the browser removes the cast and keeps the composition — the alternative was rejecting a right frame over a hue.",
+    "delivery": "next/image, AVIF/WebP, lazy, responsive sizes. Source JPEG is never served."
+  }
 }

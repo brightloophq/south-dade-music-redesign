@@ -82,7 +82,13 @@ export function HouseLights() {
       data-film="houselights"
       data-register="house"
       aria-hidden="true"
-      className="relative isolate flex min-h-[70svh] items-start py-(--section-feature)"
+      /*
+        EE2 — 70svh → 46svh. This is a gradient the visitor passes through, not
+        a frame they read: its only content is one line. Half a screen of
+        luminance change still reads as a physical rise, and the movement
+        returns ~215px.
+      */
+      className="relative isolate flex min-h-[46svh] items-start py-(--section-spacious)"
       style={{
         backgroundImage:
           'linear-gradient(180deg, var(--color-ground-stage) 0%, #4a4638 45%, var(--color-ground-house) 100%)',

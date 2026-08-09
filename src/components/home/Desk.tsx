@@ -1,15 +1,17 @@
 import Link from 'next/link'
 
 import { Button } from '@/components/ui/Button'
-import { DESK_SENTINEL_ID, FilmMargin, Movement } from '@/components/film'
+import { Atmosphere, DESK_SENTINEL_ID, FilmMargin, Movement } from '@/components/film'
 import {
   finalCta,
+  house,
   instruments,
   lessonsSection,
   performanceEvidence,
   programs,
   programsSection,
   scholarship,
+  shyQuestion,
   testimonials,
   testimonialsSection,
   twelveWeeks,
@@ -67,6 +69,110 @@ function DeskRow({
 }
 
 /**
+ * THE HOUSE — the film hands over. EE1.
+ *
+ * The first movement in the light, and the first place on the page where the
+ * business names itself in readable text. It carries the desk sentinel, so the
+ * letterbox and the grain retract here rather than one movement later — the
+ * film ends when the house lights find the wordmark, which is what the
+ * direction always described.
+ *
+ * Composition: the wordmark alone on the label rail, the category sentence set
+ * as the statement, then the tagline in the margin and the facts as a hairline
+ * pair. No card, no logo lockup, no icon. It reads like the first page of a
+ * printed programme, which is exactly what it is.
+ */
+function TheHouse() {
+  return (
+    <Movement
+      name="house"
+      ground="house"
+      id={DESK_SENTINEL_ID}
+      aria-labelledby="house-heading"
+      className="py-(--section-feature)"
+    >
+      {/*
+        THE PROGRAMME IN YOUR HANDS — EE2.
+
+        *"The film is over; this is the programme in your hands."* The desk was
+        flat #F7F4EE, which is clean and completely untactile.
+
+        `atmos-paper-tooth` is warm uncoated stock. It ships here as **one
+        non-repeating plate**, which is the fix for the defect that kept it out
+        of the build: the asset carries a diagonal light sweep across the frame,
+        so tiling it printed a visible grid of sweeps. Used once, full-bleed, at
+        the scale it was generated for, the sweep becomes what it looks like —
+        light falling across a page.
+
+        Multiplied at 0.28 into the ivory ground, under type that never sits on
+        top of detail. It is felt rather than seen, which is the entire brief
+        for a paper tooth.
+      */}
+      <Atmosphere
+        asset="atmos-paper-tooth"
+        job="The House — uncoated paper stock: the printed programme the desk is set on"
+        opacity={0.28}
+        blend="multiply"
+        sizes="100vw"
+        quality={40}
+      />
+
+      <FilmMargin wide className="relative z-[2]">
+        <div className="grid gap-8 lg:grid-cols-[220px_minmax(0,1fr)] lg:gap-16">
+          <div className="lg:pt-3">
+            <DeskLabel>{house.label}</DeskLabel>
+          </div>
+          <div className="max-w-[840px]">
+            <h2
+              id="house-heading"
+              className="max-w-[20ch] font-display text-display-md leading-[1.2] text-(--color-text-primary)"
+            >
+              {house.statement}
+            </h2>
+
+            {/* ✅ VERBATIM tagline. The only place it appears above the footer. */}
+            <p className="mt-7 font-body text-display-md italic text-(--color-text-primary)">
+              {house.tagline}
+            </p>
+
+            <dl className="mt-11">
+              <div className="flex flex-wrap items-baseline gap-x-10 gap-y-1 border-t border-(--color-border-default) py-5">
+                <dt className="w-32 shrink-0 font-display text-label uppercase text-(--color-text-muted)">
+                  Where
+                </dt>
+                <dd className="max-w-[52ch] font-body text-body-lg text-(--color-text-primary)">
+                  {house.serviceLine}
+                </dd>
+              </div>
+              <div className="flex flex-wrap items-baseline gap-x-10 gap-y-1 border-t border-(--color-border-default) py-5">
+                <dt className="w-32 shrink-0 font-display text-label uppercase text-(--color-text-muted)">
+                  Who
+                </dt>
+                <dd className="max-w-[52ch] font-body text-body-lg text-(--color-text-primary)">
+                  {house.ages}
+                </dd>
+              </div>
+            </dl>
+
+            <p className="mt-9 flex flex-wrap gap-x-8 gap-y-3">
+              {house.ways.map((way) => (
+                <Link
+                  key={way.href}
+                  href={way.href}
+                  className="inline-flex min-h-6 items-center font-display text-label uppercase text-(--color-text-primary) underline underline-offset-[6px]"
+                >
+                  {way.label}
+                </Link>
+              ))}
+            </p>
+          </div>
+        </div>
+      </FilmMargin>
+    </Movement>
+  )
+}
+
+/**
  * SHOT 08 — Programs, as tonight's programme.
  *
  * *"The flagship at 2× is the entire hierarchy. No badges, no cards."*
@@ -78,15 +184,26 @@ function DeskRow({
  *
  * Prices are absent because they are unpublished. The note says so plainly
  * rather than leaving a suspicious silence.
+ *
+ * ## EE1 — the playbill now says what each production is
+ *
+ * Six names and nothing else is a cast list, not a programme. A parent could
+ * read this movement in full and still not know that Band Builders is a group
+ * that plays together or that Early Childhood is for a three-year-old — so the
+ * one verified line each programme publishes about itself now sits under its
+ * name, small, in the margin measure.
+ *
+ * Three of the six also **linked nowhere**, because `programEntries` still
+ * carried `route: null` from before Tier 3 built their pages. Fixed at source;
+ * all six are live links.
  */
 function Programs() {
   return (
     <Movement
       name="programs"
       ground="house"
-      id={DESK_SENTINEL_ID}
       aria-labelledby="programs-heading"
-      className="py-(--section-feature)"
+      className="pb-(--section-feature)"
     >
       <h2 id="programs-heading" className="sr-only">
         {programsSection.heading}
@@ -98,42 +215,52 @@ function Programs() {
             return (
               <li
                 key={program.id}
-                className="flex flex-wrap items-baseline gap-x-10 gap-y-1 border-b border-(--color-border-default) py-6 last:border-b-0"
+                className="border-b border-(--color-border-default) py-6 last:border-b-0"
               >
-                <span
-                  aria-hidden="true"
-                  className="w-11 shrink-0 font-display text-label uppercase tabular-nums text-(--color-text-muted)"
-                >
-                  No.&nbsp;{index + 1}
-                </span>
-                {/*
-                  Three programmes have no page yet (Tier 3). They render as
-                  plain text rather than as links to a 404 — the playbill still
-                  lists everything the business offers, but nothing here lies
-                  about where it goes.
-                */}
-                {program.route ? (
-                  <Link
-                    href={program.route}
-                    className={
-                      flagship
-                        ? 'font-body text-display-md italic text-(--color-text-primary) underline-offset-[6px] hover:underline'
-                        : 'font-body text-heading-md italic text-(--color-text-primary) underline-offset-[6px] hover:underline'
-                    }
-                  >
-                    {program.name}
-                  </Link>
-                ) : (
+                <div className="flex flex-wrap items-baseline gap-x-10 gap-y-1">
                   <span
-                    className={
-                      flagship
-                        ? 'font-body text-display-md italic text-(--color-text-primary)'
-                        : 'font-body text-heading-md italic text-(--color-text-primary)'
-                    }
+                    aria-hidden="true"
+                    className="w-11 shrink-0 font-display text-label uppercase tabular-nums text-(--color-text-muted)"
                   >
-                    {program.name}
+                    No.&nbsp;{index + 1}
                   </span>
-                )}
+                  {/*
+                    `route` stays nullable so a genuinely unbuilt programme can
+                    still be listed honestly rather than linked to a 404. All
+                    six have pages today.
+                  */}
+                  {program.route ? (
+                    <Link
+                      href={program.route}
+                      className={
+                        flagship
+                          ? 'font-body text-display-md italic text-(--color-text-primary) underline-offset-[6px] hover:underline'
+                          : 'font-body text-heading-md italic text-(--color-text-primary) underline-offset-[6px] hover:underline'
+                      }
+                    >
+                      {program.name}
+                    </Link>
+                  ) : (
+                    <span
+                      className={
+                        flagship
+                          ? 'font-body text-display-md italic text-(--color-text-primary)'
+                          : 'font-body text-heading-md italic text-(--color-text-primary)'
+                      }
+                    >
+                      {program.name}
+                    </span>
+                  )}
+                  {program.pendingNote ? (
+                    <span className="font-display text-label uppercase text-(--color-text-muted)">
+                      {program.pendingNote}
+                    </span>
+                  ) : null}
+                </div>
+                {/* The one verified line this programme publishes about itself. */}
+                <p className="mt-2 max-w-[58ch] font-body text-body-sm text-(--color-text-secondary) lg:ml-[84px]">
+                  {program.summary}
+                </p>
               </li>
             )
           })}
@@ -185,10 +312,26 @@ function MusicLessons() {
         <p className="mt-8 max-w-[62ch] font-body text-body-md text-(--color-text-secondary)">
           {lessonsSection.lead}
         </p>
-        <p className="mt-6">
+        {/*
+          EE1 — the format question, answered with two destinations.
+
+          "Private or group?" is the first question a parent asks about lessons
+          and the homepage had no answer and no route for it: group learning
+          appeared nowhere on the page except as a name in the playbill.
+        */}
+        <p className="mt-6 flex flex-wrap gap-x-8 gap-y-3">
+          {lessonsSection.formats.map((format) => (
+            <Link
+              key={format.href}
+              href={format.href}
+              className="inline-flex min-h-6 items-center font-display text-label uppercase text-(--color-text-primary) underline underline-offset-[6px]"
+            >
+              {format.label}
+            </Link>
+          ))}
           <Link
             href={lessonsSection.cta.href}
-            className="inline-flex min-h-6 items-center font-display text-label uppercase text-(--color-text-primary) underline underline-offset-[6px]"
+            className="inline-flex min-h-6 items-center font-display text-label uppercase text-(--color-text-muted) underline underline-offset-[6px]"
           >
             {lessonsSection.cta.label}
           </Link>
@@ -237,6 +380,23 @@ function TwelveWeeks() {
           ))}
         </dl>
         <p className="mt-6 font-body text-body-sm text-(--color-text-muted)">{twelveWeeks.footnote}</p>
+
+        {/*
+          EE1 — the shy question, restored beside the schedule that provokes it.
+
+          Both lines verbatim. 07-the-walk.md §ACT V called this the emotional
+          hinge of the page and it was never built; the estate has kept it inside
+          an FAQ accordion for two years. A parent reading "week 11 — they play
+          for the class" is at the exact moment of doubt this answers.
+        */}
+        <div className="mt-12 border-t border-(--color-border-default) pt-8">
+          <p className="max-w-[24ch] font-body text-display-md italic leading-[1.3] text-(--color-text-primary)">
+            {shyQuestion.question}
+          </p>
+          <p className="mt-5 max-w-[58ch] font-body text-body-lg text-(--color-text-secondary)">
+            {shyQuestion.answer}
+          </p>
+        </div>
       </DeskRow>
     </Movement>
   )
@@ -448,6 +608,7 @@ function FinalCta() {
 export function Desk() {
   return (
     <>
+      <TheHouse />
       <Programs />
       <TwelveWeeks />
       <MusicLessons />

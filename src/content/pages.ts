@@ -134,8 +134,65 @@ export const ninetyDayPage = {
   eyebrow: 'The flagship',
   /** ✅ VERBATIM programme name. ⚠️ ™ withheld pending gate B-5. */
   title: '90-Day Stage Program',
+
+  /**
+   * ✅ VERBATIM — the source page's own hero subtitle, and **previously
+   * unmigrated**.
+   *
+   * `90-day-stage-program.md`: *H1 — 90-Day Stage Program (hero subtitle: "From
+   * the Practice Room to the Spotlight in Three Months")*.
+   *
+   * It is the single best sentence the programme owns: it names the start, the
+   * end and the duration in nine words, and it does it in the same stage
+   * vocabulary the homepage film is built from. It has been sitting in the
+   * extraction unused since Phase 2 while the page opened on an abstract
+   * definition instead.
+   */
+  subtitle: 'From the Practice Room to the Spotlight in Three Months',
+
   /** ✅ VERBATIM. */
   lead: 'This program is a step-by-step plan that helps students prepare for a live performance in about three months.',
+
+  /**
+   * ✅ VERBATIM — **previously unmigrated**, and the answer to the question
+   * this page most needed to answer.
+   *
+   * A parent reading "stage programme" can reasonably hear *pressure*, or
+   * assume it is for children who are already confident. The source has a
+   * section explaining why performance is in the programme at all, and the
+   * rebuild was not carrying it.
+   *
+   * ⚠️ Only the first sentence ships. The source continues: *"In fact, music
+   * programs that offer real performance opportunities help students develop
+   * confidence and stronger skills over time."* — presented as research, with
+   * **no source given**, which `90-day-stage-program.md` flags directly:
+   * *"Should be sourced or softened."* Publishing an unsourced research claim
+   * on the flagship page is exactly the kind of thing this project does not do.
+   */
+  whyStage: {
+    heading: 'Why stage experience matters',
+    body: 'Programs that include performance help students grow faster and feel more connected to music.',
+    /** ⚠️ Withheld pending a citation. */
+    researchClaim: null,
+  },
+
+  /**
+   * ✅ VERBATIM — **previously unmigrated**.
+   *
+   * Note the conditional: students *"get the chance to"* perform. That wording
+   * ships exactly as written. It is materially weaker than the footer's "every
+   * student performs", and the difference is the whole reason gate B-4 exists —
+   * the Stage-Ready Guarantee itself concedes that not every student is ready
+   * at the end of the cycle.
+   *
+   * "This is the highlight of the program" carries no such conflict and is the
+   * most useful sentence on the page for a parent deciding what the ninety days
+   * are actually *for*.
+   */
+  finale: {
+    heading: 'A real performance at the end',
+    body: 'At the end of the 90 days, students get the chance to perform. This is the highlight of the program.',
+  },
   /** ✅ VERBATIM. */
   intro:
     'At South Dade Music, our 90-Day Stage Program is designed to help students go from learning to performing in a clear and simple way. The goal is not just to practice, but to get ready for the stage in a short and focused time.',

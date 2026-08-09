@@ -19,7 +19,7 @@
   "generator": "@google/genai",
   "date": "2026-08-06T15:09:56.421Z",
   "modelNotes": null,
-  "approvalStatus": "pending-review",
+  "approvalStatus": "rejected",
   "approvedBy": null,
   "approvedAt": null,
   "provenance": "ai-generated",
@@ -30,5 +30,22 @@
   "altText": null,
   "subject": [],
   "integratedIntoUI": false,
-  "notes": "Decorative, non-representational. Must not be presented as documentary imagery."
+  "notes": "Decorative, non-representational. Must not be presented as documentary imagery.",
+  "ee1": {
+    "verdict": "REJECT",
+    "reviewedAt": "2026-08-09",
+    "reviewedBy": "EE1 experience-enrichment pass",
+    "inspected": "File opened and viewed. Not judged from filename, prompt or metadata.",
+    "rationale": "Criss-crossing beams; the busiest frame in the set. Its stated purpose is a very low-opacity depth layer, which cannot justify 2.5 MB, and the crossing beams read as a light show — the opposite of the single-source restraint the film is built on. Off-palette magenta through the lower third.",
+    "renderedOnAnyRoute": false,
+    "ownerApprovalOutstanding": true
+  },
+  "ee2": {
+    "verdict": "REJECTED FOR EE2",
+    "reviewedAt": "2026-08-09",
+    "inspected": "File opened and viewed, then checked against the rendered page in a browser.",
+    "narrativeJob": null,
+    "rationale": "Criss-crossing beams, the busiest frame in the set; reads as a light show, against a film built on single-source restraint.",
+    "delivery": "not served"
+  }
 }

@@ -138,7 +138,20 @@ export const footerNavigation: readonly NavGroup[] = [
     items: [
       { id: 'f-camps', label: 'Camps', href: '/camps', status: 'live' },
       { id: 'f-performances', label: 'Performances', href: '/performances', status: 'live' },
-      { id: 'f-events', label: 'Events', href: '/events', status: 'gated', gate: 'I-4' },
+      /*
+       * EE1 — the gated `/events` entry is removed.
+       *
+       * It rendered as a permanently greyed-out "Events" on all 27 routes: a
+       * dead word in the footer of every page, promising a section that had no
+       * design, no route and no content behind gate I-4.
+       *
+       * The authored location for genuine future performances now exists as the
+       * Upcoming movement on `/performances`, which states plainly that no date
+       * is announced. One real destination that says "not yet" beats a second
+       * greyed label that says nothing. If a dedicated `/events` route is ever
+       * warranted — several dated events, an archive worth browsing — it can be
+       * added then, with content to justify it.
+       */
       { id: 'f-scholarships', label: 'Scholarships', href: '/scholarships', status: 'live' },
       { id: 'f-contact', label: 'Contact', href: '/contact', status: 'live' },
     ],

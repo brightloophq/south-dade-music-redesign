@@ -19,7 +19,7 @@
   "generator": "@google/genai",
   "date": "2026-08-06T00:28:40.399Z",
   "modelNotes": null,
-  "approvalStatus": "pending-review",
+  "approvalStatus": "rejected",
   "approvedBy": null,
   "approvedAt": null,
   "provenance": "ai-generated",
@@ -30,5 +30,22 @@
   "altText": null,
   "subject": [],
   "integratedIntoUI": false,
-  "notes": "Decorative, non-representational. Must not be presented as documentary imagery."
+  "notes": "Decorative, non-representational. Must not be presented as documentary imagery.",
+  "ee1": {
+    "verdict": "REJECT",
+    "reviewedAt": "2026-08-09",
+    "reviewedBy": "EE1 experience-enrichment pass",
+    "inspected": "File opened and viewed. Not judged from filename, prompt or metadata.",
+    "rationale": "Well made, on-palette, no people. Rejected because there is no slot for it: The Film opens on true black with nothing in the frame (07-the-walk.md §5, ACT I), and an atmospheric hero plate contradicts the single most deliberate decision on the page. At 2.5 MB it would also become the LCP element of a page whose LCP is specified as a text node on black.",
+    "renderedOnAnyRoute": false,
+    "ownerApprovalOutstanding": true
+  },
+  "ee2": {
+    "verdict": "REJECTED FOR EE2",
+    "reviewedAt": "2026-08-09",
+    "inspected": "File opened and viewed, then checked against the rendered page in a browser.",
+    "narrativeJob": null,
+    "rationale": "Well made and on-palette, but there is no slot: ACT I opens on true black with nothing in the frame, and that is the most deliberate decision on the page. An atmospheric hero plate would also become the LCP element of a film whose LCP is specified as a text node on black.",
+    "delivery": "not served"
+  }
 }

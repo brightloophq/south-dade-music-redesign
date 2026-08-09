@@ -5,6 +5,8 @@
  * (HANDOFF.md §3). Everything else restyles through the token layer.
  */
 export { Letterbox, DESK_SENTINEL_ID } from './Letterbox'
+export { SkipFilm } from './SkipFilm'
+export { Atmosphere } from './Atmosphere'
 export { GhostNumeral } from './GhostNumeral'
 export { Seam } from './Seam'
 export { FilmGrain } from './FilmGrain'

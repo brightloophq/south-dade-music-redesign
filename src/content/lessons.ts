@@ -460,6 +460,45 @@ export const privateLessons = {
   route: '/private-lessons',
   summary:
     'One-on-one instruction for kids, teens and adults across seven instruments, with a stated progression path from trial to live performance.',
+
+  /**
+   * ✅ VERBATIM hero subtitle — **previously unmigrated** (recovered EE3.2).
+   *
+   * Third page in a row whose own hero subtitle never reached the rebuild; the
+   * flagship and Band Builders had the same gap. The extraction records them
+   * as a parenthetical on the H1 line, which is evidently how they were missed.
+   */
+  subtitle: 'Accelerate Your Progress with Dedicated Professional Mentorship',
+
+  /** ✅ VERBATIM opening line — previously unmigrated. */
+  opening:
+    'At South Dade Music, we offer private music lessons in South Miami-Dade for kids, teens, and adults.',
+
+  /**
+   * ✅ VERBATIM — **previously unmigrated, and the most consequential omission
+   * on this route.**
+   *
+   * This single sentence is the entire answer to *"why private?"* — the one
+   * decision the page exists to help a parent make. The rebuild had compressed
+   * it to the two words `lessonFormat: 'One-on-one'` in a data row, which
+   * states the format and discards the reason.
+   */
+  whyPrivate: 'Lessons are one-on-one, so students get full attention.',
+
+  /** ✅ VERBATIM — the age line as written on the page. */
+  anyone: 'We teach children, teens, and adults, so anyone can start at any time.',
+
+  /**
+   * ✅ VERBATIM — the seven instruments **as this page lists them**, which
+   * includes Keyboard.
+   *
+   * ⚠️ Keyboard is named here and on the homepage, is absent from
+   * `/instruments/`, and has no page anywhere. It is listed because this page
+   * lists it; it links nowhere, for the same reason it links nowhere on the
+   * hub. See `keyboardGap`.
+   */
+  instrumentsNamed: ['Piano', 'Guitar', 'Drums', 'Violin', 'Bass Guitar', 'Ukulele', 'Keyboard'],
+
   targetAge: 'Kids, teens, and adults — anyone can start at any time.',
   lessonFormat: 'One-on-one',
   frequency: 'Weekly',
@@ -530,6 +569,169 @@ export const groupLessons = {
 // ---------------------------------------------------------------------------
 // The lessons hub
 // ---------------------------------------------------------------------------
+
+/**
+ * Private against group, side by side — EE1.
+ *
+ * ## The problem this fixes
+ *
+ * `/lessons` listed the two formats as two paragraphs, one above the other.
+ * Nothing on the page let a parent *compare* them, so the only way to answer
+ * "which of these is my child in?" was to open both pages, read them in full,
+ * and hold the differences in their head. The instrument index had the same
+ * shape: seven names and a starting age, when the question a parent is actually
+ * weighing is also "and what do I have to buy?"
+ *
+ * ## Every cell is verbatim
+ *
+ * Each value is quoted from the page that publishes it, and where one format
+ * publishes a fact the other does not, the cell is empty rather than inferred.
+ *
+ * ## ⚠️ Frequency is deliberately absent from this table
+ *
+ * `frequencyConflict` is open: seven instrument pages say one lesson per week,
+ * `/resources/` says two classes weekly. Both formats *do* publish a frequency,
+ * so a "how often" row would be trivial to fill — and filling it would put the
+ * unresolved conflict into the one object on the site designed to be read as
+ * settled fact. The hubs state no frequency at all, and that holds here.
+ *
+ * ## ⚠️ Which instruments are available in which format is also absent
+ *
+ * `formatConflict` is open. Group instruments ship as the verbatim
+ * `/group-music-lessons/` sentence, which is itself conditional ("may
+ * include"), and the private row states the count of instruments with a page
+ * rather than claiming exclusivity.
+ */
+export const formatComparison = {
+  label: 'Private or group',
+  /** ✍️ Frames the table without resolving anything. */
+  note: 'Two formats, as each is published. Where a fact is stated for one and not the other, the row is left blank rather than assumed.',
+  columns: [
+    { id: 'private', name: 'Private Lessons', route: '/private-lessons' },
+    { id: 'group', name: 'Group Music Lessons', route: '/group-music-lessons' },
+  ],
+  rows: [
+    {
+      id: 'format',
+      label: 'Format',
+      /** ✅ VERBATIM both. */
+      private: 'One-on-one',
+      group: 'Group; small group sizes',
+    },
+    {
+      id: 'ages',
+      label: 'Ages',
+      /** ✅ VERBATIM both. */
+      private: 'Kids, teens, and adults — anyone can start at any time.',
+      group: 'Ages 6 and up, depending on maturity and attention span.',
+    },
+    {
+      id: 'experience',
+      label: 'Experience needed',
+      /** ✅ VERBATIM — `/private-lessons/` flexibility list. */
+      private: 'Programs for beginners and advanced students',
+      /** ✅ VERBATIM. */
+      group: 'Beginner-friendly options are available. Some programs may require basic experience.',
+    },
+    {
+      id: 'when',
+      label: 'When',
+      /** ✅ VERBATIM — `/private-lessons/` flexibility list. */
+      private: 'Flexible lesson times',
+      /** ✅ VERBATIM. */
+      group: 'After-school and weekend availability',
+    },
+    {
+      id: 'instruments',
+      label: 'Instruments',
+      /** ✍️ A count of the instruments that have a published page. */
+      private: 'Seven instruments with their own page',
+      /** ✅ VERBATIM — note the source's own "may include". */
+      group: 'Programs may include guitar, drums, keyboard, vocals, and band-style instruments.',
+    },
+    {
+      id: 'size',
+      label: 'Group size',
+      /** The source states nothing for private, and never gives a number for group. */
+      private: null,
+      /** ✅ VERBATIM. */
+      group: 'Group sizes are kept small to ensure quality instruction and engagement.',
+    },
+    {
+      id: 'leads',
+      label: 'What it builds toward',
+      /** ✅ VERBATIM — step three of the `/private-lessons/` learning path. */
+      private: 'Join group programs or bands',
+      /** ✅ VERBATIM — the last line of the group curriculum. */
+      group: 'Confidence through group performance',
+    },
+  ],
+} as const
+
+/**
+ * Instrument families — EE3.
+ *
+ * ## Why families rather than a flat list of seven
+ *
+ * The hub answered "which instruments?" with seven names in a row, which is an
+ * inventory, not a decision aid. A parent choosing for a five-year-old is not
+ * picking from seven equal options — they are working out what *kind* of thing
+ * their child would be doing.
+ *
+ * Grouping is not an invented distinction: it is how instruments actually
+ * divide, and it lets the one genuinely important fact on this page land
+ * without being written down. **Voice has no instrument to buy**, which the
+ * source states plainly — *"Singing is a great starting point for many
+ * children because it doesn't require an instrument."* In a flat list that
+ * sentence is the seventh row and nobody reads it. As a family with no plate
+ * and no equipment line, the absence itself carries the meaning.
+ *
+ * ## The plates
+ *
+ * Three approved object studies, one per instrumented family. They depict
+ * **objects only** — key edges, strings over a bridge, a drum head and rim —
+ * lit by the film's single warm source on its blue-black ground.
+ *
+ * ⚠️ They are not photographs of this academy and must never be captioned or
+ * positioned as though they were. Gate I-1 still blocks every real photograph
+ * the business owns. Voice deliberately has no plate: there is no honest object
+ * to show, and inventing one would be decoration.
+ */
+export const instrumentFamilies = [
+  {
+    id: 'keys',
+    name: 'Keys',
+    plate: 'instrument-keys',
+    /** ✅ VERBATIM — the piano FAQ's own equipment answer. */
+    equipment: 'A keyboard is enough to start.',
+    instrumentIds: ['piano'],
+  },
+  {
+    id: 'strings',
+    name: 'Strings',
+    plate: 'instrument-strings',
+    /** ✍️ Summarises four verbatim equipment answers without contradicting any. */
+    equipment: 'An instrument at home matters — your instructor can advise on size.',
+    instrumentIds: ['guitar', 'bass', 'violin', 'ukulele'],
+  },
+  {
+    id: 'percussion',
+    name: 'Percussion',
+    plate: 'instrument-percussion',
+    /** ✅ VERBATIM — the drum FAQ's own equipment answer. */
+    equipment: 'A practice pad is enough to start.',
+    instrumentIds: ['drums'],
+  },
+  {
+    id: 'voice',
+    name: 'Voice',
+    /** Deliberately no plate. The absence is the point. */
+    plate: null,
+    /** ✅ VERBATIM, `/singing-lessons/`. */
+    equipment: 'Singing is a great starting point for many children because it doesn’t require an instrument.',
+    instrumentIds: ['voice'],
+  },
+] as const
 
 export const lessonsHub = {
   eyebrow: 'Music lessons',

@@ -194,22 +194,31 @@
 }
 
 /* -----------------------------------------------------------------------
- * Tactility.
+ * Tactility — ⛔ REMOVED IN EE1. Do not restore this rule as it was.
  *
- * The Desk sections were flat #FAF9F7 — clean, and completely untactile. A
- * warm uncoated paper tooth multiplied into the ground gives them a surface:
- * the same trick a printed programme uses, and the reason good stock feels
- * expensive in the hand.
+ * This block multiplied `/images/generated/atmos-paper-tooth.jpg` into the
+ * desk ground to give the ivory sections a printed-programme surface. The
+ * intent is good and the asset is genuinely beautiful. The implementation had
+ * three faults, and the third hid the first two for four phases:
  *
- * Applied as a second background layer rather than a pseudo-element, so it
- * cannot disturb stacking or hit-testing anywhere.
+ *   1. **The asset does not tile.** A directional light sweep runs diagonally
+ *      across the frame, so `background-repeat: repeat` at 760px would print a
+ *      grid of identical sweeps — a visible checkerboard, not a paper tooth.
+ *   2. **It weighs 2.0 MB**, for a texture whose entire job is to be felt
+ *      rather than seen. That is roughly thirty times a defensible budget for
+ *      a repeating background, and it would load on every route.
+ *   3. **The selector never matched.** `data-register` is only ever set to
+ *      `house` in this codebase — by `Movement`, the header, the footer and the
+ *      mobile drawer. Nothing anywhere sets `desk`. So the rule was dead: the
+ *      tiling defect and the 2 MB payload were never observed because the
+ *      texture has never once rendered on any of the 27 routes.
+ *
+ * It is removed rather than repointed because repointing it to the desk
+ * movements would ship faults 1 and 2 to every page on the site the moment the
+ * selector started matching. The asset is classified **REWORK** in the EE1
+ * asset pass: it needs a seamless tile export at a sane weight, and owner
+ * approval, before this idea can return.
  * --------------------------------------------------------------------- */
-[data-register='desk'] {
-  background-image: url('/images/generated/atmos-paper-tooth.jpg');
-  background-size: 760px;
-  background-repeat: repeat;
-  background-blend-mode: multiply;
-}
 
 /* -----------------------------------------------------------------------
  * Reflected floor light.

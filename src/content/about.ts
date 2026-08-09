@@ -119,8 +119,63 @@ export const performances = {
   heading: 'It already happened.',
   /** ✍️ Explains the absence rather than hiding it. */
   note: 'Showcase photography is published once every family has given written consent. Until then, the account below is from the families who were in the room.',
-  /** ⚠️ Gate I-4 — no dated event exists anywhere in the estate. */
-  upcoming: null,
+  /**
+   * UPCOMING — the authored location for future performances. EE1.
+   *
+   * ## Why this exists as an empty state rather than as nothing
+   *
+   * `liveEventPages: 0`, `brokenEventPages: 2`. The estate's entire event
+   * infrastructure 404s, the footer carries an `/events` link gated on I-4, and
+   * the rebuild had no place at all where a real showcase date could land. The
+   * result was that the one thing this business is organised around — a night
+   * when children play in front of people — had no home on its own website.
+   *
+   * So the home is built now and stands empty, deliberately and visibly. That
+   * is the honest state: **there is no announced date**, and the page says so
+   * in those words rather than staging a hopeful "check back soon" or, worse,
+   * reviving the March 2025 record whose date survives only in a search index
+   * that `events.json` flags as unverified.
+   *
+   * ⚠️ Gate I-4. When a real date exists this block takes it. Nothing else on
+   * the page has to change.
+   *
+   * ⚠️ **Do not fill this from `events.json`.** The Bazaar and Flea Market
+   * Performance is recoverable owner history, not publishable content: the URL
+   * 404s and its date and time come from index metadata for a page that no
+   * longer resolves.
+   */
+  upcoming: {
+    label: 'Upcoming',
+    /** ✍️ States the absence in the words the absence deserves. */
+    heading: 'No date is announced.',
+    body: 'We are not going to publish a date we do not have. When the next showcase, recital or community performance is scheduled, it will be listed here — with the date, the time and where to stand.',
+    /** ✍️ The one useful action available while it is empty. */
+    action: { label: 'Ask to be told when it is', href: '/contact' },
+  },
+
+  /**
+   * IN THE COMMUNITY — EE1.
+   *
+   * ✅ VERBATIM, `/about/` — "Performances & Community Impact". These two
+   * sentences are the only published account of what the academy does outside
+   * its own room, and they were reaching visitors on `/about` only, which is
+   * not the page anyone reads to find out about performances.
+   *
+   * ⚠️ The stronger-sounding claim from `/resources/` — "We actively engage in
+   * community outreach through free performances and collaborative ensembles
+   * like choirs, orchestras, and modern band" — is **not used**. It is bundled
+   * in the source with the gate B-4 promise, and `content-conflicts.md` records
+   * that no choir and no orchestra is offered anywhere on the site. Publishing
+   * it would restate a claim the estate itself contradicts.
+   */
+  community: {
+    label: 'In the community',
+    lines: [
+      'We believe performance is an important part of growth. Students take part in recitals, community events, and group showcases that build confidence and stage experience.',
+      'At South Dade Music, learning goes beyond the classroom and into the community.',
+    ],
+  },
+
   /** ⚠️ Gate I-1 / I-7 — six photographs, no consent, unconfirmed copyright. */
   gallery: null,
 } as const

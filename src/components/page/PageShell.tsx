@@ -1,4 +1,4 @@
-import { FilmMargin, Movement } from '@/components/film'
+import { Atmosphere, FilmMargin, Movement } from '@/components/film'
 import { cn } from '@/lib/utils/cn'
 
 /**
@@ -72,8 +72,28 @@ export function PageIntro({
   children?: React.ReactNode
 }) {
   return (
-    <Movement name="page-intro" ground="house" className="pb-(--section-spacious) pt-(--section-feature)">
-      <FilmMargin wide>
+    <Movement name="page-intro" ground="house" className="pb-(--section-comfortable) pt-(--section-spacious)">
+      {/*
+        EE2 — the desk has a surface on interior routes too.
+
+        The same uncoated stock the homepage House movement is set on, so the
+        register is continuous: the film ends, and every page after it is the
+        printed programme. Decorative, `aria-hidden`, lazy-loaded, and the only
+        image on most of these routes.
+
+        ⚠️ It is atmosphere, never evidence. No interior page implies a
+        photograph of this business exists — the academy's own images remain
+        blocked under I-1.
+      */}
+      <Atmosphere
+        asset="atmos-paper-tooth"
+        job="Interior desk — uncoated paper stock, continuing the programme register from the homepage"
+        opacity={0.24}
+        blend="multiply"
+        sizes="100vw"
+        quality={40}
+      />
+      <FilmMargin wide className="relative z-[2]">
         <DeskLabel>{eyebrow}</DeskLabel>
         <h1 className="mt-6 max-w-[18ch] font-display text-display-md text-(--color-text-primary)">
           {heading}
@@ -104,11 +124,29 @@ export function DeskSection({
   ruled?: boolean
   className?: string
 }) {
+  /*
+   * ⚠️ EE2 — `--section-spacious` → `--section-comfortable`.
+   *
+   * Measured: interior routes were rendering 110–600 words across
+   * 2,600–8,000px. `/contact` carried 110 words in 2,610px; `/private-lessons`
+   * 209 words in 5,042px. That is not restraint, it is dilution — every
+   * relationship between two facts was separated by a third of a screen, so
+   * nothing on the page read as belonging to anything else.
+   *
+   * At `spacious` each section contributed 320px of vertical padding alone
+   * (160 top + 160 bottom at desktop). `comfortable` halves that to 256px per
+   * pair and the pages get materially denser without a word being added,
+   * removed or invented. The hairline still separates sections; it no longer
+   * needs half a viewport to do it.
+   *
+   * The film is untouched — it uses these tokens directly and keeps `spacious`
+   * and `feature` where the direction asks for them.
+   */
   return (
     <Movement
       name={id ?? 'desk-section'}
       ground="house"
-      className={cn('py-(--section-spacious)', className)}
+      className={cn('py-(--section-comfortable)', className)}
     >
       {ruled ? (
         <FilmMargin wide>

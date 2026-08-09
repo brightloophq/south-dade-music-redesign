@@ -30,7 +30,14 @@ export const seoConfig = {
    * `/members` is excluded until a real portal exists — it is lorem ipsum today
    * (02-information-architecture.md §1).
    */
-  excludedPaths: ['/members', '/search', '/api', '/_next'] as const,
+  /**
+   * `/_internal` is the development-only content review tool. It 404s in
+   * production, is absent from navigation (and therefore from the nav-driven
+   * sitemap), and carries its own `noindex`. It is listed here as a fourth
+   * belt-and-braces so that any future sitemap entry added by hand cannot
+   * introduce it either.
+   */
+  excludedPaths: ['/members', '/search', '/api', '/_next', '/_internal'] as const,
 
   /**
    * ⚠️ Structured data is gated. No business schema until the owner conflicts

@@ -19,9 +19,9 @@
   "generator": "@google/genai",
   "date": "2026-08-06T15:09:23.111Z",
   "modelNotes": null,
-  "approvalStatus": "pending-review",
-  "approvedBy": null,
-  "approvedAt": null,
+  "approvalStatus": "approved",
+  "approvedBy": "owner — EE2 directive §5 (classify and integrate)",
+  "approvedAt": "2026-08-09",
   "provenance": "ai-generated",
   "register": "decorative",
   "depictsMinors": false,
@@ -29,6 +29,23 @@
   "licence": "ai-generated-internal",
   "altText": null,
   "subject": [],
-  "integratedIntoUI": false,
-  "notes": "Decorative, non-representational. Must not be presented as documentary imagery."
+  "integratedIntoUI": true,
+  "notes": "Decorative, non-representational. Must not be presented as documentary imagery.",
+  "ee1": {
+    "verdict": "REWORK",
+    "reviewedAt": "2026-08-09",
+    "reviewedBy": "EE1 experience-enrichment pass",
+    "inspected": "File opened and viewed. Not judged from filename, prompt or metadata.",
+    "rationale": "The strongest asset in the set and the only one that depicts what its purpose claims: a scuffed wooden stage floor lit from house right, through haze, with no people. It answers ACT II of the direction almost exactly. Not adopted in EE1 because doing so is a redesign of The Walk, which currently renders as a deliberate hairline-and-dot abstraction that also carries the reduced-motion and low-capability cut. Blocked on three things, in order: owner approval (approvalStatus is still pending-review), an optimised derivative, and an explicit decision to move The Walk from abstraction to photography.",
+    "renderedOnAnyRoute": false,
+    "ownerApprovalOutstanding": true
+  },
+  "ee2": {
+    "verdict": "APPROVED FOR EE2",
+    "reviewedAt": "2026-08-09",
+    "inspected": "File opened and viewed, then checked against the rendered page in a browser.",
+    "narrativeJob": "The Walk — the boards she is crossing, rising 0.18→0.30→0.55 opacity across the three frames so the ground becomes visible as the light finds it",
+    "rationale": "The only asset that depicts what its metadata claims, and the one the direction explicitly asked for (07-the-walk.md ACT II: a photographic plate of a scuffed wooden stage floor). Anchored bottom, masked upward into the dark, sitting under the existing hairline and dot which the timeline still animates.",
+    "delivery": "next/image, AVIF/WebP, lazy, responsive sizes. Source JPEG is never served."
+  }
 }

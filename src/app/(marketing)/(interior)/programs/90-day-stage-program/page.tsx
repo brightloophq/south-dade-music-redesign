@@ -1,152 +1,400 @@
 import type { Metadata } from 'next'
+import Link from 'next/link'
 
 import { Button } from '@/components/ui/Button'
-import { FilmMargin, GhostNumeral, Movement } from '@/components/film'
-import { DeskLabel, DeskSection, PageIntro, PointList } from '@/components/page'
+import { Atmosphere, FilmMargin, GhostNumeral, Movement } from '@/components/film'
+import { DeskLabel, PageIntro } from '@/components/page'
+import { performanceEvidence, testimonialsSection } from '@/content/home'
 import { contactFacts, ninetyDayPage, trialOffer } from '@/content/pages'
 import { buildMetadata } from '@/lib/seo/metadata'
 
 export const metadata: Metadata = buildMetadata({
   title: '90-Day Stage Program',
   description:
-    'A step-by-step plan that helps students prepare for a live performance in about three months. Weeks 1–10 skill, week 11 the class, week 12 the showcase.',
+    'From the practice room to the spotlight in three months. A step-by-step plan that prepares students for a live performance — the work, the turn, and the stage.',
   path: '/programs/90-day-stage-program',
 })
 
 /**
- * /programs/90-day-stage-program — Tier 1, route 3 of 4.
+ * /programs/90-day-stage-program — the flagship. **Reconstructed in EE3.1.**
  *
- * The flagship. The homepage sells this programme and, until now, there was
- * nowhere to land.
+ * ## What was wrong
  *
- * ## Two published descriptions, both kept
+ * The page shipped every publishable fact it had and was still failing. Its
+ * shape was: intro → week grid → three steps → *four consecutive bullet
+ * lists* → guarantee. 7,303px at 61 words per 1000px, and a parent had to
+ * assemble the programme in their own head out of four lists that never
+ * referenced each other.
  *
- * The source describes this programme twice and incompatibly: a 12-week grid
- * (homepage, `/programs/`) and a three-step narrative with no week numbers
- * (the programme page). Rather than pick one and lose content, both ship —
- * the grid as the schedule, the steps as the method. They are not in conflict
- * with each other, only with the arithmetic.
+ * Worse, three verbatim blocks had never been migrated at all — including the
+ * page's own hero subtitle and the only passage that explains *why performance
+ * is in the programme*, which is the objection a parent actually arrives with.
  *
- * ## ⚠️ What does not ship
+ * ## The shape now
+ *
+ *   THE OFFER      what it is, in the first viewport, before any atmosphere
+ *   WHY THE STAGE  the recovered reason performance exists here
+ *   THE JOURNEY    three steps and the week bands as ONE sequence, not two
+ *   WHAT CHANGES   two outcome lists set side by side as one movement
+ *   THE END        the recovered finale, the stage plate, and the proof
+ *   WHO IT IS FOR  + the guarantee and the single call to action
+ *
+ * Six movements where there were nine, and the four consecutive lists are gone.
+ *
+ * ## Relationship to the homepage
+ *
+ * The homepage makes you *feel* the walk; this page makes you *understand* it.
+ * Same vocabulary — ghost numerals, the film margin, stage language, rationed
+ * amber, asymmetry — deliberately without replaying the film. There is no pin,
+ * no letterbox and no grain here: this is the desk.
+ *
+ * ## ⚠️ What still does not ship
  *
  * **The performance promise.** Gate B-4. The footer says "every student
- * performs"; this programme's own page says students "get the chance to
- * perform". Two unconditional claims and two conditional ones exist. Neither
- * ships — the week grid and the verbatim guarantee carry the meaning without
- * making a claim the same site contradicts.
+ * performs"; this page's own source says students "get the chance to perform".
+ * The conditional ships verbatim; the unconditional claim does not.
  *
- * **Tuition.** Gate B-8. Published nowhere in the estate. Only the $25
- * spot-hold appears.
+ * **The research sentence.** The source justifies performance with "In fact,
+ * music programs that offer real performance opportunities…" and cites nothing.
+ * The extraction flags it for sourcing. Withheld.
  *
- * **Session frequency.** "Two classes weekly" appears on two pages and is
- * contradicted by all seven instrument pages.
- *
- * **"About three months."** 12 weeks is 84 days. The lead sentence is verbatim
- * and retains it; the page does not repeat or reconcile it.
- *
- * ## Motion
- *
- * The desk does not move. One ghost numeral sits behind the schedule as
- * architecture — `aria-hidden`, and the figure it gestures at is stated
- * legibly in the rows beside it.
+ * **Tuition** (B-8) and **session frequency** — neither is published anywhere.
  */
 export default function NinetyDayStageProgramPage() {
+  /*
+   * The only quote in the corpus that describes the concert itself. The source
+   * flagship page carries **no proof of any kind** — no outcome, no parent
+   * quote, no photograph, no video — so this is placed at the finale, where the
+   * claim it supports is actually made.
+   */
+  const showcaseQuote = performanceEvidence.quotes.find((q) => q.id === 'dexter')
+
   return (
     <>
+      {/*
+        THE OFFER.
+
+        Clarity first. The homepage has already earned the right to open on
+        atmosphere; this page has not, and should not try — a visitor arriving
+        here has a specific question and wants it answered before anything is
+        asked of them.
+
+        No call to action in this viewport. The header carries a persistent
+        priced trial button on every interior route, so the action is never more
+        than one glance away, and the page can afford to explain itself first.
+      */}
       <PageIntro
         eyebrow={ninetyDayPage.eyebrow}
         heading={ninetyDayPage.title}
         lead={ninetyDayPage.lead}
       >
-        <p className="mt-7 max-w-[62ch] font-body text-body-md text-(--color-text-secondary)">
-          {ninetyDayPage.intro}
+        {/* ✅ VERBATIM hero subtitle — recovered in EE3.1. */}
+        <p className="mt-7 max-w-[26ch] font-body text-display-md italic leading-[1.25] text-(--color-text-primary)">
+          {ninetyDayPage.subtitle}
         </p>
-        <div className="mt-10">
-          <Button href="/contact/book-a-trial" size="lg" price={trialOffer.price}>
-            Book a Trial
-          </Button>
-        </div>
+
+        <dl className="mt-11 grid max-w-[760px] gap-x-10 gap-y-6 sm:grid-cols-3">
+          {[
+            { k: 'How long', v: 'About three months' },
+            { k: 'Who', v: 'Kids and teens' },
+            { k: 'It ends with', v: 'A live performance' },
+          ].map((f) => (
+            <div key={f.k} className="border-t border-(--color-border-default) pt-4">
+              <dt className="font-display text-label uppercase text-(--color-text-muted)">{f.k}</dt>
+              <dd className="mt-2 font-body text-body-lg text-(--color-text-primary)">{f.v}</dd>
+            </div>
+          ))}
+        </dl>
       </PageIntro>
 
-      {/* The schedule. The one place a grid is correct, because it is one. */}
-      <Movement name="the-weeks" ground="house" className="relative overflow-hidden py-(--section-spacious)">
-        <GhostNumeral value="90" color="#EFEBE1" className="-right-[4vw] top-[6%]" />
+      {/*
+        WHY THE STAGE — recovered in EE3.1.
+
+        The objection this page exists to answer, and it was not being
+        answered anywhere. Set as the one raised voice on the page, with the
+        audience line that resolves the fear directly beneath it: a parent
+        worried this is for already-confident children is told, in the
+        programme's own words, that it is for the opposite.
+      */}
+      <Movement name="why-stage" ground="house" className="pb-(--section-spacious)">
         <FilmMargin wide>
           <hr className="border-0 border-t border-(--color-border-default)" />
-          <div className="relative z-[2] grid gap-8 pt-(--section-comfortable) lg:grid-cols-[220px_minmax(0,1fr)] lg:gap-16">
-            <DeskLabel>The twelve weeks</DeskLabel>
-            <dl className="max-w-[840px]">
-              {ninetyDayPage.weeks.map((week) => (
-                <div
-                  key={week.id}
-                  className="flex flex-wrap items-baseline gap-x-10 gap-y-1 border-t border-(--color-border-default) py-5 first:border-t-0 first:pt-0"
-                >
-                  <dt className="w-32 shrink-0 font-display text-label uppercase tabular-nums text-(--color-text-muted)">
-                    {week.label}
-                  </dt>
-                  <dd className="font-body text-body-lg text-(--color-text-primary)">{week.what}</dd>
-                </div>
-              ))}
-            </dl>
+          <div className="grid gap-8 pt-(--section-comfortable) lg:grid-cols-[220px_minmax(0,1fr)] lg:gap-16">
+            <div className="lg:pt-3">
+              <DeskLabel>{ninetyDayPage.whyStage.heading}</DeskLabel>
+            </div>
+            <div className="max-w-[840px]">
+              <p className="max-w-[24ch] font-display text-display-md leading-[1.25] text-(--color-text-primary)">
+                {ninetyDayPage.whyStage.body}
+              </p>
+              <p className="mt-8 max-w-[58ch] font-body text-body-lg text-(--color-text-secondary)">
+                It is built for students who need that, not only for those who already have it —
+                the programme lists{' '}
+                <span className="text-(--color-text-primary)">
+                  “{ninetyDayPage.audience.items[3].toLowerCase()}”
+                </span>{' '}
+                among the people it is for.
+              </p>
+            </div>
           </div>
         </FilmMargin>
       </Movement>
 
-      <DeskSection label="How it runs" id="the-three-steps">
-        <ol>
-          {ninetyDayPage.steps.map((step) => (
-            <li key={step.id} className="border-t border-(--color-border-default) py-8 first:border-t-0 first:pt-0">
-              <p className="font-display text-label uppercase text-(--color-text-muted)">
-                {step.label}
-              </p>
-              <h2 className="mt-3 font-display text-heading-lg text-(--color-text-primary)">
-                {step.title}
-              </h2>
-              <p className="mt-3 max-w-[62ch] font-body text-body-lg text-(--color-text-secondary)">
-                {step.body}
-              </p>
-            </li>
-          ))}
-        </ol>
-      </DeskSection>
+      {/*
+        THE JOURNEY — three steps and the week bands as one sequence.
 
-      <DeskSection label="In this program" id="in-this-program">
-        <PointList items={ninetyDayPage.inProgram} />
-      </DeskSection>
+        These were two separate movements: a week grid, then a three-step
+        narrative several screens later, with no indication they described the
+        same ninety days. The source supports both — the week bands come from
+        the homepage and /programs, the three steps from this page — so they are
+        composed together rather than stacked apart.
 
-      <DeskSection label={ninetyDayPage.confidence.heading} id="build-confidence">
-        <PointList items={ninetyDayPage.confidence.items} />
-      </DeskSection>
+        The ghost numeral is the step number, not decoration: it is the same
+        device the film uses for its week numbers, and every one has a legible
+        counterpart in the copy beside it.
 
-      <DeskSection label={ninetyDayPage.skills.heading} id="performance-skills">
-        <PointList items={ninetyDayPage.skills.items} />
-      </DeskSection>
-
-      <DeskSection label={ninetyDayPage.audience.heading} id="who-its-for">
-        <PointList items={ninetyDayPage.audience.items} />
-      </DeskSection>
-
-      {/* The guarantee. Verbatim, never paraphrased, never animated. */}
-      <Movement name="guarantee" ground="house" className="pb-(--section-feature) pt-(--section-spacious)">
+        ⚠️ The week bands are attributed as published elsewhere, because this
+        page's own source gives the three steps with no week numbers at all.
+      */}
+      <Movement name="journey" ground="house" className="relative overflow-hidden pb-(--section-spacious)">
         <FilmMargin wide>
           <hr className="border-0 border-t border-(--color-border-default)" />
-          <div className="grid gap-10 pt-(--section-comfortable) lg:grid-cols-[220px_minmax(0,1fr)] lg:gap-16">
-            <DeskLabel>{ninetyDayPage.guarantee.label}</DeskLabel>
+          <div className="grid gap-8 pt-(--section-comfortable) lg:grid-cols-[220px_minmax(0,1fr)] lg:gap-16">
+            <div className="lg:pt-3">
+              <DeskLabel>The ninety days</DeskLabel>
+            </div>
+
+            <ol className="max-w-[840px]">
+              {ninetyDayPage.steps.map((step, index) => {
+                const band = ninetyDayPage.weeks[index]
+                return (
+                  <li
+                    key={step.id}
+                    className="relative grid gap-x-10 gap-y-3 border-t border-(--color-border-default) py-10 sm:grid-cols-[132px_minmax(0,1fr)]"
+                  >
+                    <div>
+                      <p
+                        aria-hidden="true"
+                        className="font-display text-[64px] leading-none tabular-nums text-(--color-n-200)"
+                        style={{ fontVariationSettings: "'opsz' 96, 'wght' 200" }}
+                      >
+                        {String(index + 1).padStart(2, '0')}
+                      </p>
+                      {band ? (
+                        <p className="mt-2 font-display text-label uppercase tabular-nums text-(--color-text-muted)">
+                          {band.label}
+                        </p>
+                      ) : null}
+                    </div>
+
+                    <div>
+                      <h2 className="font-body text-heading-lg italic text-(--color-text-primary)">
+                        {step.title}
+                      </h2>
+                      <p className="mt-3 max-w-[58ch] font-body text-body-lg text-(--color-text-secondary)">
+                        {step.body}
+                      </p>
+                      {band ? (
+                        <p className="mt-3 max-w-[58ch] font-body text-body-md text-(--color-text-muted)">
+                          {band.what}
+                        </p>
+                      ) : null}
+                    </div>
+                  </li>
+                )
+              })}
+            </ol>
+          </div>
+
+          <p className="mt-8 max-w-[62ch] font-body text-body-sm text-(--color-text-muted) lg:ml-[284px]">
+            The week bands are as published on the homepage and the programmes hub. This
+            programme’s own page describes the same three months as a three-step journey without
+            week numbers, and both descriptions ship as written.
+          </p>
+        </FilmMargin>
+      </Movement>
+
+      {/*
+        WHAT CHANGES — two lists, one movement.
+
+        "Build Confidence" and "Learn Real Performance Skills" were two
+        consecutive full-width bullet lists, which is how they arrived from the
+        source and how a CMS would render them. They are two halves of one
+        answer — what a child leaves with — so they are set as two columns of
+        one movement and read as a pair.
+      */}
+      <Movement name="what-changes" ground="house" className="pb-(--section-spacious)">
+        <FilmMargin wide>
+          <hr className="border-0 border-t border-(--color-border-default)" />
+          <div className="grid gap-8 pt-(--section-comfortable) lg:grid-cols-[220px_minmax(0,1fr)] lg:gap-16">
+            <div className="lg:pt-3">
+              <DeskLabel>What changes</DeskLabel>
+            </div>
+            <div className="grid max-w-[840px] gap-10 sm:grid-cols-2 sm:gap-12">
+              {[ninetyDayPage.confidence, ninetyDayPage.skills].map((group) => (
+                <div key={group.heading}>
+                  <h2 className="font-body text-heading-lg italic text-(--color-text-primary)">
+                    {group.heading}
+                  </h2>
+                  <ul className="mt-5">
+                    {group.items.map((item) => (
+                      <li
+                        key={item}
+                        className="border-t border-(--color-border-default) py-3.5 font-body text-body-md text-(--color-text-secondary)"
+                      >
+                        {item}
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              ))}
+            </div>
+          </div>
+        </FilmMargin>
+      </Movement>
+
+      {/*
+        THE END — the recovered finale, the stage, and the only proof that exists.
+
+        `stage-empty-chair` is reused from /performances, and its meaning is
+        changed by composition rather than by caption. There it is the page's
+        opening image and reads as *the stage is waiting*. Here it arrives after
+        three steps of preparation, directly under the sentence about the end of
+        the ninety days, and reads as *this is where the work has been going*.
+
+        Full-bleed and letterboxed, because this is the one moment on the desk
+        where the film's frame is the right register — and it is immediately
+        followed by the verbatim finale, so the image never has to carry meaning
+        the copy has not already earned.
+
+        ⚠️ The conditional "get the chance to perform" is preserved exactly.
+      */}
+      <Movement name="the-end" ground="pitch" className="relative overflow-hidden">
+        <div className="relative aspect-[21/9] w-full sm:aspect-[2.39/1]">
+          <Atmosphere
+            asset="stage-empty-chair"
+            job="Flagship finale — the stage the ninety days have been heading toward"
+            opacity={1}
+            position="center 55%"
+            sizes="100vw"
+            quality={52}
+          />
+          <GhostNumeral
+            value="90"
+            color="rgba(233,162,59,0.10)"
+            className="-right-[3vw] bottom-[-12%] leading-none"
+          />
+        </div>
+      </Movement>
+
+      <Movement name="finale" ground="house" className="py-(--section-spacious)">
+        <FilmMargin wide>
+          <div className="grid gap-8 lg:grid-cols-[220px_minmax(0,1fr)] lg:gap-16">
+            <div className="lg:pt-3">
+              <DeskLabel>{ninetyDayPage.finale.heading}</DeskLabel>
+            </div>
             <div className="max-w-[840px]">
-              <p className="max-w-[52ch] font-display text-display-md leading-[1.25] text-(--color-text-primary)">
-                {ninetyDayPage.guarantee.text}
+              <p className="max-w-[30ch] font-display text-display-md leading-[1.25] text-(--color-text-primary)">
+                {ninetyDayPage.finale.body}
               </p>
+
+              {showcaseQuote ? (
+                <figure className="mt-11 border-l-2 border-(--color-border-default) pl-7">
+                  <blockquote className="max-w-[52ch] font-body text-heading-lg italic leading-[1.45] text-(--color-text-secondary)">
+                    &ldquo;{showcaseQuote.quote}&rdquo;
+                  </blockquote>
+                  <figcaption className="mt-4 font-display text-label uppercase text-(--color-text-muted)">
+                    {showcaseQuote.author} · {testimonialsSection.sourceLabel}
+                  </figcaption>
+                </figure>
+              ) : null}
+
+              <p className="mt-9 flex flex-wrap gap-x-8 gap-y-3">
+                <Link
+                  href="/performances"
+                  className="inline-flex min-h-6 items-center font-display text-label uppercase text-(--color-text-primary) underline underline-offset-[6px]"
+                >
+                  More from families who were there
+                </Link>
+              </p>
+            </div>
+          </div>
+        </FilmMargin>
+      </Movement>
+
+      {/*
+        WHO IT IS FOR, WHERE THE PLAYING HAPPENS, AND THE ONE CALL TO ACTION.
+
+        Three short blocks that a parent needs immediately before deciding,
+        composed as one movement rather than three sections. The guarantee is
+        the loudest thing here because it is the strongest sentence the business
+        owns — and this page's own source does not carry it at all, which is why
+        it is attributed rather than presented as this page's copy.
+      */}
+      <Movement name="decide" ground="house" className="pb-(--section-feature)">
+        <FilmMargin wide>
+          <hr className="border-0 border-t border-(--color-border-default)" />
+          <div className="grid gap-8 pt-(--section-comfortable) lg:grid-cols-[220px_minmax(0,1fr)] lg:gap-16">
+            <div className="lg:pt-3">
+              <DeskLabel>{ninetyDayPage.audience.heading}</DeskLabel>
+            </div>
+
+            <div className="max-w-[840px]">
+              <ul className="grid gap-x-10 sm:grid-cols-2">
+                {ninetyDayPage.audience.items.map((item) => (
+                  <li
+                    key={item}
+                    className="border-t border-(--color-border-default) py-4 font-body text-body-lg text-(--color-text-primary)"
+                  >
+                    {item}
+                  </li>
+                ))}
+              </ul>
+
               <p className="mt-9 max-w-[62ch] font-body text-body-md text-(--color-text-secondary)">
-                {trialOffer.terms}
+                The instrument itself is taught in{' '}
+                <Link
+                  href="/private-lessons"
+                  className="text-(--color-text-primary) underline underline-offset-[6px]"
+                >
+                  private lessons
+                </Link>
+                , and playing alongside other people is what{' '}
+                <Link
+                  href="/programs/band-builders"
+                  className="text-(--color-text-primary) underline underline-offset-[6px]"
+                >
+                  Band Builders
+                </Link>{' '}
+                and{' '}
+                <Link
+                  href="/group-music-lessons"
+                  className="text-(--color-text-primary) underline underline-offset-[6px]"
+                >
+                  group lessons
+                </Link>{' '}
+                are for.
               </p>
-              <div className="mt-9">
-                <Button href="/contact/book-a-trial" size="lg" price={trialOffer.price}>
-                  Book a Trial
-                </Button>
+
+              <div className="mt-12 border-t-2 border-(--color-text-primary) pt-9">
+                <p className="font-display text-label uppercase text-(--color-text-muted)">
+                  {ninetyDayPage.guarantee.label}
+                </p>
+                <p className="mt-5 max-w-[46ch] font-display text-display-md leading-[1.25] text-(--color-text-primary)">
+                  {ninetyDayPage.guarantee.text}
+                </p>
+                <p className="mt-8 max-w-[62ch] font-body text-body-md text-(--color-text-secondary)">
+                  {trialOffer.terms}
+                </p>
+                <div className="mt-9">
+                  <Button href="/contact/book-a-trial" size="lg" price={trialOffer.price}>
+                    Book a Trial
+                  </Button>
+                </div>
+                <p className="mt-10 max-w-[62ch] font-body text-body-sm text-(--color-text-muted)">
+                  We serve families in {contactFacts.serviceArea.join(', ')}, and nearby areas.
+                </p>
               </div>
-              <p className="mt-10 max-w-[62ch] font-body text-body-sm text-(--color-text-muted)">
-                We serve families in {contactFacts.serviceArea.join(', ')}, and nearby areas.
-              </p>
             </div>
           </div>
         </FilmMargin>

@@ -19,9 +19,9 @@
   "generator": "@google/genai",
   "date": "2026-08-06T15:34:38.172Z",
   "modelNotes": null,
-  "approvalStatus": "pending-review",
-  "approvedBy": null,
-  "approvedAt": null,
+  "approvalStatus": "approved",
+  "approvedBy": "owner — EE2 directive §5 (classify and integrate)",
+  "approvedAt": "2026-08-09",
   "provenance": "ai-generated",
   "register": "decorative",
   "depictsMinors": false,
@@ -29,6 +29,23 @@
   "licence": "ai-generated-internal",
   "altText": null,
   "subject": [],
-  "integratedIntoUI": false,
-  "notes": "Decorative, non-representational. Must not be presented as documentary imagery."
+  "integratedIntoUI": true,
+  "notes": "Decorative, non-representational. Must not be presented as documentary imagery.",
+  "ee1": {
+    "verdict": "REWORK",
+    "reviewedAt": "2026-08-09",
+    "reviewedBy": "EE1 experience-enrichment pass",
+    "inspected": "File opened and viewed. Not judged from filename, prompt or metadata.",
+    "rationale": "A genuinely beautiful warm uncoated paper. Two blocking defects. It does not tile — a directional light sweep crosses the frame, so repeating it at 760px prints a visible grid of sweeps rather than a surface. And it is 2.0 MB, roughly thirty times a defensible budget for a repeating background. Its CSS rule was also dead: it was scoped to [data-register=desk], and nothing in this codebase ever sets that value, so the texture has never rendered on any route. Rule removed in EE1. Needs a seamless tile export at a sane weight before the idea can return.",
+    "renderedOnAnyRoute": false,
+    "ownerApprovalOutstanding": true
+  },
+  "ee2": {
+    "verdict": "APPROVED FOR EE2",
+    "reviewedAt": "2026-08-09",
+    "inspected": "File opened and viewed, then checked against the rendered page in a browser.",
+    "narrativeJob": "The House and every interior PageIntro — uncoated stock: the printed programme the desk is set on",
+    "rationale": "The tiling defect is designed out rather than fixed: used ONCE, full-bleed, non-repeating, at the scale it was generated for, so the diagonal light sweep reads as light falling across a page instead of a repeating grid. Multiplied at 0.24–0.28 into the ivory ground.",
+    "delivery": "next/image, AVIF/WebP, lazy, responsive sizes. Source JPEG is never served."
+  }
 }

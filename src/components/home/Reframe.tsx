@@ -1,4 +1,4 @@
-import { FilmMargin, Movement } from '@/components/film'
+import { Atmosphere, FilmMargin, Movement } from '@/components/film'
 import { reframe, theTurn } from '@/content/home'
 
 /**
@@ -30,7 +30,13 @@ export function Reframe() {
         name="reframe"
         ground="memory"
         aria-labelledby="reframe-heading"
-        className="flex min-h-svh flex-col justify-between py-(--section-feature)"
+        /*
+          EE2 — `min-h-svh` → 78svh. The diagonal needs vertical distance
+          between the two corners to read as a hinge; it does not need a full
+          screen. At 78% the gap is still the widest on the page and the
+          movement gives back ~200px.
+        */
+        className="flex min-h-[78svh] flex-col justify-between py-(--section-spacious)"
       >
         <FilmMargin>
           <p className="max-w-[380px] font-body text-whisper italic text-(--color-ash)">
@@ -57,9 +63,40 @@ export function Reframe() {
       <Movement
         name="the-turn"
         ground="wing"
-        className="flex min-h-[70svh] items-center py-(--section-feature)"
+        /*
+          EE2 — 70svh → 52svh. One line, held. It was being held in half a
+          screen of empty space above and below; 52% still isolates it
+          completely and returns ~160px.
+        */
+        className="flex min-h-[52svh] items-center py-(--section-spacious)"
       >
-        <FilmMargin>
+        {/*
+          THE WINGS — EE2.
+
+          The Turn is the last beat before she steps out, and it was a line of
+          type on flat colour. `atmos-curtain-shadow` is cloth in a raking beam:
+          anticipation, the edge of the wings, the thing she is standing behind.
+
+          ⚠️ Carried at `desaturate={0.35}`. The plate has pronounced magenta and
+          crimson through its centre, which is outside the two-colour palette
+          and would be the only decorative colour on the site. Desaturating in
+          the browser removes the cast and keeps the composition; the
+          alternative was rejecting a compositionally correct asset over a hue.
+
+          Anchored right, because the light in this film is always house right.
+        */}
+        <Atmosphere
+          asset="atmos-curtain-shadow"
+          job="The Turn — cloth in a raking beam: the wings she is standing behind"
+          opacity={0.22}
+          position="82% center"
+          desaturate={0.35}
+          blend="screen"
+          quality={46}
+          maskImage="linear-gradient(to left, rgba(0,0,0,1) 0%, rgba(0,0,0,0.5) 55%, rgba(0,0,0,0) 100%)"
+        />
+
+        <FilmMargin className="relative z-[2]">
           <p className="max-w-[640px] font-body text-whisper italic text-(--color-ash)">
             {theTurn.line}
           </p>

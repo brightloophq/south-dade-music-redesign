@@ -76,7 +76,37 @@ export function Opening() {
       <FilmMargin className="relative z-[3]">
         <div className="flex flex-col gap-(--section-comfortable) lg:flex-row lg:items-end lg:justify-between lg:gap-16">
           <div className="w-full lg:max-w-[640px]">
-            <p className="font-body text-whisper italic text-(--color-ash)">{whisperLine}</p>
+            {/*
+              EE2 — the programme, named, in the first frame.
+
+              `hero.eyebrow` has existed in the content module since the copy
+              framework was written and was never rendered. The homepage sold a
+              named flagship product without naming it until 9,769px down the
+              page.
+
+              It is set in the label register — a programme note, not a hero
+              eyebrow. The direction's rule that no logo appears in the first
+              five seconds is about the *wordmark*; the name of tonight's
+              production belongs on the bill.
+            */}
+            {/*
+              ⚠️ `--color-ash`, not `--color-spot-700`.
+
+              Amber first reading of this label was 3.42:1 on the pitch ground —
+              below the 4.5:1 AA floor for 12px text, and invisible to
+              `check:tokens`, which only validates the pairs it declares. Ash is
+              5.3:1 on pitch and is the register the film already speaks in.
+
+              It also protects the rationing rule: amber appears exactly four
+              times on this page — the seam, the source in the Walk, the flash,
+              and the CTA fill. A fifth use is what makes the other four stop
+              meaning anything.
+            */}
+            <p className="font-display text-label uppercase text-(--color-ash)">
+              {hero.eyebrow}
+            </p>
+
+            <p className="mt-6 font-body text-whisper italic text-(--color-ash)">{whisperLine}</p>
 
             <h1
               id="hero-heading"
@@ -88,6 +118,23 @@ export function Opening() {
 
             <p className="mt-5 font-body text-whisper italic text-(--color-ash)">{hero.supporting}</p>
 
+            {/*
+              EE2 — who and where, in the first viewport.
+
+              Measured before this change: a visitor met the words "South Dade
+              Music" in readable text for the first time at y=9,102px, and the
+              only wordmark above that was the vertical lockup on the frame
+              edge — which is `aria-hidden`, so for a screen reader the first
+              statement of identity was the copyright line in the footer.
+
+              This is one line of stage direction at 12px. It does not turn the
+              opening into a conventional hero, and it does not raise its voice:
+              it simply means the visitor knows whose film they are watching
+              before they commit seven screens to it.
+            */}
+            <p className="mt-9 font-display text-label uppercase text-(--color-text-muted)">
+              {hero.identity}
+            </p>
           </div>
 
           <div className="shrink-0">

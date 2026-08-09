@@ -5,6 +5,7 @@ import { Button } from '@/components/ui/Button'
 import { FilmMargin, Movement } from '@/components/film'
 import { DeskLabel, PageIntro } from '@/components/page'
 import { programEntries, programsHub } from '@/content/programs'
+import { theTurn } from '@/content/home'
 import { trialOffer } from '@/content/pages'
 import { buildMetadata } from '@/lib/seo/metadata'
 
@@ -29,12 +30,17 @@ export const metadata: Metadata = buildMetadata({
  * that difference is the whole hierarchy, exactly as the playbill on the
  * homepage does it.
  *
- * ## Three entries do not link
+ * ## EE1 — all six now link, and the order between them is stated
  *
- * Band Builders, Early Childhood and the Summer Jam Music Camp are genuinely
- * offered, so omitting them would misrepresent the business — but their pages
- * are Tier 3. They render unlinked with a plain note. A link to a 404 is worse
- * than no link, and the brief is explicit about not creating them.
+ * Band Builders, Early Childhood and the camp rendered here as unlinked dead
+ * ends reading "Detail page not yet available" long after Tier 3 built all
+ * three pages. `programEntries` was never updated. Fixed at source.
+ *
+ * The larger failure this exposed is not the links. An index answers *what
+ * exists*; a parent arrives asking *which one is mine*, and the estate has
+ * never answered it — the three products that form one pathway do not
+ * reference each other on a single live page. The pathway movement states that
+ * order explicitly, using only verbatim-derived steps, and links every stage.
  */
 export default function ProgramsPage() {
   const flagship = programEntries.find((p) => p.flagship)
@@ -76,6 +82,74 @@ export default function ProgramsPage() {
           </FilmMargin>
         </Movement>
       ) : null}
+
+      {/*
+        THE PATHWAY — EE1.
+
+        Three stages, hung on the same 220px label column as everything else on
+        the desk, each one naming the routes that serve it. Deliberately not
+        three cards and not a numbered "how it works" strip: the stages are set
+        as running editorial with the destinations as inline links, so it reads
+        as a paragraph of advice rather than as a product grid.
+      */}
+      <Movement name="pathway" ground="house" className="pb-(--section-spacious)">
+        <FilmMargin wide>
+          <hr className="border-0 border-t border-(--color-border-default)" />
+          <div className="grid gap-8 pt-(--section-comfortable) lg:grid-cols-[220px_minmax(0,1fr)] lg:gap-16">
+            <div className="lg:pt-3">
+              <DeskLabel>{programsHub.pathwayLabel}</DeskLabel>
+            </div>
+            <div className="max-w-[840px]">
+              <ol>
+                {programsHub.pathway.map((step) => (
+                  <li key={step.id} className="border-t border-(--color-border-default) py-8 first:border-t-0 first:pt-0">
+                    <p className="font-body text-heading-lg italic text-(--color-text-primary)">
+                      {step.stage}
+                    </p>
+                    <p className="mt-3 max-w-[62ch] font-body text-body-lg text-(--color-text-secondary)">
+                      {step.body}
+                    </p>
+                    <p className="mt-4 flex flex-wrap gap-x-6 gap-y-2">
+                      {step.routes.map((route) => (
+                        <Link
+                          key={route.href}
+                          href={route.href}
+                          className="inline-flex min-h-6 items-center font-display text-label uppercase text-(--color-text-primary) underline underline-offset-[6px]"
+                        >
+                          {route.label}
+                        </Link>
+                      ))}
+                    </p>
+                  </li>
+                ))}
+              </ol>
+              <p className="mt-9 max-w-[62ch] font-body text-body-md italic text-(--color-text-muted)">
+                {programsHub.earlyNote}
+              </p>
+            </div>
+          </div>
+        </FilmMargin>
+      </Movement>
+
+      {/*
+        The protected line, as the one raised voice on this page.
+
+        01-brand-strategy.md §2 calls it "the single best sentence on the
+        current website", and it was reaching visitors on the homepage only —
+        as a whisper in the dark, at 20px, where it is felt rather than read.
+        Here it is set as a pull quote, because /programs is where a parent is
+        weighing what any of this is actually for. Verbatim, including the
+        original "realize".
+      */}
+      <Movement name="programs-turn" ground="house" className="pb-(--section-spacious)">
+        <FilmMargin wide>
+          <blockquote className="ml-auto max-w-[820px] border-l-2 border-(--color-border-default) pl-8 lg:pl-12">
+            <p className="font-body text-display-md italic leading-[1.35] text-(--color-text-primary)">
+              {theTurn.line}
+            </p>
+          </blockquote>
+        </FilmMargin>
+      </Movement>
 
       <Movement name="programs-index" ground="house" className="pb-(--section-feature)">
         <FilmMargin wide>

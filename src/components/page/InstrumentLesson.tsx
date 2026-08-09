@@ -128,21 +128,49 @@ export function InstrumentLessonPage({ instrument }: { instrument: Instrument })
         <PointList items={benefits} />
       </DeskSection>
 
-      {programConnections.length ? (
-        <DeskSection label="Where it leads" id="programme-connections">
-          <PointList items={programConnections} />
-          <p className="mt-8 font-body text-body-md text-(--color-text-secondary)">
-            Every instrument leads to the same place —{' '}
-            <Link
-              href="/programs/90-day-stage-program"
-              className="text-(--color-text-primary) underline underline-offset-[6px]"
-            >
-              the 90-Day Stage Program
-            </Link>
-            .
-          </p>
-        </DeskSection>
-      ) : null}
+      {/*
+        WHERE IT LEADS — always rendered, as of EE1.
+
+        This section was conditional on `programConnections`, which only three of
+        the seven instruments publish. The other four — piano, guitar, drums,
+        violin — ended at their FAQ with no statement of what an instrument is
+        *for* on this site, which is the single thing that distinguishes this
+        business from any other teacher in South Miami-Dade. Four of seven
+        lesson pages carried no route to the performance programme at all.
+
+        ⚠️ The destinations are deliberately the flagship and the performances
+        page, and **never group lessons**. Guitar, violin and voice each state
+        that every lesson in that instrument is private; linking those pages to
+        the group programme would take a side in the open `formatConflict` by
+        implication. Where a source page names its own group connections they
+        ship verbatim above, and only there.
+      */}
+      <DeskSection label="Where it leads" id="programme-connections">
+        {programConnections.length ? <PointList items={programConnections} className="mb-8" /> : null}
+        {/*
+          Deliberately phrased as where the *programme* goes, not as a promise
+          about students. "Every student performs" is gate B-4 and appears
+          nowhere on this site.
+        */}
+        <p className="max-w-[62ch] font-body text-body-lg text-(--color-text-primary)">
+          Every instrument here leads to the same place — the 90-Day Stage Program, which ends in a
+          live showcase.
+        </p>
+        <p className="mt-6 flex flex-wrap gap-x-8 gap-y-3">
+          <Link
+            href="/programs/90-day-stage-program"
+            className="inline-flex min-h-6 items-center font-display text-label uppercase text-(--color-text-primary) underline underline-offset-[6px]"
+          >
+            90-Day Stage Program
+          </Link>
+          <Link
+            href="/performances"
+            className="inline-flex min-h-6 items-center font-display text-label uppercase text-(--color-text-primary) underline underline-offset-[6px]"
+          >
+            Performances
+          </Link>
+        </p>
+      </DeskSection>
 
       {faqs.length ? (
         <DeskSection label="Questions" id="faqs">

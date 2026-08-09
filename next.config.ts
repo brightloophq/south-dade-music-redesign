@@ -101,9 +101,44 @@ const headers: NextConfig['headers'] = async () =>
         },
       ]
 
+/**
+ * Image delivery.
+ *
+ * EE2 introduced the first real image requests on this site. The sources are
+ * 2–2.5 MB 2K JPEGs and none of them is ever served: `next/image` re-encodes to
+ * the smallest format the browser accepts, at the width it actually needs.
+ *
+ * AVIF is listed first because these plates are exactly what it is best at —
+ * large, soft, low-frequency gradients through haze, with no fine detail to
+ * protect. WebP stays as the fallback for anything that cannot take AVIF.
+ *
+ * ⚠️ This governs decorative atmosphere only. No photograph of a person is
+ * served by this site: gate I-1 blocks all 18 of the academy's own images, and
+ * nothing generated may stand in for them.
+ */
+const images: NextConfig['images'] = {
+  formats: ['image/avif', 'image/webp'],
+  /**
+   * ⚠️ Every `quality` value used by `<Atmosphere>` must be listed here.
+   *
+   * Next 16 refuses to optimise at an undeclared quality and logs a console
+   * warning instead — which `probe:motion` correctly failed on, because
+   * console noise on the homepage is exactly what that assertion exists to
+   * catch. An undeclared value would also mean the plate silently falls back,
+   * so this list is load-bearing, not configuration hygiene.
+   *
+   *   40  paper tooth — a surface, no detail to protect
+   *   46  curtain shadow — soft cloth, heavily desaturated in the browser
+   *   48  stage floor — the most detailed plate; boards need slightly more
+   *   52  default for any future plate
+   */
+  qualities: [40, 46, 48, 52],
+}
+
 const nextConfig: NextConfig = {
   redirects,
   headers,
+  images,
 }
 
 export default nextConfig

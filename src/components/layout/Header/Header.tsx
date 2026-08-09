@@ -104,28 +104,54 @@ export function Header({ overHero, className }: HeaderProps) {
           Both return when the capability does.
         */}
         <div className="flex shrink-0 items-center gap-2">
-          {primaryCta.status === 'live' ? (
-            <Button
-              href={primaryCta.href}
-              variant="primary"
-              size="md"
-              price={primaryCta.priceSuffix ?? undefined}
-              className="hidden sm:inline-flex"
-            >
-              {primaryCta.label}
-            </Button>
-          ) : (
-            <Button
-              variant="primary"
-              size="md"
-              disabled
-              aria-disabled
-              title="Booking is not yet available"
-              className="hidden sm:inline-flex"
-            >
-              {primaryCta.label}
-            </Button>
-          )}
+          {/*
+            ⚠️ The responsive display sits on this wrapper, NOT on the Button.
+            Do not move it back.
+
+            `className="hidden sm:inline-flex"` on the Button did not work. `cn`
+            is a plain concatenator with no conflict resolution, so the Button's
+            base `inline-flex` and the passed `hidden` both survived into the
+            class attribute — and in Tailwind v4 both sit in the same layer, so
+            the winner is decided by emission order in the stylesheet, not by
+            order in the attribute. `inline-flex` is emitted later, so it won,
+            and the 191px trial button rendered at every viewport.
+
+            The measured cost: **36px of horizontal scroll on 26 of 27 routes at
+            390px.** A 143px wordmark plus a 191px button plus a 44px menu
+            control cannot fit 390px, so every interior page could be dragged
+            sideways on a phone. Found by the EE1 mobile sweep; it predates EE1.
+
+            This is the second instance of this exact failure — the first squared
+            off the primary CTA when `rounded-none` beat `rounded-(--radius-full)`
+            and is recorded in content-migration-coverage.md §"Found while
+            building Tier 1". A wrapper is used rather than a fix inside `cn`
+            because swapping that implementation changes class resolution in
+            every component on the site, which is not a change to make
+            immediately before a visual review. **The real fix belongs in `cn`**
+            and is recorded as an EE1 follow-up.
+          */}
+          <span className="hidden sm:inline-flex">
+            {primaryCta.status === 'live' ? (
+              <Button
+                href={primaryCta.href}
+                variant="primary"
+                size="md"
+                price={primaryCta.priceSuffix ?? undefined}
+              >
+                {primaryCta.label}
+              </Button>
+            ) : (
+              <Button
+                variant="primary"
+                size="md"
+                disabled
+                aria-disabled
+                title="Booking is not yet available"
+              >
+                {primaryCta.label}
+              </Button>
+            )}
+          </span>
 
           <MobileNav />
         </div>

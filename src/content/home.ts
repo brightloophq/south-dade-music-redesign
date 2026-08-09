@@ -39,6 +39,22 @@ export const hero = {
   /** ✍️ from ✅ verified week structure. */
   supporting: 'Weeks 1–10 skill · Week 11 the class · Week 12 you.',
 
+  /**
+   * ✍️ AUTHORED — EE2. Category and place, as a stage direction.
+   *
+   * Both facts are corroborated throughout the estate: the business is
+   * described as a music academy on its own pages and in reviews, and the
+   * Florida City address is the one element of the address every source agrees
+   * on (only the unit number is disputed, and no unit number appears here).
+   *
+   * It makes no promise — no performance claim, no price, no frequency, no
+   * age. It answers "where am I?", which is Act I's job and which the film was
+   * not doing until 9,102px down the page.
+   *
+   * ⚠️ Gate B-5: `siteConfig.shortName`, matching the footer and every title.
+   */
+  identity: 'South Dade Music · a music academy in Florida City',
+
   /** ✅ VERBATIM price — "We hold your spot for $25". Gate B-8 blocks tuition, not this. */
   primaryCta: { label: 'Book a Trial', price: '$25', href: '/contact/book-a-trial' },
 
@@ -186,6 +202,102 @@ export const twelveWeeks = {
   footnote: 'Ages 3–18. Adults welcome.',
 } as const
 
+/**
+ * The shy question — EE1.
+ *
+ * ✅ VERBATIM, both halves, from the site-wide FAQ set that appears on `/` and
+ * `/resources/`.
+ *
+ * ## Why this belongs beside the twelve weeks
+ *
+ * 07-the-walk.md §ACT V specified this exact exchange as the emotional hinge of
+ * the page — *"the verbatim FAQ answer that has been buried in an accordion for
+ * two years"* — and it did not make it into the build. The schedule currently
+ * states that a child plays for the class in week 11 and for an audience in
+ * week 12, and says nothing at all to the parent whose entire reason for
+ * hesitating is that their child would rather die than do either.
+ *
+ * It sits directly under the week rows because that is the object that provokes
+ * the question. Set as a question and its answer, not as an accordion — there
+ * is one of them, and hiding a single answer behind a disclosure is theatre.
+ *
+ * ⚠️ Gate B-3. The Ladder is **named** because the name is verbatim and already
+ * ships on `/about`. Its rungs are enumerated nowhere in the estate and are not
+ * invented here.
+ */
+export const shyQuestion = {
+  question: 'What if my child is too shy?',
+  answer:
+    'That is exactly what we train for. We use a Gradual Exposure Ladder to move them from isolation to community safely.',
+} as const
+
+// ---------------------------------------------------------------------------
+// The House — the film hands over. EE1.
+// ---------------------------------------------------------------------------
+
+/**
+ * The first thing said in the light.
+ *
+ * ## The problem this fixes
+ *
+ * The film never says what this place is. That is correct for the film — Act I
+ * opens on black with no logo by design, and 07-the-walk.md §5 is explicit that
+ * *"the wordmark arrives at the very end of the page, once you have earned the
+ * right to know who did this to you."*
+ *
+ * But it never arrived. The only wordmark above the footer is the vertical
+ * lockup in the hero, which is `aria-hidden` and therefore does not exist for a
+ * screen reader; the first readable statement that South Dade Music is a music
+ * academy in Florida City is the copyright line at the bottom of the page. A
+ * visitor who scrolls the whole film learns what happens to a child and not
+ * where it happens, to whom, or at what ages.
+ *
+ * So the wordmark arrives here, at the join — the first movement in the house
+ * lights, before the programme. It is the payoff the direction already
+ * specified and the build omitted, not a new section.
+ *
+ * ## Nothing here is a new claim
+ *
+ * The tagline is ✅ VERBATIM from five programme pages. The service line is
+ * ✅ VERBATIM and identical on five pages. The age line is ✅ VERBATIM and
+ * already ships in the twelve-week table. The one authored sentence states the
+ * category and the city — both corroborated throughout the estate — and makes
+ * no promise about performance, price, frequency or outcome.
+ *
+ * ⚠️ Gate B-5. `siteConfig.shortName` is used rather than any of the four
+ * competing names, matching the footer and every `<title>` on the site.
+ */
+export const house = {
+  label: 'The house lights',
+  /** ✍️ AUTHORED. Category and place. No gated claim. */
+  statement: 'South Dade Music is a music academy in Florida City.',
+  /**
+   * ✅ VERBATIM — the tagline carried by `/90-day-stage-program/`,
+   * `/private-lessons/`, `/band-builders/`, `/early-childhood/` and
+   * `/summer-programs/`.
+   *
+   * ⚠️ The footer positioning line that sits beside it in the source —
+   * "Home of the 90-Day Stage Program™ where every student performs in a live
+   * showcase within 90 days" — is **not** used: it carries gate B-4 (the
+   * unconditional promise) and gate B-5 (™). The tagline alone is clean.
+   */
+  tagline: 'Build Community. Make Music.',
+  /** ✅ VERBATIM — the identical sentence on five programme pages. */
+  serviceLine:
+    'We serve families in Florida City, Homestead, Cutler Bay, Palmetto Bay, and nearby areas.',
+  /** ✅ VERBATIM — the same line the twelve-week table carries. */
+  ages: 'Ages 3–18. Adults welcome.',
+  /**
+   * ✍️ The two ways in, named once, in the light. Both routes exist.
+   * Deliberately not a third CTA — these are links in a sentence, and the
+   * page's only button remains the trial.
+   */
+  ways: [
+    { label: 'Music lessons', href: '/lessons' },
+    { label: 'Programs', href: '/programs' },
+  ],
+} as const
+
 // ---------------------------------------------------------------------------
 // Programs
 // ---------------------------------------------------------------------------
@@ -246,8 +358,32 @@ export const instruments = instrumentPages.map((i) => ({
 export const lessonsSection = {
   /** ✍️ AUTHORED. */
   heading: 'Music lessons',
-  /** ✅ VERBATIM — "A keyboard is enough to start" is quoted from the piano FAQ. */
-  lead: 'Seven instruments, taught one-on-one. Most children start between five and eight. A keyboard is enough to start.',
+  /**
+   * ✍️ built from ✅ verified fragments. "A keyboard is enough to start" is
+   * quoted from the piano FAQ; the starting-age range is the sitewide one.
+   *
+   * ⚠️ **Corrected in EE1.** This previously read "Seven instruments, taught
+   * one-on-one" — which silently picked a side of the open format conflict.
+   * Five instrument pages claim every lesson in that instrument is private
+   * while `/group-music-lessons/`, `/band-builders/` and `/programs/` sell
+   * group instruction in the same instruments. The homepage was asserting the
+   * private-only reading as fact, and simultaneously made group learning
+   * invisible on the page.
+   *
+   * The wording now matches `lessonsHub.lead`: both formats are named as real,
+   * and neither is claimed to cover any particular instrument — the only
+   * framing true under either reading of the conflict.
+   */
+  lead: 'Private one-on-one instruction, or small-group sessions that build toward playing in a band. Most children start between five and eight, and a keyboard is enough to start.',
+  /**
+   * ✍️ The two formats as named destinations. The homepage previously offered
+   * one route out of this movement — the instrument list — so a parent whose
+   * question was "private or group?" had nowhere to go.
+   */
+  formats: [
+    { label: 'Private Lessons', href: '/private-lessons' },
+    { label: 'Group Music Lessons', href: '/group-music-lessons' },
+  ],
   cta: { label: 'See all lessons', href: '/lessons' },
 } as const
 
@@ -352,6 +488,27 @@ export const testimonials = [
     id: 'j-val',
     quote: 'Amazing teachers that are very passionate and patient in what they do. My kids love the classes.',
     author: 'J Val',
+    namesMinor: false,
+  },
+  /**
+   * ✅ VERBATIM. Added in EE1 and **not rendered on the homepage** — it is
+   * placed on `/performances`, beside the community statement it corroborates.
+   *
+   * It was previously unmigrated: the coverage audit assigned it to `/about`
+   * and it never landed anywhere. It is the only review in the corpus that
+   * speaks to community rather than to a teacher or a class, which is exactly
+   * the claim `/about` makes and had no evidence for.
+   *
+   * ⚠️ The extraction flags a possible duplicate reviewer — "Mariana Olvera"
+   * and "Mariana Gennevie Olvera" may be one person. That is why this is safe
+   * to publish: the Gennevie record names a minor and is filtered from every
+   * rendered set, so at most one of the two can ever appear on the site.
+   */
+  {
+    id: 'mariana-olvera',
+    quote:
+      'Amazing music school! Love their dedication to the community! My kids love this school and learning so much! They’re making my dream come true of having talented kids!',
+    author: 'Mariana Olvera',
     namesMinor: false,
   },
 ] as const

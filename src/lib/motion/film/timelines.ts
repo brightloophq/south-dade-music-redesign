@@ -221,8 +221,21 @@ export function WalkTimeline(ctx: FilmContext) {
     scrollTrigger: {
       trigger: scope,
       start: 'top top',
-      // Three viewports of scroll: ~12 footsteps each.
-      end: '+=300%',
+      /*
+       * ⚠️ EE2 — retimed from `+=300%` to `+=170%`.
+       *
+       * Three full viewports of scroll bought three frames, one viewport each,
+       * and the third of each viewport between cross-fades was dead: nothing
+       * changed, no line arrived, no light moved. Measured cost, 900px of empty
+       * scroll, inside a film that already required 9.9 viewports before the
+       * business became legible.
+       *
+       * At 170% each frame gets ~0.57 of a viewport of travel and the
+       * cross-fades at 0.33 and 0.7 land in the same relative places, so the
+       * *rhythm* is untouched — there is simply less nothing between the beats.
+       * The walk still reads as a walk; it no longer reads as a wait.
+       */
+      end: '+=170%',
       pin: true,
       scrub: 0.7,
       anticipatePin: 1,
@@ -304,7 +317,21 @@ export function ReleaseTimeline(ctx: FilmContext) {
   ctx.ScrollTrigger.create({
     trigger: scope,
     start: 'top top',
-    end: '+=150%',
+    /*
+     * ⚠️ EE2 — retimed from `+=150%` to `+=90%`.
+     *
+     * This pin is not scrubbed: it holds the viewport while a 3.7s timeline
+     * plays itself (1.5s still + 0.4s flash + 1.8s rise). The pin length
+     * therefore controls how long the visitor is *held*, not how fast the beat
+     * runs — and 150% held them for 1,350px after the timeline had finished.
+     *
+     * 90% still exceeds the timeline's own length at any ordinary scroll speed,
+     * `onEnter` starts it regardless of approach velocity, and `onLeave` snaps
+     * it complete for anyone who flicks past. The three beat lengths in the
+     * timeline are untouched — they are the design, and they are not what was
+     * costing screens.
+     */
+    end: '+=90%',
     pin: true,
     anticipatePin: 1,
     onEnter: () => tl.play(0),

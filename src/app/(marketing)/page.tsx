@@ -1,7 +1,7 @@
 import type { Metadata } from 'next'
 
 import { Desk, HouseLights, Opening, Reframe, TheRelease, TheWalk } from '@/components/home'
-import { FilmGrain, Letterbox } from '@/components/film'
+import { FilmGrain, Letterbox, SkipFilm } from '@/components/film'
 import { FilmDirector } from '@/components/motion/FilmDirector'
 import { MotionDebugPanel } from '@/components/motion/MotionDebugPanel'
 import { homeMeta } from '@/content/home'
@@ -64,6 +64,16 @@ export default function HomePage() {
       <FilmDirector />
       <Letterbox />
       <FilmGrain />
+
+      {/*
+        EE2 — the escape hatch the direction always specified.
+
+        First in the tree so it is the first tab stop inside the page, which is
+        what 07-the-walk.md §11 asks for. It is `position: fixed` and owned
+        entirely by React — no GSAP touches it, so it cannot be pinned away with
+        a movement and cannot recreate the DOM-ownership fault fixed in bc3830a.
+      */}
+      <SkipFilm />
 
       <Opening />
       <Reframe />

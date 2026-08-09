@@ -146,6 +146,24 @@ export default function GroupMusicLessonsPage() {
                     One-on-one, at your own pace.
                   </p>
                 </li>
+                {/*
+                  EE1 — the missing middle.
+
+                  Group lessons and Band Builders are the two group products and
+                  neither page referenced the other, here or in the source. This
+                  is the closest neighbour on the whole site.
+                */}
+                <li className="border-t border-(--color-border-default) py-5">
+                  <Link
+                    href="/programs/band-builders"
+                    className="font-body text-heading-lg italic text-(--color-text-primary) underline-offset-[6px] hover:underline"
+                  >
+                    Band Builders
+                  </Link>
+                  <p className="mt-2 max-w-[62ch] font-body text-body-md text-(--color-text-secondary)">
+                    The same idea taken further — a group that plays as a band.
+                  </p>
+                </li>
                 <li className="border-t border-(--color-border-default) py-5">
                   <Link
                     href="/programs/90-day-stage-program"

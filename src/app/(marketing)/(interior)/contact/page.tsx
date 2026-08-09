@@ -1,8 +1,8 @@
 import type { Metadata } from 'next'
+import Link from 'next/link'
 
-import { Button } from '@/components/ui/Button'
 import { FilmMargin, Movement } from '@/components/film'
-import { DeskLabel, DeskSection, PageIntro } from '@/components/page'
+import { DeskLabel, PageIntro } from '@/components/page'
 import { contactFacts, contactPage, trialOffer } from '@/content/pages'
 import { buildMetadata } from '@/lib/seo/metadata'
 
@@ -51,77 +51,144 @@ export default function ContactPage() {
         lead={contactPage.serviceLine}
       />
 
-      <DeskSection label="Visit" id="visit" ruled={false}>
-        <address className="not-italic">
-          <p className="font-body text-display-md leading-[1.3] text-(--color-text-primary)">
-            {address.street}, {address.unit}
-            <br />
-            {address.locality}, {address.region} {address.postalCode}
-          </p>
-        </address>
+      {/*
+        EE3 — rebuilt as three parallel ways in, not a stacked definition list.
 
-        <dl className="mt-12">
-          <div className="flex flex-wrap items-baseline gap-x-10 gap-y-1 border-t border-(--color-border-default) py-5">
-            <dt className="w-24 shrink-0 font-display text-label uppercase text-(--color-text-muted)">
-              Phone
-            </dt>
-            <dd className="font-body text-body-lg">
-              <a
-                href={contactFacts.phoneHref}
-                className="inline-flex min-h-6 items-center text-(--color-text-primary) underline underline-offset-[6px]"
-              >
-                {contactFacts.phoneDisplay}
-              </a>
-            </dd>
-          </div>
-          <div className="flex flex-wrap items-baseline gap-x-10 gap-y-1 border-t border-(--color-border-default) py-5">
-            <dt className="w-24 shrink-0 font-display text-label uppercase text-(--color-text-muted)">
-              Email
-            </dt>
-            <dd className="font-body text-body-lg">
-              <a
-                href={`mailto:${contactFacts.email}`}
-                className="inline-flex min-h-6 items-center text-(--color-text-primary) underline underline-offset-[6px]"
-              >
-                {contactFacts.email}
-              </a>
-            </dd>
-          </div>
-          <div className="flex flex-wrap items-baseline gap-x-10 gap-y-1 border-t border-(--color-border-default) py-5">
-            <dt className="w-24 shrink-0 font-display text-label uppercase text-(--color-text-muted)">
-              Hours
-            </dt>
-            <dd className="font-body text-body-lg tabular-nums text-(--color-text-primary)">
-              {contactFacts.hours}
-            </dd>
-          </div>
-          <div className="flex flex-wrap items-baseline gap-x-10 gap-y-1 border-t border-(--color-border-default) py-5">
-            <dt className="w-24 shrink-0 font-display text-label uppercase text-(--color-text-muted)">
-              Area
-            </dt>
-            <dd className="max-w-[52ch] font-body text-body-lg text-(--color-text-primary)">
-              {contactFacts.serviceArea.join(' · ')} and nearby areas
-            </dd>
-          </div>
-        </dl>
-      </DeskSection>
+        This route publishes ~110 words and was spending 2,482px doing it,
+        because every fact sat in its own full-width row separated by a third of
+        a screen. The words are unchanged and not one has been added: what
+        changed is that they are now *composed*.
 
-      {/* The trial is the reason most people are on this page. */}
-      <Movement name="contact-cta" ground="house" className="pb-(--section-feature)">
+        A visitor arriving here has already decided to make contact. The page's
+        whole job is to make the three real ways of doing that equally
+        available and instantly scannable, so they sit side by side as parallel
+        actions rather than stacked as trivia.
+      */}
+      <Movement name="reach-us" ground="house" className="pb-(--section-spacious)">
         <FilmMargin wide>
-          <hr className="border-0 border-t border-(--color-border-default)" />
-          <div className="grid gap-10 pt-(--section-comfortable) lg:grid-cols-[220px_minmax(0,1fr)] lg:gap-16">
-            <DeskLabel>Enrol</DeskLabel>
+          <div className="grid gap-8 lg:grid-cols-[220px_minmax(0,1fr)] lg:gap-16">
+            <div className="lg:pt-3">
+              <DeskLabel>Three ways in</DeskLabel>
+            </div>
+
             <div className="max-w-[840px]">
-              <p className="max-w-[62ch] font-body text-body-lg text-(--color-text-secondary)">
+              <ul className="grid gap-px border-t border-(--color-border-default) sm:grid-cols-3">
+                <li className="border-b border-(--color-border-default) py-7 sm:border-b-0 sm:pr-8">
+                  <p className="font-display text-label uppercase text-(--color-text-muted)">Call</p>
+                  <p className="mt-3">
+                    <a
+                      href={contactFacts.phoneHref}
+                      className="inline-flex min-h-11 items-center font-body text-heading-lg italic text-(--color-text-primary) underline-offset-[6px] hover:underline"
+                    >
+                      {contactFacts.phoneDisplay}
+                    </a>
+                  </p>
+                  <p className="mt-1 font-body text-body-sm tabular-nums text-(--color-text-secondary)">
+                    {contactFacts.hours}
+                  </p>
+                </li>
+
+                <li className="border-b border-(--color-border-default) py-7 sm:border-b-0 sm:border-l sm:border-l-(--color-border-default) sm:px-8">
+                  <p className="font-display text-label uppercase text-(--color-text-muted)">Email</p>
+                  <p className="mt-3">
+                    <a
+                      href={`mailto:${contactFacts.email}`}
+                      className="inline-flex min-h-11 items-center break-all font-body text-heading-md italic text-(--color-text-primary) underline-offset-[6px] hover:underline"
+                    >
+                      {contactFacts.email}
+                    </a>
+                  </p>
+                </li>
+
+                <li className="py-7 sm:border-l sm:border-l-(--color-border-default) sm:pl-8">
+                  <p className="font-display text-label uppercase text-(--color-text-muted)">
+                    Book a trial
+                  </p>
+                  <p className="mt-3 font-body text-heading-lg italic text-(--color-text-primary)">
+                    {trialOffer.price}
+                  </p>
+                  <p className="mt-3">
+                    <Link
+                      href="/contact/book-a-trial"
+                      className="inline-flex min-h-11 items-center font-display text-label uppercase text-(--color-text-primary) underline underline-offset-[6px]"
+                    >
+                      Hold a place
+                    </Link>
+                  </p>
+                </li>
+              </ul>
+
+              <p className="mt-7 max-w-[62ch] font-body text-body-md text-(--color-text-secondary)">
                 {trialOffer.terms}
               </p>
-              <div className="mt-9">
-                <Button href="/contact/book-a-trial" size="lg" price={trialOffer.price}>
-                  Book a Trial
-                </Button>
+            </div>
+          </div>
+        </FilmMargin>
+      </Movement>
+
+      {/* Where and when, as one block rather than four rows. */}
+      <Movement name="visit" ground="house" className="pb-(--section-spacious)">
+        <FilmMargin wide>
+          <hr className="border-0 border-t border-(--color-border-default)" />
+          <div className="grid gap-8 pt-(--section-comfortable) lg:grid-cols-[220px_minmax(0,1fr)] lg:gap-16">
+            <div className="lg:pt-3">
+              <DeskLabel>Visit</DeskLabel>
+            </div>
+            <div className="grid max-w-[840px] gap-10 sm:grid-cols-2">
+              <address className="not-italic" id="visit">
+                <p className="font-body text-display-md leading-[1.3] text-(--color-text-primary)">
+                  {address.street}, {address.unit}
+                  <br />
+                  {address.locality}, {address.region} {address.postalCode}
+                </p>
+              </address>
+              <div>
+                <p className="font-display text-label uppercase text-(--color-text-muted)">
+                  Who we serve
+                </p>
+                <p className="mt-3 max-w-[36ch] font-body text-body-lg text-(--color-text-primary)">
+                  {contactFacts.serviceArea.join(' · ')} and nearby areas
+                </p>
               </div>
             </div>
+          </div>
+        </FilmMargin>
+      </Movement>
+
+      {/*
+        EE3 — contextual next steps.
+
+        Most people reaching a contact page are still deciding. These are the
+        four routes that answer the question behind the visit, and they cost
+        nothing to offer. Structural links only — no new claim.
+      */}
+      <Movement name="before-you-call" ground="house" className="pb-(--section-feature)">
+        <FilmMargin wide>
+          <hr className="border-0 border-t border-(--color-border-default)" />
+          <div className="grid gap-8 pt-(--section-comfortable) lg:grid-cols-[220px_minmax(0,1fr)] lg:gap-16">
+            <div className="lg:pt-3">
+              <DeskLabel>Before you call</DeskLabel>
+            </div>
+            <ul className="grid max-w-[840px] gap-x-10 gap-y-5 sm:grid-cols-2">
+              {[
+                { href: '/programs', label: 'What we run', note: 'Six programmes, and how they fit together.' },
+                { href: '/lessons', label: 'What you can learn', note: 'Seven instruments, private or group.' },
+                { href: '/faq', label: 'Common questions', note: 'Ages, scholarships, how the trial works.' },
+                { href: '/scholarships', label: 'Step Up scholarships', note: 'PEP and UA are accepted here.' },
+              ].map((item) => (
+                <li key={item.href} className="border-t border-(--color-border-default) pt-5">
+                  <Link
+                    href={item.href}
+                    className="font-body text-heading-md italic text-(--color-text-primary) underline-offset-[6px] hover:underline"
+                  >
+                    {item.label}
+                  </Link>
+                  <p className="mt-1 font-body text-body-sm text-(--color-text-secondary)">
+                    {item.note}
+                  </p>
+                </li>
+              ))}
+            </ul>
           </div>
         </FilmMargin>
       </Movement>

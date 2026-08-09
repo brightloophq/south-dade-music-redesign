@@ -19,7 +19,7 @@
   "generator": "@google/genai",
   "date": "2026-08-06T15:08:28.319Z",
   "modelNotes": null,
-  "approvalStatus": "pending-review",
+  "approvalStatus": "rejected",
   "approvedBy": null,
   "approvedAt": null,
   "provenance": "ai-generated",
@@ -30,5 +30,22 @@
   "altText": null,
   "subject": [],
   "integratedIntoUI": false,
-  "notes": "Decorative, non-representational. Must not be presented as documentary imagery."
+  "notes": "Decorative, non-representational. Must not be presented as documentary imagery.",
+  "ee1": {
+    "verdict": "REJECT",
+    "reviewedAt": "2026-08-09",
+    "reviewedBy": "EE1 experience-enrichment pass",
+    "inspected": "File opened and viewed. Not judged from filename, prompt or metadata.",
+    "rationale": "Multiple beams converging from top centre. The film has exactly one light source, house right, whose position the motion runtime publishes as --light-x / --light-y and moves; a baked multi-beam cone fights that physics rather than serving it. Also carries an off-palette magenta cast through the lower centre.",
+    "renderedOnAnyRoute": false,
+    "ownerApprovalOutstanding": true
+  },
+  "ee2": {
+    "verdict": "REJECTED FOR EE2",
+    "reviewedAt": "2026-08-09",
+    "inspected": "File opened and viewed, then checked against the rendered page in a browser.",
+    "narrativeJob": null,
+    "rationale": "Multiple beams converging from top centre. The film has exactly one light, house right, whose position the runtime moves via --light-x/--light-y; a baked multi-beam cone fights that physics rather than serving it.",
+    "delivery": "not served"
+  }
 }
