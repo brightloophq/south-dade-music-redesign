@@ -188,7 +188,7 @@ function MusicLessons() {
         <p className="mt-6">
           <Link
             href={lessonsSection.cta.href}
-            className="font-display text-label uppercase text-(--color-text-primary) underline underline-offset-[6px]"
+            className="inline-flex min-h-6 items-center font-display text-label uppercase text-(--color-text-primary) underline underline-offset-[6px]"
           >
             {lessonsSection.cta.label}
           </Link>

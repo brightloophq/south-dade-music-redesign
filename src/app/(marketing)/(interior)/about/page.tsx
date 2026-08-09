@@ -87,7 +87,7 @@ export default function AboutPage() {
         <p className="mt-6">
           <Link
             href="/programs/90-day-stage-program"
-            className="font-display text-label uppercase text-(--color-text-primary) underline underline-offset-[6px]"
+            className="inline-flex min-h-6 items-center font-display text-label uppercase text-(--color-text-primary) underline underline-offset-[6px]"
           >
             How the 90 days work
           </Link>
@@ -106,7 +106,7 @@ export default function AboutPage() {
         <p className="mt-8">
           <Link
             href="/performances"
-            className="font-display text-label uppercase text-(--color-text-primary) underline underline-offset-[6px]"
+            className="inline-flex min-h-6 items-center font-display text-label uppercase text-(--color-text-primary) underline underline-offset-[6px]"
           >
             Performances
           </Link>

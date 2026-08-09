@@ -100,7 +100,7 @@ export default function ProgramsPage() {
                       {program.route ? (
                         <Link
                           href={program.route}
-                          className="underline-offset-[6px] hover:underline"
+                          className="inline-flex min-h-6 items-center underline-offset-[6px] hover:underline"
                         >
                           {program.name}
                         </Link>

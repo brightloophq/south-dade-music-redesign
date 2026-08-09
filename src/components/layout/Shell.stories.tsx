@@ -19,9 +19,9 @@ const meta: Meta = {
         component: [
           'Canonical spec: `docs/redesign/02-information-architecture.md` §2–4 and `04-design-system.md` §11.',
           '',
-          '⚠️ **Routes are placeholders.** Phase 4 built the navigation *mechanism*; the target pages do not exist. Every item carries a `status` — `live`, `planned` or `gated` — and non-live items render as **plain text rather than links**, so the foundation never ships a link to a 404.',
+          'Every item carries a `status` — `live`, `planned` or `gated` — and non-live items render as **plain text rather than links**, so the shell never ships a link to a 404. Most routes are now `live`; the muted items are the ones still blocked on an owner decision.',
           '',
-          'That is why every item here appears muted: nothing is `live` yet. Inspect an item to see `data-route-status` and, where relevant, `data-gate`.',
+          'Inspect a non-live item to see `data-route-status`. The gate ID that blocks it (`B-7`, `B-2`, …) is deliberately **not** in the markup — gate IDs are internal decision-register vocabulary and are not shipped to visitors. They live in `src/config/navigation.ts` and `docs/implementation/owner-decision-register.md`.',
         ].join('\n'),
       },
     },

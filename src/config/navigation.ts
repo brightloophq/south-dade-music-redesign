@@ -149,9 +149,20 @@ export const footerNavigation: readonly NavGroup[] = [
     items: [
       { id: 'f-faq', label: 'FAQ', href: '/faq', status: 'live' },
       { id: 'f-pricing', label: 'Pricing', href: '/pricing', status: 'gated', gate: 'B-8' },
-      { id: 'f-accessibility', label: 'Accessibility', href: '/accessibility', status: 'planned' },
-      { id: 'f-privacy', label: 'Privacy Policy', href: '/privacy-policy', status: 'planned' },
-      { id: 'f-terms', label: 'Terms', href: '/terms', status: 'planned' },
+      { id: 'f-accessibility', label: 'Accessibility', href: '/accessibility', status: 'live' },
+      { id: 'f-privacy', label: 'Privacy Policy', href: '/privacy', status: 'live' },
+      { id: 'f-terms', label: 'Terms', href: '/terms', status: 'live' },
+      /*
+       * Added in Phase 4B. Both pages existed but were reachable from nowhere —
+       * unlinked, and therefore also absent from the sitemap, which is built
+       * from the `live` entries in this file.
+       *
+       * /photo-consent especially: it is the route that unblocks gate I-1 and
+       * with it every photograph the academy owns. A page nobody can reach
+       * cannot do that.
+       */
+      { id: 'f-lesson-cancellation', label: 'Cancellations', href: '/lesson-cancellation', status: 'live' },
+      { id: 'f-photo-consent', label: 'Photo Consent', href: '/photo-consent', status: 'live' },
     ],
   },
 ]

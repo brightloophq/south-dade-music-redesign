@@ -76,7 +76,9 @@ export function Header({ overHero, className }: HeaderProps) {
       <Container width="wide" className="flex h-full items-center justify-between gap-4">
         <Link
           href="/"
-          className="flex shrink-0 items-center font-display text-heading-sm font-bold tracking-tight text-(--color-text-primary)"
+          // min-h-6 gives the wordmark a 24px hit area (WCAG 2.5.8 AA). Its
+          // type box measured 23px — one pixel short — on every route.
+          className="flex min-h-6 shrink-0 items-center font-display text-heading-sm font-bold tracking-tight text-(--color-text-primary)"
         >
           {/*
             ⚠️ Gate B-5 / D-1 — the estate runs four brand names and the logo has
@@ -118,7 +120,6 @@ export function Header({ overHero, className }: HeaderProps) {
               size="md"
               disabled
               aria-disabled
-              data-gate={primaryCta.gate}
               title="Booking is not yet available"
               className="hidden sm:inline-flex"
             >

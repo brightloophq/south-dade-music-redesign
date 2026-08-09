@@ -31,11 +31,15 @@ function NavDestination({
   ...rest
 }: { item: NavItem; className?: string; children: React.ReactNode } & React.HTMLAttributes<HTMLElement>) {
   if (item.status !== 'live') {
+    /*
+     * `item.gate` is not emitted. Gate IDs are internal decision-register
+     * vocabulary and belong in the typed config, comments and docs — not in
+     * markup a visitor can read. Nothing selected on them at runtime.
+     */
     return (
       <span
         className={cn(className, 'cursor-default opacity-(--opacity-muted)')}
         data-route-status={item.status}
-        {...(item.gate ? { 'data-gate': item.gate } : {})}
         {...rest}
       >
         {children}

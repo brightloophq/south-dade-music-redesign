@@ -1,0 +1,94 @@
+{
+  "$comment": "Provenance record for five legacy WordPress assets pulled from the old estate during Phase 4D. THE BINARIES HAVE BEEN DELETED. This file is a record of what was retrieved and why it was rejected — it is not an index of available assets. It lives under docs/ rather than public/ so that nothing described here is deployable.",
+  "recordVersion": 2,
+  "recoveredAt": "2026-08-08",
+  "removedAt": "2026-08-09",
+  "removedFrom": "public/images/recovered/",
+  "status": "REMOVED — NOT APPROVED FOR REUSE",
+
+  "correctionNotice": "Version 1 of this record stated 'NO PHOTOGRAPH OF A PERSON IS PRESENT' and described four of these files as pillar icons. Both statements were false. All five files are photographs of identifiable people; two of them include children. The files were retrieved from the legacy WordPress uploads folder on filename and URL evidence alone, without anyone opening them. They were reviewed visually on 2026-08-09, found to be photographs of people, and deleted the same day. No page ever referenced them and no image of a person was ever rendered by this site.",
+
+  "whyRemoved": [
+    "All five are photographs containing identifiable people.",
+    "Two of the five depict identifiable children.",
+    "Licensing and provenance are not sufficiently established for any of the five. They came from the legacy WordPress uploads folder, which mixes business-owned uploads with stock and template imagery of unknown origin. Being present in that folder does not establish a right to republish.",
+    "No release, model consent or photographer permission is on file for any person shown in any of them.",
+    "They sat in public/, which meant any deployment served them at a guessable URL whether or not a page referenced them."
+  ],
+
+  "notApprovedForReuse": "None of these files may be republished, used as page imagery, used as an og:image, or reintroduced to the deployable asset tree. This applies regardless of any earlier note suggesting the owner might want them on /camps — that suggestion was made while they were mistakenly believed to be icons and has been withdrawn.",
+
+  "relationshipToGateI1": "These are NOT the academy's own 18 performance photographs. Those remain undownloaded and are governed by gate I-1 (no photo-release consent on file) and gate I-7 (photographer copyright unconfirmed). The files below are legacy stock and template imagery of people unconnected to the academy, which raises a licensing and third-party-likeness problem rather than a student-consent one. Neither category is publishable today.",
+
+  "assets": [
+    {
+      "formerFile": "camp-pillar-1-learn-real-instruments.png",
+      "actualSubject": "Photograph of an identifiable young woman holding a violin at a desk. Not an icon.",
+      "containsIdentifiablePeople": true,
+      "containsChildren": false,
+      "sourceUrl": "https://southdademusic.com/wp-content/uploads/2026/04/m1000x1000.png",
+      "foundOn": "/summercamp/ (legacy route, now redirected to /camps)",
+      "licensing": "NOT ESTABLISHED — appearance and framing are consistent with stock photography; no licence or release located.",
+      "status": "DELETED",
+      "recordedBytes": 926050,
+      "recordedSha256_16": "82678596afdb5026"
+    },
+    {
+      "formerFile": "camp-pillar-2-perform-live-on-stage.png",
+      "actualSubject": "Photograph of identifiable performers on a lit stage with a drummer behind. Not an icon.",
+      "containsIdentifiablePeople": true,
+      "containsChildren": false,
+      "sourceUrl": "https://southdademusic.com/wp-content/uploads/2026/03/m1000x1000-1.png",
+      "foundOn": "/summercamp/ (legacy route, now redirected to /camps)",
+      "licensing": "NOT ESTABLISHED — no licence or release located.",
+      "status": "DELETED",
+      "recordedBytes": 1221543,
+      "recordedSha256_16": "ee8f90e31d5188a4"
+    },
+    {
+      "formerFile": "camp-pillar-3-screen-free-structured-days.png",
+      "actualSubject": "Close-up portrait photograph of an identifiable young woman wearing headphones; the face fills the frame. Not an icon.",
+      "containsIdentifiablePeople": true,
+      "containsChildren": false,
+      "sourceUrl": "https://southdademusic.com/wp-content/uploads/2026/03/m1000x1000-2.png",
+      "foundOn": "/summercamp/ (legacy route, now redirected to /camps)",
+      "licensing": "NOT ESTABLISHED — no licence or release located.",
+      "status": "DELETED",
+      "recordedBytes": 735210,
+      "recordedSha256_16": "cdfebe5ffb19d85b"
+    },
+    {
+      "formerFile": "camp-pillar-4-snacks-and-social-time.png",
+      "actualSubject": "Photograph of four identifiable young people seated around a table. Ages are not verifiable from the image; at least some may be minors. Not an icon.",
+      "containsIdentifiablePeople": true,
+      "containsChildren": "possible — not verifiable",
+      "sourceUrl": "https://southdademusic.com/wp-content/uploads/2026/03/m1000x1000-3.png",
+      "foundOn": "/summercamp/ (legacy route, now redirected to /camps)",
+      "licensing": "NOT ESTABLISHED — no licence or release located.",
+      "status": "DELETED",
+      "recordedBytes": 981427,
+      "recordedSha256_16": "924f5e3fc967a393"
+    },
+    {
+      "formerFile": "legacy-shared-hero-learning-space.jpg",
+      "actualSubject": "Photograph of a music-lesson room containing several identifiable young children with adults. Faces are clear and unobscured.",
+      "containsIdentifiablePeople": true,
+      "containsChildren": true,
+      "sourceUrl": "https://southdademusic.com/wp-content/uploads/2026/01/how-music-education-has-changed-impact-on-learning-space-design.jpg",
+      "foundOn": "Hero image on 22+ pages of the legacy site, served from the third-party staging domain.",
+      "licensing": "NOT ESTABLISHED — generic stock of unknown provenance. Version 1 of this record already flagged it unusable; it should never have been retained alongside assets described as safe.",
+      "status": "DELETED",
+      "recordedBytes": 101962,
+      "recordedSha256_16": "eea87755b55c3b30"
+    }
+  ],
+
+  "stagingDomainFinding": {
+    "domain": "cmscustom-staginglink2.com",
+    "status": "DEAD as of 2026-08-08 — root returns 403, the referenced asset returns 404",
+    "impact": "22+ pages of the still-live legacy site are serving a broken hero image today.",
+    "consequenceForTheRebuild": "None. The rebuild references no external asset host, and now ships no photograph of any person at all. This finding stands and is unaffected by the removals above — it remains an owner action against the OLD site."
+  },
+
+  "whatTheRebuildShipsNow": "Eight generated atmospheric images in public/images/generated/, all decorative, all aria-hidden, none depicting a person. Verified 2026-08-09: zero <img> elements render across all 27 routes."
+}

@@ -2,6 +2,7 @@ import Link from 'next/link'
 
 import { footerNavigation } from '@/config/navigation'
 import { siteConfig } from '@/config/site'
+import { contactFacts } from '@/content/pages'
 import { Container } from '@/components/ui/Container'
 import { Divider } from '@/components/ui/Divider'
 import { Text } from '@/components/ui/Typography'
@@ -12,11 +13,16 @@ import { MotionToggle } from './MotionToggle'
 
 function FooterLink({ item }: { item: NavItem }) {
   if (item.status !== 'live') {
+    /*
+     * `item.gate` is deliberately NOT emitted as an attribute. Gate IDs are
+     * internal decision-register vocabulary; they belong in the typed config,
+     * in comments and in docs/implementation, not in markup a visitor can
+     * read. Nothing selects on them at runtime — they were write-only.
+     */
     return (
       <span
         className="inline-flex min-h-11 items-center font-body text-body-sm text-n-400"
         data-route-status={item.status}
-        {...(item.gate ? { 'data-gate': item.gate } : {})}
       >
         {item.label}
       </span>
@@ -40,11 +46,11 @@ function FooterLink({ item }: { item: NavItem }) {
  * "The footer carries the address, hours and phone — it is load-bearing and
  * must be treated as content, not chrome."
  *
- * ⚠️ Phase 4 ships the reusable shell with **placeholder navigation and no
- * final business copy**. The contact block is deliberately withheld: Phase 2
- * found two phone numbers, two email addresses and three unit numbers in the
- * estate, and publishing the wrong one sends a parent to the wrong door. The
- * slot is marked and gated rather than filled with a guess.
+ * Phase 2 found two phone numbers, two email addresses and three unit numbers
+ * across the estate. The footer publishes the two that are settled — the
+ * sitewide phone and email, the same pair carried by `/contact` and by every
+ * policy page — and withholds the postal address pending gate I-8, linking to
+ * `/contact` instead of repeating a disputed unit number on 27 pages.
  */
 export function Footer({ className }: { className?: string }) {
   const year = new Date().getFullYear()
@@ -85,23 +91,51 @@ export function Footer({ className }: { className?: string }) {
         <Divider spacing="base" className="bg-stage-700" />
 
         {/*
-          Contact block — intentionally empty in Phase 4.
+          Contact block.
 
-          ⚠️ Blocked on:
-            · I-8  three unit numbers in evidence (117 / 1157 / 115)
-            · phone conflict: sitewide footer vs a different number on the subdomain
-            · email conflict: info@ (footer) vs contact@ (contact page body)
+          This slot was a Phase 4 foundation placeholder and was never revisited
+          when Tier 1 shipped `/contact`. Until the hardening pass it rendered
+          the sentence "Address, hours and phone are pending owner confirmation.
+          See docs/source-content/contact-details.json" — an internal note, with
+          a repository path, on all 27 routes. That is engineering scaffolding
+          addressed to the wrong audience: a parent reading the footer learns
+          nothing and sees the seams.
 
-          Address, hours and phone are load-bearing content. They ship when the
-          owner confirms which values are correct — not before.
+          What ships now is what is already published elsewhere on this site:
+          the phone and email carried by `/contact` and by every policy page.
+          Nothing new is asserted.
+
+          ⚠️ Still withheld — the postal address. Gate I-8: three unit numbers
+          are in evidence (117 / 1157 / 115) and sending a parent to the wrong
+          door is the one contact error with a real-world cost. `/contact`
+          publishes the best-corroborated value with that caveat; the footer,
+          which appears on every page, links there rather than repeating it.
         */}
-        <section aria-labelledby="footer-contact" data-gate="I-8" className="mb-8">
+        <section aria-labelledby="footer-contact" className="mb-8">
           <Text token="label" as="h3" id="footer-contact" className="mb-2 text-spot-400">
             Contact
           </Text>
           <Text token="body-sm" className="text-n-400">
-            Address, hours and phone are pending owner confirmation. See{' '}
-            <code className="font-mono">docs/source-content/contact-details.json</code>.
+            <a
+              href={contactFacts.phoneHref}
+              className="transition-colors duration-(--duration-fast) hover:text-spot-400"
+            >
+              {contactFacts.phoneDisplay}
+            </a>
+            {' · '}
+            <a
+              href={`mailto:${contactFacts.email}`}
+              className="transition-colors duration-(--duration-fast) hover:text-spot-400"
+            >
+              {contactFacts.email}
+            </a>
+            {' · '}
+            <Link
+              href="/contact"
+              className="transition-colors duration-(--duration-fast) hover:text-spot-400"
+            >
+              Visit us
+            </Link>
           </Text>
         </section>
 

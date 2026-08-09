@@ -20,12 +20,12 @@ function DrawerDestination({ item, onNavigate }: { item: NavItem; onNavigate: ()
   )
 
   if (item.status !== 'live') {
+    /*
+     * `item.gate` is not emitted — gate IDs are internal vocabulary and stay
+     * in the typed config, comments and docs. Nothing selected on them.
+     */
     return (
-      <span
-        className={cn(className, 'cursor-default text-n-400')}
-        data-route-status={item.status}
-        {...(item.gate ? { 'data-gate': item.gate } : {})}
-      >
+      <span className={cn(className, 'cursor-default text-n-400')} data-route-status={item.status}>
         {item.label}
       </span>
     )
@@ -168,25 +168,32 @@ export function MobileNav({ className }: { className?: string }) {
                 {primaryCta.label}
               </Button>
             ) : (
-              <Button variant="primary" size="xl" fullWidth disabled aria-disabled data-gate={primaryCta.gate}>
+              <Button variant="primary" size="xl" fullWidth disabled aria-disabled>
                 {primaryCta.label}
               </Button>
             )}
 
             {/*
-              Language switch placeholder. ⚠️ Gate B-6 — bilingual support is
-              currently claimed sitewide and delivered nowhere. The control is
-              disabled rather than hidden so the shell is complete, but it must
-              not imply a Spanish path that does not exist.
+              The EN | "ES — not yet available" badge that used to sit here has
+              been REMOVED (gate B-6).
+
+              It was a dead placeholder: no Spanish route, no switcher, no
+              `hreflang`, no translated content, and `aria-hidden` so it was not
+              even announced. It offered no language capability whatsoever.
+
+              It was also the wrong message to send. A large share of these
+              families are Spanish-speaking, and a badge saying Spanish is
+              "not yet available" tells a parent a Spanish site is coming when
+              nothing has been built and nobody has committed to building it.
+              The Header had already dropped its copy of this control for that
+              reason; the drawer kept one, so the promise still shipped on 26
+              routes.
+
+              B-6 is a real decision — build bilingual support, or drop the
+              sitewide claim. It is recorded in owner-decision-register.md.
+              Nothing in the UI should pre-empt it. When Spanish exists, a
+              working switcher goes here.
             */}
-            <div
-              className="flex items-center gap-2 px-2 font-body text-body-sm text-n-400"
-              data-gate="B-6"
-              aria-hidden="true"
-            >
-              <span className="rounded-(--radius-sm) border border-stage-700 px-2 py-1">EN</span>
-              <span className="opacity-(--opacity-muted)">ES — not yet available</span>
-            </div>
           </div>
         </nav>
       </div>

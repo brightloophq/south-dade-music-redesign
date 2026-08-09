@@ -184,7 +184,7 @@ export function InstrumentLessonPage({ instrument }: { instrument: Instrument })
                 </Button>
                 <Link
                   href="/lessons"
-                  className="font-display text-label uppercase text-(--color-text-primary) underline underline-offset-[6px]"
+                  className="inline-flex min-h-6 items-center font-display text-label uppercase text-(--color-text-primary) underline underline-offset-[6px]"
                 >
                   All instruments
                 </Link>
