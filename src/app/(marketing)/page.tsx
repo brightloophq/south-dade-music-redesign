@@ -67,8 +67,43 @@ export default function HomePage() {
 
       <Opening />
       <Reframe />
-      <TheWalk />
-      <TheRelease />
+
+      {/*
+        ⚠️ THESE TWO WRAPPERS ARE LOAD-BEARING. Do not remove them, and do not
+        "tidy" them away as redundant divs.
+
+        `WalkTimeline` and `ReleaseTimeline` pin their trigger with
+        `pin: true` (lib/motion/film/timelines.ts). ScrollTrigger implements a
+        pin by **wrapping the pinned element in a `<div class="pin-spacer">`** at
+        the moment the trigger is created — before any scrolling, and invisibly
+        to React.
+
+        Without these wrappers `<TheWalk>`'s and `<TheRelease>`'s root elements
+        are direct host children of `<main>` in React's fiber tree, so on unmount
+        React calls `main.removeChild(section)`. Their real parent is by then the
+        pin-spacer, and the browser throws:
+
+            NotFoundError: Failed to execute 'removeChild' on 'Node'
+
+        which fired on **every first click off the homepage**, in development and
+        in production alike.
+
+        With the wrappers, ScrollTrigger inserts its spacer *inside* a div React
+        owns and never reparents. The host node React removes from `<main>` is
+        the wrapper, whose parent relationship is untouched, so GSAP is free to
+        restructure everything below it.
+
+        The wrappers are plain block boxes: no class, no style, no margin. They
+        do not affect the trigger element, so pin distances, scrub values and
+        scroll lengths are byte-identical.
+      */}
+      <div>
+        <TheWalk />
+      </div>
+      <div>
+        <TheRelease />
+      </div>
+
       <HouseLights />
       <Desk />
 

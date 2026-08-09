@@ -1,7 +1,6 @@
 'use client'
 
-import { useEffect } from 'react'
-
+import { useIsomorphicLayoutEffect } from '@/hooks/useIsomorphicLayoutEffect'
 import { useMotionCapability } from '@/hooks/useReducedMotion'
 import { reportDiagnostics, resetDiagnostics } from '@/lib/motion/diagnostics'
 
@@ -40,6 +39,32 @@ import { reportDiagnostics, resetDiagnostics } from '@/lib/motion/diagnostics'
  * `ScrollTrigger.refresh()` runs after teardown so any surviving trigger
  * recalculates against the restored layout.
  *
+ * ## ⚠️ Cleanup runs in the layout phase, not the passive phase
+ *
+ * This effect is a **layout** effect. That is not about avoiding a paint flash —
+ * the work inside is asynchronous anyway — it is about *teardown ordering*.
+ *
+ * React defers passive (`useEffect`) cleanups until after the mutation phase has
+ * already removed host nodes. Two of this film's sections are pinned, and
+ * ScrollTrigger implements a pin by wrapping the pinned element in a
+ * `pin-spacer` div. With a passive cleanup, React removed those sections from
+ * `<main>` *before* `context.revert()` had unwrapped them — and threw
+ * `NotFoundError: Failed to execute 'removeChild' on 'Node'` on every first
+ * navigation off the homepage.
+ *
+ * A layout-effect cleanup runs synchronously during the mutation phase, and this
+ * component is rendered before the pinned sections, so the spacers are unwrapped
+ * before React reaches them. The wrappers in `page.tsx` are the primary,
+ * ordering-independent guard; this is the second line and the correct place for
+ * GSAP teardown regardless.
+ *
+ * ## Teardown is scoped to this film, never global
+ *
+ * `ScrollTrigger.getAll()` is a **global** registry. Killing everything in it
+ * would tear down triggers belonging to any other component that happens to be
+ * mounted. The set that existed before this film was built is captured up front,
+ * and only triggers created after that point are killed here.
+ *
  * ## Scroll ownership
  *
  * Lenis is created once in `MotionProvider`, driven by `gsap.ticker`, and calls
@@ -49,7 +74,7 @@ import { reportDiagnostics, resetDiagnostics } from '@/lib/motion/diagnostics'
 export function FilmDirector() {
   const capability = useMotionCapability()
 
-  useEffect(() => {
+  useIsomorphicLayoutEffect(() => {
     if (!capability.reveals) return
 
     let cancelled = false
@@ -106,6 +131,13 @@ export function FilmDirector() {
         }
       }
       if (cancelled) return
+
+      /*
+       * Every trigger that already exists is somebody else's. Captured before a
+       * single film trigger is created, so teardown can be exact rather than
+       * global — see the note on scoping above.
+       */
+      const preExistingTriggers = new Set(ScrollTrigger.getAll())
 
       const context = gsap.context(() => {})
       const light = createLight(gsap, context)
@@ -171,7 +203,15 @@ export function FilmDirector() {
         for (const split of splits) split.revert()
         mm.revert()
         context.revert()
-        for (const trigger of ScrollTrigger.getAll()) trigger.kill()
+        /*
+         * Belt-and-braces for anything the context and the matchMedia scope did
+         * not already reclaim — but only for triggers this film created.
+         * Killing the whole registry would take other components' triggers with
+         * it, which is exactly the global teardown this component must not do.
+         */
+        for (const trigger of ScrollTrigger.getAll()) {
+          if (!preExistingTriggers.has(trigger)) trigger.kill()
+        }
         document.documentElement.style.setProperty('--light-flare', '0')
         ScrollTrigger.refresh()
         resetDiagnostics()
