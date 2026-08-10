@@ -3,6 +3,7 @@ import Link from 'next/link'
 
 import { Button } from '@/components/ui/Button'
 import { Atmosphere, FilmMargin, Movement } from '@/components/film'
+import { Photo } from '@/components/media/Photo'
 import { DeskLabel, PageIntro } from '@/components/page'
 import {
   formatComparison,
@@ -203,32 +204,33 @@ export default function LessonsPage() {
             </div>
             <div className="max-w-[840px]">
               {/*
-                MI1 — ⚠️ THIS ROUTE GETS NO AUTHENTIC PHOTOGRAPH, and the reason
-                is worth recording here rather than only in the report.
+                THE ROOM — approved portfolio, published. Audit #11.
 
-                `/lessons` is the page that most wants a picture of the actual
-                teaching room, and the estate contains two of them:
-                  · audit #11 — children at keyboards, a ukulele, the SDM neon
-                    on the wall. The best interior frame in the whole estate,
-                    and 1000×667 composed almost entirely of identifiable
-                    children. I-1 blocks the frame; there is no face-free
-                    region left in it large enough to fill this slot.
-                  · audit #30 — the room with the ukulele wall, the amps and the
-                    music rug. Its one good face-free region is the ukulele
-                    rack, and that crop is already spent on `/private-lessons`.
+                Through MI1 and MI2 this route carried no photograph at all:
+                the only good interior frame in the estate was composed almost
+                entirely of identifiable children and was blocked by I-1, and
+                the fallback crop of the other room frame read as a storage
+                corner and was rejected on sight.
 
-                A `room-drums` crop of #30's far wall was generated, wired here,
-                and then REJECTED on visual inspection: the honest content of
-                that corner is a microwave, plastic bags, a utility cart and
-                wire shelving. It reads as a storage room, not a teaching room,
-                and shipping it would have made the academy look worse than a
-                generated plate does. It remains in `.audit/media-review/`,
-                marked REJECTED, and is referenced by nothing.
-
-                So the plates below stay generated and stay honest about it.
-                This is the clearest single argument in MI1 for commissioning a
-                short room shoot: the gap here is not a design problem.
+                The owner's approval resolves that. This is the actual lesson
+                room, mid-lesson — keyboards, a ukulele, the academy's red SDM
+                sign on the wall — and it sits above the instrument index so the
+                reader sees the place before choosing what to do in it.
               */}
+              <figure className="mb-11">
+                <div className="relative aspect-[3/2] w-full overflow-hidden bg-(--color-ground-pitch)">
+                  <Photo
+                    id="lesson-room"
+                    alt="A South Dade Music lesson in progress: students at digital keyboards and a ukulele, with the academy's red SDM sign on the wall behind them."
+                    position="center 55%"
+                    sizes="(min-width: 1024px) 840px, 100vw"
+                  />
+                </div>
+                <figcaption className="mt-3 font-display text-label uppercase text-(--color-text-muted)">
+                  The room
+                </figcaption>
+              </figure>
+
               {instrumentFamilies.map((family) => {
                 const members = family.instrumentIds
                   .map((id) => instrumentPages.find((i) => i.id === id))

@@ -3,7 +3,7 @@ import Link from 'next/link'
 
 import { Button } from '@/components/ui/Button'
 import { FilmMargin, Movement } from '@/components/film'
-import { MediaReview } from '@/components/dev/MediaReview'
+import { Photo } from '@/components/media/Photo'
 import { DeskLabel, PageIntro } from '@/components/page'
 import { instrumentPages, privateLessons } from '@/content/lessons'
 import { trialOffer } from '@/content/pages'
@@ -113,15 +113,11 @@ export default function PrivateLessonsPage() {
                 ⚠️ PREVIEW ONLY. Copyright (I-7) unconfirmed.
               */}
               <figure className="relative mb-11 aspect-[16/10] w-full max-w-[540px] overflow-hidden bg-(--color-ground-pitch)">
-                <MediaReview
-                  asset="ukulele-wall"
-                  job="Private lessons — the teaching room this happens in"
+                <Photo
+                  id="ukulele-wall"
                   alt="Six ukuleles hanging on a wall rack under an LED strip in the South Dade Music teaching room, with an amplifier and a music stand below."
-                  fallback="instrument-keys"
-                  fallbackAlt="A close study of piano key edges receding into darkness, lit by one warm beam."
-                  fallbackPosition="center center"
-                  position="center"
-                  sizes="(min-width: 640px) 540px, 100vw"
+                  position="center center"
+                  sizes="(min-width: 1024px) 540px, 100vw"
                 />
               </figure>
 

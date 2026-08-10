@@ -3,7 +3,7 @@ import Link from 'next/link'
 
 import { Button } from '@/components/ui/Button'
 import { FilmMargin, GhostNumeral, Movement } from '@/components/film'
-import { MediaReview } from '@/components/dev/MediaReview'
+import { Photo } from '@/components/media/Photo'
 import { DeskLabel, PageIntro } from '@/components/page'
 import { performanceEvidence, testimonialsSection } from '@/content/home'
 import { contactFacts, ninetyDayPage, trialOffer } from '@/content/pages'
@@ -157,6 +157,28 @@ export default function NinetyDayStageProgramPage() {
         ⚠️ The week bands are attributed as published elsewhere, because this
         page's own source gives the three steps with no week numbers at all.
       */}
+      {/*
+        PREPARATION — approved portfolio, published. Audit #54.
+
+        The room as it is set on showcase day, before anyone is on it. It sits
+        immediately before the three steps, so the sequence the page describes —
+        practice, preparation, stage, outcome — has the preparation stage
+        photographed rather than only named.
+      */}
+      <Movement name="preparation" ground="house" className="pb-(--section-spacious)">
+        <FilmMargin wide>
+          <hr className="border-0 border-t border-(--color-border-default)" />
+          <div className="relative mt-(--section-comfortable) aspect-[16/10] w-full overflow-hidden bg-(--color-ground-pitch) sm:aspect-[2.2/1]">
+            <Photo
+              id="stage-set-purple"
+              alt="The South Dade Music stage dressed for a showcase: a drum kit, congas and keyboards under purple lighting, with the academy banner beside them."
+              position="center 58%"
+              sizes="100vw"
+            />
+          </div>
+        </FilmMargin>
+      </Movement>
+
       <Movement name="journey" ground="house" className="relative overflow-hidden pb-(--section-spacious)">
         <FilmMargin wide>
           <hr className="border-0 border-t border-(--color-border-default)" />
@@ -286,13 +308,9 @@ export default function NinetyDayStageProgramPage() {
 
             ⚠️ PREVIEW ONLY. Copyright (I-7) unconfirmed.
           */}
-          <MediaReview
-            asset="medals"
-            job="Flagship finale — the medals laid out before the showcase"
+          <Photo
+            id="medals"
             alt="Rows of gold medals on red, white and blue ribbons laid out on a table before a South Dade Music showcase."
-            fallback="stage-empty-chair"
-            fallbackAlt="A single wooden chair alone on a bare stage floor, lit by one warm beam through haze."
-            fallbackPosition="center 55%"
             position="center 55%"
             sizes="100vw"
           />
@@ -336,6 +354,32 @@ export default function NinetyDayStageProgramPage() {
               </p>
             </div>
           </div>
+        </FilmMargin>
+      </Movement>
+
+      {/*
+        THE OUTCOME — approved portfolio, published. Audit #28.
+
+        Students on stage with their medals at the end of a showcase. This is
+        the only frame in the estate that photographs the thing the whole
+        programme is sold on, and it belongs directly after the finale copy
+        rather than in a gallery.
+      */}
+      <Movement name="outcome" ground="house" className="pb-(--section-spacious)">
+        <FilmMargin wide>
+          <figure>
+            <div className="relative aspect-[16/10] w-full overflow-hidden bg-(--color-ground-pitch) sm:aspect-[2/1]">
+              <Photo
+                id="medals-on-stage"
+                alt="South Dade Music students standing together on stage wearing medals at the end of a showcase."
+                position="center 45%"
+                sizes="100vw"
+              />
+            </div>
+            <figcaption className="mt-3 font-display text-label uppercase text-(--color-text-muted)">
+              The end of a ninety days
+            </figcaption>
+          </figure>
         </FilmMargin>
       </Movement>
 

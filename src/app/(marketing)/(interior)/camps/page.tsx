@@ -1,4 +1,5 @@
 import type { Metadata } from 'next'
+import { Photo } from '@/components/media/Photo'
 import Link from 'next/link'
 
 import { Button } from '@/components/ui/Button'
@@ -51,6 +52,23 @@ export default function CampsPage() {
       <PageIntro eyebrow={camp.eyebrow} heading={camp.name} lead={camp.summary} />
 
       {/* The honest status, before anything that looks like an offer. */}
+      {/*
+        THE CAMP ROOM — approved portfolio, published. Audit #34.
+
+        A camp circle in progress: children seated on the floor with percussion
+        blocks and an instructor leading them. It is the only frame in the
+        estate that shows group work with the youngest students, which is
+        exactly what this page sells and what a parent is trying to picture.
+      */}
+      <figure className="relative aspect-[16/10] w-full overflow-hidden bg-(--color-ground-pitch) sm:aspect-[2.2/1]">
+        <Photo
+          id="camp-circle"
+          alt="A South Dade Music camp session: children seated in a circle on the floor with percussion blocks while an instructor leads them."
+          position="center 50%"
+          sizes="100vw"
+        />
+      </figure>
+
       <Movement name="camp-status" ground="house" className="pb-(--section-spacious)">
         <FilmMargin wide>
           <div className="grid gap-8 lg:grid-cols-[220px_minmax(0,1fr)] lg:gap-16">

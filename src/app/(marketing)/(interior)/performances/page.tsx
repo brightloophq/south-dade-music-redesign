@@ -3,7 +3,7 @@ import Link from 'next/link'
 
 import { Button } from '@/components/ui/Button'
 import { FilmMargin, Movement } from '@/components/film'
-import { MediaReview } from '@/components/dev/MediaReview'
+import { Photo } from '@/components/media/Photo'
 import { DeskLabel, PageIntro } from '@/components/page'
 import { performances } from '@/content/about'
 import { performanceEvidence, testimonials, testimonialsSection } from '@/content/home'
@@ -61,46 +61,28 @@ export default function PerformancesPage() {
       </PageIntro>
 
       {/*
-        THE STAGE, BEFORE ANYONE IS ON IT — EE3.
+        THE SHOWCASE, IN PROGRESS.
 
-        This page is the one most damaged by gates: all six showcase
-        photographs are blocked under I-1, there is no dated event under I-4,
-        and the only surviving event record has a date that exists solely as
-        unverified search-index metadata. It was carrying its entire subject in
-        type.
+        This page spent the whole migration as the one most damaged by gates:
+        all six showcase photographs were blocked under I-1, there is no dated
+        event under I-4, and it carried its entire subject in type. It opened on
+        a generated empty chair, then on the academy's own empty stage.
 
-        The slot needs an image that depicts the one thing that is true and
-        showable here: the stage exists, and it is waiting. It was originally
-        filled by the generated `stage-empty-chair`, which said that honestly
-        but generically. MI1 replaces it — see the note below.
+        The owner's approval means it can finally open on the thing itself — a
+        showcase in progress, students and instructors playing in front of the
+        academy backdrop with an audience watching. Audit #10.
 
-        Full-bleed and letterboxed at 2.39:1, because this is the only place
-        outside the homepage where the film's frame is the right register.
+        Full-bleed and letterboxed, because this is the only place outside the
+        homepage where the film's frame is the right register.
+
+        Approval basis: OWNER APPROVED EXISTING PORTFOLIO.
       */}
       <Movement name="stage" ground="pitch" className="relative overflow-hidden">
         <div className="relative aspect-[21/9] w-full sm:aspect-[2.39/1]">
-          {/*
-            MI1 — the GENERATED chair is replaced by the ACTUAL South Dade stage.
-
-            `stage-set-purple` is audit #54: this academy's own stage, dressed,
-            drums and congas under a purple wash, the academy banner and phone
-            number visible beside them. Nobody is on it.
-
-            A generated chair said "a stage is waiting". This says "*this* stage
-            is waiting, and it is theirs" — which is the whole difference MI1
-            exists to test. The generated plate stays in the repository and is
-            simply no longer used here.
-
-            ⚠️ PREVIEW ONLY. Copyright (I-7) unconfirmed.
-          */}
-          <MediaReview
-            asset="stage-set-purple"
-            job="Performances — the academy's own stage, dressed and empty"
-            alt="The South Dade Music stage set for a performance: a drum kit, congas and keyboards under purple stage lighting, with the academy's banner beside them. No performers are present."
-            fallback="stage-empty-chair"
-            fallbackAlt="A single wooden chair alone on a bare stage floor, lit by one warm beam through haze."
-            fallbackPosition="center center"
-            position="center 58%"
+          <Photo
+            id="band-showcase"
+            alt="A South Dade Music showcase in progress: students and instructors performing with guitars and keyboards in front of the academy backdrop, watched by a seated audience."
+            position="center 45%"
             sizes="100vw"
           />
         </div>
@@ -153,13 +135,9 @@ export default function PerformancesPage() {
                 ⚠️ PREVIEW ONLY. I-7 unconfirmed.
               */}
               <div className="relative mt-9 aspect-[1120/1320] w-[200px] overflow-hidden bg-(--color-ground-pitch)">
-                <MediaReview
-                  asset="bass-on-stand"
-                  job="Performances — an instrument out and waiting on recital day"
+                <Photo
+                  id="bass-on-stand"
                   alt="A bass guitar resting on its stand beside a decorated table and balloons, set up for a South Dade Music recital."
-                  fallback="instrument-strings"
-                  fallbackAlt="A close study of steel strings crossing a wooden bridge, lit by one warm beam."
-                  fallbackPosition="center center"
                   position="center 45%"
                   sizes="200px"
                 />
@@ -178,6 +156,35 @@ export default function PerformancesPage() {
       </Movement>
 
       {/* Testimony instead of photography, because photography is blocked. */}
+      {/*
+        THE ENSEMBLE — approved portfolio, published.
+
+        The academy's own showcase: a full group on stage in leis, lit, with an
+        audience watching. It sits between the empty-stage opener and the
+        testimony, so the page reads stage → the night itself → what families
+        said about it.
+
+        Owner-approved existing portfolio. Audit #20.
+      */}
+      <Movement name="ensemble" ground="house" className="pb-(--section-spacious)">
+        <FilmMargin wide>
+          <hr className="border-0 border-t border-(--color-border-default)" />
+          <figure className="pt-(--section-comfortable)">
+            <div className="relative aspect-[16/10] w-full overflow-hidden bg-(--color-ground-pitch) sm:aspect-[2/1]">
+              <Photo
+                id="ensemble-leis"
+                alt="A full ensemble of South Dade Music students standing on stage in leis under coloured lights, performing to a seated audience."
+                position="center 42%"
+                sizes="100vw"
+              />
+            </div>
+            <figcaption className="mt-3 font-display text-label uppercase text-(--color-text-muted)">
+              A South Dade Music showcase
+            </figcaption>
+          </figure>
+        </FilmMargin>
+      </Movement>
+
       <Movement name="evidence" ground="house" className="pb-(--section-spacious)">
         <FilmMargin wide>
           <hr className="border-0 border-t border-(--color-border-default)" />
@@ -203,6 +210,21 @@ export default function PerformancesPage() {
           </div>
         </FilmMargin>
       </Movement>
+
+      {/*
+        THE ROOM IT HAPPENS IN — approved portfolio, published. Audit #26.
+
+        Full-bleed, directly under the quotes: the families who wrote them were
+        sitting in these chairs. No caption competes with the testimony above.
+      */}
+      <div className="relative aspect-[16/9] w-full overflow-hidden bg-(--color-ground-pitch) sm:aspect-[2.4/1]">
+        <Photo
+          id="recital-room"
+          alt="The South Dade Music recital room during a showcase: rows of families seated on folding chairs facing the lit stage."
+          position="center 55%"
+          sizes="100vw"
+        />
+      </div>
 
       {/*
         IN THE COMMUNITY — EE1.

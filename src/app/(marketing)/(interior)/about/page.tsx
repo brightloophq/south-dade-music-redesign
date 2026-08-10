@@ -3,7 +3,7 @@ import Link from 'next/link'
 
 import { Button } from '@/components/ui/Button'
 import { FilmMargin, Movement } from '@/components/film'
-import { MediaReview, hasMedia } from '@/components/dev/MediaReview'
+import { Photo } from '@/components/media/Photo'
 import { DeskLabel, DeskSection, PageIntro } from '@/components/page'
 import { about, aboutTestimonials } from '@/content/about'
 import { trialOffer } from '@/content/pages'
@@ -114,32 +114,23 @@ export default function AboutPage() {
           ⚠️ PREVIEW ONLY. I-7 unconfirmed.
         */}
         {/*
-          ⚠️ THE ONE PLACEMENT WITH NO PRODUCTION FALLBACK.
+          The academy's own banner, in its own room — now published.
 
-          Every other MediaReview on the site names an approved generated plate
-          to ship in production. This one deliberately does not, and the reason
-          is the whole point of the tiering: the banner is evidence that *this
-          business* said "build community. make music." in its own room. No
-          generated image can stand in for that without implying the academy
-          made a statement it did not make — an abstract light study here would
-          be decoration pretending to be a quotation.
-
-          So in production the image does not render, and `hasMedia()` collapses
-          the flex wrapper with it: the prose simply runs full width and there is
-          no empty box, no dark rectangle and no orphaned gap. That is the
-          correct production layout, not a degraded one.
+          Through MI1 and MI2 this was the one placement with no production
+          fallback: a generated plate could not stand in for evidence that
+          *this business* wrote "build community. make music." on a banner. The
+          owner's approval resolves that by letting the real photograph ship,
+          so the collapse branch is gone and the composition is the same in
+          every environment.
         */}
-        <div className={hasMedia() ? 'gap-9 sm:flex sm:items-start' : undefined}>
-          {hasMedia() ? (
-            <div className="relative mb-7 aspect-[441/759] w-[132px] shrink-0 overflow-hidden bg-(--color-ground-pitch) sm:mb-0 sm:w-[168px]">
-              <MediaReview
-                asset="banner"
-                job="About — the academy's own banner, in its own room"
-                alt="A South Dade Music pull-up banner standing in the teaching room, reading “build community. make music.”"
-                sizes="168px"
-              />
-            </div>
-          ) : null}
+        <div className="gap-9 sm:flex sm:items-start">
+          <div className="relative mb-7 aspect-[441/759] w-[132px] shrink-0 overflow-hidden bg-(--color-ground-pitch) sm:mb-0 sm:w-[168px]">
+            <Photo
+              id="banner"
+              alt="A South Dade Music pull-up banner standing in the teaching room, reading build community, make music."
+              sizes="168px"
+            />
+          </div>
           <div>
             {about.community.map((paragraph) => (
               <p
@@ -151,6 +142,25 @@ export default function AboutPage() {
             ))}
           </div>
         </div>
+        {/*
+          COMMUNITY — approved portfolio, published. Audit #21.
+
+          Families and staff in the room after a showcase, with the academy's
+          banner behind them. The section claims South Dade is a community
+          fixture; this is the photograph of that claim rather than another
+          sentence about it.
+        */}
+        <figure className="mt-10">
+          <div className="relative aspect-[16/10] w-full overflow-hidden bg-(--color-ground-pitch) sm:aspect-[2/1]">
+            <Photo
+              id="community-event"
+              alt="Families and staff gathered and talking in the South Dade Music room after a showcase, with the academy's banner behind them."
+              position="center 45%"
+              sizes="(min-width: 1024px) 840px, 100vw"
+            />
+          </div>
+        </figure>
+
         <p className="mt-8">
           <Link
             href="/performances"

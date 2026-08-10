@@ -1,5 +1,5 @@
 import { FilmMargin, Movement } from '@/components/film'
-import { MediaReview } from '@/components/dev/MediaReview'
+import { Photo } from '@/components/media/Photo'
 
 /**
  * SHOT 07 A→B — First Note, then the house lights. Pinned sequence №2 of 2.
@@ -174,14 +174,10 @@ export function HouseLightsReveal() {
         and the two crops are ordinary responsive classes.
       */}
       <div data-houselights-plate className="absolute inset-0">
-        <MediaReview
-          asset="stage-set-floral"
-          job="The house lights — the actual South Dade stage the whole film walks toward"
-          alt="The South Dade Music stage, dressed and empty: keyboards, a drum kit and congas under coloured lighting, with the academy's banner reading build community, make music."
-          fallback="stage-empty-chair"
-          fallbackAlt="A single wooden chair alone on a bare stage floor, lit by one warm beam through haze."
-          fallbackImgClassName="object-[88%_center] sm:object-[center_center]"
-          className="[&_img]:object-[40%_center] sm:[&_img]:object-[center_58%]"
+        <Photo
+          id="stage-floral"
+          alt="The South Dade Music stage, dressed and empty: keyboards, a drum kit and congas under coloured lighting, with the academy banner reading build community, make music."
+          imgClassName="object-[40%_center] sm:object-[center_58%]"
           sizes="100vw"
         />
       </div>

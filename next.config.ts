@@ -132,7 +132,7 @@ const images: NextConfig['images'] = {
    *   48  stage floor — the most detailed plate; boards need slightly more
    *   52  default for any future plate
    */
-  qualities: [40, 46, 48, 52],
+  qualities: [40, 46, 48, 52, 72],
 }
 
 const nextConfig: NextConfig = {

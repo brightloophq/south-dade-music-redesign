@@ -3,7 +3,7 @@ import Link from 'next/link'
 
 import { Button } from '@/components/ui/Button'
 import { FilmMargin, Movement } from '@/components/film'
-import { MediaReview } from '@/components/dev/MediaReview'
+import { Photo } from '@/components/media/Photo'
 import { DeskLabel, PageIntro } from '@/components/page'
 import { bandBuilders } from '@/content/programs'
 import { performanceEvidence, testimonialsSection } from '@/content/home'
@@ -133,14 +133,10 @@ export default function BandBuildersPage() {
                 copyright is unconfirmed.
               */}
               <div className="relative mt-10 aspect-[21/9] w-full overflow-hidden bg-(--color-ground-pitch) sm:aspect-[2.39/1]">
-                <MediaReview
-                  asset="stage-instruments"
-                  job="Band Builders — two instruments played side by side, cropped to hands"
-                  alt="A bass guitar and an electric guitar being played side by side under warm stage lighting at South Dade Music. Only the instruments and the players' hands are visible."
-                  fallback="instrument-percussion"
-                  fallbackAlt="A close study of a drum head stretched across its rim, lit by one warm beam."
-                  fallbackPosition="center center"
-                  position="center 40%"
+                <Photo
+                  id="ensemble-guitars"
+                  alt="Two South Dade Music students playing bass and electric guitar side by side on stage under coloured lights, in front of the academy banner."
+                  position="center 42%"
                   sizes="(min-width: 1024px) 840px, 100vw"
                 />
               </div>
