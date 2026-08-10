@@ -202,6 +202,33 @@ export default function LessonsPage() {
               <DeskLabel>{lessonsHub.instrumentsLabel}</DeskLabel>
             </div>
             <div className="max-w-[840px]">
+              {/*
+                MI1 — ⚠️ THIS ROUTE GETS NO AUTHENTIC PHOTOGRAPH, and the reason
+                is worth recording here rather than only in the report.
+
+                `/lessons` is the page that most wants a picture of the actual
+                teaching room, and the estate contains two of them:
+                  · audit #11 — children at keyboards, a ukulele, the SDM neon
+                    on the wall. The best interior frame in the whole estate,
+                    and 1000×667 composed almost entirely of identifiable
+                    children. I-1 blocks the frame; there is no face-free
+                    region left in it large enough to fill this slot.
+                  · audit #30 — the room with the ukulele wall, the amps and the
+                    music rug. Its one good face-free region is the ukulele
+                    rack, and that crop is already spent on `/private-lessons`.
+
+                A `room-drums` crop of #30's far wall was generated, wired here,
+                and then REJECTED on visual inspection: the honest content of
+                that corner is a microwave, plastic bags, a utility cart and
+                wire shelving. It reads as a storage room, not a teaching room,
+                and shipping it would have made the academy look worse than a
+                generated plate does. It remains in `.audit/media-review/`,
+                marked REJECTED, and is referenced by nothing.
+
+                So the plates below stay generated and stay honest about it.
+                This is the clearest single argument in MI1 for commissioning a
+                short room shoot: the gap here is not a design problem.
+              */}
               {instrumentFamilies.map((family) => {
                 const members = family.instrumentIds
                   .map((id) => instrumentPages.find((i) => i.id === id))

@@ -3,6 +3,7 @@ import Link from 'next/link'
 
 import { Button } from '@/components/ui/Button'
 import { FilmMargin, Movement } from '@/components/film'
+import { MediaReview } from '@/components/dev/MediaReview'
 import { DeskLabel, PageIntro } from '@/components/page'
 import { instrumentPages, privateLessons } from '@/content/lessons'
 import { trialOffer } from '@/content/pages'
@@ -96,6 +97,31 @@ export default function PrivateLessonsPage() {
               <DeskLabel>Why one-to-one</DeskLabel>
             </div>
             <div className="max-w-[840px]">
+              {/*
+                MI1 — the actual teaching room, beside the argument for it.
+
+                `ukulele-wall` is audit #30 cropped: six ukuleles racked under an
+                LED strip with an amplifier below, in this academy's own room.
+                **No people** — the first crop caught an adult and a child at the
+                right edge and was re-cropped after visual verification.
+
+                It is here rather than on the hub because this page is where a
+                parent decides whether one-to-one teaching is right for their
+                child, and a real room answers "what is this place?" faster than
+                any paragraph on the route could.
+
+                ⚠️ PREVIEW ONLY. Copyright (I-7) unconfirmed.
+              */}
+              <figure className="relative mb-11 aspect-[16/10] w-full max-w-[540px] overflow-hidden bg-(--color-ground-pitch)">
+                <MediaReview
+                  asset="ukulele-wall"
+                  job="Private lessons — the teaching room this happens in"
+                  alt="Six ukuleles hanging on a wall rack under an LED strip in the South Dade Music teaching room, with an amplifier and a music stand below."
+                  position="center"
+                  sizes="(min-width: 640px) 540px, 100vw"
+                />
+              </figure>
+
               <p className="max-w-[24ch] font-display text-display-md leading-[1.25] text-(--color-text-primary)">
                 {privateLessons.whyPrivate}
               </p>

@@ -2,7 +2,8 @@ import type { Metadata } from 'next'
 import Link from 'next/link'
 
 import { Button } from '@/components/ui/Button'
-import { Atmosphere, FilmMargin, GhostNumeral, Movement } from '@/components/film'
+import { FilmMargin, GhostNumeral, Movement } from '@/components/film'
+import { MediaReview } from '@/components/dev/MediaReview'
 import { DeskLabel, PageIntro } from '@/components/page'
 import { performanceEvidence, testimonialsSection } from '@/content/home'
 import { contactFacts, ninetyDayPage, trialOffer } from '@/content/pages'
@@ -256,11 +257,11 @@ export default function NinetyDayStageProgramPage() {
       {/*
         THE END — the recovered finale, the stage, and the only proof that exists.
 
-        `stage-empty-chair` is reused from /performances, and its meaning is
-        changed by composition rather than by caption. There it is the page's
-        opening image and reads as *the stage is waiting*. Here it arrives after
-        three steps of preparation, directly under the sentence about the end of
-        the ninety days, and reads as *this is where the work has been going*.
+        The plate here arrives after three steps of preparation, directly under
+        the sentence about the end of the ninety days, so it reads as *this is
+        where the work has been going*. Until MI1 it was the generated
+        `stage-empty-chair`; it is now the medals, which say the same thing
+        without having to be read as a metaphor. See the note below.
 
         Full-bleed and letterboxed, because this is the one moment on the desk
         where the film's frame is the right register — and it is immediately
@@ -271,17 +272,30 @@ export default function NinetyDayStageProgramPage() {
       */}
       <Movement name="the-end" ground="pitch" className="relative overflow-hidden">
         <div className="relative aspect-[21/9] w-full sm:aspect-[2.39/1]">
-          <Atmosphere
-            asset="stage-empty-chair"
-            job="Flagship finale — the stage the ninety days have been heading toward"
-            opacity={1}
+          {/*
+            MI1 — the generated chair gives way to what the ninety days actually
+            end in.
+
+            `medals` is audit #23: the showcase medals laid out on the table
+            before the recital, photographed at this academy. No people in the
+            frame at all.
+
+            It is a better finale than a chair because it is the *outcome*
+            rather than a metaphor for it — and it is the only image in the
+            estate that shows the end of the cycle without showing a child.
+
+            ⚠️ PREVIEW ONLY. Copyright (I-7) unconfirmed.
+          */}
+          <MediaReview
+            asset="medals"
+            job="Flagship finale — the medals laid out before the showcase"
+            alt="Rows of gold medals on red, white and blue ribbons laid out on a table before a South Dade Music showcase."
             position="center 55%"
             sizes="100vw"
-            quality={52}
           />
           <GhostNumeral
             value="90"
-            color="rgba(233,162,59,0.10)"
+            color="rgba(233,162,59,0.14)"
             className="-right-[3vw] bottom-[-12%] leading-none"
           />
         </div>

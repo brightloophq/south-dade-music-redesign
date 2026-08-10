@@ -1,6 +1,7 @@
 import { MAIN_CONTENT_ID } from '@/config/navigation'
 import { Footer } from '@/components/layout/Footer'
 import { SkipLink } from '@/components/layout/SkipLink'
+import { MediaReviewBadge } from '@/components/dev/MediaReview'
 
 /**
  * Marketing shell.
@@ -32,6 +33,8 @@ export default function MarketingLayout({ children }: { children: React.ReactNod
         {children}
       </main>
       <Footer />
+      {/* MI1 — development-only. Returns null in production. */}
+      <MediaReviewBadge />
     </>
   )
 }

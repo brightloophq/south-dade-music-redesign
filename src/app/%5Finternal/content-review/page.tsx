@@ -6,6 +6,8 @@ import {
   ASSET_VERDICT_LABELS,
   DELIVERY_LABELS,
   EE3_ASSET_DECISIONS,
+  MI1_DERIVATIVES,
+  MI1_ROUTE_COVERAGE,
   EXPERIENCE_LABELS,
   ROUTE_DELIVERY,
   experienceTotals,
@@ -791,6 +793,140 @@ export default function ContentReviewPage() {
               </figcaption>
             </figure>
           ))}
+        </div>
+      </Section>
+
+      {/* ---- MI1 authentic media ---- */}
+      <Section id="mi1" title="MI1 — authentic media integration preview (UNCLEARED)">
+        <div className="mt-3 rounded border-2 border-red-700 bg-red-50 p-4">
+          <p className="text-sm font-bold text-red-900">
+            Nothing in this section is approved to publish.
+          </p>
+          <p className="mt-2 text-[13px] leading-relaxed text-red-900">
+            Every row is a derivative of legacy southdademusic.com photography. The business&rsquo;s
+            right to license that photography is unconfirmed (gate I-7), so a row that looks good
+            here is still blocked. The bytes are not in this repository: they live in{' '}
+            <code className="font-mono">.audit/media-review/</code>, which is gitignored, and reach
+            a browser only through the development-only handler at{' '}
+            <code className="font-mono">/_media-review/[asset]</code>, which 404s in production.
+            There are deliberately no thumbnails in this table — serving them from{' '}
+            <code className="font-mono">public/</code> is precisely the Phase 4D exposure. Open the
+            routes in <code className="font-mono">next dev</code> instead.
+          </p>
+        </div>
+
+        <div className="mt-5 grid grid-cols-2 gap-3 sm:grid-cols-5">
+          <Stat label="Derivatives generated" value={MI1_DERIVATIVES.length} />
+          <Stat
+            label="Currently rendered"
+            value={MI1_DERIVATIVES.filter((d) => d.inUse).length}
+            tone="ok"
+          />
+          <Stat
+            label="Rejected on inspection"
+            value={MI1_DERIVATIVES.filter((d) => !d.inUse).length}
+            tone="warn"
+          />
+          <Stat
+            label="Routes with authentic media"
+            value={`${MI1_ROUTE_COVERAGE.filter((r) => r.authentic > 0).length}/${MI1_ROUTE_COVERAGE.length}`}
+          />
+          <Stat label="Production-approved" value={0} tone="bad" />
+        </div>
+
+        <h3 className="mt-8 text-sm font-bold uppercase tracking-wide text-neutral-900">
+          Source → crop → route → role
+        </h3>
+        <div className="mt-3 overflow-x-auto">
+          <table className="w-full min-w-[1500px] border-collapse text-[11px]">
+            <thead>
+              <tr className="bg-neutral-200 text-left">
+                <th className="border border-neutral-300 p-2">Derivative</th>
+                <th className="border border-neutral-300 p-2">Tier</th>
+                <th className="border border-neutral-300 p-2">Source</th>
+                <th className="border border-neutral-300 p-2">Crop</th>
+                <th className="border border-neutral-300 p-2">Output</th>
+                <th className="border border-neutral-300 p-2">Route</th>
+                <th className="border border-neutral-300 p-2">Design role</th>
+                <th className="border border-neutral-300 p-2">Face-free?</th>
+                <th className="border border-neutral-300 p-2">In use?</th>
+                <th className="border border-neutral-300 p-2">Status</th>
+                <th className="border border-neutral-300 p-2">Approval required?</th>
+              </tr>
+            </thead>
+            <tbody>
+              {MI1_DERIVATIVES.map((d) => (
+                <tr key={d.id} className="align-top odd:bg-white even:bg-neutral-50">
+                  <td className="border border-neutral-300 p-2 font-mono font-semibold">{d.id}</td>
+                  <td className="border border-neutral-300 p-2">
+                    <Pill tone={d.tier === 'A' ? 'ok' : d.tier === 'B' ? 'warn' : 'bad'}>
+                      {d.tier}
+                    </Pill>
+                  </td>
+                  <td className="max-w-[200px] border border-neutral-300 p-2">
+                    <span className="font-mono">#{d.sourceIndex}</span> {d.sourceFilename}
+                    <span className="block text-neutral-500">{d.sourceDimensions}</span>
+                  </td>
+                  <td className="max-w-[190px] border border-neutral-300 p-2">{d.crop}</td>
+                  <td className="border border-neutral-300 p-2 font-mono">{d.outputDimensions}</td>
+                  <td className="border border-neutral-300 p-2 font-mono">
+                    {d.route ?? <span className="text-neutral-400">none</span>}
+                  </td>
+                  <td className="max-w-[220px] border border-neutral-300 p-2">{d.designRole}</td>
+                  <td className="border border-neutral-300 p-2">
+                    <YesNo value={d.faceFree} />
+                  </td>
+                  <td className="border border-neutral-300 p-2">
+                    <YesNo value={d.inUse} />
+                  </td>
+                  <td className="max-w-[330px] border border-neutral-300 p-2 leading-relaxed">
+                    {d.status}
+                  </td>
+                  <td className="border border-neutral-300 p-2">
+                    <Pill tone="bad">REQUIRED</Pill>
+                    <span className="mt-1 block text-neutral-600">{d.gate}</span>
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+
+        <h3 className="mt-8 text-sm font-bold uppercase tracking-wide text-neutral-900">
+          Authentic media coverage, per route
+        </h3>
+        <p className="mt-2 max-w-[80ch] text-[13px] leading-relaxed text-neutral-700">
+          Counted in a real browser at 1440×900 and 390×844 after a full scroll, not counted from
+          source. The two zero rows are the honest result: they are where the design wants a
+          photograph and the estate does not have one.
+        </p>
+        <div className="mt-3 overflow-x-auto">
+          <table className="w-full border-collapse text-[11px]">
+            <thead>
+              <tr className="bg-neutral-200 text-left">
+                <th className="border border-neutral-300 p-2">Route</th>
+                <th className="border border-neutral-300 p-2">Authentic</th>
+                <th className="border border-neutral-300 p-2">Generated</th>
+                <th className="border border-neutral-300 p-2">Why none</th>
+              </tr>
+            </thead>
+            <tbody>
+              {MI1_ROUTE_COVERAGE.map((r) => (
+                <tr key={r.route} className="align-top odd:bg-white even:bg-neutral-50">
+                  <td className="border border-neutral-300 p-2 font-mono font-semibold">
+                    {r.route}
+                  </td>
+                  <td className="border border-neutral-300 p-2">
+                    <Pill tone={r.authentic > 0 ? 'ok' : 'bad'}>{r.authentic}</Pill>
+                  </td>
+                  <td className="border border-neutral-300 p-2 font-mono">{r.generated}</td>
+                  <td className="max-w-[640px] border border-neutral-300 p-2 leading-relaxed">
+                    {r.note ?? <span className="text-neutral-400">—</span>}
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
         </div>
       </Section>
 

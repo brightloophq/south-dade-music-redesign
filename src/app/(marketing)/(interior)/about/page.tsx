@@ -3,6 +3,7 @@ import Link from 'next/link'
 
 import { Button } from '@/components/ui/Button'
 import { FilmMargin, Movement } from '@/components/film'
+import { MediaReview } from '@/components/dev/MediaReview'
 import { DeskLabel, DeskSection, PageIntro } from '@/components/page'
 import { about, aboutTestimonials } from '@/content/about'
 import { trialOffer } from '@/content/pages'
@@ -95,14 +96,43 @@ export default function AboutPage() {
       </DeskSection>
 
       <DeskSection label="In the community" id="community">
-        {about.community.map((paragraph) => (
-          <p
-            key={paragraph}
-            className="mt-5 max-w-[62ch] font-body text-body-lg text-(--color-text-secondary) first:mt-0"
-          >
-            {paragraph}
-          </p>
-        ))}
+        {/*
+          MI1 — the academy's own words, photographed in its own room.
+
+          `banner` is audit #68: the pull-up banner that stands in the teaching
+          room, reading *build community. make music.* Tier A — no people in the
+          frame.
+
+          This is an INLINE PROOF, not atmosphere, and it earns that placement:
+          this section's entire claim is that the academy is a community
+          fixture, and the banner is the one piece of first-party material in
+          the whole estate where the academy states that itself, physically, in
+          the room. It is set small and beside the prose — the size of a thing
+          on a wall — rather than as a plate, because it is evidence for a
+          sentence, not a scene.
+
+          ⚠️ PREVIEW ONLY. I-7 unconfirmed.
+        */}
+        <div className="gap-9 sm:flex sm:items-start">
+          <div className="relative mb-7 aspect-[441/759] w-[132px] shrink-0 overflow-hidden bg-(--color-ground-pitch) sm:mb-0 sm:w-[168px]">
+            <MediaReview
+              asset="banner"
+              job="About — the academy's own banner, in its own room"
+              alt="A South Dade Music pull-up banner standing in the teaching room, reading “build community. make music.”"
+              sizes="168px"
+            />
+          </div>
+          <div>
+            {about.community.map((paragraph) => (
+              <p
+                key={paragraph}
+                className="mt-5 max-w-[62ch] font-body text-body-lg text-(--color-text-secondary) first:mt-0"
+              >
+                {paragraph}
+              </p>
+            ))}
+          </div>
+        </div>
         <p className="mt-8">
           <Link
             href="/performances"

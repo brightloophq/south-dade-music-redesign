@@ -1117,3 +1117,238 @@ export function experienceTotals(items: readonly ExperienceItem[] = EXPERIENCE_I
 export function rankedItems(items: readonly ExperienceItem[] = EXPERIENCE_ITEMS): ExperienceItem[] {
   return [...items].sort((a, b) => RANK[a.after] - RANK[b.after] || a.category.localeCompare(b.category))
 }
+
+/* ────────────────────────────────────────────────────────────────────────────
+   MI1 — AUTHENTIC MEDIA INTEGRATION PREVIEW
+   ──────────────────────────────────────────────────────────────────────────── */
+
+export type MediaTier = 'A' | 'B' | 'C'
+
+export const MEDIA_TIER_LABELS: Record<MediaTier, string> = {
+  A: 'A — no people in the original frame',
+  B: 'B — face-free crop of a people-bearing original',
+  C: 'C — identifiable people (never previewed)',
+}
+
+export interface Mi1Derivative {
+  /** Derivative name, without extension. */
+  id: string
+  tier: MediaTier
+  /** Index in the 67-image visual census. */
+  sourceIndex: number
+  sourceFilename: string
+  sourceDimensions: string
+  /** What the crop step did, in words. */
+  crop: string
+  outputDimensions: string
+  /** Route it is wired to, or null when it is wired to nothing. */
+  route: string | null
+  /** The narrative job. A plate without a job does not ship. */
+  designRole: string
+  faceFree: boolean
+  /** Whether it survived visual inspection and is currently rendered. */
+  inUse: boolean
+  status: string
+  /** Always true in MI1. Nothing here is production-approved. */
+  productionApprovalRequired: true
+  /** Which gate is actually blocking it. */
+  gate: string
+}
+
+/**
+ * ## Every row here is UNCLEARED
+ *
+ * `productionApprovalRequired` is typed as the literal `true` because there is
+ * no legitimate value for it in MI1. These are derivatives of legacy
+ * southdademusic.com photography; the business's right to license them is
+ * unconfirmed (gate I-7), and looking good in a preview is not clearance.
+ *
+ * ## The bytes are not in this repository
+ *
+ * They live in `.audit/media-review/`, which is gitignored, and reach a browser
+ * only through the development-only handler at `/_media-review/[asset]`. There
+ * is deliberately no `thumbnail` field on this interface: rendering these in
+ * the review tool from `public/` is exactly the Phase 4D exposure, and the
+ * reviewer is expected to open the routes in `next dev` instead.
+ *
+ * ## Two rows record rejections, and they are the useful ones
+ *
+ * `room-drums` and the first `bass-on-stand` placement both passed every
+ * automated check and both failed visual inspection. They are kept in the table
+ * because a media audit that only lists what worked is not an audit.
+ */
+export const MI1_DERIVATIVES: readonly Mi1Derivative[] = [
+  {
+    id: 'stage-set-floral',
+    tier: 'A',
+    sourceIndex: 65,
+    sourceFilename: '0_p-NH2ecjjuoHdJct-1024x683-2.png',
+    sourceDimensions: '1024×683',
+    crop: 'None — used whole',
+    outputDimensions: '1024×683',
+    route: '/',
+    designRole: 'FULL-BLEED EDITORIAL — the homepage House join',
+    faceFree: true,
+    inUse: true,
+    status:
+      'Preview only. The academy’s own dressed stage — Casio keyboards, drum kit, floral drape, SDM banner. Nobody on it.',
+    productionApprovalRequired: true,
+    gate: 'I-7 photographer copyright',
+  },
+  {
+    id: 'stage-set-purple',
+    tier: 'A',
+    sourceIndex: 54,
+    sourceFilename: 'Exposure-scaled.jpg',
+    sourceDimensions: '2560×1707',
+    crop: 'Trimmed to the stage, purple wash retained',
+    outputDimensions: '2200×1467',
+    route: '/performances',
+    designRole: 'FULL-BLEED EDITORIAL — replaces the generated empty chair',
+    faceFree: true,
+    inUse: true,
+    status:
+      'Preview only. Replaces a generated chair that said “a stage is waiting” with this academy’s stage, which says “this stage is waiting”.',
+    productionApprovalRequired: true,
+    gate: 'I-7 photographer copyright',
+  },
+  {
+    id: 'medals',
+    tier: 'A',
+    sourceIndex: 23,
+    sourceFilename: 'P1088548.jpg',
+    sourceDimensions: '2000×1500',
+    crop: 'Letterboxed to the medals on the table',
+    outputDimensions: '1800×872',
+    route: '/programs/90-day-stage-program',
+    designRole: 'PROGRAMME MOMENT — the flagship finale',
+    faceFree: true,
+    inUse: true,
+    status:
+      'Preview only. The one piece of first-party material that depicts an outcome. It is the reason the finale no longer needs a generated chair.',
+    productionApprovalRequired: true,
+    gate: 'I-7 photographer copyright',
+  },
+  {
+    id: 'stage-instruments',
+    tier: 'B',
+    sourceIndex: 29,
+    sourceFilename: 'P1088639.jpg',
+    sourceDimensions: '2000×1500',
+    crop: 'Cropped below the faces — instruments and hands only',
+    outputDimensions: '1440×675',
+    route: '/programs/band-builders',
+    designRole: 'FULL-BLEED EDITORIAL — replaces three generated object studies',
+    faceFree: true,
+    inUse: true,
+    status:
+      'Preview only. Two teenagers playing bass and electric guitar side by side. The generated triptych argued “together” by arrangement; this frame simply is it.',
+    productionApprovalRequired: true,
+    gate: 'I-7 copyright; I-1 applies to the original, which never ships',
+  },
+  {
+    id: 'ukulele-wall',
+    tier: 'B',
+    sourceIndex: 30,
+    sourceFilename: 'IMG_5012-scaled.jpg',
+    sourceDimensions: '2560×1440',
+    crop: 'Cropped to the ukulele rack on the wall',
+    outputDimensions: '768×605',
+    route: '/private-lessons',
+    designRole: 'FULL-BLEED EDITORIAL',
+    faceFree: true,
+    inUse: true,
+    status:
+      'Preview only. The only good face-free region of the single best interior frame in the estate — which is why /lessons could not also have one.',
+    productionApprovalRequired: true,
+    gate: 'I-7 copyright; I-1 applies to the original, which never ships',
+  },
+  {
+    id: 'banner',
+    tier: 'A',
+    sourceIndex: 68,
+    sourceFilename: 'New-Project.png',
+    sourceDimensions: '441×759',
+    crop: 'None — used whole',
+    outputDimensions: '441×759',
+    route: '/about',
+    designRole: 'INLINE PROOF — “in the community”',
+    faceFree: true,
+    inUse: true,
+    status:
+      'Preview only. The academy’s pull-up banner, in its own room, reading “build community. make music.” It is the only first-party artefact where the business states its own claim physically.',
+    productionApprovalRequired: true,
+    gate: 'I-7 photographer copyright',
+  },
+  {
+    id: 'bass-on-stand',
+    tier: 'A',
+    sourceIndex: 24,
+    sourceFilename: 'P1088541.jpg',
+    sourceDimensions: '2000×1500',
+    crop: 'Portrait crop to the bass and the table edge',
+    outputDimensions: '1120×1320',
+    route: '/performances',
+    designRole: 'MARGINAL IMAGE — beside “no dated event yet”',
+    faceFree: true,
+    inUse: true,
+    status:
+      '⚠️ RE-HOMED AFTER INSPECTION. First wired to /contact as “the room behind the address”. The photograph shows a party table and balloons on recital day and does not support that caption, so it moved to the section whose claim it actually matches.',
+    productionApprovalRequired: true,
+    gate: 'I-7 photographer copyright',
+  },
+  {
+    id: 'room-drums',
+    tier: 'B',
+    sourceIndex: 30,
+    sourceFilename: 'IMG_5012-scaled.jpg',
+    sourceDimensions: '2560×1440',
+    crop: 'Cropped to the far wall of the teaching room',
+    outputDimensions: '1024×792',
+    route: null,
+    designRole: 'REJECTED — wired to /lessons, then reverted',
+    faceFree: true,
+    inUse: false,
+    status:
+      '⚠️ REJECTED ON VISUAL INSPECTION. The honest content of this corner is a microwave, plastic bags, a utility cart and wire shelving. It reads as a storage room, not a teaching room, and would have made the academy look worse than a generated plate does. Retained on disk as the record; referenced by nothing.',
+    productionApprovalRequired: true,
+    gate: 'Rejected on quality before any gate applies',
+  },
+]
+
+export interface Mi1RouteCoverage {
+  route: string
+  /** Authentic photographs currently rendered on this route. */
+  authentic: number
+  /** Approved generated plates currently rendered. */
+  generated: number
+  /** Set when the route carries no authentic media, explaining why. */
+  note: string | null
+}
+
+/**
+ * Measured in a real browser at 1440×900 and 390×844 by counting
+ * `[data-media-review]` and `[data-atmosphere]` after a full scroll — not
+ * counted from source. The two zero rows are the honest output of MI1 and are
+ * the strongest argument in it for commissioning a short shoot.
+ */
+export const MI1_ROUTE_COVERAGE: readonly Mi1RouteCoverage[] = [
+  { route: '/', authentic: 1, generated: 5, note: null },
+  { route: '/programs/90-day-stage-program', authentic: 1, generated: 1, note: null },
+  { route: '/programs/band-builders', authentic: 1, generated: 1, note: null },
+  { route: '/private-lessons', authentic: 1, generated: 1, note: null },
+  { route: '/performances', authentic: 2, generated: 1, note: null },
+  { route: '/about', authentic: 1, generated: 1, note: null },
+  {
+    route: '/lessons',
+    authentic: 0,
+    generated: 4,
+    note: 'No usable frame. Audit #11 is the best interior photograph in the estate and is 1000×667 composed almost entirely of identifiable children — no face-free region survives at this size. Audit #30’s one good face-free region is already spent on /private-lessons.',
+  },
+  {
+    route: '/contact',
+    authentic: 0,
+    generated: 1,
+    note: 'The estate contains no exterior, no entrance, no reception and no street view in any of its 67 images. A contact page wants exactly one photograph and it does not exist.',
+  },
+]

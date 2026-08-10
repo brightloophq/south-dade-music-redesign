@@ -2,6 +2,7 @@ import Link from 'next/link'
 
 import { Button } from '@/components/ui/Button'
 import { Atmosphere, DESK_SENTINEL_ID, FilmMargin, Movement } from '@/components/film'
+import { MediaReview } from '@/components/dev/MediaReview'
 import {
   finalCta,
   house,
@@ -91,6 +92,38 @@ function TheHouse() {
       aria-labelledby="house-heading"
       className="py-(--section-feature)"
     >
+      {/*
+        MI1 — the destination, immediately before the house lights find the
+        wordmark.
+
+        `stage-set-floral` is audit #65: this academy's own stage, dressed,
+        Casio keyboards and a drum kit under a green-and-purple wash, with the
+        SOUTH DADE MUSIC banner reading "build community. make music." at the
+        left. Nobody is on it.
+
+        The film has just walked a child toward a stage for seven screens
+        without ever showing one. This is the answer to "where has all of this
+        been going" — and it is a real answer rather than an atmospheric one.
+        It sits at the join, so the last thing the dark does is hand over to a
+        photograph of the actual room, and the first thing the light does is
+        name the business.
+
+        The generated plates in the Walk and the Turn are KEPT: they are
+        abstract by design and carry the film's interior weather, which a
+        documentary photograph cannot do without breaking the fiction.
+
+        ⚠️ PREVIEW ONLY. Copyright (I-7) unconfirmed.
+      */}
+      <div className="relative aspect-[21/9] w-full overflow-hidden bg-(--color-ground-pitch) sm:aspect-[2.39/1]">
+        <MediaReview
+          asset="stage-set-floral"
+          job="The join — the actual South Dade stage the film has been walking toward"
+          alt="The South Dade Music stage, dressed and empty: keyboards, a drum kit and congas under coloured lighting, with the academy's banner reading build community, make music."
+          position="center 62%"
+          sizes="100vw"
+        />
+      </div>
+
       {/*
         THE PROGRAMME IN YOUR HANDS — EE2.
 
@@ -208,6 +241,7 @@ function Programs() {
       <h2 id="programs-heading" className="sr-only">
         {programsSection.heading}
       </h2>
+
       <DeskRow label={programsSection.heading}>
         <ol className="w-full">
           {programs.map((program, index) => {

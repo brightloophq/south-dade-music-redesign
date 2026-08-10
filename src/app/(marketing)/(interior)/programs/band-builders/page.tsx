@@ -2,7 +2,8 @@ import type { Metadata } from 'next'
 import Link from 'next/link'
 
 import { Button } from '@/components/ui/Button'
-import { Atmosphere, FilmMargin, Movement } from '@/components/film'
+import { FilmMargin, Movement } from '@/components/film'
+import { MediaReview } from '@/components/dev/MediaReview'
 import { DeskLabel, PageIntro } from '@/components/page'
 import { bandBuilders } from '@/content/programs'
 import { performanceEvidence, testimonialsSection } from '@/content/home'
@@ -66,11 +67,14 @@ export default function BandBuildersPage() {
    */
   const showQuote = performanceEvidence.quotes.find((q) => q.id === 'romi')
 
-  const PLATES = [
-    { asset: 'instrument-keys', label: 'Keys' },
-    { asset: 'instrument-strings', label: 'Strings' },
-    { asset: 'instrument-percussion', label: 'Percussion' },
-  ]
+  /*
+   * The three instrument families this programme puts in one room. Until MI1
+   * each of these also named a generated object study and the row rendered as a
+   * triptych; the studies were replaced by one real photograph of two students
+   * playing side by side, so what survives here is the label set — the names
+   * still belong under the image, the generated plates no longer do.
+   */
+  const FAMILIES = ['Keys', 'Strings', 'Percussion']
 
   return (
     <>
@@ -88,14 +92,15 @@ export default function BandBuildersPage() {
       {/*
         ALONE → TOGETHER.
 
-        Not a gallery. Three object studies set in one row under a single
-        continuous rule: separate instruments, one shared line. The composition
-        is the argument — this is the only programme on the site where the
+        Not a gallery. One image under a single continuous rule, with the three
+        family names beneath it. This is the only programme on the site whose
         subject is the relationship *between* instruments rather than any one of
-        them, and the three plates say that faster than a sentence can.
+        them, so the image has to show more than one instrument in play.
 
-        ⚠️ Object studies. They do not depict this academy, its students or its
-        rooms, and nothing here implies they do.
+        Until MI1 that argument was made by arrangement: three generated object
+        studies in a row, separate but sharing a line. It is now made by a
+        photograph of two students actually playing side by side. Same claim,
+        one fewer inference for the reader.
       */}
       <Movement name="alone-together" ground="house" className="pb-(--section-spacious)">
         <FilmMargin wide>
@@ -109,27 +114,38 @@ export default function BandBuildersPage() {
                 {bandBuilders.premise}
               </p>
 
-              <div className="mt-10 grid grid-cols-3 gap-3 sm:gap-5">
-                {PLATES.map((plate) => (
-                  <div key={plate.asset}>
-                    <div className="relative h-[92px] overflow-hidden bg-(--color-ground-pitch) sm:h-[132px]">
-                      <Atmosphere
-                        asset={plate.asset}
-                        job={`Band Builders — ${plate.label}, one voice of the ensemble`}
-                        opacity={1}
-                        position="center"
-                        sizes="(min-width: 640px) 260px, 33vw"
-                        quality={52}
-                      />
-                    </div>
-                    <p className="mt-3 font-display text-label uppercase text-(--color-text-muted)">
-                      {plate.label}
-                    </p>
-                  </div>
-                ))}
+              {/*
+                MI1 — three generated object studies replaced by one real one.
+
+                `stage-instruments` is audit #29: a bass and an electric guitar
+                being played side by side under this academy's stage lights,
+                cropped to the instruments and the players' hands. **No faces.**
+
+                The generated triptych argued "separate instruments, shared
+                space" by arrangement. This photograph *is* two people playing
+                together — which is the programme, and it does in one frame what
+                three studies were doing by implication. The generated plates
+                remain approved and in use on `/lessons`, where a uniform index
+                is the right object; here they were always the weaker answer.
+
+                ⚠️ PREVIEW ONLY. This is a crop of a photograph containing
+                minors. The crop is face-free; the original never ships. I-7
+                copyright is unconfirmed.
+              */}
+              <div className="relative mt-10 aspect-[21/9] w-full overflow-hidden bg-(--color-ground-pitch) sm:aspect-[2.39/1]">
+                <MediaReview
+                  asset="stage-instruments"
+                  job="Band Builders — two instruments played side by side, cropped to hands"
+                  alt="A bass guitar and an electric guitar being played side by side under warm stage lighting at South Dade Music. Only the instruments and the players' hands are visible."
+                  position="center 40%"
+                  sizes="(min-width: 1024px) 840px, 100vw"
+                />
               </div>
-              {/* One rule under all three: separate instruments, shared space. */}
-              <div className="mt-5 h-px w-full bg-(--color-text-primary)" />
+              <p className="mt-3 font-display text-label uppercase text-(--color-text-muted)">
+                {FAMILIES.join(' · ')}
+              </p>
+              {/* One rule under all of it: separate instruments, shared space. */}
+              <div className="mt-3 h-px w-full bg-(--color-text-primary)" />
             </div>
           </div>
         </FilmMargin>

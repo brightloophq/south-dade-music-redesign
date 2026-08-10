@@ -2,7 +2,8 @@ import type { Metadata } from 'next'
 import Link from 'next/link'
 
 import { Button } from '@/components/ui/Button'
-import { Atmosphere, FilmMargin, Movement } from '@/components/film'
+import { FilmMargin, Movement } from '@/components/film'
+import { MediaReview } from '@/components/dev/MediaReview'
 import { DeskLabel, PageIntro } from '@/components/page'
 import { performances } from '@/content/about'
 import { performanceEvidence, testimonials, testimonialsSection } from '@/content/home'
@@ -68,25 +69,36 @@ export default function PerformancesPage() {
         unverified search-index metadata. It was carrying its entire subject in
         type.
 
-        `stage-empty-chair` is the honest image for exactly that condition. It
-        is drawn from the direction's own shot list — *"An empty chair on a
-        stage, lit"* — and it depicts the one thing that is true and showable
-        here: the stage exists, and it is waiting. It contains no person, no
-        audience and no identifiable venue, so it says nothing about this
-        academy that this academy has not earned.
+        The slot needs an image that depicts the one thing that is true and
+        showable here: the stage exists, and it is waiting. It was originally
+        filled by the generated `stage-empty-chair`, which said that honestly
+        but generically. MI1 replaces it — see the note below.
 
         Full-bleed and letterboxed at 2.39:1, because this is the only place
         outside the homepage where the film's frame is the right register.
       */}
       <Movement name="stage" ground="pitch" className="relative overflow-hidden">
         <div className="relative aspect-[21/9] w-full sm:aspect-[2.39/1]">
-          <Atmosphere
-            asset="stage-empty-chair"
-            job="Performances — a single lit chair on bare boards: the stage before anyone is on it"
-            opacity={1}
-            position="center 55%"
+          {/*
+            MI1 — the GENERATED chair is replaced by the ACTUAL South Dade stage.
+
+            `stage-set-purple` is audit #54: this academy's own stage, dressed,
+            drums and congas under a purple wash, the academy banner and phone
+            number visible beside them. Nobody is on it.
+
+            A generated chair said "a stage is waiting". This says "*this* stage
+            is waiting, and it is theirs" — which is the whole difference MI1
+            exists to test. The generated plate stays in the repository and is
+            simply no longer used here.
+
+            ⚠️ PREVIEW ONLY. Copyright (I-7) unconfirmed.
+          */}
+          <MediaReview
+            asset="stage-set-purple"
+            job="Performances — the academy's own stage, dressed and empty"
+            alt="The South Dade Music stage set for a performance: a drum kit, congas and keyboards under purple stage lighting, with the academy's banner beside them. No performers are present."
+            position="center 58%"
             sizes="100vw"
-            quality={52}
           />
         </div>
       </Movement>
@@ -116,6 +128,36 @@ export default function PerformancesPage() {
               <p className="mt-7 max-w-[62ch] font-body text-body-lg text-(--color-text-secondary)">
                 {performances.upcoming.body}
               </p>
+
+              {/*
+                MI1 — an instrument waiting, beside the section that says there
+                is nothing dated to announce yet.
+
+                `bass-on-stand` is audit #24: a bass on its stand beside the
+                decorated table on a recital day. Tier A — no people in the
+                frame at all, so I-7 copyright is the only gate on it.
+
+                It is captioned for what it actually is. This crop was first
+                wired to `/contact` under the caption "the room behind the
+                address" and reverted, because that is not what the photograph
+                shows — it shows a party table and balloons on show day. Here
+                the subject and the claim agree: the room is dressed, the
+                instrument is out, and the date is not announced.
+
+                MARGINAL image — small, beside the prose, carrying no weight the
+                copy does not already carry.
+
+                ⚠️ PREVIEW ONLY. I-7 unconfirmed.
+              */}
+              <div className="relative mt-9 aspect-[1120/1320] w-[200px] overflow-hidden bg-(--color-ground-pitch)">
+                <MediaReview
+                  asset="bass-on-stand"
+                  job="Performances — an instrument out and waiting on recital day"
+                  alt="A bass guitar resting on its stand beside a decorated table and balloons, set up for a South Dade Music recital."
+                  position="center 45%"
+                  sizes="200px"
+                />
+              </div>
               <p className="mt-8">
                 <Link
                   href={performances.upcoming.action.href}

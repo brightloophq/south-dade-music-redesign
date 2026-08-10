@@ -134,6 +134,25 @@ export default function ContactPage() {
             <div className="lg:pt-3">
               <DeskLabel>Visit</DeskLabel>
             </div>
+            {/*
+              MI1 — ⚠️ THIS ROUTE GETS NO AUTHENTIC PHOTOGRAPH.
+
+              A contact page wants one specific picture: the building, the door,
+              the sign you look for from the car park. The estate contains none
+              of them. There is no exterior frame, no entrance, no reception and
+              no street view anywhere in 67 fetched images.
+
+              A `bass-on-stand` crop was wired here first and then reverted: it
+              is a real, people-free, Tier A photograph, but its actual subject
+              is a bass waiting beside a decorated table on recital day, and
+              captioning that as "the room behind the address" would have been
+              me writing a caption the photograph does not support. It now sits
+              on `/performances`, where its subject is true.
+
+              The address stays unillustrated until someone photographs the
+              front of Unit 117 — which is a twenty-minute errand, and is listed
+              as such in the MI1 report.
+            */}
             <div className="grid max-w-[840px] gap-10 sm:grid-cols-2">
               <address className="not-italic" id="visit">
                 <p className="font-body text-display-md leading-[1.3] text-(--color-text-primary)">

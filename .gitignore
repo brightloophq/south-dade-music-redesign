@@ -45,3 +45,37 @@ storybook-static
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# ---------------------------------------------------------------------------
+# Audit-only legacy asset area.
+#
+# Copies of legacy southdademusic.com assets pulled down for visual
+# provenance/consent review. They are NOT approved media and NOT deployable:
+#
+#   · never committed
+#   · never imported by application code
+#   · never referenced by a public route
+#   · never copied into public/
+#
+# Gates I-1 (photo-release consent) and I-7 (photographer copyright) remain in
+# force for every file in here. Phase 4D put five such files in public/ on
+# filename evidence alone; all five were photographs of identifiable people,
+# two including children. This directory exists so that inspection can happen
+# WITHOUT that risk.
+# ---------------------------------------------------------------------------
+.audit/
+
+# ---------------------------------------------------------------------------
+# MI1 local media-review derivatives.
+#
+# Crops and resizes generated from .audit/legacy-assets/ so the team can see
+# how authentic South Dade photography changes the approved design.
+#
+# ⚠️ PREVIEW ONLY — NOT CLEARED FOR PRODUCTION.
+#   · every derivative still sits behind I-7 (photographer copyright)
+#   · people-bearing sources stay in .audit/ and are never derived from here
+#   · this directory is gitignored so it cannot enter a commit or a deploy
+#   · a development-only badge marks any page rendering these
+# Provenance for each file: # (moved to .audit/media-review — see below)_derivatives.json
+# ---------------------------------------------------------------------------
+public/_media-review/
