@@ -93,36 +93,23 @@ function TheHouse() {
       className="py-(--section-feature)"
     >
       {/*
-        MI1 — the destination, immediately before the house lights find the
-        wordmark.
+        MI2 — the `stage-set-floral` photograph MOVED OUT of this movement.
 
-        `stage-set-floral` is audit #65: this academy's own stage, dressed,
-        Casio keyboards and a drum kit under a green-and-purple wash, with the
-        SOUTH DADE MUSIC banner reading "build community. make music." at the
-        left. Nobody is on it.
+        MI1 put it here as a 2.39:1 band immediately above the business
+        introduction. That was the right asset in the wrong place: the film had
+        just walked a child toward a stage for seven and a half viewports, and
+        the stage arrived as a strip, several hundred pixels after a gradient
+        that was separately trying to be the same payoff.
 
-        The film has just walked a child toward a stage for seven screens
-        without ever showing one. This is the answer to "where has all of this
-        been going" — and it is a real answer rather than an atmospheric one.
-        It sits at the join, so the last thing the dark does is hand over to a
-        photograph of the actual room, and the first thing the light does is
-        name the business.
+        It is now the whole of `HouseLightsReveal` directly above this section —
+        a full viewport, revealed as the lights come up. So this movement goes
+        back to being what it should always have been: the business introducing
+        itself in type, on cream, immediately after you have seen its room.
 
-        The generated plates in the Walk and the Turn are KEPT: they are
+        The generated plates in the Walk and the Reframe are KEPT: they are
         abstract by design and carry the film's interior weather, which a
         documentary photograph cannot do without breaking the fiction.
-
-        ⚠️ PREVIEW ONLY. Copyright (I-7) unconfirmed.
       */}
-      <div className="relative aspect-[21/9] w-full overflow-hidden bg-(--color-ground-pitch) sm:aspect-[2.39/1]">
-        <MediaReview
-          asset="stage-set-floral"
-          job="The join — the actual South Dade stage the film has been walking toward"
-          alt="The South Dade Music stage, dressed and empty: keyboards, a drum kit and congas under coloured lighting, with the academy's banner reading build community, make music."
-          position="center 62%"
-          sizes="100vw"
-        />
-      </div>
 
       {/*
         THE PROGRAMME IN YOUR HANDS — EE2.
@@ -242,7 +229,30 @@ function Programs() {
         {programsSection.heading}
       </h2>
 
-      <DeskRow label={programsSection.heading}>
+      {/*
+        MI2 — the playbill keeps its numbered editorial system and gains a rail.
+
+        §7 of the brief: elegant, but too much like a printed catalogue. The
+        answer is not cards — a card grid would throw away the one-column
+        hierarchy where the flagship is simply set larger, which is the whole
+        idea. It is a third column.
+
+        `bass-hands` is audit #31, cropped to the scroll of an upright bass and
+        a hand on its neck. It runs the full height of the list and sticks while
+        the six programmes scroll past it, so the rail reads as the thing all
+        six lead to rather than as a picture of any one of them.
+
+        Tier B: the original frame contains a student, the crop contains no part
+        of any face, and the original never leaves `.audit/`.
+
+        ⚠️ PREVIEW ONLY. I-7 unconfirmed.
+      */}
+      <FilmMargin wide>
+        <div className="grid gap-8 lg:grid-cols-[220px_minmax(0,1fr)_240px] lg:gap-14">
+          <div className="lg:pt-2">
+            <DeskLabel>{programsSection.heading}</DeskLabel>
+          </div>
+          <div className="max-w-[840px]">
         <ol className="w-full">
           {programs.map((program, index) => {
             const flagship = index === 0
@@ -299,10 +309,36 @@ function Programs() {
             )
           })}
         </ol>
-        <p className="mt-8 max-w-[62ch] font-body text-body-md italic text-(--color-text-muted)">
-          {programsSection.lead}
-        </p>
-      </DeskRow>
+            <p className="mt-8 max-w-[62ch] font-body text-body-md italic text-(--color-text-muted)">
+              {programsSection.lead}
+            </p>
+          </div>
+
+          {/*
+            The rail, and the same photograph re-cropped rather than dropped.
+
+            At `lg` it is the third column: a 240px vertical rail at the crop's
+            own 600×1500, sticky, so it holds while the six programmes pass it.
+
+            Below `lg` the grid collapses and a 975px-tall column would be a
+            scroll of its own, so the same file is boxed at 3:2 instead and
+            `object-position` pulls the frame down to the hand on the neck —
+            which is the half of the photograph that survives a landscape crop.
+            One element, two intentional crops. The phone gets the picture; it
+            does not get the rail, because there is nothing to run a rail
+            alongside once the layout is a single column.
+          */}
+          <div className="relative aspect-[3/2] w-full overflow-hidden bg-(--color-ground-pitch) lg:sticky lg:top-24 lg:aspect-[600/1500]">
+            <MediaReview
+              asset="bass-hands"
+              job="Programs — the scroll of an upright bass and a hand on its neck"
+              alt="The carved scroll of an upright bass rising above a student's hand gripping the instrument's neck, in a bright room at South Dade Music."
+              position="center 72%"
+              sizes="(min-width: 1024px) 240px, 100vw"
+            />
+          </div>
+        </div>
+      </FilmMargin>
     </Movement>
   )
 }
@@ -400,18 +436,63 @@ function TwelveWeeks() {
         <p className="mt-6 max-w-[62ch] font-body text-body-lg text-(--color-text-secondary)">
           {twelveWeeks.lead}
         </p>
+        {/*
+          MI2 — the schedule now gets brighter as it approaches the stage.
+
+          §8 of the brief: keep the factual week structure, but let the visitor
+          understand progression visually rather than from three text rows.
+
+          There is **no photograph here on purpose.** No week-by-week
+          photography exists in the estate, and dropping a recital picture next
+          to "weeks 1–10" would be illustrating a claim with an image of a
+          different thing. What the estate does support is the film's own
+          language: one light source, house right, getting stronger as she gets
+          closer to it.
+
+          So each row carries a light that intensifies — a warm wash from the
+          right at 0 / 0.10 / 0.28, and a rule that goes from hairline grey to
+          full ink on the final row. The row about the live showcase is
+          physically the brightest thing in the section. Nothing is claimed that
+          is not already in the words.
+
+          The wash is a plain gradient, not an image: it costs no bytes, needs
+          no consent, and cannot be mistaken for documentary evidence.
+        */}
         <dl className="mt-10">
-          {twelveWeeks.rows.map((row) => (
-            <div
-              key={row.id}
-              className="flex flex-wrap items-baseline gap-x-10 gap-y-1 border-t border-(--color-border-default) py-5"
-            >
-              <dt className="w-32 shrink-0 font-display text-label uppercase tabular-nums text-(--color-text-muted)">
-                {row.week}
-              </dt>
-              <dd className="font-body text-body-lg text-(--color-text-primary)">{row.what}</dd>
-            </div>
-          ))}
+          {twelveWeeks.rows.map((row, index) => {
+            const glow = [0, 0.1, 0.28][index] ?? 0
+            const last = index === twelveWeeks.rows.length - 1
+            return (
+              <div
+                key={row.id}
+                className={`relative isolate flex flex-wrap items-baseline gap-x-10 gap-y-1 overflow-hidden py-5 ${
+                  last
+                    ? 'border-t-2 border-(--color-text-primary)'
+                    : 'border-t border-(--color-border-default)'
+                }`}
+              >
+                {glow ? (
+                  <div
+                    aria-hidden="true"
+                    className="pointer-events-none absolute inset-0 -z-10"
+                    style={{
+                      backgroundImage: `linear-gradient(90deg, transparent 30%, rgba(233,162,59,${glow}) 100%)`,
+                    }}
+                  />
+                ) : null}
+                <dt className="w-32 shrink-0 font-display text-label uppercase tabular-nums text-(--color-text-muted)">
+                  {row.week}
+                </dt>
+                <dd
+                  className={`font-body text-body-lg text-(--color-text-primary) ${
+                    last ? 'italic' : ''
+                  }`}
+                >
+                  {row.what}
+                </dd>
+              </div>
+            )
+          })}
         </dl>
         <p className="mt-6 font-body text-body-sm text-(--color-text-muted)">{twelveWeeks.footnote}</p>
 
@@ -452,8 +533,38 @@ function PerformanceEvidence() {
       name="evidence"
       ground="stage"
       aria-labelledby="evidence-heading"
-      className="py-(--section-feature)"
+      className="pb-(--section-feature)"
     >
+      {/*
+        MI2 — "here is visual evidence of the place where it happens", set
+        directly above the words that say it happened.
+
+        `the-room` is audit #26, cropped to the lower band of the frame: rows of
+        folding chairs in this academy's recital room with an audience seated in
+        them, **photographed entirely from behind**. Not one face appears, at
+        any resolution, which is why this crop exists at all — the full frame is
+        gated and unusable.
+
+        It is a horizontal band rather than a plate on purpose. This movement is
+        testimony about a room with the lights down, and a band the width of the
+        page puts the reader at the back of that room, at seated eye height,
+        looking at the same thing the quotes below are describing.
+
+        ⚠️ This is a real audience at a real event and it is deliberately NOT
+        captioned as a full house — it shows occupied and empty chairs, which is
+        what the photograph shows. Tier B; I-7 unconfirmed; the original never
+        leaves `.audit/`.
+      */}
+      <div className="relative mb-(--section-comfortable) aspect-[2000/716] w-full overflow-hidden bg-(--color-ground-pitch)">
+        <MediaReview
+          asset="the-room"
+          job="Performance evidence — the recital room, from the back, mid-audience"
+          alt="Rows of black folding chairs in the South Dade Music recital room, with people seated in them seen from behind."
+          position="center center"
+          sizes="100vw"
+        />
+      </div>
+
       <FilmMargin wide>
         <div className="grid gap-8 lg:grid-cols-[220px_minmax(0,1fr)] lg:gap-16">
           <div className="lg:pt-2">

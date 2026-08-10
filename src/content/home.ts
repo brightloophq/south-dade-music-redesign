@@ -92,9 +92,28 @@ export const hero = {
  *
  * Specified in docs/homepage/02-section-specifications.md §2. Carries no gate.
  */
+/**
+ * ## ⚠️ MI2 — the hinge was rewritten, and why
+ *
+ * It read: *"That's not shyness. That's a skill she hasn't been taught yet."*
+ *
+ * Rhetorically that is the strongest sentence on the page and it is also a
+ * diagnosis. It tells a parent what their child's behaviour **is not**, in the
+ * largest type in the movement, on no evidence — this business has published
+ * nothing that supports a claim about the nature of shyness, and a music
+ * academy is not in a position to make one.
+ *
+ * The replacement keeps the persuasive move intact. The problem still shifts
+ * from the child's character to something teachable, which is what this beat
+ * exists to do; it just stops defining the child to reach it. It also stops
+ * gendering an imagined student in the headline.
+ *
+ * The Turn's verbatim line follows immediately beneath it and now does the
+ * evidential work: it is the owner's own sentence about what changes.
+ */
 export const reframe = {
   recognition: 'She sings constantly at home. In front of anyone else, nothing.',
-  hinge: 'That’s not shyness. That’s a skill she hasn’t been taught yet.',
+  hinge: 'Confidence can be practised. It just needs somewhere to start.',
 } as const
 
 // ---------------------------------------------------------------------------

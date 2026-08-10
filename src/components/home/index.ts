@@ -5,5 +5,5 @@
 export { Opening } from './Opening'
 export { Reframe } from './Reframe'
 export { TheWalk } from './TheWalk'
-export { TheRelease, HouseLights } from './TheRelease'
+export { TheRelease, HouseLightsReveal } from './TheRelease'
 export { Desk } from './Desk'

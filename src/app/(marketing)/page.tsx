@@ -1,6 +1,6 @@
 import type { Metadata } from 'next'
 
-import { Desk, HouseLights, Opening, Reframe, TheRelease, TheWalk } from '@/components/home'
+import { Desk, HouseLightsReveal, Opening, Reframe, TheRelease, TheWalk } from '@/components/home'
 import { FilmGrain, Letterbox, SkipFilm } from '@/components/film'
 import { FilmDirector } from '@/components/motion/FilmDirector'
 import { MotionDebugPanel } from '@/components/motion/MotionDebugPanel'
@@ -114,7 +114,7 @@ export default function HomePage() {
         <TheRelease />
       </div>
 
-      <HouseLights />
+      <HouseLightsReveal />
       <Desk />
 
       <MotionDebugPanel />

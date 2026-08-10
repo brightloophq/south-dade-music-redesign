@@ -60,7 +60,11 @@ export interface MediaReviewProps {
   sizes?: string
   priority?: boolean
   className?: string
-  /** `object-position`. */
+  /**
+   * `object-position`, as an inline style. Omit it when the crop has to change
+   * across breakpoints — inline styles cannot carry a media query — and pass
+   * `[&_img]:object-[…]` utilities through `className` instead.
+   */
   position?: string
 }
 
@@ -71,7 +75,7 @@ export function MediaReview({
   sizes = '100vw',
   priority = false,
   className,
-  position = 'center',
+  position,
 }: MediaReviewProps) {
   if (!isPreview) return null
 
@@ -97,7 +101,7 @@ export function MediaReview({
         priority={priority}
         loading={priority ? undefined : 'lazy'}
         className="object-cover"
-        style={{ objectPosition: position }}
+        style={position ? { objectPosition: position } : undefined}
       />
     </div>
   )

@@ -235,7 +235,7 @@ export function WalkTimeline(ctx: FilmContext) {
        * *rhythm* is untouched — there is simply less nothing between the beats.
        * The walk still reads as a walk; it no longer reads as a wait.
        */
-      end: '+=170%',
+      end: '+=110%',
       pin: true,
       scrub: 0.7,
       anticipatePin: 1,
@@ -331,7 +331,7 @@ export function ReleaseTimeline(ctx: FilmContext) {
      * timeline are untouched — they are the design, and they are not what was
      * costing screens.
      */
-    end: '+=90%',
+    end: '+=50%',
     pin: true,
     anticipatePin: 1,
     onEnter: () => tl.play(0),
@@ -358,21 +358,66 @@ export function HouselightsTimeline(ctx: FilmContext) {
   const scope = q('[data-film="houselights"]')
   if (!scope) return register('Houselights', gsap.timeline(), { trigger: null, targets: 0 })
 
+  const scrim = scope.querySelector('[data-houselights-scrim]')
+  const plate = scope.querySelector('[data-houselights-plate]')
+  const line = scope.querySelector('[data-houselights-line]')
+
+  /*
+   * MI2 — this is now the reveal, not a gradient.
+   *
+   * `start: 'top 85%'` rather than `top bottom`: the rise must begin only once
+   * the frame is genuinely on screen, or the visitor pulls the lights up while
+   * still reading the flash beat above and the payoff lands early, half-lit and
+   * unnoticed.
+   *
+   * `end: 'top top'` finishes the exposure as the frame reaches full height, so
+   * the photograph is completely lit for the whole time it fills the viewport
+   * rather than still brightening while you look at it.
+   */
   const tl = gsap.timeline({
     scrollTrigger: {
       trigger: scope,
-      start: 'top bottom',
-      end: 'bottom center',
-      scrub: 1,
+      start: 'top 85%',
+      end: 'top top',
+      scrub: 0.9,
       onUpdate: (self) => reportProgressSilently('Houselights', self.progress),
     },
     defaults: { ease: 'none' },
   })
 
-  tl.addLabel('rising')
-    .add(() => light.mood('disperse'), 0)
-    .fromTo(scope, { '--vignette': 0.55 }, { '--vignette': 0, duration: 1 }, 0)
-    .addLabel('room-air')
+  tl.addLabel('dark').add(() => light.mood('disperse'), 0)
 
-  return register('Houselights', tl, { trigger: scope, targets: 1, scrub: 1 })
+  if (scrim) {
+    /*
+     * The dark leaving the room. Ends at 0 — the photograph is never left with
+     * a permanent overlay on it.
+     */
+    tl.fromTo(scrim, { opacity: 1 }, { opacity: 0, duration: 1 }, 0)
+  }
+
+  if (plate) {
+    /*
+     * The exposure envelope, and the only scale move in the film that is not a
+     * pin. Both resolve to identity — `brightness(1)`, `scale(1)` — so what the
+     * visitor ends up looking at is the photograph as taken, ungraded.
+     *
+     * 1.06 is deliberately small. Anything more reads as a slideshow effect
+     * rather than as a room settling.
+     */
+    tl.fromTo(
+      plate,
+      { filter: 'brightness(0.25)', scale: 1.06 },
+      { filter: 'brightness(1)', scale: 1, duration: 1 },
+      0,
+    )
+  }
+
+  if (line) {
+    /* The last line of the film hands over to the room it was describing. */
+    tl.fromTo(line, { opacity: 0.85 }, { opacity: 0, duration: 0.55 }, 0.4)
+  }
+
+  tl.addLabel('room-air')
+
+  return register('Houselights', tl, { trigger: scope, targets: 3, scrub: 0.9 })
 }

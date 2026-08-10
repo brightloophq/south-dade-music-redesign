@@ -1352,3 +1352,348 @@ export const MI1_ROUTE_COVERAGE: readonly Mi1RouteCoverage[] = [
     note: 'The estate contains no exterior, no entrance, no reception and no street view in any of its 67 images. A contact page wants exactly one photograph and it does not exist.',
   },
 ]
+
+/* ────────────────────────────────────────────────────────────────────────────
+   MI2 — VISUAL EVIDENCE, CINEMATIC COMPRESSION & HOMEPAGE EXPERIENCE PASS
+   ──────────────────────────────────────────────────────────────────────────── */
+
+export interface Mi2Beat {
+  /** Beat name as a reviewer would recognise it on screen. */
+  beat: string
+  /** A narrative · B informational · C proof · D conversion. */
+  kind: 'A' | 'B' | 'C' | 'D'
+  /** Scroll cost in CSS px at 1440×900, measured in a real browser. */
+  before: number | null
+  after: number | null
+  note: string
+}
+
+export const MI2_KIND_LABELS: Record<Mi2Beat['kind'], string> = {
+  A: 'A — narrative / cinematic',
+  B: 'B — informational',
+  C: 'C — proof / evidence',
+  D: 'D — conversion',
+}
+
+/**
+ * Every number here was measured in Chrome at 1440×900 after a full scroll, on
+ * the real DOM — not counted from source and not estimated.
+ *
+ * The single number that matters: **the first authentic photograph moved from
+ * 6,624px (7.4 viewports) to 4,608px (5.1 viewports)**, and it went from a
+ * 2.39:1 band inside a text movement to a full viewport of its own.
+ */
+export const MI2_BEATS: readonly Mi2Beat[] = [
+  {
+    beat: 'Opening — "your child takes a stage."',
+    kind: 'A',
+    before: 900,
+    after: 900,
+    note: 'Unchanged. This is the hero and it earns a full screen.',
+  },
+  {
+    beat: 'Reframe — the hinge',
+    kind: 'A',
+    before: 702,
+    after: 792,
+    note: 'MERGED with The Turn. One screen, one argument — see the row below.',
+  },
+  {
+    beat: 'The Turn — one whisper line',
+    kind: 'A',
+    before: 468,
+    after: 0,
+    note: 'No longer a separate screen. Its verbatim line now sits directly under the hinge as its coda, which is where it belongs in meaning. Nothing was cut.',
+  },
+  {
+    beat: 'The Walk — weeks 1–10 / 11 / 12',
+    kind: 'A',
+    before: 2430,
+    after: 1890,
+    note: 'Pin shortened +=170% → +=110%. All three frames kept; Week 11 and Week 12 both intact. The cross-fades simply happen over less scroll.',
+  },
+  {
+    beat: 'The Release — the flash and the shout slot',
+    kind: 'A',
+    before: 1710,
+    after: 864,
+    note: 'Pin +=90% → +=50% and the frame 100svh → 64svh. It was spending a full viewport of empty cream on a horizontal rule and an internal review note.',
+  },
+  {
+    beat: 'House lights — gradient',
+    kind: 'A',
+    before: 414,
+    after: 0,
+    note: 'Absorbed into the reveal. The gradient and the photograph were separately attempting the same payoff.',
+  },
+  {
+    beat: 'HOUSE LIGHTS REVEAL — the authentic stage',
+    kind: 'C',
+    before: null,
+    after: 900,
+    note: 'NEW. A full viewport: the scrim lifts, the exposure rises and the real South Dade stage arrives. Scrubbed, so the visitor pulls the lights up. Resolves to brightness(1) / scale(1) — the photograph ends up ungraded.',
+  },
+  {
+    beat: 'The House — business introduction',
+    kind: 'B',
+    before: 1462,
+    after: 860,
+    note: 'The 2.39:1 photo band moved out of this movement and became the reveal above it. What is left is the business introducing itself in type, immediately after you have seen its room.',
+  },
+  {
+    beat: 'Programs — the playbill',
+    kind: 'B',
+    before: 1103,
+    after: 1103,
+    note: 'Numbered editorial index kept exactly. Gains a third column: bass-hands as a sticky vertical rail at lg, re-cropped to 3:2 below it.',
+  },
+  {
+    beat: 'The twelve weeks',
+    kind: 'B',
+    before: 965,
+    after: 965,
+    note: 'No photograph — none exists for these weeks. Progression is carried by light: a warm wash at 0 / 0.10 / 0.28 and a full-ink rule on Week 12.',
+  },
+  {
+    beat: 'Music lessons',
+    kind: 'B',
+    before: 528,
+    after: 528,
+    note: 'Unchanged.',
+  },
+  {
+    beat: 'It already happened — showcase testimony',
+    kind: 'C',
+    before: 982,
+    after: 1497,
+    note: 'Gains the-room as a full-bleed horizontal band directly above the quotes: the place, immediately above the words about the place.',
+  },
+  {
+    beat: 'What families say — Google reviews',
+    kind: 'C',
+    before: 748,
+    after: 748,
+    note: 'Untouched. The review typography was already the strongest proof object on the page.',
+  },
+  {
+    beat: 'Scholarship',
+    kind: 'B',
+    before: 834,
+    after: 834,
+    note: 'Unchanged.',
+  },
+  {
+    beat: 'Final CTA',
+    kind: 'D',
+    before: 703,
+    after: 703,
+    note: 'Unchanged. After MI2 the visitor reaches it having seen three photographs and two proof sections, so the button still lands after persuasion rather than after another viewport.',
+  },
+]
+
+export interface Mi2Image {
+  id: string
+  authentic: boolean
+  /** Census index for authentic material; null for generated plates. */
+  sourceIndex: number | null
+  provenance: string
+  placement: string
+  why: string
+  faceFree: boolean | null
+  gate: string
+}
+
+/**
+ * The homepage carries **three** authentic photographs after MI2, not seven.
+ *
+ * §5 of the brief is explicit that an image must not be used merely because it
+ * exists, and §6 that generated media stays in the art direction rather than
+ * being purged. Both are load-bearing here: the twelve-week section was the
+ * obvious place to drop a fourth photograph and it deliberately has none.
+ */
+export const MI2_IMAGES: readonly Mi2Image[] = [
+  {
+    id: 'stage-set-floral',
+    authentic: true,
+    sourceIndex: 65,
+    provenance: 'southdademusic.com legacy media, audit #65, 1024×683, used whole',
+    placement: 'House lights reveal — full viewport',
+    why: 'The film walks a child toward a stage for five viewports. This is that stage, and it is theirs: the banner in frame reads "build community. make music." Nobody is on it, so it makes no claim about students.',
+    faceFree: true,
+    gate: 'I-7 photographer copyright',
+  },
+  {
+    id: 'bass-hands',
+    authentic: true,
+    sourceIndex: 31,
+    provenance: 'audit #31, 2560×1920 → 600×1500 crop (left 940, top 205)',
+    placement: 'Programs — sticky rail at lg, 3:2 crop below lg',
+    why: 'The programmes all lead to playing an instrument, and this is the only high-resolution frame in the estate that shows a hand actually on one. The crop excludes the student’s head entirely.',
+    faceFree: true,
+    gate: 'I-7; I-1 applies to the original, which never ships',
+  },
+  {
+    id: 'the-room',
+    authentic: true,
+    sourceIndex: 26,
+    provenance: 'audit #26, 2000×1500 → 2000×716 crop (lower band only)',
+    placement: 'Performance evidence — full-bleed horizontal band',
+    why: 'The proof movement is testimony about a room with the lights down. This is that room with an audience in it, photographed entirely from behind — the band puts the reader at the back of it, at seated eye height.',
+    faceFree: true,
+    gate: 'I-7; I-1 applies to the original, which never ships',
+  },
+  {
+    id: 'atmos-stage-floor',
+    authentic: false,
+    sourceIndex: null,
+    provenance: 'Generated editorial plate',
+    placement: 'The Walk — the boards, under all three frames',
+    why: 'KEPT. The Walk is interior weather, not documentary. A real photograph here would break the fiction the film depends on, and this plate is honest about being a plate.',
+    faceFree: null,
+    gate: 'None — generated, approved',
+  },
+  {
+    id: 'atmos-curtain-shadow',
+    authentic: false,
+    sourceIndex: null,
+    provenance: 'Generated editorial plate',
+    placement: 'Reframe — the wings',
+    why: 'KEPT, and now inside the merged movement. Same reasoning as the floor.',
+    faceFree: null,
+    gate: 'None — generated, approved',
+  },
+  {
+    id: 'atmos-paper-tooth',
+    authentic: false,
+    sourceIndex: null,
+    provenance: 'Generated editorial plate',
+    placement: 'The House — uncoated stock under the desk',
+    why: 'KEPT. Texture, not evidence.',
+    faceFree: null,
+    gate: 'None — generated, approved',
+  },
+]
+
+export interface Mi2Rejection {
+  id: string
+  reason: string
+}
+
+/** What was considered for the homepage in MI2 and did not survive inspection. */
+export const MI2_REJECTIONS: readonly Mi2Rejection[] = [
+  {
+    id: 'audit #66 — dark performance, purple wash, SDM banner',
+    reason:
+      'Cropped to 500×393 — the source is only 1024×683. Dark, noisy at that size, and a partial face survives at the top edge of every crop that keeps the guitars. Rejected on quality and on the face.',
+  },
+  {
+    id: 'audit #10 — full ensemble in front of the SDM backdrop',
+    reason:
+      'The best performance frame in the estate and unusable: 1000×667, and every face-free region crops to under 250px. Rejected on resolution.',
+  },
+  {
+    id: 'audit #13, #20, #27, #28, #33, #34, #55, #63 — recitals and camp',
+    reason:
+      'All strong evidence, all composed around identifiable minors with no face-free region at usable resolution. Blocked by I-1.',
+  },
+  {
+    id: 'A fourth photograph for the twelve-week section',
+    reason:
+      'Deliberately not placed. No week-by-week photography exists, and putting a recital picture beside "weeks 1–10" would illustrate a claim with a picture of something else. The section uses progressive light instead.',
+  },
+]
+
+export interface Mi2CopyChange {
+  where: string
+  before: string
+  after: string
+  why: string
+}
+
+export const MI2_COPY_CHANGES: readonly Mi2CopyChange[] = [
+  {
+    where: 'The Release — beneath the shout slot',
+    before: 'The largest word on this site. The owner’s to choose — not ours to invent.',
+    after: 'One note. Whatever instrument she chose. Held.',
+    why: 'The old line was internal design-review language shipping as customer-facing copy, at the climax of the film, on a nearly empty screen. The replacement is a stage direction in the same register as the rest of the dark, and it asserts nothing about the business.',
+  },
+  {
+    where: 'The Reframe — the hinge',
+    before: 'That’s not shyness. That’s a skill she hasn’t been taught yet.',
+    after: 'Confidence can be practised. It just needs somewhere to start.',
+    why: 'The old line diagnosed a child’s behaviour, in the largest type in the movement, on no evidence. The replacement keeps the persuasive move — the problem shifts from character to something teachable — without defining the child to get there.',
+  },
+]
+
+/**
+ * ## ⚠️ STILL UNRESOLVED — the shout
+ *
+ * The single largest piece of type on the site is still intentionally blank.
+ * The word is the owner’s to choose and MI2 did not invent one.
+ *
+ * What changed is that the visitor is no longer told about it. The reserved 5px
+ * rule stays — it holds the exact baseline and measure the word will occupy, so
+ * setting it later causes no layout shift — and the explanation now lives here
+ * instead of on the homepage.
+ */
+export const MI2_OPEN_ITEMS: readonly string[] = [
+  'THE SHOUT WORD — the reserved slot in The Release is still blank and still the owner’s to choose. Nothing was invented; the customer-facing explanation was removed.',
+  'No exterior, entrance or reception photograph exists, so /contact still carries no authentic image. Unchanged from MI1.',
+  'No week-by-week photography exists, so the twelve-week section is lit rather than illustrated.',
+  'Every photograph on the homepage remains blocked on I-7 (photographer copyright). None is production-approved.',
+]
+
+export interface Mi2Viewport {
+  label: string
+  width: number
+  docHeight: number
+  payoffViewports: number
+  images: number
+  overflow: number
+  consoleErrors: number
+  note: string
+}
+
+/** Measured, not asserted. Each row is one real browser run with a full scroll. */
+export const MI2_VIEWPORTS: readonly Mi2Viewport[] = [
+  {
+    label: 'Desktop',
+    width: 1440,
+    docHeight: 13457,
+    payoffViewports: 5.1,
+    images: 3,
+    overflow: 0,
+    consoleErrors: 0,
+    note: 'Programs rail is the third column and sticks through all six programmes.',
+  },
+  {
+    label: 'Desktop narrow',
+    width: 1280,
+    docHeight: 12845,
+    payoffViewports: 5.1,
+    images: 3,
+    overflow: 0,
+    consoleErrors: 0,
+    note: 'Rail still present; no wrapping in the programme names.',
+  },
+  {
+    label: 'Tablet',
+    width: 768,
+    docHeight: 14937,
+    payoffViewports: 5.5,
+    images: 3,
+    overflow: 0,
+    consoleErrors: 0,
+    note: 'Grid collapses; the rail becomes a 3:2 crop below the list rather than being dropped.',
+  },
+  {
+    label: 'Mobile',
+    width: 390,
+    docHeight: 13991,
+    payoffViewports: 5.5,
+    images: 3,
+    overflow: 0,
+    consoleErrors: 0,
+    note: 'The reveal crop moves horizontally to 40% so the banner stays in frame — at portrait the full height already fits, so a vertical offset does nothing.',
+  },
+]

@@ -26,49 +26,25 @@ import { reframe, theTurn } from '@/content/home'
 export function Reframe() {
   return (
     <>
+      {/*
+        MI2 — THE REFRAME AND THE TURN ARE NOW ONE MOVEMENT.
+
+        They were two consecutive dark screens carrying three short texts
+        between them — 78svh + 52svh = 130svh of scroll for twenty-nine words,
+        and two of the eight consecutive title cards the visitor crossed before
+        reaching any evidence that this business exists.
+
+        Nothing is cut. The diagonal still runs recognition (upper-left) →
+        hinge (lower-right); the Turn's line now lands directly under the hinge
+        as its coda, which is where it always belonged in meaning — it is the
+        sentence that explains *why* the hinge is true. One screen, one
+        argument, 88svh. The wings plate comes with it.
+      */}
       <Movement
         name="reframe"
         ground="memory"
         aria-labelledby="reframe-heading"
-        /*
-          EE2 — `min-h-svh` → 78svh. The diagonal needs vertical distance
-          between the two corners to read as a hinge; it does not need a full
-          screen. At 78% the gap is still the widest on the page and the
-          movement gives back ~200px.
-        */
-        className="flex min-h-[78svh] flex-col justify-between py-(--section-spacious)"
-      >
-        <FilmMargin>
-          <p className="max-w-[380px] font-body text-whisper italic text-(--color-ash)">
-            {reframe.recognition}
-          </p>
-        </FilmMargin>
-
-        <FilmMargin>
-          <h2
-            id="reframe-heading"
-            className="ml-auto max-w-[560px] text-right font-display text-display-lg text-(--color-text-primary)"
-            style={{ fontVariationSettings: "'opsz' 48, 'wght' 600" }}
-          >
-            {reframe.hinge}
-          </h2>
-        </FilmMargin>
-      </Movement>
-
-      {/*
-        MOVEMENT 4 — The Turn. Ground: wing. Whisper only, eight-word cap.
-        Visual Specification.md §D: "one thought, held". It gets its own screen
-        and nothing else is on it.
-      */}
-      <Movement
-        name="the-turn"
-        ground="wing"
-        /*
-          EE2 — 70svh → 52svh. One line, held. It was being held in half a
-          screen of empty space above and below; 52% still isolates it
-          completely and returns ~160px.
-        */
-        className="flex min-h-[52svh] items-center py-(--section-spacious)"
+        className="relative flex min-h-[88svh] flex-col justify-between overflow-hidden py-(--section-spacious)"
       >
         {/*
           THE WINGS — EE2.
@@ -96,8 +72,23 @@ export function Reframe() {
           maskImage="linear-gradient(to left, rgba(0,0,0,1) 0%, rgba(0,0,0,0.5) 55%, rgba(0,0,0,0) 100%)"
         />
 
+        {/* Upper-left: the parent's observation. */}
         <FilmMargin className="relative z-[2]">
-          <p className="max-w-[640px] font-body text-whisper italic text-(--color-ash)">
+          <p className="max-w-[380px] font-body text-whisper italic text-(--color-ash)">
+            {reframe.recognition}
+          </p>
+        </FilmMargin>
+
+        {/* Lower-right: the answer, and the line that explains it. */}
+        <FilmMargin className="relative z-[2]">
+          <h2
+            id="reframe-heading"
+            className="ml-auto max-w-[560px] text-right font-display text-display-lg text-(--color-text-primary)"
+            style={{ fontVariationSettings: "'opsz' 48, 'wght' 600" }}
+          >
+            {reframe.hinge}
+          </h2>
+          <p className="ml-auto mt-8 max-w-[440px] text-right font-body text-whisper italic text-(--color-ash)">
             {theTurn.line}
           </p>
         </FilmMargin>

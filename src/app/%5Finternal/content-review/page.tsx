@@ -7,6 +7,12 @@ import {
   DELIVERY_LABELS,
   EE3_ASSET_DECISIONS,
   MI1_DERIVATIVES,
+  MI2_BEATS,
+  MI2_COPY_CHANGES,
+  MI2_IMAGES,
+  MI2_OPEN_ITEMS,
+  MI2_REJECTIONS,
+  MI2_VIEWPORTS,
   MI1_ROUTE_COVERAGE,
   EXPERIENCE_LABELS,
   ROUTE_DELIVERY,
@@ -922,6 +928,236 @@ export default function ContentReviewPage() {
                   <td className="border border-neutral-300 p-2 font-mono">{r.generated}</td>
                   <td className="max-w-[640px] border border-neutral-300 p-2 leading-relaxed">
                     {r.note ?? <span className="text-neutral-400">—</span>}
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+      </Section>
+
+      {/* ---- MI2 homepage experience pass ---- */}
+      <Section id="mi2" title="MI2 — cinematic compression & visual evidence (homepage)">
+        <div className="mt-3 rounded border-2 border-red-700 bg-red-50 p-4">
+          <p className="text-sm font-bold text-red-900">
+            The three homepage photographs are still UNCLEARED.
+          </p>
+          <p className="mt-2 text-[13px] leading-relaxed text-red-900">
+            MI2 changed where authentic media sits and how much of the page it occupies. It changed
+            nothing about clearance: every photograph below is blocked on gate I-7, and the two Tier
+            B crops derive from originals containing minors that never leave{' '}
+            <code className="font-mono">.audit/</code>.
+          </p>
+        </div>
+
+        <div className="mt-5 grid grid-cols-2 gap-3 sm:grid-cols-4">
+          <Stat label="Payoff was" value="7.4 vp" tone="bad" />
+          <Stat label="Payoff now" value="5.1 vp" tone="ok" />
+          <Stat label="Authentic images on the homepage" value={3} tone="ok" />
+          <Stat label="Production-approved" value={0} tone="bad" />
+        </div>
+
+        <h3 className="mt-8 text-sm font-bold uppercase tracking-wide text-neutral-900">
+          Cinematic beats, before and after
+        </h3>
+        <p className="mt-2 max-w-[80ch] text-[13px] leading-relaxed text-neutral-700">
+          Scroll cost in CSS px at 1440×900, measured in a real browser after a full scroll. A zero
+          in the <em>after</em> column means the beat was absorbed into another one — not deleted.
+        </p>
+        <div className="mt-3 overflow-x-auto">
+          <table className="w-full min-w-[1000px] border-collapse text-[11px]">
+            <thead>
+              <tr className="bg-neutral-200 text-left">
+                <th className="border border-neutral-300 p-2">Beat</th>
+                <th className="border border-neutral-300 p-2">Kind</th>
+                <th className="border border-neutral-300 p-2">Before</th>
+                <th className="border border-neutral-300 p-2">After</th>
+                <th className="border border-neutral-300 p-2">Δ</th>
+                <th className="border border-neutral-300 p-2">What changed</th>
+              </tr>
+            </thead>
+            <tbody>
+              {MI2_BEATS.map((b) => {
+                const delta = b.before !== null && b.after !== null ? b.after - b.before : null
+                return (
+                  <tr key={b.beat} className="align-top odd:bg-white even:bg-neutral-50">
+                    <td className="border border-neutral-300 p-2 font-semibold">{b.beat}</td>
+                    <td className="border border-neutral-300 p-2">
+                      <Pill tone={b.kind === 'C' ? 'ok' : b.kind === 'D' ? 'warn' : 'mute'}>
+                        {b.kind}
+                      </Pill>
+                    </td>
+                    <td className="border border-neutral-300 p-2 font-mono">
+                      {b.before === null ? '—' : `${b.before}px`}
+                    </td>
+                    <td className="border border-neutral-300 p-2 font-mono">
+                      {b.after === null ? '—' : `${b.after}px`}
+                    </td>
+                    <td className="border border-neutral-300 p-2 font-mono">
+                      {delta === null ? (
+                        <span className="text-neutral-400">new</span>
+                      ) : delta === 0 ? (
+                        <span className="text-neutral-400">0</span>
+                      ) : (
+                        <span className={delta < 0 ? 'text-emerald-700' : 'text-amber-700'}>
+                          {delta > 0 ? '+' : ''}
+                          {delta}
+                        </span>
+                      )}
+                    </td>
+                    <td className="max-w-[520px] border border-neutral-300 p-2 leading-relaxed">
+                      {b.note}
+                    </td>
+                  </tr>
+                )
+              })}
+            </tbody>
+          </table>
+        </div>
+
+        <h3 className="mt-8 text-sm font-bold uppercase tracking-wide text-neutral-900">
+          Every image on the homepage, and why it is there
+        </h3>
+        <div className="mt-3 overflow-x-auto">
+          <table className="w-full min-w-[1100px] border-collapse text-[11px]">
+            <thead>
+              <tr className="bg-neutral-200 text-left">
+                <th className="border border-neutral-300 p-2">Asset</th>
+                <th className="border border-neutral-300 p-2">Class</th>
+                <th className="border border-neutral-300 p-2">Provenance</th>
+                <th className="border border-neutral-300 p-2">Placement</th>
+                <th className="border border-neutral-300 p-2">Why this image here</th>
+                <th className="border border-neutral-300 p-2">Face-free?</th>
+                <th className="border border-neutral-300 p-2">Gate</th>
+              </tr>
+            </thead>
+            <tbody>
+              {MI2_IMAGES.map((i) => (
+                <tr key={i.id} className="align-top odd:bg-white even:bg-neutral-50">
+                  <td className="border border-neutral-300 p-2 font-mono font-semibold">{i.id}</td>
+                  <td className="border border-neutral-300 p-2">
+                    <Pill tone={i.authentic ? 'ok' : 'mute'}>
+                      {i.authentic ? 'AUTHENTIC' : 'GENERATED'}
+                    </Pill>
+                  </td>
+                  <td className="max-w-[230px] border border-neutral-300 p-2">{i.provenance}</td>
+                  <td className="max-w-[190px] border border-neutral-300 p-2">{i.placement}</td>
+                  <td className="max-w-[420px] border border-neutral-300 p-2 leading-relaxed">
+                    {i.why}
+                  </td>
+                  <td className="border border-neutral-300 p-2">
+                    {i.faceFree === null ? (
+                      <span className="text-neutral-400">n/a</span>
+                    ) : (
+                      <YesNo value={i.faceFree} />
+                    )}
+                  </td>
+                  <td className="max-w-[190px] border border-neutral-300 p-2">{i.gate}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+
+        <div className="mt-8 grid gap-6 lg:grid-cols-2">
+          <div>
+            <h3 className="text-sm font-bold uppercase tracking-wide text-neutral-900">
+              Rejected in MI2
+            </h3>
+            <ul className="mt-3 flex flex-col gap-2">
+              {MI2_REJECTIONS.map((r) => (
+                <li key={r.id} className="rounded border border-neutral-300 bg-white p-3 text-[12px]">
+                  <p className="font-mono font-semibold">{r.id}</p>
+                  <p className="mt-1 leading-relaxed text-neutral-700">{r.reason}</p>
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          <div>
+            <h3 className="text-sm font-bold uppercase tracking-wide text-neutral-900">
+              Unresolved after MI2
+            </h3>
+            <ul className="mt-3 flex flex-col gap-2">
+              {MI2_OPEN_ITEMS.map((o) => (
+                <li
+                  key={o}
+                  className="rounded border border-amber-400 bg-amber-50 p-3 text-[12px] leading-relaxed text-neutral-800"
+                >
+                  {o}
+                </li>
+              ))}
+            </ul>
+          </div>
+        </div>
+
+        <h3 className="mt-8 text-sm font-bold uppercase tracking-wide text-neutral-900">
+          Customer-facing copy changed
+        </h3>
+        <div className="mt-3 overflow-x-auto">
+          <table className="w-full min-w-[900px] border-collapse text-[11px]">
+            <thead>
+              <tr className="bg-neutral-200 text-left">
+                <th className="border border-neutral-300 p-2">Where</th>
+                <th className="border border-neutral-300 p-2">Was</th>
+                <th className="border border-neutral-300 p-2">Is</th>
+                <th className="border border-neutral-300 p-2">Why</th>
+              </tr>
+            </thead>
+            <tbody>
+              {MI2_COPY_CHANGES.map((c) => (
+                <tr key={c.where} className="align-top odd:bg-white even:bg-neutral-50">
+                  <td className="border border-neutral-300 p-2 font-semibold">{c.where}</td>
+                  <td className="max-w-[250px] border border-neutral-300 p-2 italic text-red-800">
+                    {c.before}
+                  </td>
+                  <td className="max-w-[250px] border border-neutral-300 p-2 italic text-emerald-800">
+                    {c.after}
+                  </td>
+                  <td className="max-w-[420px] border border-neutral-300 p-2 leading-relaxed">
+                    {c.why}
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+
+        <h3 className="mt-8 text-sm font-bold uppercase tracking-wide text-neutral-900">
+          Responsive review
+        </h3>
+        <div className="mt-3 overflow-x-auto">
+          <table className="w-full min-w-[900px] border-collapse text-[11px]">
+            <thead>
+              <tr className="bg-neutral-200 text-left">
+                <th className="border border-neutral-300 p-2">Viewport</th>
+                <th className="border border-neutral-300 p-2">Width</th>
+                <th className="border border-neutral-300 p-2">Page height</th>
+                <th className="border border-neutral-300 p-2">Payoff at</th>
+                <th className="border border-neutral-300 p-2">Images</th>
+                <th className="border border-neutral-300 p-2">Overflow</th>
+                <th className="border border-neutral-300 p-2">Console errors</th>
+                <th className="border border-neutral-300 p-2">Note</th>
+              </tr>
+            </thead>
+            <tbody>
+              {MI2_VIEWPORTS.map((v) => (
+                <tr key={v.label} className="align-top odd:bg-white even:bg-neutral-50">
+                  <td className="border border-neutral-300 p-2 font-semibold">{v.label}</td>
+                  <td className="border border-neutral-300 p-2 font-mono">{v.width}px</td>
+                  <td className="border border-neutral-300 p-2 font-mono">{v.docHeight}px</td>
+                  <td className="border border-neutral-300 p-2 font-mono">
+                    {v.payoffViewports} vp
+                  </td>
+                  <td className="border border-neutral-300 p-2 font-mono">{v.images}</td>
+                  <td className="border border-neutral-300 p-2">
+                    <Pill tone={v.overflow === 0 ? 'ok' : 'bad'}>{v.overflow}</Pill>
+                  </td>
+                  <td className="border border-neutral-300 p-2">
+                    <Pill tone={v.consoleErrors === 0 ? 'ok' : 'bad'}>{v.consoleErrors}</Pill>
+                  </td>
+                  <td className="max-w-[420px] border border-neutral-300 p-2 leading-relaxed">
+                    {v.note}
                   </td>
                 </tr>
               ))}
