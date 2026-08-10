@@ -97,6 +97,9 @@ export default function PerformancesPage() {
             asset="stage-set-purple"
             job="Performances — the academy's own stage, dressed and empty"
             alt="The South Dade Music stage set for a performance: a drum kit, congas and keyboards under purple stage lighting, with the academy's banner beside them. No performers are present."
+            fallback="stage-empty-chair"
+            fallbackAlt="A single wooden chair alone on a bare stage floor, lit by one warm beam through haze."
+            fallbackPosition="center center"
             position="center 58%"
             sizes="100vw"
           />
@@ -154,6 +157,9 @@ export default function PerformancesPage() {
                   asset="bass-on-stand"
                   job="Performances — an instrument out and waiting on recital day"
                   alt="A bass guitar resting on its stand beside a decorated table and balloons, set up for a South Dade Music recital."
+                  fallback="instrument-strings"
+                  fallbackAlt="A close study of steel strings crossing a wooden bridge, lit by one warm beam."
+                  fallbackPosition="center center"
                   position="center 45%"
                   sizes="200px"
                 />

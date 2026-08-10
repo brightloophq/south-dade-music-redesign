@@ -333,6 +333,9 @@ function Programs() {
               asset="bass-hands"
               job="Programs — the scroll of an upright bass and a hand on its neck"
               alt="The carved scroll of an upright bass rising above a student's hand gripping the instrument's neck, in a bright room at South Dade Music."
+              fallback="instrument-strings"
+              fallbackAlt="A close study of steel strings crossing a wooden bridge, lit by one warm beam."
+              fallbackPosition="center center"
               position="center 72%"
               sizes="(min-width: 1024px) 240px, 100vw"
             />
@@ -560,6 +563,9 @@ function PerformanceEvidence() {
           asset="the-room"
           job="Performance evidence — the recital room, from the back, mid-audience"
           alt="Rows of black folding chairs in the South Dade Music recital room, with people seated in them seen from behind."
+          fallback="atmos-stage-floor"
+          fallbackAlt="Bare stage boards lit by beams falling through haze."
+          fallbackPosition="center 60%"
           position="center center"
           sizes="100vw"
         />

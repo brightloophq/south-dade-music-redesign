@@ -50,13 +50,57 @@ import { cn } from '@/lib/utils/cn'
 
 const isPreview = process.env.NODE_ENV !== 'production'
 
+/**
+ * ## Dual mode — the fix for the deployed review experience
+ *
+ * Returning `null` in production was correct about the photograph and wrong
+ * about the page. It left the compositions MI1 and MI2 built around those
+ * photographs standing empty: a full-viewport black rectangle where the house
+ * lights reveal should be, an empty dark column beside the programmes, an empty
+ * band above the showcase quotes.
+ *
+ * So a placement now declares two images:
+ *
+ *   `asset`     the authentic derivative — **development only**, served from
+ *               `.audit/media-review/` by a handler that 404s in production
+ *   `fallback`  an approved generated plate from `public/images/generated/`,
+ *               which is what production actually ships
+ *
+ * The two are never the same picture and are never presented as the same thing.
+ * A generated plate carries no `data-media-review` attribute, so nothing
+ * downstream can mistake one for evidence, and its alt text describes an
+ * abstract study rather than a room in Florida City.
+ *
+ * ## When there is no honest fallback
+ *
+ * Omit `fallback` and the component renders nothing in production — which is
+ * still correct for something like the academy's own banner, where no generated
+ * plate could stand in without implying the business said something it did not.
+ * In that case the **parent must collapse too**, which is what `hasMedia()`
+ * below is for. An empty aspect-ratio box with a dark background is the exact
+ * defect this change exists to remove.
+ */
+
+/** Does this placement render anything in the current mode? */
+export function hasMedia(fallback?: string): boolean {
+  return isPreview || Boolean(fallback)
+}
+
 export interface MediaReviewProps {
-  /** Filename in `.audit/media-review`, without extension. */
+  /** Filename in `.audit/media-review`, without extension. Development only. */
   asset: string
   /** Why this image is on this page. Required — a plate without a job does not ship. */
   job: string
-  /** Descriptive alt. These are real photographs and are NOT decorative. */
+  /** Descriptive alt for the authentic derivative. NOT decorative. */
   alt: string
+  /**
+   * Approved generated plate in `public/images/generated`, without extension.
+   * Omit only when no generated image could stand in honestly — and then
+   * collapse the parent with `hasMedia()`.
+   */
+  fallback?: string
+  /** Alt for the generated plate. Must describe a study, never a real room. */
+  fallbackAlt?: string
   sizes?: string
   priority?: boolean
   className?: string
@@ -66,18 +110,52 @@ export interface MediaReviewProps {
    * `[&_img]:object-[…]` utilities through `className` instead.
    */
   position?: string
+  /** `object-position` for the fallback. The two images crop differently. */
+  fallbackPosition?: string
+  /** Responsive crop utilities for the fallback, when one value will not do. */
+  fallbackImgClassName?: string
 }
 
 export function MediaReview({
   asset,
   job,
   alt,
+  fallback,
+  fallbackAlt,
   sizes = '100vw',
   priority = false,
   className,
   position,
+  fallbackPosition,
+  fallbackImgClassName,
 }: MediaReviewProps) {
-  if (!isPreview) return null
+  /*
+   * PRODUCTION. The authentic derivative is not reachable here — the route
+   * handler 404s — so this branch never references it.
+   */
+  if (!isPreview) {
+    if (!fallback) return null
+
+    return (
+      <div
+        data-media-fallback={fallback}
+        aria-hidden={fallbackAlt ? undefined : true}
+        className={cn('pointer-events-none absolute inset-0 overflow-hidden', className)}
+      >
+        <Image
+          src={`/images/generated/${fallback}.jpg`}
+          alt={fallbackAlt ?? ''}
+          fill
+          sizes={sizes}
+          quality={52}
+          priority={priority}
+          loading={priority ? undefined : 'lazy'}
+          className={cn('object-cover', fallbackImgClassName)}
+          style={fallbackPosition ? { objectPosition: fallbackPosition } : undefined}
+        />
+      </div>
+    )
+  }
 
   return (
     <div

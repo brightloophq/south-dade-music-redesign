@@ -137,6 +137,9 @@ export default function BandBuildersPage() {
                   asset="stage-instruments"
                   job="Band Builders — two instruments played side by side, cropped to hands"
                   alt="A bass guitar and an electric guitar being played side by side under warm stage lighting at South Dade Music. Only the instruments and the players' hands are visible."
+                  fallback="instrument-percussion"
+                  fallbackAlt="A close study of a drum head stretched across its rim, lit by one warm beam."
+                  fallbackPosition="center center"
                   position="center 40%"
                   sizes="(min-width: 1024px) 840px, 100vw"
                 />

@@ -117,6 +117,9 @@ export default function PrivateLessonsPage() {
                   asset="ukulele-wall"
                   job="Private lessons — the teaching room this happens in"
                   alt="Six ukuleles hanging on a wall rack under an LED strip in the South Dade Music teaching room, with an amplifier and a music stand below."
+                  fallback="instrument-keys"
+                  fallbackAlt="A close study of piano key edges receding into darkness, lit by one warm beam."
+                  fallbackPosition="center center"
                   position="center"
                   sizes="(min-width: 640px) 540px, 100vw"
                 />

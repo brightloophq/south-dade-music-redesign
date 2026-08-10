@@ -290,6 +290,9 @@ export default function NinetyDayStageProgramPage() {
             asset="medals"
             job="Flagship finale — the medals laid out before the showcase"
             alt="Rows of gold medals on red, white and blue ribbons laid out on a table before a South Dade Music showcase."
+            fallback="stage-empty-chair"
+            fallbackAlt="A single wooden chair alone on a bare stage floor, lit by one warm beam through haze."
+            fallbackPosition="center 55%"
             position="center 55%"
             sizes="100vw"
           />

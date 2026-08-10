@@ -3,7 +3,7 @@ import Link from 'next/link'
 
 import { Button } from '@/components/ui/Button'
 import { FilmMargin, Movement } from '@/components/film'
-import { MediaReview } from '@/components/dev/MediaReview'
+import { MediaReview, hasMedia } from '@/components/dev/MediaReview'
 import { DeskLabel, DeskSection, PageIntro } from '@/components/page'
 import { about, aboutTestimonials } from '@/content/about'
 import { trialOffer } from '@/content/pages'
@@ -113,15 +113,33 @@ export default function AboutPage() {
 
           ⚠️ PREVIEW ONLY. I-7 unconfirmed.
         */}
-        <div className="gap-9 sm:flex sm:items-start">
-          <div className="relative mb-7 aspect-[441/759] w-[132px] shrink-0 overflow-hidden bg-(--color-ground-pitch) sm:mb-0 sm:w-[168px]">
-            <MediaReview
-              asset="banner"
-              job="About — the academy's own banner, in its own room"
-              alt="A South Dade Music pull-up banner standing in the teaching room, reading “build community. make music.”"
-              sizes="168px"
-            />
-          </div>
+        {/*
+          ⚠️ THE ONE PLACEMENT WITH NO PRODUCTION FALLBACK.
+
+          Every other MediaReview on the site names an approved generated plate
+          to ship in production. This one deliberately does not, and the reason
+          is the whole point of the tiering: the banner is evidence that *this
+          business* said "build community. make music." in its own room. No
+          generated image can stand in for that without implying the academy
+          made a statement it did not make — an abstract light study here would
+          be decoration pretending to be a quotation.
+
+          So in production the image does not render, and `hasMedia()` collapses
+          the flex wrapper with it: the prose simply runs full width and there is
+          no empty box, no dark rectangle and no orphaned gap. That is the
+          correct production layout, not a degraded one.
+        */}
+        <div className={hasMedia() ? 'gap-9 sm:flex sm:items-start' : undefined}>
+          {hasMedia() ? (
+            <div className="relative mb-7 aspect-[441/759] w-[132px] shrink-0 overflow-hidden bg-(--color-ground-pitch) sm:mb-0 sm:w-[168px]">
+              <MediaReview
+                asset="banner"
+                job="About — the academy's own banner, in its own room"
+                alt="A South Dade Music pull-up banner standing in the teaching room, reading “build community. make music.”"
+                sizes="168px"
+              />
+            </div>
+          ) : null}
           <div>
             {about.community.map((paragraph) => (
               <p

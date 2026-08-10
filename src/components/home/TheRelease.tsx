@@ -178,6 +178,9 @@ export function HouseLightsReveal() {
           asset="stage-set-floral"
           job="The house lights — the actual South Dade stage the whole film walks toward"
           alt="The South Dade Music stage, dressed and empty: keyboards, a drum kit and congas under coloured lighting, with the academy's banner reading build community, make music."
+          fallback="stage-empty-chair"
+          fallbackAlt="A single wooden chair alone on a bare stage floor, lit by one warm beam through haze."
+          fallbackImgClassName="object-[88%_center] sm:object-[center_center]"
           className="[&_img]:object-[40%_center] sm:[&_img]:object-[center_58%]"
           sizes="100vw"
         />
