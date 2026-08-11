@@ -91,7 +91,7 @@ export default function PrivateLessonsPage() {
       */}
       <Movement name="why-private" ground="house" className="pb-(--section-spacious)">
         <FilmMargin wide>
-          <hr className="border-0 border-t border-(--color-border-default)" />
+          <hr data-desk-rule className="origin-left border-0 border-t border-(--color-border-default)" />
           <div className="grid gap-8 pt-(--section-comfortable) lg:grid-cols-[220px_minmax(0,1fr)] lg:gap-16">
             <div className="lg:pt-3">
               <DeskLabel>Why one-to-one</DeskLabel>
@@ -112,7 +112,7 @@ export default function PrivateLessonsPage() {
 
                 ⚠️ PREVIEW ONLY. Copyright (I-7) unconfirmed.
               */}
-              <figure className="relative mb-11 aspect-[16/10] w-full max-w-[540px] overflow-hidden bg-(--color-ground-pitch)">
+              <figure className="relative mb-11 aspect-[16/10] w-full max-w-[540px] overflow-hidden rounded-(--radius-media-sm) sm:rounded-(--radius-media) bg-(--color-ground-pitch)">
                 <Photo
                   id="ukulele-wall"
                   alt="Six ukuleles hanging on a wall rack under an LED strip in the South Dade Music teaching room, with an amplifier and a music stand below."
@@ -197,7 +197,7 @@ export default function PrivateLessonsPage() {
       */}
       <Movement name="path" ground="house" className="pb-(--section-spacious)">
         <FilmMargin wide>
-          <hr className="border-0 border-t border-(--color-border-default)" />
+          <hr data-desk-rule className="origin-left border-0 border-t border-(--color-border-default)" />
           <div className="grid gap-8 pt-(--section-comfortable) lg:grid-cols-[220px_minmax(0,1fr)] lg:gap-16">
             <div className="lg:pt-3">
               <DeskLabel>Where it goes</DeskLabel>
@@ -304,7 +304,7 @@ export default function PrivateLessonsPage() {
       */}
       <Movement name="afford" ground="house" className="pb-(--section-feature)">
         <FilmMargin wide>
-          <hr className="border-0 border-t border-(--color-border-default)" />
+          <hr data-desk-rule className="origin-left border-0 border-t border-(--color-border-default)" />
           <div className="grid gap-8 pt-(--section-comfortable) lg:grid-cols-[220px_minmax(0,1fr)] lg:gap-16">
             <div className="lg:pt-3">
               <DeskLabel>Paying for it</DeskLabel>

@@ -43,6 +43,19 @@ export interface PhotoProps {
   position?: string
   /** Responsive crop utilities, for slots whose framing changes by breakpoint. */
   imgClassName?: string
+  /**
+   * How this photograph arrives, chosen by the job it does.
+   *
+   *   mask   an aperture opening from the bottom, with a small scale settle —
+   *          the default, and the one that reads as evidence being uncovered
+   *   wipe   a horizontal exposure across a full-bleed band
+   *   sweep  a vertical opening for a tall rail
+   *   none   already visible; for anything above the fold
+   *
+   * Read by `DeskTimeline`. Under reduced motion no timeline runs and every
+   * photograph renders at its static value, fully visible.
+   */
+  reveal?: 'mask' | 'wipe' | 'sweep' | 'none'
 }
 
 export function Photo({
@@ -53,6 +66,7 @@ export function Photo({
   className,
   position,
   imgClassName,
+  reveal = 'mask',
 }: PhotoProps) {
   const record = PHOTOS[id]
 
@@ -60,6 +74,7 @@ export function Photo({
     <div
       data-photo={id}
       data-audit={record.auditId}
+      data-reveal={reveal}
       className={cn('pointer-events-none absolute inset-0 overflow-hidden', className)}
     >
       <Image

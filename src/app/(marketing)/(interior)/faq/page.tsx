@@ -81,7 +81,7 @@ export default function FaqPage() {
       {/* Tuition is unpublished everywhere. Say it plainly, once. */}
       <Movement name="faq-pricing" ground="house" className="pb-(--section-spacious)">
         <FilmMargin wide>
-          <hr className="border-0 border-t border-(--color-border-default)" />
+          <hr data-desk-rule className="origin-left border-0 border-t border-(--color-border-default)" />
           <div className="grid gap-10 pt-(--section-comfortable) lg:grid-cols-[220px_minmax(0,1fr)] lg:gap-16">
             <DeskLabel>What does it cost?</DeskLabel>
             <div className="max-w-[840px]">
@@ -125,7 +125,7 @@ export default function FaqPage() {
       {/* Instrument questions live on their instrument page, in context. */}
       <Movement name="faq-instruments" ground="house" className="pb-(--section-feature)">
         <FilmMargin wide>
-          <hr className="border-0 border-t border-(--color-border-default)" />
+          <hr data-desk-rule className="origin-left border-0 border-t border-(--color-border-default)" />
           <div className="grid gap-10 pt-(--section-comfortable) lg:grid-cols-[220px_minmax(0,1fr)] lg:gap-16">
             <DeskLabel>{faqPage.instrumentLabel}</DeskLabel>
             <div className="max-w-[840px]">

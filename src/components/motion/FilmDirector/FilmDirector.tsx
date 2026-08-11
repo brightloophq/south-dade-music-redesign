@@ -18,6 +18,7 @@ import { reportDiagnostics, resetDiagnostics } from '@/lib/motion/diagnostics'
  *   WalkTimeline         shots 04–06 — PINNED №1. Scroll becomes footsteps
  *   ReleaseTimeline      shot 07  — PINNED №2. 1.5s still / 400ms / 1.8s
  *   HouselightsTimeline  shot 07B — the dimmer rise out of the dark
+ *   WeeksTimeline        the twelve-week series — the desk's one exception
  *
  * There is no batch reveal. Every appearance in this film is by light, and
  * `EmergeBatch` was removed with the rest of the fade-up vocabulary.
@@ -180,6 +181,8 @@ export function FilmDirector() {
             }
 
             film.HouselightsTimeline(filmContext)
+            film.WeeksTimeline(filmContext)
+            film.DeskTimeline(filmContext)
           })
 
           /*

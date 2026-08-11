@@ -164,7 +164,17 @@ export function MobileNav({ className }: { className?: string }) {
 
           <div className="mt-8 flex flex-col gap-3">
             {primaryCta.status === 'live' ? (
-              <Button href={primaryCta.href} variant="primary" size="xl" fullWidth onClick={close}>
+              <Button
+                href={primaryCta.href}
+                variant="primary"
+                size="xl"
+                fullWidth
+                /* Parity with the desktop header — the drawer was the one place
+                   the $25 was dropped, and price disclosure is the estate's
+                   largest conversion failure. */
+                price={primaryCta.priceSuffix ?? undefined}
+                onClick={close}
+              >
                 {primaryCta.label}
               </Button>
             ) : (

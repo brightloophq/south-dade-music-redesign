@@ -129,7 +129,7 @@ export default function ContactPage() {
       {/* Where and when, as one block rather than four rows. */}
       <Movement name="visit" ground="house" className="pb-(--section-spacious)">
         <FilmMargin wide>
-          <hr className="border-0 border-t border-(--color-border-default)" />
+          <hr data-desk-rule className="origin-left border-0 border-t border-(--color-border-default)" />
           <div className="grid gap-8 pt-(--section-comfortable) lg:grid-cols-[220px_minmax(0,1fr)] lg:gap-16">
             <div className="lg:pt-3">
               <DeskLabel>Visit</DeskLabel>
@@ -183,7 +183,7 @@ export default function ContactPage() {
       */}
       <Movement name="before-you-call" ground="house" className="pb-(--section-feature)">
         <FilmMargin wide>
-          <hr className="border-0 border-t border-(--color-border-default)" />
+          <hr data-desk-rule className="origin-left border-0 border-t border-(--color-border-default)" />
           <div className="grid gap-8 pt-(--section-comfortable) lg:grid-cols-[220px_minmax(0,1fr)] lg:gap-16">
             <div className="lg:pt-3">
               <DeskLabel>Before you call</DeskLabel>

@@ -125,7 +125,7 @@ export default function LessonsPage() {
       */}
       <Movement name="format-comparison" ground="house" className="pb-(--section-spacious)">
         <FilmMargin wide>
-          <hr className="border-0 border-t border-(--color-border-default)" />
+          <hr data-desk-rule className="origin-left border-0 border-t border-(--color-border-default)" />
           <div className="grid gap-8 pt-(--section-comfortable) lg:grid-cols-[220px_minmax(0,1fr)] lg:gap-16">
             <div className="lg:pt-3">
               <DeskLabel>Side by side</DeskLabel>
@@ -218,7 +218,7 @@ export default function LessonsPage() {
                 reader sees the place before choosing what to do in it.
               */}
               <figure className="mb-11">
-                <div className="relative aspect-[3/2] w-full overflow-hidden bg-(--color-ground-pitch)">
+                <div className="relative aspect-[3/2] w-full overflow-hidden rounded-(--radius-media-sm) sm:rounded-(--radius-media) bg-(--color-ground-pitch)">
                   <Photo
                     id="lesson-room"
                     alt="A South Dade Music lesson in progress: students at digital keyboards and a ukulele, with the academy's red SDM sign on the wall behind them."
@@ -240,7 +240,7 @@ export default function LessonsPage() {
                   <section
                     key={family.id}
                     className={`grid gap-6 border-t border-(--color-border-default) py-9 sm:gap-9 ${
-                      family.plate ? 'sm:grid-cols-[168px_minmax(0,1fr)]' : ''
+                      family.plate ? 'sm:grid-cols-[240px_minmax(0,1fr)]' : ''
                     }`}
                   >
                     {/*
@@ -331,7 +331,7 @@ export default function LessonsPage() {
       {/* What happens next, and how to book. */}
       <Movement name="lessons-next" ground="house" className="pb-(--section-feature)">
         <FilmMargin wide>
-          <hr className="border-0 border-t border-(--color-border-default)" />
+          <hr data-desk-rule className="origin-left border-0 border-t border-(--color-border-default)" />
           <div className="grid gap-10 pt-(--section-comfortable) lg:grid-cols-[220px_minmax(0,1fr)] lg:gap-16">
             <DeskLabel>{lessonsHub.nextLabel}</DeskLabel>
             <div className="max-w-[840px]">

@@ -56,7 +56,7 @@ export function TheRelease() {
     <Movement
       name="release"
       ground="flash"
-      className="relative flex min-h-[64svh] flex-col justify-end overflow-hidden py-(--section-spacious)"
+      className="relative flex min-h-[52svh] flex-col justify-center overflow-hidden py-(--section-comfortable)"
     >
       <FilmMargin className="relative z-[3]">
         {/*
@@ -81,9 +81,46 @@ export function TheRelease() {
           register as every other line in the dark, and it asserts nothing about
           the business that the business has not published.
         */}
-        <p className="mt-6 max-w-[720px] font-body text-whisper italic text-(--color-ash)">
-          One note. Whatever instrument she chose. Held.
-        </p>
+        {/*
+          THE LINE AND THE MOMENT IT DESCRIBES, ON ONE AXIS.
+
+          This beat was a rule, a sentence, and most of a screen of empty ivory.
+          Measured: a 1,007px frame carrying 687px of content — 160px of padding
+          above and below, `justify-end` pushing everything down, and the
+          photograph stacked *under* the line so it entered the viewport long
+          after the words it belongs to. At the climax of the film it read as an
+          unfinished page.
+
+          It is now one composition. The rule still runs full width; beneath it
+          the line and the photograph share a single axis, text left at a narrow
+          measure, image right and larger. The frame is 52svh and centred rather
+          than 64svh and bottom-aligned, so the ivory that remains is breathing
+          room rather than a gap.
+
+          Audit #18 is the photograph of exactly this sentence: an instructor
+          leaning down to hand a microphone to a very small child in a waistcoat,
+          on stage, the academy banner behind them, an audience already seated.
+          The half-second before a first note. No generated image could have
+          supplied it.
+
+          Approval basis: OWNER APPROVED EXISTING PORTFOLIO.
+        */}
+        <div className="mt-8 grid items-center gap-8 lg:grid-cols-[minmax(0,4fr)_minmax(0,6fr)] lg:gap-14">
+          <p className="max-w-[26ch] font-body text-whisper italic text-(--color-ash)">
+            One note. Whatever instrument she chose. Held.
+          </p>
+
+          <figure>
+            <div className="relative aspect-[3/2] w-full overflow-hidden rounded-(--radius-media-sm) bg-(--color-ground-pitch) sm:rounded-(--radius-media)">
+              <Photo
+                id="first-note"
+                alt="An instructor leaning down to hand a microphone to a small child in a waistcoat on the South Dade Music stage, with the academy banner behind them and an audience seated."
+                position="center 42%"
+                sizes="(min-width: 1024px) 660px, 100vw"
+              />
+            </div>
+          </figure>
+        </div>
       </FilmMargin>
     </Movement>
   )
@@ -176,6 +213,7 @@ export function HouseLightsReveal() {
       <div data-houselights-plate className="absolute inset-0">
         <Photo
           id="stage-floral"
+          reveal="none"
           alt="The South Dade Music stage, dressed and empty: keyboards, a drum kit and congas under coloured lighting, with the academy banner reading build community, make music."
           imgClassName="object-[40%_center] sm:object-[center_58%]"
           sizes="100vw"

@@ -13,6 +13,9 @@ import type { NavItem } from '@/types/navigation'
 /** 150ms hover-intent delay before a mega-menu opens (04-design-system.md §11). */
 const HOVER_INTENT_MS = 150
 
+/** Grace period before a pointer leaving the trigger closes the panel. */
+const CLOSE_INTENT_MS = 180
+
 function isActive(pathname: string, item: NavItem): boolean {
   if (item.href === '/') return pathname === '/'
   if (pathname === item.href || pathname.startsWith(`${item.href}/`)) return true
@@ -103,6 +106,20 @@ export function Navigation({ className }: { className?: string }) {
     setOpenId(null)
   }, [clearTimer])
 
+  /*
+    Closing needs its own delay, and for a different reason than opening.
+
+    Opening is debounced to defeat accidental brushes. Closing is debounced to
+    defeat *intentional* ones: the pointer path from a trigger to the item it
+    wants inside the panel is a diagonal, and a diagonal briefly leaves both
+    elements. With an immediate close the menu vanished mid-gesture. 180ms is
+    longer than that traverse and shorter than a deliberate exit.
+  */
+  const closeWithIntent = useCallback(() => {
+    clearTimer()
+    timerRef.current = window.setTimeout(() => setOpenId(null), CLOSE_INTENT_MS)
+  }, [clearTimer])
+
   // Escape and outside click.
   useEffect(() => {
     if (!openId) return
@@ -136,8 +153,8 @@ export function Navigation({ className }: { className?: string }) {
             <li
               key={item.id}
               className="relative"
-              onPointerEnter={hasChildren ? () => openWithIntent(item.id) : undefined}
-              onPointerLeave={hasChildren ? close : undefined}
+              onPointerEnter={hasChildren ? () => (openId === item.id ? clearTimer() : openWithIntent(item.id)) : undefined}
+              onPointerLeave={hasChildren ? closeWithIntent : undefined}
               onFocus={hasChildren ? () => setOpenId(item.id) : undefined}
               onBlur={
                 hasChildren
@@ -203,9 +220,25 @@ export function Navigation({ className }: { className?: string }) {
                 <div
                   id={`nav-panel-${item.id}`}
                   hidden={!isOpen}
+                  /*
+                    NO GAP between trigger and panel.
+
+                    This was `mt-2`: an 8px dead band that the pointer had to
+                    cross to reach the menu, and crossing it fired mouseleave and
+                    closed the thing being reached for. The panel now meets the
+                    trigger at `top-full` and carries its own top padding, so the
+                    gesture never leaves an interactive surface.
+
+                    The panel also follows the header's register. Over the film
+                    it is pitch with a hairline seam; at the desk it is the raised
+                    surface. No shadow in either — a drop shadow here is the
+                    floating-card cliché the direction bans, and the seam does the
+                    same separation work.
+                  */
                   className={cn(
-                    'absolute top-full left-0 z-(--z-popover) mt-2 min-w-64',
-                    'rounded-(--radius-lg) border border-n-200 bg-n-0 p-2 shadow-elev-3',
+                    'absolute top-full left-0 z-(--z-popover) min-w-64 pt-2',
+                    'border border-(--color-border-default) bg-(--color-surface-raised) p-2',
+                    'in-data-[register=house]:border-white/12 in-data-[register=house]:bg-(--color-ground-pitch)',
                   )}
                 >
                   <ul className="flex flex-col">
@@ -215,13 +248,13 @@ export function Navigation({ className }: { className?: string }) {
                           item={child}
                           className={cn(
                             'flex min-h-11 flex-col justify-center rounded-(--radius-sm) px-3 py-2',
-                            'font-body text-body-md text-n-800',
-                            child.status === 'live' && 'hover:bg-n-100',
+                            'font-body text-body-md text-(--color-text-primary)',
+                            child.status === 'live' && 'hover:bg-(--color-text-primary)/8',
                           )}
                         >
                           <span>{child.label}</span>
                           {child.facts?.length ? (
-                            <span className="text-body-sm text-n-500">{child.facts.join(' · ')}</span>
+                            <span className="text-body-sm text-(--color-text-muted)">{child.facts.join(' · ')}</span>
                           ) : null}
                         </NavDestination>
                       </li>

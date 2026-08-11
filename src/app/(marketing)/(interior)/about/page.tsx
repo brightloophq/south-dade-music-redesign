@@ -124,11 +124,11 @@ export default function AboutPage() {
           every environment.
         */}
         <div className="gap-9 sm:flex sm:items-start">
-          <div className="relative mb-7 aspect-[441/759] w-[132px] shrink-0 overflow-hidden bg-(--color-ground-pitch) sm:mb-0 sm:w-[168px]">
+          <div className="relative mb-7 aspect-[441/759] w-[180px] shrink-0 overflow-hidden rounded-(--radius-media-sm) sm:rounded-(--radius-media) bg-(--color-ground-pitch) sm:mb-0 sm:w-[248px]">
             <Photo
               id="banner"
               alt="A South Dade Music pull-up banner standing in the teaching room, reading build community, make music."
-              sizes="168px"
+              sizes="248px"
             />
           </div>
           <div>
@@ -151,7 +151,7 @@ export default function AboutPage() {
           sentence about it.
         */}
         <figure className="mt-10">
-          <div className="relative aspect-[16/10] w-full overflow-hidden bg-(--color-ground-pitch) sm:aspect-[2/1]">
+          <div className="relative aspect-[16/10] w-full overflow-hidden rounded-(--radius-media-sm) sm:rounded-(--radius-media) bg-(--color-ground-pitch) sm:aspect-[2/1]">
             <Photo
               id="community-event"
               alt="Families and staff gathered and talking in the South Dade Music room after a showcase, with the academy's banner behind them."
@@ -190,7 +190,7 @@ export default function AboutPage() {
 
       <Movement name="about-cta" ground="house" className="pb-(--section-feature)">
         <FilmMargin wide>
-          <hr className="border-0 border-t border-(--color-border-default)" />
+          <hr data-desk-rule className="origin-left border-0 border-t border-(--color-border-default)" />
           <div className="grid gap-10 pt-(--section-comfortable) lg:grid-cols-[220px_minmax(0,1fr)] lg:gap-16">
             <DeskLabel>Where we teach</DeskLabel>
             <div className="max-w-[840px]">

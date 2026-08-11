@@ -60,7 +60,7 @@ export default function CampsPage() {
         estate that shows group work with the youngest students, which is
         exactly what this page sells and what a parent is trying to picture.
       */}
-      <figure className="relative aspect-[16/10] w-full overflow-hidden bg-(--color-ground-pitch) sm:aspect-[2.2/1]">
+      <figure className="relative aspect-[16/10] w-full overflow-hidden rounded-(--radius-media-sm) sm:rounded-(--radius-media) bg-(--color-ground-pitch) sm:aspect-[2.2/1]">
         <Photo
           id="camp-circle"
           alt="A South Dade Music camp session: children seated in a circle on the floor with percussion blocks while an instructor leads them."
@@ -206,7 +206,7 @@ export default function CampsPage() {
       {/* Legally load-bearing. Ships in full, unedited, and never animated. */}
       <Movement name="camp-terms" ground="house" className="pb-(--section-feature)">
         <FilmMargin wide>
-          <hr className="border-0 border-t border-(--color-border-default)" />
+          <hr data-desk-rule className="origin-left border-0 border-t border-(--color-border-default)" />
           <div className="grid gap-10 pt-(--section-comfortable) lg:grid-cols-[220px_minmax(0,1fr)] lg:gap-16">
             <DeskLabel>Terms</DeskLabel>
             <div className="max-w-[840px]">

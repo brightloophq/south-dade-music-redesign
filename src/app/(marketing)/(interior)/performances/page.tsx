@@ -81,6 +81,7 @@ export default function PerformancesPage() {
         <div className="relative aspect-[21/9] w-full sm:aspect-[2.39/1]">
           <Photo
             id="band-showcase"
+            reveal="wipe"
             alt="A South Dade Music showcase in progress: students and instructors performing with guitars and keyboards in front of the academy backdrop, watched by a seated audience."
             position="center 45%"
             sizes="100vw"
@@ -103,7 +104,7 @@ export default function PerformancesPage() {
       */}
       <Movement name="upcoming" ground="house" className="pb-(--section-spacious)">
         <FilmMargin wide>
-          <hr className="border-0 border-t border-(--color-border-default)" />
+          <hr data-desk-rule className="origin-left border-0 border-t border-(--color-border-default)" />
           <div className="grid gap-10 pt-(--section-comfortable) lg:grid-cols-[220px_minmax(0,1fr)] lg:gap-16">
             <DeskLabel>{performances.upcoming.label}</DeskLabel>
             <div className="max-w-[840px]">
@@ -134,7 +135,7 @@ export default function PerformancesPage() {
 
                 ⚠️ PREVIEW ONLY. I-7 unconfirmed.
               */}
-              <div className="relative mt-9 aspect-[1120/1320] w-[200px] overflow-hidden bg-(--color-ground-pitch)">
+              <div className="relative mt-9 aspect-[1120/1320] w-[200px] overflow-hidden rounded-(--radius-media-sm) sm:rounded-(--radius-media) bg-(--color-ground-pitch)">
                 <Photo
                   id="bass-on-stand"
                   alt="A bass guitar resting on its stand beside a decorated table and balloons, set up for a South Dade Music recital."
@@ -157,6 +158,80 @@ export default function PerformancesPage() {
 
       {/* Testimony instead of photography, because photography is blocked. */}
       {/*
+      {/*
+        MORE THAN ONE NIGHT.
+
+        The single hardest thing for this page to say is that performances are
+        a habit rather than an anecdote. One photograph cannot say it; four of
+        the same night cannot either. These are three visibly different
+        occasions from the academy's own portfolio — a community stage under an
+        ARTE EN EL PARQUE banner, a named production, a seasonal recital in a
+        room dressed for the holidays.
+
+        Deliberately not a grid. Three sizes, three shapes, one shared baseline:
+        the outreach frame is the large one because it is the one that happens
+        away from home, and the two beside it are stacked at different heights
+        so the row reads as a contact sheet someone laid out rather than a
+        component that repeated itself.
+
+        No dates are given. The estate publishes none, and inventing a
+        chronology would be worse than presenting these as what they are —
+        different nights, all real.
+
+        Audits #14, #33, #5. Approval basis: OWNER APPROVED EXISTING PORTFOLIO.
+      */}
+      <Movement name="portfolio" ground="house" className="pb-(--section-spacious)">
+        <FilmMargin wide>
+          <hr data-desk-rule className="origin-left border-0 border-t border-(--color-border-default)" />
+          <div className="grid gap-6 pt-(--section-comfortable) lg:grid-cols-[minmax(0,7fr)_minmax(0,4fr)] lg:gap-8">
+            <figure>
+              <div className="relative aspect-[3/2] w-full overflow-hidden rounded-(--radius-media-sm) sm:rounded-(--radius-media) bg-(--color-ground-pitch)">
+                <Photo
+                  id="event-park"
+                  alt="South Dade Music students performing on a community stage beneath an Arte en el Parque banner, with drums, keyboards and guitars."
+                  position="center 45%"
+                  sizes="(min-width: 1024px) 700px, 100vw"
+                />
+              </div>
+              <figcaption className="mt-3 font-display text-label uppercase text-(--color-text-muted)">
+                A community stage
+              </figcaption>
+            </figure>
+
+            <div className="flex flex-col gap-6 lg:pt-12">
+              <figure>
+                <div className="relative aspect-[4/3] w-full overflow-hidden rounded-(--radius-media-sm) sm:rounded-(--radius-media) bg-(--color-ground-pitch)">
+                  <Photo
+                    id="event-la-bamba"
+                    alt="A South Dade Music combo band performing with a vocalist and a young guitarist in front of a projected band name."
+                    position="center 40%"
+                    sizes="(min-width: 1024px) 400px, 100vw"
+                  />
+                </div>
+                <figcaption className="mt-3 font-display text-label uppercase text-(--color-text-muted)">
+                  A named production
+                </figcaption>
+              </figure>
+              <figure>
+                <div className="relative aspect-[3/2] w-full overflow-hidden rounded-(--radius-media-sm) sm:rounded-(--radius-media) bg-(--color-ground-pitch)">
+                  <Photo
+                    id="event-holiday"
+                    alt="A South Dade Music student playing a Yamaha keyboard at a seasonal recital, in a room lit green with holiday decorations."
+                    position="center 50%"
+                    sizes="(min-width: 1024px) 400px, 100vw"
+                  />
+                </div>
+                <figcaption className="mt-3 font-display text-label uppercase text-(--color-text-muted)">
+                  A seasonal recital
+                </figcaption>
+              </figure>
+            </div>
+          </div>
+        </FilmMargin>
+      </Movement>
+
+      {/*
+
         THE ENSEMBLE — approved portfolio, published.
 
         The academy's own showcase: a full group on stage in leis, lit, with an
@@ -168,9 +243,9 @@ export default function PerformancesPage() {
       */}
       <Movement name="ensemble" ground="house" className="pb-(--section-spacious)">
         <FilmMargin wide>
-          <hr className="border-0 border-t border-(--color-border-default)" />
+          <hr data-desk-rule className="origin-left border-0 border-t border-(--color-border-default)" />
           <figure className="pt-(--section-comfortable)">
-            <div className="relative aspect-[16/10] w-full overflow-hidden bg-(--color-ground-pitch) sm:aspect-[2/1]">
+            <div className="relative aspect-[16/10] w-full overflow-hidden rounded-(--radius-media-sm) sm:rounded-(--radius-media) bg-(--color-ground-pitch) sm:aspect-[2/1]">
               <Photo
                 id="ensemble-leis"
                 alt="A full ensemble of South Dade Music students standing on stage in leis under coloured lights, performing to a seated audience."
@@ -187,7 +262,7 @@ export default function PerformancesPage() {
 
       <Movement name="evidence" ground="house" className="pb-(--section-spacious)">
         <FilmMargin wide>
-          <hr className="border-0 border-t border-(--color-border-default)" />
+          <hr data-desk-rule className="origin-left border-0 border-t border-(--color-border-default)" />
           <div className="grid gap-10 pt-(--section-comfortable) lg:grid-cols-[220px_minmax(0,1fr)] lg:gap-16">
             <DeskLabel>{performanceEvidence.lead}</DeskLabel>
             <div className="max-w-[840px]">
@@ -220,6 +295,7 @@ export default function PerformancesPage() {
       <div className="relative aspect-[16/9] w-full overflow-hidden bg-(--color-ground-pitch) sm:aspect-[2.4/1]">
         <Photo
           id="recital-room"
+          reveal="wipe"
           alt="The South Dade Music recital room during a showcase: rows of families seated on folding chairs facing the lit stage."
           position="center 55%"
           sizes="100vw"
@@ -236,7 +312,7 @@ export default function PerformancesPage() {
       */}
       <Movement name="community" ground="house" className="pb-(--section-spacious)">
         <FilmMargin wide>
-          <hr className="border-0 border-t border-(--color-border-default)" />
+          <hr data-desk-rule className="origin-left border-0 border-t border-(--color-border-default)" />
           <div className="grid gap-10 pt-(--section-comfortable) lg:grid-cols-[220px_minmax(0,1fr)] lg:gap-16">
             <DeskLabel>{performances.community.label}</DeskLabel>
             <div className="max-w-[840px]">
@@ -268,7 +344,7 @@ export default function PerformancesPage() {
 
       <Movement name="performances-cta" ground="house" className="pb-(--section-feature)">
         <FilmMargin wide>
-          <hr className="border-0 border-t border-(--color-border-default)" />
+          <hr data-desk-rule className="origin-left border-0 border-t border-(--color-border-default)" />
           <div className="grid gap-10 pt-(--section-comfortable) lg:grid-cols-[220px_minmax(0,1fr)] lg:gap-16">
             <DeskLabel>Take part</DeskLabel>
             <div className="max-w-[840px]">

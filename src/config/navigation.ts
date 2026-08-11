@@ -57,17 +57,29 @@ export const primaryNavigation: readonly NavItem[] = [
       { id: 'voice', label: 'Voice', href: '/singing-lessons', status: 'live' },
     ],
   },
+  /**
+   * Promoted to the first level.
+   *
+   * `/performances` is now the academy's actual portfolio — real photographs
+   * of real showcases — and it is the strongest evidence the site has.
+   * Leaving it as a child of About buried the one page that proves the
+   * business does what it says.
+   *
+   * The IA cap of six top-level items still holds: Scholarships moves under
+   * About, one interaction away, which is the right depth for a funding topic
+   * a visitor seeks out deliberately rather than stumbles into.
+   */
+  { id: 'performances', label: 'Performances', href: '/performances', status: 'live' },
   { id: 'camps', label: 'Camps', href: '/camps', status: 'live' },
-  { id: 'scholarships', label: 'Scholarships', href: '/scholarships', status: 'live' },
   {
     id: 'about',
     label: 'About',
     href: '/about',
-    status: 'planned',
+    status: 'live',
     children: [
       { id: 'method', label: 'Our Method', href: '/about', status: 'live' },
+      { id: 'scholarships', label: 'Scholarships', href: '/scholarships', status: 'live' },
       { id: 'teachers', label: 'Teachers', href: '/teachers', status: 'gated', gate: 'B-7' },
-      { id: 'performances', label: 'Performances', href: '/performances', status: 'live' },
       { id: 'faq', label: 'FAQ', href: '/faq', status: 'live' },
       { id: 'contact', label: 'Contact', href: '/contact', status: 'live' },
     ],

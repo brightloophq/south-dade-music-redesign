@@ -1,5 +1,7 @@
 'use client'
 
+import { useEffect, useState } from 'react'
+import Image from 'next/image'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 
@@ -7,6 +9,7 @@ import { primaryCta } from '@/config/navigation'
 import { siteConfig } from '@/config/site'
 import { Button } from '@/components/ui/Button'
 import { Container } from '@/components/ui/Container'
+import { DESK_SENTINEL_ID } from '@/components/film'
 import { useScrollDirection } from '@/hooks/useScrollDirection'
 import { cn } from '@/lib/utils/cn'
 
@@ -32,6 +35,38 @@ export interface HeaderProps {
 const ROUTES_WITH_DARK_HERO = new Set(['/'])
 
 /**
+ * Has the film handed over to the desk?
+ *
+ * Watches the same `#desk-begins` sentinel the letterbox and grain use, so the
+ * header changes register on precisely the beat they do. Disabled (and always
+ * false) on routes that are not the homepage, where scroll depth is the right
+ * signal and this observer would be dead weight.
+ */
+function useDeskSentinel(enabled: boolean) {
+  const [reached, setReached] = useState(false)
+
+  useEffect(() => {
+    if (!enabled) return
+    const sentinel = document.getElementById(DESK_SENTINEL_ID)
+    if (!sentinel) return
+
+    /*
+      `rootMargin` pulls the trip line down to the header's own height, so the
+      swap happens as the desk arrives *under* the bar rather than when it
+      first appears at the bottom of the screen.
+    */
+    const observer = new IntersectionObserver(
+      ([entry]) => setReached(entry.boundingClientRect.top <= 80),
+      { rootMargin: '-80px 0px 0px 0px', threshold: [0, 1] },
+    )
+    observer.observe(sentinel)
+    return () => observer.disconnect()
+  }, [enabled])
+
+  return reached
+}
+
+/**
  * Site header.
  * Canonical spec: docs/redesign/04-design-system.md §11 · final-art-direction.md §5
  *
@@ -49,9 +84,25 @@ const ROUTES_WITH_DARK_HERO = new Set(['/'])
 export function Header({ overHero, className }: HeaderProps) {
   const pathname = usePathname()
   const { isScrolled } = useScrollDirection({ threshold: 24 })
+  const deskReached = useDeskSentinel(pathname === '/')
 
   const floatsOverHero = overHero ?? ROUTES_WITH_DARK_HERO.has(pathname)
-  const solid = isScrolled || !floatsOverHero
+
+  /*
+    THE HOMEPAGE IS NOT SCROLL-DEPTH DRIVEN.
+
+    Everywhere else, 24px of scroll means the hero is behind you and the header
+    should go solid. On the homepage that rule is wrong by about five
+    viewports: the film runs dark from the first pixel to the house lights, and
+    a header that turned ivory on the first flick of the wheel would put a
+    bright bar across the whole of it.
+
+    So the homepage asks the film instead. `#desk-begins` is the same sentinel
+    the letterbox and the grain already use to know the film is over — the
+    header now shares it, which is why the three of them change register on
+    exactly the same scroll position rather than approximately.
+  */
+  const solid = floatsOverHero ? (pathname === '/' ? deskReached : isScrolled) : true
 
   return (
     <header
@@ -64,11 +115,27 @@ export function Header({ overHero, className }: HeaderProps) {
       data-register={!solid ? 'house' : undefined}
       className={cn(
         'sticky top-0 z-(--z-header) w-full',
-        'transition-[background-color,box-shadow,height] duration-(--duration-base) ease-(--ease-stage)',
+        /*
+          The film-to-desk handover is a state change the visitor should feel,
+          so colour and height ease across ~320ms rather than snapping. Only
+          paint and height transition — never transform — so the header cannot
+          contribute layout shift, and `motion-reduce` drops it entirely.
+        */
+        'transition-[background-color,border-color,color,height] duration-(--duration-slow) ease-(--ease-stage)',
         'motion-reduce:transition-none',
         solid
           ? 'h-16 border-b border-(--color-border-default) bg-(--color-surface-raised)'
-          : 'h-20 border-b border-transparent bg-transparent',
+          : /*
+              Pitch, not `transparent`.
+              
+              The header sits in flow, so a transparent bar over the homepage
+              showed 20px of the cream page background between the letterbox's
+              top bar and the first frame of the film — a pale strip across the
+              whole width, directly under the navigation. Against the film,
+              pitch and transparent look identical; only one of them is
+              actually dark.
+            */
+            'h-20 border-b border-transparent bg-(--color-ground-pitch)',
         className,
       )}
       style={{ ['--header-height' as string]: solid ? '64px' : '80px' }}
@@ -76,16 +143,31 @@ export function Header({ overHero, className }: HeaderProps) {
       <Container width="wide" className="flex h-full items-center justify-between gap-4">
         <Link
           href="/"
-          // min-h-6 gives the wordmark a 24px hit area (WCAG 2.5.8 AA). Its
-          // type box measured 23px — one pixel short — on every route.
-          className="flex min-h-6 shrink-0 items-center font-display text-heading-sm font-bold tracking-tight text-(--color-text-primary)"
+          aria-label={`${siteConfig.shortName} — home`}
+          className="flex shrink-0 items-center"
         >
           {/*
-            ⚠️ Gate B-5 / D-1 — the estate runs four brand names and the logo has
-            not been reviewed, so the wordmark is set in type rather than an
-            image. Replacing this with the real mark is blocked on both gates.
+            THE AUTHENTIC MARK.
+
+            This was set in type — three lines of Bricolage standing in for a
+            logo — because gate D-1 had the real mark unreviewed. The owner has
+            now asked for it directly, so the first-party asset ships: census
+            #76, the highest-resolution brand file in the estate at 1536×914,
+            served at 720px with its alpha intact. It is not recreated, not
+            approximated and not regenerated.
+
+            Height is fixed and width follows, so the aspect ratio is never
+            touched. 40px keeps the three-line wordmark legible without letting
+            a 1.68:1 mark dominate a 64px bar.
           */}
-          {siteConfig.shortName}
+          <Image
+            src="/brand/south-dade-music.png"
+            alt={siteConfig.shortName}
+            width={720}
+            height={428}
+            priority
+            className="h-12 w-auto sm:h-14"
+          />
         </Link>
 
         <Navigation className="flex-1 justify-center" />

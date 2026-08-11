@@ -3,6 +3,7 @@ import Link from 'next/link'
 
 import { Button } from '@/components/ui/Button'
 import { FilmMargin, Movement } from '@/components/film'
+import { Photo } from '@/components/media/Photo'
 import { DeskLabel, PageIntro } from '@/components/page'
 import { programEntries, programsHub } from '@/content/programs'
 import { theTurn } from '@/content/home'
@@ -54,6 +55,30 @@ export default function ProgramsPage() {
         lead={programsHub.lead}
       />
 
+      {/*
+        THE HUB'S FIRST VIEWPORT WAS HALF EMPTY.
+
+        Found in the six-width visual sweep: `/programs` opened on a heading, a
+        paragraph and roughly 700px of unbroken cream to the right of it. It read
+        as an unfinished page rather than as restraint.
+
+        `ensemble-guitars` (audit #29) is the right frame for a hub that says
+        every programme leads to the same place — two students playing together
+        on stage, which is the destination the page is describing. Full-bleed
+        band rather than a plate, so it separates the promise from the index
+        below it.
+      */}
+      <div className="relative aspect-[16/9] w-full overflow-hidden bg-(--color-ground-pitch) sm:aspect-[2.4/1]">
+        <Photo
+          id="ensemble-guitars"
+          alt="Two South Dade Music students playing bass and electric guitar side by side on stage under coloured lights."
+          position="center 42%"
+          reveal="wipe"
+          sizes="100vw"
+        />
+      </div>
+
+
       {/* The flagship, at twice the size of everything below it. */}
       {flagship ? (
         <Movement name="flagship" ground="house" className="pb-(--section-spacious)">
@@ -94,7 +119,7 @@ export default function ProgramsPage() {
       */}
       <Movement name="pathway" ground="house" className="pb-(--section-spacious)">
         <FilmMargin wide>
-          <hr className="border-0 border-t border-(--color-border-default)" />
+          <hr data-desk-rule className="origin-left border-0 border-t border-(--color-border-default)" />
           <div className="grid gap-8 pt-(--section-comfortable) lg:grid-cols-[220px_minmax(0,1fr)] lg:gap-16">
             <div className="lg:pt-3">
               <DeskLabel>{programsHub.pathwayLabel}</DeskLabel>
@@ -204,7 +229,7 @@ export default function ProgramsPage() {
       {/* Tuition is unpublished. Say so, rather than leaving a silence. */}
       <Movement name="programs-cta" ground="house" className="pb-(--section-feature)">
         <FilmMargin wide>
-          <hr className="border-0 border-t border-(--color-border-default)" />
+          <hr data-desk-rule className="origin-left border-0 border-t border-(--color-border-default)" />
           <div className="grid gap-10 pt-(--section-comfortable) lg:grid-cols-[220px_minmax(0,1fr)] lg:gap-16">
             <DeskLabel>Tuition</DeskLabel>
             <div className="max-w-[840px]">

@@ -1,3 +1,4 @@
+import Image from 'next/image'
 import Link from 'next/link'
 
 import { footerNavigation } from '@/config/navigation'
@@ -9,7 +10,6 @@ import { Text } from '@/components/ui/Typography'
 import { cn } from '@/lib/utils/cn'
 import type { NavItem } from '@/types/navigation'
 
-import { MotionToggle } from './MotionToggle'
 
 function FooterLink({ item }: { item: NavItem }) {
   if (item.status !== 'live') {
@@ -140,12 +140,24 @@ export function Footer({ className }: { className?: string }) {
         </section>
 
         <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
+          {/*
+            The authentic mark, small, above the colophon. Same first-party
+            asset as the header (census #76) at the 180px variant, because the
+            footer never needs the 720px file.
+          */}
+          <Image
+            src="/brand/south-dade-music-small.png"
+            alt=""
+            aria-hidden="true"
+            width={180}
+            height={107}
+            className="mb-5 h-9 w-auto opacity-80"
+          />
           <Text token="body-sm" className="text-n-400">
             © {year} {siteConfig.shortName}
             {/* ⚠️ Gate B-5 — legal entity name unconfirmed; four names in use. */}
           </Text>
 
-          <MotionToggle />
         </div>
       </Container>
     </footer>

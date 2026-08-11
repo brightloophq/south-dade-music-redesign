@@ -119,7 +119,7 @@ export default function NinetyDayStageProgramPage() {
       */}
       <Movement name="why-stage" ground="house" className="pb-(--section-spacious)">
         <FilmMargin wide>
-          <hr className="border-0 border-t border-(--color-border-default)" />
+          <hr data-desk-rule className="origin-left border-0 border-t border-(--color-border-default)" />
           <div className="grid gap-8 pt-(--section-comfortable) lg:grid-cols-[220px_minmax(0,1fr)] lg:gap-16">
             <div className="lg:pt-3">
               <DeskLabel>{ninetyDayPage.whyStage.heading}</DeskLabel>
@@ -158,6 +158,35 @@ export default function NinetyDayStageProgramPage() {
         page's own source gives the three steps with no week numbers at all.
       */}
       {/*
+        PRACTICE — the first stage of the arc, and the only one without a
+        photograph until now.
+
+        Audit #13: an instructor at the keyboard with a student beside him and
+        another student on the kit behind, an audience already in the room. The
+        page sells practice → preparation → stage → outcome, and it was
+        illustrating the last three.
+      */}
+      <Movement name="practice" ground="house" className="pb-(--section-spacious)">
+        <FilmMargin wide>
+          <hr data-desk-rule className="origin-left border-0 border-t border-(--color-border-default)" />
+          <figure className="pt-(--section-comfortable)">
+            <div className="relative aspect-[16/10] w-full overflow-hidden rounded-(--radius-media-sm) sm:rounded-(--radius-media) bg-(--color-ground-pitch) sm:aspect-[2.2/1]">
+              <Photo
+                id="lesson-duet"
+                alt="A South Dade Music instructor playing a keyboard beside a student, with another student at a drum kit behind them and an audience seated in front."
+                position="center 45%"
+                sizes="100vw"
+              />
+            </div>
+            <figcaption className="mt-3 font-display text-label uppercase text-(--color-text-muted)">
+              The weeks before
+            </figcaption>
+          </figure>
+        </FilmMargin>
+      </Movement>
+
+
+      {/*
         PREPARATION — approved portfolio, published. Audit #54.
 
         The room as it is set on showcase day, before anyone is on it. It sits
@@ -167,8 +196,8 @@ export default function NinetyDayStageProgramPage() {
       */}
       <Movement name="preparation" ground="house" className="pb-(--section-spacious)">
         <FilmMargin wide>
-          <hr className="border-0 border-t border-(--color-border-default)" />
-          <div className="relative mt-(--section-comfortable) aspect-[16/10] w-full overflow-hidden bg-(--color-ground-pitch) sm:aspect-[2.2/1]">
+          <hr data-desk-rule className="origin-left border-0 border-t border-(--color-border-default)" />
+          <div className="relative mt-(--section-comfortable) aspect-[16/10] w-full overflow-hidden rounded-(--radius-media-sm) sm:rounded-(--radius-media) bg-(--color-ground-pitch) sm:aspect-[2.2/1]">
             <Photo
               id="stage-set-purple"
               alt="The South Dade Music stage dressed for a showcase: a drum kit, congas and keyboards under purple lighting, with the academy banner beside them."
@@ -181,7 +210,7 @@ export default function NinetyDayStageProgramPage() {
 
       <Movement name="journey" ground="house" className="relative overflow-hidden pb-(--section-spacious)">
         <FilmMargin wide>
-          <hr className="border-0 border-t border-(--color-border-default)" />
+          <hr data-desk-rule className="origin-left border-0 border-t border-(--color-border-default)" />
           <div className="grid gap-8 pt-(--section-comfortable) lg:grid-cols-[220px_minmax(0,1fr)] lg:gap-16">
             <div className="lg:pt-3">
               <DeskLabel>The ninety days</DeskLabel>
@@ -248,7 +277,7 @@ export default function NinetyDayStageProgramPage() {
       */}
       <Movement name="what-changes" ground="house" className="pb-(--section-spacious)">
         <FilmMargin wide>
-          <hr className="border-0 border-t border-(--color-border-default)" />
+          <hr data-desk-rule className="origin-left border-0 border-t border-(--color-border-default)" />
           <div className="grid gap-8 pt-(--section-comfortable) lg:grid-cols-[220px_minmax(0,1fr)] lg:gap-16">
             <div className="lg:pt-3">
               <DeskLabel>What changes</DeskLabel>
@@ -293,7 +322,7 @@ export default function NinetyDayStageProgramPage() {
         ⚠️ The conditional "get the chance to perform" is preserved exactly.
       */}
       <Movement name="the-end" ground="pitch" className="relative overflow-hidden">
-        <div className="relative aspect-[21/9] w-full sm:aspect-[2.39/1]">
+        <div className="rounded-(--radius-media-sm) sm:rounded-(--radius-media) relative aspect-[21/9] w-full sm:aspect-[2.39/1]">
           {/*
             MI1 — the generated chair gives way to what the ninety days actually
             end in.
@@ -368,7 +397,7 @@ export default function NinetyDayStageProgramPage() {
       <Movement name="outcome" ground="house" className="pb-(--section-spacious)">
         <FilmMargin wide>
           <figure>
-            <div className="relative aspect-[16/10] w-full overflow-hidden bg-(--color-ground-pitch) sm:aspect-[2/1]">
+            <div className="relative aspect-[16/10] w-full overflow-hidden rounded-(--radius-media-sm) sm:rounded-(--radius-media) bg-(--color-ground-pitch) sm:aspect-[2/1]">
               <Photo
                 id="medals-on-stage"
                 alt="South Dade Music students standing together on stage wearing medals at the end of a showcase."
@@ -394,7 +423,7 @@ export default function NinetyDayStageProgramPage() {
       */}
       <Movement name="decide" ground="house" className="pb-(--section-feature)">
         <FilmMargin wide>
-          <hr className="border-0 border-t border-(--color-border-default)" />
+          <hr data-desk-rule className="origin-left border-0 border-t border-(--color-border-default)" />
           <div className="grid gap-8 pt-(--section-comfortable) lg:grid-cols-[220px_minmax(0,1fr)] lg:gap-16">
             <div className="lg:pt-3">
               <DeskLabel>{ninetyDayPage.audience.heading}</DeskLabel>

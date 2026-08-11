@@ -38,7 +38,7 @@
  *   3. no Next.js dev error overlay
  *   4. the destination visibly renders (real text, exactly one h1)
  *
- * Plus: after navigating back to `/`, the film must re-initialise — both pins
+ * Plus: after navigating back to `/`, the film must re-initialise — the pin
  * rebuilt, and the pinned sections sitting inside their React-owned wrappers.
  *
  * ## Usage
@@ -227,9 +227,23 @@ rule()
   await page.waitForTimeout(600)
 
   const problems = []
-  if (first.spacers !== 2) problems.push(`first visit built ${first.spacers} pins, expected 2`)
+  /*
+    ONE PIN, NOT TWO — updated deliberately, not to make the check pass.
+
+    The film budgeted two pinned sequences: the Walk and the Release. The
+    Release pin was removed after the polish pass rebuilt that beat as a 52svh
+    composition (~797px) instead of a full screen. Pinning an element shorter
+    than the viewport made ScrollTrigger's spacer collapse and re-expand it,
+    measured at **CLS 1.75** on desktop against 0.003 on mobile where pins never
+    run. See the comment on `pin: false` in ReleaseTimeline.
+
+    The Walk remains the one pinned sequence, and this check still guards the
+    thing that matters: that the pin is built, torn down and rebuilt correctly
+    across client-side navigation.
+  */
+  if (first.spacers !== 1) problems.push(`first visit built ${first.spacers} pins, expected 1`)
   if (away.spacers !== 0) problems.push(`${away.spacers} pin-spacers survived leaving the homepage`)
-  if (back.spacers !== 2) problems.push(`return visit rebuilt ${back.spacers} pins, expected 2`)
+  if (back.spacers !== 1) problems.push(`return visit rebuilt ${back.spacers} pins, expected 1`)
   if (!/wrapper/.test(back.walk)) problems.push(`walk section is not inside its React wrapper (${back.walk})`)
   if (!/wrapper/.test(back.release)) problems.push(`release section is not inside its React wrapper (${back.release})`)
   if (pageErrors.length) problems.push(`errors during round trip: ${pageErrors[0]}`)

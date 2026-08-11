@@ -22,7 +22,9 @@ import { cn } from '@/lib/utils/cn'
 
 /** The label that hangs in the left margin of every desk row. */
 export function DeskLabel({ children }: { children: React.ReactNode }) {
-  return <p className="font-display text-label uppercase text-(--color-text-muted)">{children}</p>
+  return <p
+      data-desk-label
+      className="font-display text-label uppercase text-(--color-text-muted)">{children}</p>
 }
 
 /**

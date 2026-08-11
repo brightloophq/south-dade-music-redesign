@@ -103,7 +103,7 @@ export default function ScholarshipsPage() {
       */}
       <Movement name="scholarship-next" ground="house" className="pb-(--section-feature) pt-(--section-spacious)">
         <FilmMargin wide>
-          <hr className="border-0 border-t border-(--color-border-default)" />
+          <hr data-desk-rule className="origin-left border-0 border-t border-(--color-border-default)" />
           <div className="grid gap-10 pt-(--section-comfortable) lg:grid-cols-[220px_minmax(0,1fr)] lg:gap-16">
             <DeskLabel>{scholarshipsPage.next.heading}</DeskLabel>
             <div className="max-w-[840px]">

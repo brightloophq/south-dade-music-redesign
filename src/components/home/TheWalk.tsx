@@ -1,4 +1,4 @@
-import { Atmosphere, FilmMargin, GhostNumeral, Movement } from '@/components/film'
+import { FilmMargin, FilmVideo, GhostNumeral, Movement } from '@/components/film'
 import { journey } from '@/content/home'
 
 /**
@@ -106,6 +106,32 @@ export function TheWalk() {
       aria-labelledby="walk-heading"
       className="relative bg-(--color-ground-wing)"
     >
+      {/*
+        ONE video for the whole walk, not one per frame.
+
+        Each of the three frames carried its own `FilmVideo` with a per-frame
+        opacity ramp. That was three <video> elements decoding the same file —
+        with the hero's copy, four on the homepage, and measurably four
+        downloads: 1.8 MB of video on desktop for what is one 453 KB clip.
+
+        It is now a single instance behind all three frames. The "light finds
+        the floor" ramp is carried by the per-frame `glow` gradients that were
+        always there, and by the frames' own grounds warming from wing to stage.
+        Same read, a quarter of the cost.
+      */}
+      <FilmVideo
+        name="walk-backstage"
+        job="The Walk — the boards she is crossing, and the room breathing around them"
+        opacity={0.38}
+        className="top-auto bottom-0 h-[46%]"
+        style={{
+          maskImage:
+            'linear-gradient(to top, rgba(0,0,0,1) 0%, rgba(0,0,0,0.85) 42%, rgba(0,0,0,0) 100%)',
+          WebkitMaskImage:
+            'linear-gradient(to top, rgba(0,0,0,1) 0%, rgba(0,0,0,0.85) 42%, rgba(0,0,0,0) 100%)',
+        }}
+      />
+
       <h2 id="walk-heading" className="sr-only">
         {journey.heading}
       </h2>
@@ -119,44 +145,6 @@ export function TheWalk() {
           data-walk-frame={index + 1}
           className="flex min-h-svh flex-col justify-end overflow-hidden py-(--section-feature)"
         >
-          {/*
-            THE FLOOR — EE2.
-
-            07-the-walk.md §ACT II asks for *"a single photographic plate of a
-            scuffed wooden stage floor"*. The build shipped a 1px hairline
-            instead, which reads as a diagram of a floor rather than a floor.
-
-            `atmos-stage-floor` is the one generated asset that actually depicts
-            what its metadata claims: boards, lit from house right, through
-            haze, no people. It is anchored to the bottom of the frame, masked
-            so it dissolves upward into the dark rather than ending on an edge,
-            and it sits *under* the existing hairline and dot — which stay,
-            because they are the elements the timeline animates.
-
-            Lazy-loaded and far below the fold, so the opening frame is still a
-            text node on true black.
-          */}
-          <Atmosphere
-            asset="atmos-stage-floor"
-            job="The Walk — the boards she is crossing, becoming visible as the light finds them"
-            opacity={frame.floor}
-            position="center 78%"
-            sizes="100vw"
-            quality={48}
-            /*
-             * ⚠️ Height is capped deliberately.
-             *
-             * At 58% this plate became the Largest Contentful Paint element for
-             * a visitor who scrolls immediately, and Next warned accordingly.
-             * The correct answer is NOT `priority` — that would preload a
-             * decorative below-fold image and damage the real LCP, which the
-             * direction requires to be a text node on black. Capping the box
-             * keeps the floor doing its job while leaving the type as the
-             * largest paint.
-             */
-            className="top-auto bottom-0 h-[40%]"
-            maskImage="linear-gradient(to top, rgba(0,0,0,1) 0%, rgba(0,0,0,0.85) 42%, rgba(0,0,0,0) 100%)"
-          />
 
           {frame.glow ? (
             <div

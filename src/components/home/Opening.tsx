@@ -1,5 +1,5 @@
 import { Button } from '@/components/ui/Button'
-import { FilmMargin, GhostNumeral, Movement, Seam } from '@/components/film'
+import { FilmMargin, FilmVideo, GhostNumeral, Movement, Seam } from '@/components/film'
 import { hero } from '@/content/home'
 import { siteConfig } from '@/config/site'
 
@@ -40,6 +40,39 @@ export function Opening() {
       className="flex min-h-svh flex-col justify-end overflow-hidden pb-(--section-spacious) pt-(--section-feature)"
     >
       <Seam />
+
+      {/*
+        THE BACKSTAGE, VISIBLE FROM THE FIRST FRAME.
+
+        The footage was generated for The Walk and mounted only there — which
+        begins 1,772px down, two full viewports below the fold. The opening
+        viewport had no media layer at all, so the hero was type and a ghost
+        numeral on flat black and nothing else. Dark was doing all the work and
+        empty was the result.
+
+        The same clip now opens the film. It is deliberately *not* a video hero:
+        it occupies the lower two-thirds, is masked upward so it dissolves into
+        the dark rather than ending on an edge, and sits under every text layer.
+        What a visitor should perceive is a room — curtain edge, boards, a warm
+        seam of light, dust moving — not a playing video.
+
+        Opacity is 0.42 here against 0.18 at the top of the Walk. The hero is the
+        one place the environment has to establish itself; the Walk then starts
+        low again and climbs, so the arc still reads as light finding the floor.
+      */}
+      <FilmVideo
+        name="walk-backstage"
+        job="The opening — the backstage room the film begins in"
+        opacity={0.42}
+        className="top-auto bottom-0 h-[66%]"
+        style={{
+          maskImage:
+            'linear-gradient(to top, rgba(0,0,0,1) 0%, rgba(0,0,0,0.9) 46%, rgba(0,0,0,0) 100%)',
+          WebkitMaskImage:
+            'linear-gradient(to top, rgba(0,0,0,1) 0%, rgba(0,0,0,0.9) 46%, rgba(0,0,0,0) 100%)',
+        }}
+      />
+
 
       {/*
         The ghost "90". Bled off the right edge, sitting 3–5% above pitch so it

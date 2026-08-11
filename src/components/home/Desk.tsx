@@ -3,13 +3,13 @@ import Link from 'next/link'
 import { Button } from '@/components/ui/Button'
 import { Atmosphere, DESK_SENTINEL_ID, FilmMargin, Movement } from '@/components/film'
 import { Photo } from '@/components/media/Photo'
+import { ProgramsIndex } from './ProgramsIndex'
 import {
   finalCta,
   house,
   instruments,
   lessonsSection,
   performanceEvidence,
-  programs,
   programsSection,
   scholarship,
   shyQuestion,
@@ -37,7 +37,9 @@ import {
 /** The label that hangs in the left margin of every desk movement. */
 function DeskLabel({ children }: { children: React.ReactNode }) {
   return (
-    <p className="font-display text-label uppercase text-(--color-text-muted)">{children}</p>
+    <p data-desk-label className="font-display text-label uppercase text-(--color-text-muted)">
+      {children}
+    </p>
   )
 }
 
@@ -248,95 +250,7 @@ function Programs() {
         ⚠️ PREVIEW ONLY. I-7 unconfirmed.
       */}
       <FilmMargin wide>
-        <div className="grid gap-8 lg:grid-cols-[220px_minmax(0,1fr)_240px] lg:gap-14">
-          <div className="lg:pt-2">
-            <DeskLabel>{programsSection.heading}</DeskLabel>
-          </div>
-          <div className="max-w-[840px]">
-        <ol className="w-full">
-          {programs.map((program, index) => {
-            const flagship = index === 0
-            return (
-              <li
-                key={program.id}
-                className="border-b border-(--color-border-default) py-6 last:border-b-0"
-              >
-                <div className="flex flex-wrap items-baseline gap-x-10 gap-y-1">
-                  <span
-                    aria-hidden="true"
-                    className="w-11 shrink-0 font-display text-label uppercase tabular-nums text-(--color-text-muted)"
-                  >
-                    No.&nbsp;{index + 1}
-                  </span>
-                  {/*
-                    `route` stays nullable so a genuinely unbuilt programme can
-                    still be listed honestly rather than linked to a 404. All
-                    six have pages today.
-                  */}
-                  {program.route ? (
-                    <Link
-                      href={program.route}
-                      className={
-                        flagship
-                          ? 'font-body text-display-md italic text-(--color-text-primary) underline-offset-[6px] hover:underline'
-                          : 'font-body text-heading-md italic text-(--color-text-primary) underline-offset-[6px] hover:underline'
-                      }
-                    >
-                      {program.name}
-                    </Link>
-                  ) : (
-                    <span
-                      className={
-                        flagship
-                          ? 'font-body text-display-md italic text-(--color-text-primary)'
-                          : 'font-body text-heading-md italic text-(--color-text-primary)'
-                      }
-                    >
-                      {program.name}
-                    </span>
-                  )}
-                  {program.pendingNote ? (
-                    <span className="font-display text-label uppercase text-(--color-text-muted)">
-                      {program.pendingNote}
-                    </span>
-                  ) : null}
-                </div>
-                {/* The one verified line this programme publishes about itself. */}
-                <p className="mt-2 max-w-[58ch] font-body text-body-sm text-(--color-text-secondary) lg:ml-[84px]">
-                  {program.summary}
-                </p>
-              </li>
-            )
-          })}
-        </ol>
-            <p className="mt-8 max-w-[62ch] font-body text-body-md italic text-(--color-text-muted)">
-              {programsSection.lead}
-            </p>
-          </div>
-
-          {/*
-            The rail, and the same photograph re-cropped rather than dropped.
-
-            At `lg` it is the third column: a 240px vertical rail at the crop's
-            own 600×1500, sticky, so it holds while the six programmes pass it.
-
-            Below `lg` the grid collapses and a 975px-tall column would be a
-            scroll of its own, so the same file is boxed at 3:2 instead and
-            `object-position` pulls the frame down to the hand on the neck —
-            which is the half of the photograph that survives a landscape crop.
-            One element, two intentional crops. The phone gets the picture; it
-            does not get the rail, because there is nothing to run a rail
-            alongside once the layout is a single column.
-          */}
-          <div className="relative aspect-[3/2] w-full overflow-hidden bg-(--color-ground-pitch) lg:sticky lg:top-24 lg:aspect-[600/1500]">
-            <Photo
-              id="bass-hands"
-              alt="The carved scroll of an upright bass rising above a student’s hand gripping the instrument’s neck, in a bright room at South Dade Music."
-              position="center 72%"
-              sizes="(min-width: 1024px) 240px, 100vw"
-            />
-          </div>
-        </div>
+          <ProgramsIndex />
       </FilmMargin>
     </Movement>
   )
@@ -405,6 +319,29 @@ function MusicLessons() {
             {lessonsSection.cta.label}
           </Link>
         </p>
+
+        {/*
+          REAL LEARNING — the missing rung on the homepage's ladder.
+
+          The page moves cinematic possibility → real place → real performance →
+          real proof, and until now it skipped the part in the middle where
+          somebody actually learns something. This is the academy's own lesson
+          room mid-lesson: keyboards, a ukulele, the red SDM sign on the wall.
+
+          It is set at the lessons movement rather than given a movement of its
+          own, because it is evidence for a claim already being made here, not a
+          new argument. Audit #11.
+        */}
+        <figure className="mt-11">
+          <div className="relative aspect-[3/2] w-full overflow-hidden rounded-(--radius-media-sm) sm:rounded-(--radius-media) bg-(--color-ground-pitch) sm:aspect-[2/1]">
+            <Photo
+              id="lesson-room"
+              alt="A South Dade Music lesson in progress: students at digital keyboards and a ukulele, with the academy's red SDM sign on the wall behind them."
+              position="center 58%"
+              sizes="(min-width: 1024px) 840px, 100vw"
+            />
+          </div>
+        </figure>
       </DeskRow>
     </Movement>
   )
@@ -436,35 +373,52 @@ function TwelveWeeks() {
           {twelveWeeks.lead}
         </p>
         {/*
-          MI2 — the schedule now gets brighter as it approaches the stage.
+          THREE PHASES, NOT THREE ROWS.
 
-          §8 of the brief: keep the factual week structure, but let the visitor
-          understand progression visually rather than from three text rows.
+          The weeks were text rows with supporting pictures. They are now
+          phases, and each is composed, sized and *animated* differently, so the
+          section tells the story structurally rather than only in words:
 
-          There is **no photograph here on purpose.** No week-by-week
-          photography exists in the estate, and dropping a recital picture next
-          to "weeks 1–10" would be illustrating a claim with an image of a
-          different thing. What the estate does support is the film's own
-          language: one light source, house right, getting stronger as she gets
-          closer to it.
+            PHASE I    contained   ~44vw, held near the margin, dark and close
+            PHASE II   opening     ~56vw, shifted toward centre
+            PHASE III  arriving    ~74vw, widest and brightest
 
-          So each row carries a light that intensifies — a warm wash from the
-          right at 0 / 0.10 / 0.28, and a rule that goes from hairline grey to
-          full ink on the final row. The row about the live showcase is
-          physically the brightest thing in the section. Nothing is claimed that
-          is not already in the words.
+          The motion is the point. All three could have used one fade-up; that
+          is the generic answer and it says nothing. Each phase instead moves the
+          way its week feels — see `WeeksTimeline`:
 
-          The wash is a plain gradient, not an image: it costs no bytes, needs
-          no consent, and cannot be mistaken for documentary evidence.
+            I    CONTAIN / FOCUS   a narrow slot tightening inward
+            II   OPEN / EXPOSE     a horizontal opening from the left edge
+            III  EXPAND / ARRIVE   a wide opening with a forward push
+
+          ⚠️ The three plates are GENERATED and are not evidence. No week-by-week
+          photography of this academy exists. They are still lifes — a manuscript
+          and a metronome, a microphone before empty chairs, a stage from the
+          wings. No people, no branding, no text.
         */}
-        <dl className="mt-10">
+        <div className="mt-12">
           {twelveWeeks.rows.map((row, index) => {
             const glow = [0, 0.1, 0.28][index] ?? 0
             const last = index === twelveWeeks.rows.length - 1
+            const plate = ['week-practice', 'week-peers', 'week-stage'][index]
+            const phase = ['Phase I', 'Phase II', 'Phase III'][index]
+            /*
+              Each phase is wider than the last, and PHASE III reclaims the
+              220px label column with a negative margin so the stage genuinely
+              dominates rather than staying politely inside the text measure.
+              That break-out is the composition saying "arrival" before the
+              motion does.
+            */
+            const frame = [
+              'w-full max-w-[560px] aspect-[4/3]',
+              'w-full max-w-[780px] aspect-[16/10] sm:ml-[8%]',
+              'w-full aspect-[21/9] lg:-ml-[236px] lg:w-[calc(100%+236px)]',
+            ][index]
             return (
-              <div
+              <section
                 key={row.id}
-                className={`relative isolate flex flex-wrap items-baseline gap-x-10 gap-y-1 overflow-hidden py-5 ${
+                data-phase={index + 1}
+                className={`relative isolate overflow-hidden py-9 ${
                   last
                     ? 'border-t-2 border-(--color-text-primary)'
                     : 'border-t border-(--color-border-default)'
@@ -479,20 +433,39 @@ function TwelveWeeks() {
                     }}
                   />
                 ) : null}
-                <dt className="w-32 shrink-0 font-display text-label uppercase tabular-nums text-(--color-text-muted)">
-                  {row.week}
-                </dt>
-                <dd
-                  className={`font-body text-body-lg text-(--color-text-primary) ${
-                    last ? 'italic' : ''
-                  }`}
+
+                <div className="flex flex-wrap items-baseline gap-x-8 gap-y-1">
+                  <p className="w-24 shrink-0 font-display text-label uppercase tabular-nums text-(--color-text-muted)">
+                    {phase}
+                  </p>
+                  <p className="w-32 shrink-0 font-display text-label uppercase tabular-nums text-(--color-text-muted)">
+                    {row.week}
+                  </p>
+                  <p
+                    className={`font-body text-body-lg text-(--color-text-primary) ${
+                      last ? 'italic' : ''
+                    }`}
+                  >
+                    {row.what}
+                  </p>
+                </div>
+
+                <div
+                  data-week-reveal={index + 1}
+                  className={`relative mt-7 overflow-hidden rounded-(--radius-media-sm) bg-(--color-ground-pitch) sm:rounded-(--radius-media) ${frame}`}
                 >
-                  {row.what}
-                </dd>
-              </div>
+                  <Atmosphere
+                    asset={plate}
+                    job={`The twelve weeks — phase ${index + 1} of 3`}
+                    opacity={1}
+                    sizes="(min-width: 1024px) 860px, 100vw"
+                    quality={52}
+                  />
+                </div>
+              </section>
             )
           })}
-        </dl>
+        </div>
         <p className="mt-6 font-body text-body-sm text-(--color-text-muted)">{twelveWeeks.footnote}</p>
 
         {/*
@@ -557,6 +530,7 @@ function PerformanceEvidence() {
       <div className="relative mb-(--section-comfortable) aspect-[2000/716] w-full overflow-hidden bg-(--color-ground-pitch)">
         <Photo
           id="recital-room"
+          reveal="wipe"
           alt="The South Dade Music recital room during a showcase: rows of families seated on folding chairs facing the lit stage, with the academy banner beside it."
           position="center 55%"
           sizes="100vw"
@@ -617,12 +591,37 @@ function Testimonials() {
   const marginalia = rest.slice(0, 2)
 
   return (
+
+
     <Movement
       name="testimonials"
       ground="house"
       aria-labelledby="testimonials-heading"
       className="py-(--section-feature)"
     >
+      {/*
+        THE ROOM THOSE FAMILIES WERE IN.
+
+        Testimonials, the scholarship note and the final call to action ran to
+        two and a half viewports of unbroken type — the stretch where
+        "typographic breath" turned into an unfinished page.
+
+        Audit #67 is the same room the reviews are about, full: every seat
+        taken, staff at the back, the academy banner lit at the right. It is
+        placed with the quotes rather than given its own movement, because it is
+        the evidence for them — people say this happened, and this is the room
+        it happened in.
+      */}
+      <div className="relative aspect-[16/9] w-full overflow-hidden bg-(--color-ground-pitch) sm:aspect-[2.4/1]">
+        <Photo
+          id="full-house"
+          reveal="wipe"
+          alt="A full audience seated in the South Dade Music room during a showcase, with staff standing at the back and the academy banner lit at the right."
+          position="center 55%"
+          sizes="100vw"
+        />
+      </div>
+
       <FilmMargin wide>
         <h2 id="testimonials-heading" className="sr-only">
           {testimonialsSection.heading}

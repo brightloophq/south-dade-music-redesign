@@ -332,14 +332,36 @@ export function ReleaseTimeline(ctx: FilmContext) {
      * costing screens.
      */
     end: '+=50%',
-    pin: true,
+    /*
+      ⚠️ THE PIN IS OFF, AND IT IS A MEASURED CORRECTION.
+
+      This beat was a full-screen typographic climax when it was designed, and
+      pinning held the viewport while the 3.7s flash played. It is no longer
+      full-screen: the polish pass rebuilt it as a 52svh composition — rule,
+      line and photograph on one axis — which computes to ~797px inside a 900px
+      viewport.
+
+      Pinning an element shorter than the viewport makes ScrollTrigger's spacer
+      collapse and re-expand it. Instrumented, the section reported
+      `height 0 → 797` twice, for **CLS 1.75** at 1440 against 0.003 at 390
+      where pins never run. Raising the frame to 78svh did not help — still
+      shorter than the viewport, still 1.64 — and restoring a full-screen frame
+      would have reinstated exactly the dead ivory this beat was rebuilt to
+      remove.
+
+      So the beat keeps its three timings and loses the hold. The flash plays on
+      the same trigger; the visitor scrolls through it rather than being held in
+      it. The Walk remains the film's one pinned sequence, which is also what
+      the two-pin budget in the direction always intended.
+    */
+    pin: false,
     anticipatePin: 1,
     onEnter: () => tl.play(0),
     onEnterBack: () => tl.play(0),
     onLeave: () => tl.progress(1),
   })
 
-  return register('Release', tl, { trigger: scope, targets: 1, pinned: true })
+  return register('Release', tl, { trigger: scope, targets: 1, pinned: false })
 }
 
 // ---------------------------------------------------------------------------
@@ -420,4 +442,240 @@ export function HouselightsTimeline(ctx: FilmContext) {
   tl.addLabel('room-air')
 
   return register('Houselights', tl, { trigger: scope, targets: 3, scrub: 0.9 })
+}
+
+// ---------------------------------------------------------------------------
+// 7 · THE WEEKS — the one place the desk is allowed to move.
+// ---------------------------------------------------------------------------
+
+/**
+ * *"The film is over; this is the programme in your hands. The desk does not
+ * move at all."*
+ *
+ * This is the documented exception to that rule, made deliberately and kept to
+ * three elements. The twelve-week series is the only sequence on the desk that
+ * is *about* progression, and three plates that simply exist do not progress —
+ * they have to arrive.
+ *
+ * Each reveals as its week is reached, and the three build:
+ *
+ *   weeks 1–10  a narrow slot opens          the smallest move
+ *   week 11     the frame opens further, and drifts in from the margin
+ *   week 12     the widest opening, with the longest settle
+ *
+ * `clipPath` and `opacity` only. Nothing reflows, so this cannot contribute
+ * layout shift, and the reveal reads as light finding an image rather than a
+ * card animating in.
+ *
+ * ## Reduced motion
+ *
+ * `FilmDirector` never calls this, so the plates render at their static values
+ * — fully visible, no clip. Someone who asked for less motion sees all three
+ * immediately.
+ */
+export function WeeksTimeline(ctx: FilmContext) {
+  const { gsap } = ctx
+  const frames = qa('[data-week-reveal]')
+  if (!frames.length) return register('Weeks', gsap.timeline(), { trigger: null, targets: 0 })
+
+  const tl = gsap.timeline()
+
+  /*
+    THREE PHASES, THREE DIFFERENT MOTIONS.
+
+    The generic answer is opacity 0→1 with a 20px lift, applied three times.
+    That is a component animating itself, and it tells the visitor nothing about
+    what the twelve weeks are. Each phase instead moves the way its week feels:
+
+      I   CONTAIN / FOCUS
+          A narrow horizontal slot that tightens inward as it opens, with the
+          plate easing back from 1.06. Practice is repetition inside a small
+          space, so the motion closes in rather than spreading out.
+
+      II  OPEN / EXPOSE
+          A vertical curtain drawn from the left edge, the frame sliding in from
+          the margin as it goes. The room opens and something previously private
+          is now visible from one side.
+
+      III EXPAND / ARRIVE
+          The widest opening, from the centre outward in both directions, with a
+          forward push and the longest settle. Arrival, not a reveal.
+
+    All three are clip-path, transform and opacity — no reflow, no layout shift.
+  */
+  const PHASES = [
+    {
+      /* I — a slot that tightens inward. */
+      from: { clipPath: 'inset(38% 30% 38% 30%)', opacity: 0.3, scale: 1.06, x: 0 },
+      duration: 0.8,
+    },
+    {
+      /* II — a curtain from the left, arriving from the margin. */
+      from: { clipPath: 'inset(0% 0% 0% 100%)', opacity: 0.55, scale: 1.02, x: -28 },
+      duration: 0.95,
+    },
+    {
+      /* III — opening from the centre outward, pushing forward. */
+      from: { clipPath: 'inset(0% 50% 0% 50%)', opacity: 0.65, scale: 0.965, x: 0 },
+      duration: 1.15,
+    },
+  ]
+
+  frames.forEach((frame, index) => {
+    const phase = PHASES[index] ?? PHASES[0]
+
+    gsap.fromTo(frame, phase.from, {
+      clipPath: 'inset(0% 0% 0% 0%)',
+      opacity: 1,
+      scale: 1,
+      x: 0,
+      duration: phase.duration,
+      ease: 'stage',
+      scrollTrigger: {
+        trigger: frame,
+        start: 'top 84%',
+        once: true,
+        onUpdate: (self) => reportProgressSilently(`Weeks-${index + 1}`, self.progress),
+      },
+    })
+  })
+
+  /*
+    THE PROGRESSION ITSELF, SCRUBBED.
+
+    The reveal above makes each plate arrive; this makes the series *move*. A
+    slow scrubbed scale runs across each frame's passage through the viewport,
+    and it grows down the series — 1.02 for the contained weeks, 1.05 for the
+    room, 1.08 for the stage. The plate the visitor is looking at when they
+    reach Week 12 is the one still opening.
+
+    `scale` on a clipped box: no reflow, no layout shift.
+  */
+  frames.forEach((frame, index) => {
+    const to = [1.02, 1.05, 1.08][index] ?? 1.02
+    const plate = frame.querySelector('img') ?? frame
+    gsap.fromTo(
+      plate,
+      { scale: 1 },
+      {
+        scale: to,
+        ease: 'none',
+        scrollTrigger: { trigger: frame, start: 'top bottom', end: 'bottom top', scrub: 1.1 },
+      },
+    )
+  })
+
+  return register('Weeks', tl, { trigger: frames[0], targets: frames.length })
+}
+
+// ---------------------------------------------------------------------------
+// 8 · THE DESK — section-to-section choreography below the film.
+// ---------------------------------------------------------------------------
+
+/**
+ * The film was choreographed and the desk was not.
+ *
+ * Eight movements — house, programs, weeks, lessons, evidence, testimonials,
+ * scholarship, the call to action — arrived as static screens stacked
+ * vertically. Nothing marked one becoming the next, so a page that had been a
+ * continuous authored experience for five viewports turned into a document.
+ *
+ * ## What this animates, and what it deliberately does not
+ *
+ * It animates the **relationship between sections**, not their contents. There
+ * is no fade-up on paragraphs, no stagger on list items, no per-child motion of
+ * any kind — those are the things that make a site feel like a template
+ * animating itself.
+ *
+ * Two devices only:
+ *
+ *   **The rule draws.** Every desk movement is separated by a hairline. Each
+ *   now draws left-to-right as its movement is reached. The site already used
+ *   rules as its primary structural mark; making them arrive is the smallest
+ *   possible gesture that says *a new movement is beginning*.
+ *
+ *   **The label arrives with it.** The label in the left rail lifts 8px and
+ *   fades as its rule completes, so the eye is led from the rule to the thing
+ *   the rule introduces.
+ *
+ * ## Photographs arrive by role, not by rote
+ *
+ * `Photo` declares how it should be uncovered and this reads it:
+ *
+ *   wipe   a horizontal exposure — full-bleed bands
+ *   sweep  a vertical opening — the tall Programs rail
+ *   mask   an aperture from the bottom with a 1.04 → 1 settle — everything else
+ *
+ * `clip-path`, `opacity` and `transform` only. Nothing here reflows, so none of
+ * it can contribute layout shift.
+ */
+export function DeskTimeline(ctx: FilmContext) {
+  const { gsap } = ctx
+  const desk = qa('[data-desk-rule]')
+  const labels = qa('[data-desk-label]')
+  const photos = qa('[data-reveal]').filter((el) => el.getAttribute('data-reveal') !== 'none')
+
+  if (!desk.length && !labels.length && !photos.length) {
+    return register('Desk', gsap.timeline(), { trigger: null, targets: 0 })
+  }
+
+  const tl = gsap.timeline()
+
+  /*
+    The rules and the labels are driven separately on purpose. Interior routes
+    separate their movements with a hairline; the homepage separates them with
+    space and leads each with a label in the left rail. Pairing them would have
+    left the homepage — the page this pass exists for — with nothing moving.
+  */
+  desk.forEach((rule) => {
+    gsap.fromTo(
+      rule,
+      { scaleX: 0 },
+      {
+        scaleX: 1,
+        duration: 0.75,
+        ease: 'stage',
+        scrollTrigger: { trigger: rule, start: 'top 88%', once: true },
+      },
+    )
+  })
+
+  labels.forEach((label) => {
+    gsap.fromTo(
+      label,
+      { opacity: 0, y: 8 },
+      {
+        opacity: 1,
+        y: 0,
+        duration: 0.5,
+        ease: 'stage',
+        scrollTrigger: { trigger: label, start: 'top 92%', once: true },
+      },
+    )
+  })
+
+  photos.forEach((photo) => {
+    const role = photo.getAttribute('data-reveal')
+
+    const from =
+      role === 'wipe'
+        ? { clipPath: 'inset(0% 100% 0% 0%)', opacity: 1 }
+        : role === 'sweep'
+          ? { clipPath: 'inset(100% 0% 0% 0%)', opacity: 1 }
+          : { clipPath: 'inset(0% 0% 100% 0%)', opacity: 0.4, scale: 1.04 }
+
+    gsap.fromTo(photo, from, {
+      clipPath: 'inset(0% 0% 0% 0%)',
+      opacity: 1,
+      scale: 1,
+      duration: role === 'wipe' ? 1.05 : 0.85,
+      ease: 'stage',
+      scrollTrigger: { trigger: photo, start: 'top 88%', once: true },
+    })
+  })
+
+  return register('Desk', tl, {
+    trigger: desk[0] ?? labels[0] ?? photos[0],
+    targets: desk.length + labels.length + photos.length,
+  })
 }

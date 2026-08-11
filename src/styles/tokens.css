@@ -133,6 +133,23 @@
   --radius-xl: 0px;
   --radius-full: 9999px;
 
+  /*
+    THE MEDIA EXCEPTION.
+
+    The zero-radius law holds for every layout container, section, text block,
+    control and surface on this site, and the pill CTA remains the one shape
+    exception. This is the second, and it is narrower than it looks: it applies
+    to PHOTOGRAPHS and to editorial plates set inside a composition — never to
+    full-bleed cinematic media, never to a container, never to navigation.
+
+    A hard 90-degree corner on a photograph reads as a crop mark; on a page of
+    hairlines and right angles it also makes every image look like a placeholder
+    someone forgot to style. 10px is enough to soften the edge and not enough to
+    become a card.
+  */
+  --radius-media: 10px;
+  --radius-media-sm: 8px;
+
   /* Breakpoints — unchanged */
   --breakpoint-sm: 480px;
   --breakpoint-md: 768px;
@@ -259,4 +276,27 @@
     --section-spacious: 160px; --section-feature: 192px;
     --grid-gutter: 32px; --grid-margin: 150px; /* the film margin: type hangs left at 150px */
   }
+}
+
+/* ---------------------------------------------------------------------------
+   PRELOADER — the house lights before the house lights.
+
+   Two keyframes only. The mark arrives by light and settles; the exposure
+   behind it opens once and stops. Both are compositor-only (opacity, scale,
+   filter) so the overlay cannot cost layout.
+   --------------------------------------------------------------------------- */
+
+@keyframes sdm-preload-mark {
+  0%   { opacity: 0; transform: scale(0.94); filter: brightness(0.4); }
+  55%  { opacity: 1; }
+  100% { opacity: 1; transform: scale(1); filter: brightness(1); }
+}
+
+@keyframes sdm-preload-expose {
+  0%   { opacity: 0; transform: scale(0.9); }
+  100% { opacity: 1; transform: scale(1); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  [data-preloader] * { animation: none !important; }
 }

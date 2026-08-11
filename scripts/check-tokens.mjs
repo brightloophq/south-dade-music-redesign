@@ -117,7 +117,16 @@ for (const step of ['none', 'sm', 'md', 'lg', 'xl']) {
   if (v !== '0px') fail(`radius-${step} is "${v}", must be 0px (zero-radius law)`)
 }
 if (cssVar('--radius-full') !== '9999px') fail('radius-full must remain 9999px — the CTA pill exception')
-ok('radius collapsed to 0 with the pill exception intact')
+{
+  const m = cssVar('--radius-media')
+  const ms = cssVar('--radius-media-sm')
+  // The media exception is bounded on purpose: soft enough to kill the crop-mark
+  // edge, hard enough that a photograph never becomes a card.
+  const px = (v) => Number(String(v).replace('px', ''))
+  if (!(px(m) >= 6 && px(m) <= 16)) fail(`radius-media is "${m}", must be 6-16px`)
+  if (!(px(ms) >= 4 && px(ms) <= px(m))) fail(`radius-media-sm is "${ms}", must be 4px..radius-media`)
+}
+ok('radius collapsed to 0 with the pill and media exceptions intact')
 
 /** Shadows: every drop shadow none; spotlight is the one glow. */
 for (const s of ['elev-1', 'elev-2', 'elev-3', 'elev-4', 'dark-modal', 'dark-lightbox']) {

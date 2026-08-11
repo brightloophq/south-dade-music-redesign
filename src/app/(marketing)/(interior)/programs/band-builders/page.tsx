@@ -104,7 +104,7 @@ export default function BandBuildersPage() {
       */}
       <Movement name="alone-together" ground="house" className="pb-(--section-spacious)">
         <FilmMargin wide>
-          <hr className="border-0 border-t border-(--color-border-default)" />
+          <hr data-desk-rule className="origin-left border-0 border-t border-(--color-border-default)" />
           <div className="grid gap-8 pt-(--section-comfortable) lg:grid-cols-[220px_minmax(0,1fr)] lg:gap-16">
             <div className="lg:pt-3">
               <DeskLabel>Alone, then together</DeskLabel>
@@ -132,7 +132,7 @@ export default function BandBuildersPage() {
                 minors. The crop is face-free; the original never ships. I-7
                 copyright is unconfirmed.
               */}
-              <div className="relative mt-10 aspect-[21/9] w-full overflow-hidden bg-(--color-ground-pitch) sm:aspect-[2.39/1]">
+              <div className="relative mt-10 aspect-[21/9] w-full overflow-hidden rounded-(--radius-media-sm) sm:rounded-(--radius-media) bg-(--color-ground-pitch) sm:aspect-[2.39/1]">
                 <Photo
                   id="ensemble-guitars"
                   alt="Two South Dade Music students playing bass and electric guitar side by side on stage under coloured lights, in front of the academy banner."
@@ -187,7 +187,7 @@ export default function BandBuildersPage() {
       */}
       <Movement name="the-path" ground="house" className="pb-(--section-spacious)">
         <FilmMargin wide>
-          <hr className="border-0 border-t border-(--color-border-default)" />
+          <hr data-desk-rule className="origin-left border-0 border-t border-(--color-border-default)" />
           <div className="grid gap-8 pt-(--section-comfortable) lg:grid-cols-[220px_minmax(0,1fr)] lg:gap-16">
             <div className="lg:pt-3">
               <DeskLabel>How to get in</DeskLabel>
@@ -256,7 +256,7 @@ export default function BandBuildersPage() {
       {/* PERFORMING — the conditional, exactly as published, with its proof. */}
       <Movement name="performing" ground="house" className="pb-(--section-feature)">
         <FilmMargin wide>
-          <hr className="border-0 border-t border-(--color-border-default)" />
+          <hr data-desk-rule className="origin-left border-0 border-t border-(--color-border-default)" />
           <div className="grid gap-8 pt-(--section-comfortable) lg:grid-cols-[220px_minmax(0,1fr)] lg:gap-16">
             <div className="lg:pt-3">
               <DeskLabel>Performing</DeskLabel>

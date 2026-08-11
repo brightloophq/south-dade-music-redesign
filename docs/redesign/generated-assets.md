@@ -29,6 +29,9 @@ not in this table has not been reviewed and must not be referenced by UI code.
 | `instrument-strings.jpg` | lessons | instrument-study | 2026-08-09 | gemini-3-pro-image | pending-review |
 | `instrument-percussion.jpg` | lessons | instrument-study | 2026-08-09 | gemini-3-pro-image | pending-review |
 | `stage-empty-chair.jpg` | performances | evidence | 2026-08-09 | gemini-3-pro-image | pending-review |
+| `week-practice.jpg` | home | twelve-weeks | 2026-08-11 | gemini-3-pro-image | pending-review |
+| `week-peers.jpg` | home | twelve-weeks | 2026-08-11 | gemini-3-pro-image | pending-review |
+| `week-stage.jpg` | home | twelve-weeks | 2026-08-11 | gemini-3-pro-image | pending-review |
 <!-- generated-assets:rows:end -->
 
 **Status values:** `pending-review` → `approved` → `integrated`, or `rejected`.
