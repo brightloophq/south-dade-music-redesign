@@ -32,6 +32,7 @@ not in this table has not been reviewed and must not be referenced by UI code.
 | `week-practice.jpg` | home | twelve-weeks | 2026-08-11 | gemini-3-pro-image | pending-review |
 | `week-peers.jpg` | home | twelve-weeks | 2026-08-11 | gemini-3-pro-image | pending-review |
 | `week-stage.jpg` | home | twelve-weeks | 2026-08-11 | gemini-3-pro-image | pending-review |
+| `program-early-rhythm.jpg` | home | programs | 2026-09-15 | gemini-3-pro-image | integrated-for-client-review (owner review pending) |
 <!-- generated-assets:rows:end -->
 
 **Status values:** `pending-review` → `approved` → `integrated`, or `rejected`.

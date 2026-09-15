@@ -75,11 +75,13 @@ Every generated asset, where it appears, and why photography could not serve:
 
 | Asset | Where | Why generated |
 |---|---|---|
-| `walk-backstage` (Veo video) | Hero + The Walk | No footage of an empty stage before a performance exists, and staging one would be documentary invention. Contains no people, text or branding. |
+| `walk-backstage` (Veo video) | Homepage learning journey (atmospheric band behind the heading) | No footage of an empty stage before a performance exists, and staging one would be documentary invention. Contains no people, text or branding. |
 | `week-practice` / `week-peers` / `week-stage` | The three 12-week phases | No week-by-week photography exists. Still lifes only — manuscript and metronome, a microphone before empty chairs, a stage from the wings. |
 | `atmos-curtain-shadow` | The Reframe | Interior weather; a documentary photograph would break the film's fiction. |
 | `atmos-paper-tooth` | The desk | Paper texture. |
 | `instrument-keys` / `-strings` / `-percussion` | `/lessons` instrument index | A uniform index object; real photographs would make seven instruments look like seven different claims. |
+| `program-early-rhythm` | Homepage programmes — Early Childhood | Added in the client-review refinement. The approved portfolio has no early-childhood class photograph. A still life of the first instruments the programme names (frame drum, rhythm sticks, shakers, xylophone); objects only. |
+| `week-practice` / `week-peers` | Homepage learning journey — small inset beside the authentic photograph of each phase | Mood detail only; each phase's main image is now an authentic photograph. `week-stage` is no longer used. |
 
 **No generated asset depicts South Dade students, instructors, facilities or
 events.** Documentary truth is carried only by approved photography.

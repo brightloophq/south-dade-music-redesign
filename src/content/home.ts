@@ -40,6 +40,32 @@ export const hero = {
   supporting: 'Weeks 1–10 skill · Week 11 the class · Week 12 you.',
 
   /**
+   * ✍️ AUTHORED from ✅ verified facts — client-review refinement.
+   *
+   * The supporting line above is shorthand for someone who already knows the
+   * programme. A first-time visitor needed one plain sentence saying what the
+   * place is: lessons (private and group are both published), the ages (the
+   * sitewide "3–18, adults welcome") and the flagship's verbatim shape ("a
+   * structured 12-week program, ending in a live showcase"). No frequency, no
+   * tuition, no unconditional promise.
+   */
+  lead: 'Private and group music lessons for ages 3 to 18 — adults welcome — and a structured 12-week program that ends in a live showcase.',
+
+  /**
+   * The fact strip under the hero. Each value is published elsewhere on the
+   * site in these terms; none is new.
+   */
+  factStrip: [
+    { label: 'Ages', value: '3–18, adults welcome' },
+    { label: 'Lessons', value: 'Private & small group' },
+    { label: 'Instruments', value: 'Seven, piano to voice' },
+    { label: 'Trial', value: '$25, credited to tuition' },
+  ],
+
+  /** ✍️ The exploratory action beside the trial. Both anchors exist on the page. */
+  exploreCta: { label: 'Explore lessons & programs', href: '#programs' },
+
+  /**
    * ✍️ AUTHORED — EE2. Category and place, as a stage direction.
    *
    * Both facts are corroborated throughout the estate: the business is
@@ -597,6 +623,208 @@ export const finalCta = {
    * business confirms it can meet that commitment (04-copy-framework.md §12).
    */
   nextStep: null,
+} as const
+
+// ---------------------------------------------------------------------------
+// Client-review narrative — the homepage as one argument, in order
+// ---------------------------------------------------------------------------
+
+/**
+ * The photograph assigned to each part of the story.
+ *
+ * Every `photo` is an owner-approved first-party image from
+ * `lib/media/catalog.ts`. Every `plate` is a generated still life from
+ * `public/images/generated/` and is only ever used where no photograph of this
+ * academy could do the job — it is always objects, never people, and always
+ * decorative (`alt=""`).
+ *
+ * Alt text describes what is in the frame, not what we would like it to mean.
+ */
+export const introduction = {
+  label: 'The academy',
+  /** ✍️ AUTHORED. Category and place — see `house.statement`. */
+  statement: house.statement,
+  /** ✅ VERBATIM tagline. */
+  tagline: house.tagline,
+  /** ✅ VERBATIM — `/about` "In the community". */
+  body: 'We believe performance is an important part of growth. Students take part in recitals, community events, and group showcases that build confidence and stage experience.',
+  facts: [
+    { label: 'Where', value: house.serviceLine },
+    { label: 'Who', value: house.ages },
+  ],
+  links: [
+    { label: 'Music lessons', href: '/lessons' },
+    { label: 'Programs', href: '/programs' },
+    { label: 'Our story', href: '/about' },
+  ],
+  main: {
+    photo: 'stage-floral',
+    alt: 'The South Dade Music stage set for a showcase: keyboards, a drum kit and congas under coloured light, beside the academy banner reading build community, make music.',
+    caption: 'The stage, set before a showcase.',
+  },
+  detail: {
+    photo: 'bass-hands',
+    alt: 'A student’s hand holding a violin upright, the scroll in focus against a blurred lesson room.',
+  },
+} as const
+
+/**
+ * One photograph per programme, so each reads as its own room rather than as
+ * a row in a list. Keyed by `programEntries[].id`.
+ */
+export const programFrames = {
+  'ninety-day': {
+    photo: 'first-note',
+    alt: 'An instructor leaning down to hand a microphone to a small child on the South Dade Music stage, with an audience seated.',
+  },
+  'private-lessons': {
+    photo: 'ukulele-wall',
+    alt: 'Ukuleles hanging on the wall of the South Dade Music teaching room above an amplifier.',
+  },
+  'group-music-lessons': {
+    photo: 'lesson-room',
+    alt: 'A group lesson in progress: students at digital keyboards and a microphone, with the academy’s SDM sign on the wall.',
+  },
+  'band-builders': {
+    photo: 'event-park',
+    alt: 'Students performing together as a band — vocals, keys, drums and guitars — at the Arte en el Parque community event.',
+  },
+  'early-childhood': {
+    /** ⚠️ GENERATED still life. No photograph of an early-childhood class exists in the approved portfolio. */
+    plate: 'program-early-rhythm',
+  },
+  'summer-camp': {
+    photo: 'camp-circle',
+    alt: 'A summer camp session: young children seated in a circle on the floor with percussion blocks while an instructor leads.',
+  },
+} as const
+
+export const programsShowcase = {
+  label: 'Lessons & programs',
+  /** ✅ `programsHub.heading`. */
+  heading: 'One flagship cycle, and the classes that feed it.',
+  /** ✍️ AUTHORED — mirrors `programsHub.lead` without the pathway detail. */
+  lead: 'Private lessons build the skill, group programmes build the nerve, and the 90-Day Stage Program puts both in front of an audience.',
+  flagshipLabel: 'The flagship',
+  moreLabel: 'More ways to learn',
+  journeyLink: { label: 'Inside the twelve weeks', href: '#twelve-weeks' },
+  allLink: { label: 'Compare all programs', href: '/programs' },
+} as const
+
+/**
+ * The twelve weeks, as three phases with pictures.
+ *
+ * The week bands and their descriptions are ✅ VERBATIM (`twelveWeeks.rows`).
+ * The photographs are authentic; the insets are generated still lifes that
+ * carry the mood of the phase and nothing documentary.
+ *
+ * ⚠️ The captions describe the photographs only. The source publishes no
+ * mapping between these weeks and the three-step narrative on the programme
+ * page, so none is implied here.
+ */
+export const journeyPhases = [
+  {
+    ...twelveWeeks.rows[0],
+    numeral: 'I',
+    counter: { from: 1, to: 10 },
+    photo: 'lesson-duet',
+    alt: 'An instructor at a keyboard beside students at the drums and keys, rehearsing together.',
+    caption: 'Rehearsal at the keys.',
+    plate: 'week-practice',
+  },
+  {
+    ...twelveWeeks.rows[1],
+    numeral: 'II',
+    counter: { from: 11, to: 11 },
+    photo: 'stage-set-purple',
+    alt: 'The South Dade Music room set for a performance: drum kit, keyboards and the academy banner under purple light, the seats still empty.',
+    caption: 'The room, before anyone is watching.',
+    plate: 'week-peers',
+  },
+  {
+    ...twelveWeeks.rows[2],
+    numeral: 'III',
+    counter: { from: 12, to: 12 },
+    photo: 'medals-on-stage',
+    alt: 'Students standing together on stage wearing medals at the end of a South Dade Music showcase.',
+    caption: 'After the showcase.',
+    detail: {
+      photo: 'medals',
+      alt: 'A row of medals with red, white and blue ribbons laid out on a table before a showcase.',
+    },
+  },
+] as const
+
+export const journeySection = {
+  label: 'The 90-Day Stage Program',
+  heading: 'What ninety days looks like.',
+  lead: twelveWeeks.lead,
+  footnote: twelveWeeks.footnote,
+  programLink: { label: 'The full program', href: '/programs/90-day-stage-program' },
+} as const
+
+export const performanceStory = {
+  label: 'Performances',
+  /** ✅ `performances.heading`. */
+  heading: 'It already happened.',
+  /** ✅ VERBATIM — the three performance lines. */
+  lines: ['Real students. Real performances.', 'Music meant to be shared.', 'Confidence built on stage.'],
+  /** ✅ VERBATIM. */
+  body: 'At South Dade Music, learning goes beyond the classroom and into the community.',
+  quote: performanceEvidence.quotes[2],
+  link: { label: 'See the performances', href: '/performances' },
+  frames: [
+    {
+      photo: 'ensemble-leis',
+      alt: 'Students standing together on the South Dade Music stage under blue light at a showcase, wearing leis.',
+      caption: 'Showcase night.',
+    },
+    {
+      photo: 'event-la-bamba',
+      alt: 'A singer and young guitarists performing La Bamba on stage in front of a seated audience.',
+      caption: 'La Bamba, live.',
+    },
+    {
+      photo: 'band-showcase',
+      alt: 'A student band on stage under coloured lights with the South Dade Music banner beside them.',
+      caption: 'A student band, in full voice.',
+    },
+    {
+      photo: 'event-holiday',
+      alt: 'A student playing a digital piano at a holiday recital under green light.',
+      caption: 'A holiday recital.',
+    },
+  ],
+} as const
+
+export const voicesSection = {
+  label: 'What families say',
+  sourceLabel: 'Google reviews',
+  photo: 'full-house',
+  alt: 'A full audience seated in the South Dade Music room during a showcase, with staff standing at the back.',
+  /** Order of the rendered reviews. Minors-naming records are filtered at render. */
+  order: ['nikin-shah', 'elizabeth-garcia', 'yaimarelys-grandales', 'j-val', 'maria-carolina-linares'],
+} as const
+
+export const philosophy = {
+  label: 'Our approach',
+  /** ✍️ AUTHORED — `reframe.hinge`. */
+  heading: reframe.hinge,
+  /** ✅ VERBATIM, protected. */
+  turn: theTurn.line,
+  /** ✅ VERBATIM — `/about` vision. */
+  vision: 'Our vision is to build a strong music community where every student has the opportunity to learn, perform, and grow.',
+  photo: 'community-event',
+  alt: 'Families, students and staff gathered in the South Dade Music room after a showcase.',
+  caption: 'After the show, the room fills back up.',
+  link: { label: 'About South Dade Music', href: '/about' },
+} as const
+
+export const homeFaq = {
+  label: 'Questions',
+  /** ✅ `faqPage.heading`. */
+  heading: 'The things parents ask first.',
+  link: { label: 'All questions', href: '/faq' },
 } as const
 
 // ---------------------------------------------------------------------------

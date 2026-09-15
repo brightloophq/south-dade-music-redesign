@@ -16,6 +16,19 @@ export type RouteStatus = 'live' | 'planned' | 'gated'
 
 export type NavEmphasis = 'default' | 'flagship'
 
+/**
+ * The editorial plate a menu panel carries beside its links. Always an
+ * approved photograph from `lib/media/catalog.ts` — the panel shows the real
+ * room, never a decorative graphic.
+ */
+export interface NavFeature {
+  photo: string
+  alt: string
+  eyebrow: string
+  title: string
+  href: string
+}
+
 export interface NavItem {
   id: string
   label: string
@@ -29,6 +42,12 @@ export interface NavItem {
   /** Facts shown inline in the mega-menu (ages, format, price-from). */
   facts?: readonly string[]
   description?: string
+  /** Column heading this child is listed under inside its parent's panel. */
+  group?: string
+  /** Label for the parent's own overview link inside its panel. */
+  overviewLabel?: string
+  /** Photograph shown in the parent's panel. */
+  feature?: NavFeature
 }
 
 export interface NavGroup {

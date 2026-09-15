@@ -4,9 +4,7 @@
  * Structure: docs/redesign/02-information-architecture.md §2–4
  * Register behaviour: docs/redesign/final-art-direction.md §5
  *
- * ⚠️ PLACEHOLDER ROUTES. Phase 4 builds the navigation *mechanism*; the target
- * pages do not exist yet. Every item carries `status` so the shell can render
- * disabled/annotated states rather than shipping links to 404s.
+ * Every item carries `status` so the shell never ships a link to a 404.
  */
 
 import type { NavGroup, NavItem, PrimaryCta } from '@/types/navigation'
@@ -14,97 +12,184 @@ import type { NavGroup, NavItem, PrimaryCta } from '@/types/navigation'
 /**
  * IA design constraints (02 §2):
  *  - Maximum 6 top-level items
- *  - The flagship must be visible without a hover
  *  - The primary CTA is not a nav item — it is a persistent button
- *  - Language switch is a first-class control
  */
 export const MAX_TOP_LEVEL_ITEMS = 6
 
+/**
+ * Primary navigation — client-review refinement.
+ *
+ * ## Why the structure changed
+ *
+ * The previous bar was six items, four of them dropdowns, and the lesson
+ * formats were split across two menus: Private and Group sat under Programs
+ * while the instruments sat under Lessons. A parent whose first question is
+ * "private or group, and for which instrument?" had to open both.
+ *
+ * It is now organised by the question a family is actually asking:
+ *
+ *   Lessons       how do we learn? — the three formats, then the instruments
+ *   Programs      what is the journey? — the flagship cycle, the band, the camp
+ *   Performances  does it really happen? — the portfolio, one click, no menu
+ *   About         who are you? — the academy, scholarships, questions
+ *   Contact       how do we reach you?
+ *
+ * Early Childhood lives under Lessons because it is a way of learning for ages
+ * 3–6, even though its URL sits under `/programs` (the URL is unchanged — it is
+ * indexed and redirected to).
+ *
+ * ## What is deliberately absent
+ *
+ * `/programs/adults` (gate B-2) and `/teachers` (gate B-7) were listed here as
+ * permanently greyed-out entries. A disabled row inside a menu reads as an
+ * unfinished site, and neither page is designed. They return when they exist.
+ *
+ * Every description below is a fact the source content states — ages, format,
+ * duration — never an authored promise.
+ */
 export const primaryNavigation: readonly NavItem[] = [
   {
-    id: 'ninety-day',
-    label: 'The 90-Day Program',
-    href: '/programs/90-day-stage-program',
+    id: 'lessons',
+    label: 'Lessons',
+    href: '/lessons',
     status: 'live',
-    /** Typographically distinguished — it reads as "the current production". */
-    emphasis: 'flagship',
+    overviewLabel: 'All lessons',
+    feature: {
+      photo: 'lesson-duet',
+      alt: 'An instructor at the keyboard beside South Dade Music students during a lesson.',
+      eyebrow: 'Seven instruments',
+      title: 'Private one-on-one, or small groups.',
+      href: '/lessons',
+    },
+    children: [
+      {
+        id: 'private-lessons',
+        label: 'Private Lessons',
+        href: '/private-lessons',
+        status: 'live',
+        group: 'Ways to learn',
+        description: 'One-on-one · Kids, teens and adults',
+      },
+      {
+        id: 'group-lessons',
+        label: 'Group Music Lessons',
+        href: '/group-music-lessons',
+        status: 'live',
+        group: 'Ways to learn',
+        description: 'Small groups · Ages 6 and up',
+      },
+      {
+        id: 'early-childhood',
+        label: 'Early Childhood',
+        href: '/programs/early-childhood',
+        status: 'live',
+        group: 'Ways to learn',
+        description: 'Play-based classes · Ages 3 to 6',
+      },
+      { id: 'piano', label: 'Piano', href: '/piano-lessons', status: 'live', group: 'Instruments' },
+      { id: 'guitar', label: 'Guitar', href: '/guitar-lessons', status: 'live', group: 'Instruments' },
+      { id: 'drums', label: 'Drums', href: '/drum-lessons', status: 'live', group: 'Instruments' },
+      { id: 'bass', label: 'Bass', href: '/bass-guitar-lessons', status: 'live', group: 'Instruments' },
+      { id: 'violin', label: 'Violin', href: '/violin-lessons', status: 'live', group: 'Instruments' },
+      { id: 'ukulele', label: 'Ukulele', href: '/ukulele-lessons', status: 'live', group: 'Instruments' },
+      { id: 'voice', label: 'Voice', href: '/singing-lessons', status: 'live', group: 'Instruments' },
+    ],
   },
   {
     id: 'programs',
     label: 'Programs',
     href: '/programs',
     status: 'live',
+    overviewLabel: 'All programs',
+    feature: {
+      photo: 'first-note',
+      alt: 'An instructor handing a microphone to a small child on the South Dade Music stage.',
+      eyebrow: 'The flagship',
+      title: 'Twelve weeks, ending in a live showcase.',
+      href: '/programs/90-day-stage-program',
+    },
     children: [
-      { id: 'private-lessons', label: 'Private Lessons', href: '/private-lessons', status: 'live' },
-      { id: 'group-lessons', label: 'Group Lessons', href: '/group-music-lessons', status: 'live' },
-      { id: 'band-builders', label: 'Band Builders', href: '/programs/band-builders', status: 'live' },
-      { id: 'early-childhood', label: 'Early Childhood', href: '/programs/early-childhood', status: 'live' },
-      { id: 'adults', label: 'Adults', href: '/programs/adults', status: 'gated', gate: 'B-2' },
-    ],
-  },
-  {
-    id: 'lessons',
-    label: 'Lessons',
-    href: '/lessons',
-    status: 'live',
-    children: [
-      { id: 'piano', label: 'Piano', href: '/piano-lessons', status: 'live' },
-      { id: 'guitar', label: 'Guitar', href: '/guitar-lessons', status: 'live' },
-      { id: 'drums', label: 'Drums', href: '/drum-lessons', status: 'live' },
-      { id: 'bass', label: 'Bass', href: '/bass-guitar-lessons', status: 'live' },
-      { id: 'violin', label: 'Violin', href: '/violin-lessons', status: 'live' },
-      { id: 'ukulele', label: 'Ukulele', href: '/ukulele-lessons', status: 'live' },
-      { id: 'voice', label: 'Voice', href: '/singing-lessons', status: 'live' },
+      {
+        id: 'ninety-day',
+        label: '90-Day Stage Program',
+        href: '/programs/90-day-stage-program',
+        status: 'live',
+        emphasis: 'flagship',
+        group: 'Programs',
+        description: 'Twelve weeks · Ends in a live showcase',
+      },
+      {
+        id: 'band-builders',
+        label: 'Band Builders',
+        href: '/programs/band-builders',
+        status: 'live',
+        group: 'Programs',
+        description: 'Group · Kids and teens play as a band',
+      },
+      {
+        id: 'camps',
+        label: 'Summer Jam Music Camp',
+        href: '/camps',
+        status: 'live',
+        group: 'Programs',
+        description: 'Three weeks · Ages 7 to 15',
+      },
     ],
   },
   /**
-   * Promoted to the first level.
-   *
-   * `/performances` is now the academy's actual portfolio — real photographs
-   * of real showcases — and it is the strongest evidence the site has.
-   * Leaving it as a child of About buried the one page that proves the
-   * business does what it says.
-   *
-   * The IA cap of six top-level items still holds: Scholarships moves under
-   * About, one interaction away, which is the right depth for a funding topic
-   * a visitor seeks out deliberately rather than stumbles into.
+   * First level, no menu. `/performances` is the academy's portfolio — real
+   * photographs of real showcases — and the page that proves the business
+   * does what it says. It should never be one interaction deep.
    */
   { id: 'performances', label: 'Performances', href: '/performances', status: 'live' },
-  { id: 'camps', label: 'Camps', href: '/camps', status: 'live' },
   {
     id: 'about',
     label: 'About',
     href: '/about',
     status: 'live',
+    overviewLabel: 'About South Dade Music',
+    feature: {
+      photo: 'community-event',
+      alt: 'Families and students gathered together after a South Dade Music showcase.',
+      eyebrow: 'Build Community. Make Music.',
+      title: 'Florida City, Homestead, Cutler Bay, Palmetto Bay.',
+      href: '/about',
+    },
     children: [
-      { id: 'method', label: 'Our Method', href: '/about', status: 'live' },
-      { id: 'scholarships', label: 'Scholarships', href: '/scholarships', status: 'live' },
-      { id: 'teachers', label: 'Teachers', href: '/teachers', status: 'gated', gate: 'B-7' },
-      { id: 'faq', label: 'FAQ', href: '/faq', status: 'live' },
-      { id: 'contact', label: 'Contact', href: '/contact', status: 'live' },
+      {
+        id: 'method',
+        label: 'Our Story',
+        href: '/about',
+        status: 'live',
+        group: 'The academy',
+        description: 'Who we are and how we teach',
+      },
+      {
+        id: 'scholarships',
+        label: 'Scholarships',
+        href: '/scholarships',
+        status: 'live',
+        group: 'The academy',
+        description: 'Step Up PEP and UA accepted',
+      },
+      {
+        id: 'faq',
+        label: 'Questions',
+        href: '/faq',
+        status: 'live',
+        group: 'The academy',
+        description: 'Trials, ages and scholarships',
+      },
     ],
   },
+  { id: 'contact', label: 'Contact', href: '/contact', status: 'live' },
 ]
 
 /**
- * ⚠️ Gate B-8 — the price in the label is a structural fix for the Phase 2
- * non-disclosure failure (04-design-system.md §7 rule 2). Until the price is
- * published the label must NOT invent one.
- */
-/**
- * ⚠️ Corrected during Tier 1.
- *
- * This was `planned` and gated on B-8, which disabled the trial button on
- * every page that renders a header. Two things were wrong with that:
- *
- *   1. **B-8 gates tuition, not the trial.** The $25 spot-hold is
- *      verbatim-extracted and publishable — established in the Phase 4
- *      foundation report and already shipping on the homepage.
- *   2. **The destination now exists.** `/contact/book-a-trial` was built as
- *      Tier 1 route 1; before that it 404'd, which is why it was disabled.
- *
- * The price ships in the label because disclosing it on 2 pages out of 26 was
- * the estate's largest conversion failure.
+ * The trial. `$25` is the verbatim spot-hold, credited to tuition — gate B-8
+ * blocks tuition, not this — and it ships in the label because disclosing the
+ * price on two pages out of twenty-six was the estate's largest conversion
+ * failure.
  */
 export const primaryCta: PrimaryCta = {
   id: 'book-trial',
@@ -116,25 +201,26 @@ export const primaryCta: PrimaryCta = {
 
 /**
  * Footer — four columns per 02-information-architecture.md §3.
- * The footer carries address, hours and phone: it is load-bearing content,
- * not chrome. Placeholder labels only; no final business copy in Phase 4.
+ * The footer carries phone and email: it is load-bearing content, not chrome.
  */
 export const footerNavigation: readonly NavGroup[] = [
   {
     id: 'programs',
     label: 'Programs',
     items: [
-      { id: 'f-ninety', label: 'The 90-Day Program', href: '/programs/90-day-stage-program', status: 'live' },
-      { id: 'f-private', label: 'Private Lessons', href: '/private-lessons', status: 'live' },
-      { id: 'f-group', label: 'Group Lessons', href: '/group-music-lessons', status: 'live' },
+      { id: 'f-ninety', label: '90-Day Stage Program', href: '/programs/90-day-stage-program', status: 'live' },
       { id: 'f-band', label: 'Band Builders', href: '/programs/band-builders', status: 'live' },
+      { id: 'f-camps', label: 'Summer Jam Music Camp', href: '/camps', status: 'live' },
       { id: 'f-early', label: 'Early Childhood', href: '/programs/early-childhood', status: 'live' },
+      { id: 'f-programs', label: 'All programs', href: '/programs', status: 'live' },
     ],
   },
   {
     id: 'lessons',
     label: 'Lessons',
     items: [
+      { id: 'f-private', label: 'Private Lessons', href: '/private-lessons', status: 'live' },
+      { id: 'f-group', label: 'Group Lessons', href: '/group-music-lessons', status: 'live' },
       { id: 'f-piano', label: 'Piano', href: '/piano-lessons', status: 'live' },
       { id: 'f-guitar', label: 'Guitar', href: '/guitar-lessons', status: 'live' },
       { id: 'f-drums', label: 'Drums', href: '/drum-lessons', status: 'live' },
@@ -142,30 +228,18 @@ export const footerNavigation: readonly NavGroup[] = [
       { id: 'f-violin', label: 'Violin', href: '/violin-lessons', status: 'live' },
       { id: 'f-ukulele', label: 'Ukulele', href: '/ukulele-lessons', status: 'live' },
       { id: 'f-voice', label: 'Voice', href: '/singing-lessons', status: 'live' },
+      { id: 'f-lessons', label: 'All lessons', href: '/lessons', status: 'live' },
     ],
   },
   {
     id: 'visit',
-    label: 'Visit',
+    label: 'The Academy',
     items: [
-      { id: 'f-camps', label: 'Camps', href: '/camps', status: 'live' },
       { id: 'f-performances', label: 'Performances', href: '/performances', status: 'live' },
-      /*
-       * EE1 — the gated `/events` entry is removed.
-       *
-       * It rendered as a permanently greyed-out "Events" on all 27 routes: a
-       * dead word in the footer of every page, promising a section that had no
-       * design, no route and no content behind gate I-4.
-       *
-       * The authored location for genuine future performances now exists as the
-       * Upcoming movement on `/performances`, which states plainly that no date
-       * is announced. One real destination that says "not yet" beats a second
-       * greyed label that says nothing. If a dedicated `/events` route is ever
-       * warranted — several dated events, an archive worth browsing — it can be
-       * added then, with content to justify it.
-       */
+      { id: 'f-about', label: 'About', href: '/about', status: 'live' },
       { id: 'f-scholarships', label: 'Scholarships', href: '/scholarships', status: 'live' },
       { id: 'f-contact', label: 'Contact', href: '/contact', status: 'live' },
+      { id: 'f-trial', label: 'Book a Trial', href: '/contact/book-a-trial', status: 'live' },
     ],
   },
   {
@@ -173,19 +247,15 @@ export const footerNavigation: readonly NavGroup[] = [
     label: 'Information',
     items: [
       { id: 'f-faq', label: 'FAQ', href: '/faq', status: 'live' },
-      { id: 'f-pricing', label: 'Pricing', href: '/pricing', status: 'gated', gate: 'B-8' },
+      /*
+       * The gated `/pricing` entry is removed for the same reason EE1 removed
+       * `/events`: it rendered as a permanently greyed-out word on every route,
+       * promising a page with no design and no content behind gate B-8. The
+       * FAQ states plainly that tuition is not published online.
+       */
       { id: 'f-accessibility', label: 'Accessibility', href: '/accessibility', status: 'live' },
       { id: 'f-privacy', label: 'Privacy Policy', href: '/privacy', status: 'live' },
       { id: 'f-terms', label: 'Terms', href: '/terms', status: 'live' },
-      /*
-       * Added in Phase 4B. Both pages existed but were reachable from nowhere —
-       * unlinked, and therefore also absent from the sitemap, which is built
-       * from the `live` entries in this file.
-       *
-       * /photo-consent especially: it is the route that unblocks gate I-1 and
-       * with it every photograph the academy owns. A page nobody can reach
-       * cannot do that.
-       */
       { id: 'f-lesson-cancellation', label: 'Cancellations', href: '/lesson-cancellation', status: 'live' },
       { id: 'f-photo-consent', label: 'Photo Consent', href: '/photo-consent', status: 'live' },
     ],
@@ -200,3 +270,23 @@ export const utilityActions = [
 
 /** Skip-link target. Must match the `id` on the main landmark. */
 export const MAIN_CONTENT_ID = 'main-content'
+
+/**
+ * Which top-level item owns the current route.
+ *
+ * Children are matched before parents: `/programs/early-childhood` belongs to
+ * Lessons even though its path begins with the Programs hub's `/programs`.
+ */
+export function activeNavId(pathname: string, items: readonly NavItem[] = primaryNavigation): string | null {
+  const matches = (href: string) => pathname === href || pathname.startsWith(`${href}/`)
+  for (const item of items) {
+    if (item.children?.some((child) => child.href !== item.href && pathname === child.href)) return item.id
+  }
+  for (const item of items) {
+    if (item.children?.some((child) => matches(child.href))) return item.id
+  }
+  for (const item of items) {
+    if (matches(item.href)) return item.id
+  }
+  return null
+}

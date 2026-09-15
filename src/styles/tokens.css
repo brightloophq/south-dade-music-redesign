@@ -297,6 +297,18 @@
   100% { opacity: 1; transform: scale(1); }
 }
 
+/* The hairline under the mark draws once, left to right — timing, not progress. */
+@keyframes sdm-preload-rule {
+  0%   { transform: scaleX(0); }
+  100% { transform: scaleX(1); }
+}
+
+/* The tagline arrives last, as the exposure finishes developing. */
+@keyframes sdm-preload-line {
+  0%   { opacity: 0; transform: translateY(6px); }
+  100% { opacity: 1; transform: translateY(0); }
+}
+
 @media (prefers-reduced-motion: reduce) {
   [data-preloader] * { animation: none !important; }
 }

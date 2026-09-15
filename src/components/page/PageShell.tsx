@@ -1,4 +1,6 @@
 import { Atmosphere, FilmMargin, Movement } from '@/components/film'
+import { MediaFrame } from '@/components/media/MediaFrame'
+import { DISPLAY_SECTION, Eyebrow } from '@/components/ui/Editorial'
 import { cn } from '@/lib/utils/cn'
 
 /**
@@ -67,25 +69,37 @@ export function PageIntro({
   heading,
   lead,
   children,
+  media,
 }: {
   eyebrow: string
   heading: string
   lead?: string
   children?: React.ReactNode
+  /**
+   * An approved photograph beside the opening. Optional: routes with a
+   * photograph of their own subject carry it here, so the first viewport shows
+   * the thing the page is about rather than a field of cream.
+   */
+  media?: { photo: string; alt: string; caption?: string; position?: string }
 }) {
+  /*
+    CLIENT-REVIEW REFINEMENT — the interior opening speaks at section size.
+
+    The heading was `display-md` (36px at its largest) under a 12px label:
+    a quiet statement is right for the desk, but at that size every interior
+    page opened as a small line of type in a wide field of cream, and the jump
+    from the homepage's headings to a route's own title read as a drop in
+    confidence rather than a change of register.
+
+    It now uses the same section display size and labelled rule as the
+    homepage, so the whole site shares one voice. Nothing else changes: same
+    paper ground, same margin, same lead, same children slot.
+  */
   return (
-    <Movement name="page-intro" ground="house" className="pb-(--section-comfortable) pt-(--section-spacious)">
+    <Movement name="page-intro" ground="house" className="pb-(--section-compact) pt-(--section-comfortable)">
       {/*
-        EE2 — the desk has a surface on interior routes too.
-
-        The same uncoated stock the homepage House movement is set on, so the
-        register is continuous: the film ends, and every page after it is the
-        printed programme. Decorative, `aria-hidden`, lazy-loaded, and the only
-        image on most of these routes.
-
-        ⚠️ It is atmosphere, never evidence. No interior page implies a
-        photograph of this business exists — the academy's own images remain
-        blocked under I-1.
+        The same uncoated stock as the desk: decorative, `aria-hidden`,
+        lazy-loaded. Atmosphere, never evidence.
       */}
       <Atmosphere
         asset="atmos-paper-tooth"
@@ -96,16 +110,33 @@ export function PageIntro({
         quality={40}
       />
       <FilmMargin wide className="relative z-[2]">
-        <DeskLabel>{eyebrow}</DeskLabel>
-        <h1 className="mt-6 max-w-[18ch] font-display text-display-md text-(--color-text-primary)">
-          {heading}
-        </h1>
-        {lead ? (
-          <p className="mt-7 max-w-[62ch] font-body text-body-lg text-(--color-text-secondary)">
-            {lead}
-          </p>
-        ) : null}
-        {children}
+        <div className={cn(media && 'grid gap-12 lg:grid-cols-12 lg:items-center lg:gap-10')}>
+          <div className={cn(media && 'lg:col-span-6')}>
+            <Eyebrow>{eyebrow}</Eyebrow>
+            <h1 className={cn('mt-7 max-w-[20ch] text-(--color-text-primary)', DISPLAY_SECTION)}>{heading}</h1>
+            {lead ? (
+              <p className="mt-7 max-w-[62ch] font-body text-body-lg text-(--color-text-secondary)">
+                {lead}
+              </p>
+            ) : null}
+            {children}
+          </div>
+          {media ? (
+            <figure className="lg:col-span-5 lg:col-start-8">
+              <MediaFrame
+                photo={media.photo}
+                alt={media.alt}
+                priority
+                sizes="(min-width: 1280px) 460px, (min-width: 1024px) 40vw, 100vw"
+                position={media.position}
+                className="aspect-[4/3] w-full lg:aspect-[4/5]"
+              />
+              {media.caption ? (
+                <figcaption className="mt-3 font-display text-body-sm text-(--color-text-muted)">{media.caption}</figcaption>
+              ) : null}
+            </figure>
+          ) : null}
+        </div>
       </FilmMargin>
     </Movement>
   )

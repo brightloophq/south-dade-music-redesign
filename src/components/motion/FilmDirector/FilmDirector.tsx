@@ -10,18 +10,20 @@ import { reportDiagnostics, resetDiagnostics } from '@/lib/motion/diagnostics'
  * One place where the film is directed. Not eleven components each animating
  * themselves — a shot list, executed in order, torn down as a unit.
  *
- * Everything the page does on scroll is created here:
+ * Everything the homepage does on scroll is created here, one personality per
+ * section (see `lib/motion/film/timelines.ts`):
  *
- *   OpeningTimeline      shot 01 — the seam at rest. The load screen.
- *   WingsTimeline        shot 02 — the door opens a hand's width
- *   MemoryTimeline       shot 03 — the temperature drops to brown-black
- *   WalkTimeline         shots 04–06 — PINNED №1. Scroll becomes footsteps
- *   ReleaseTimeline      shot 07  — PINNED №2. 1.5s still / 400ms / 1.8s
- *   HouselightsTimeline  shot 07B — the dimmer rise out of the dark
- *   WeeksTimeline        the twelve-week series — the desk's one exception
+ *   HeroTimeline          cinematic — push-in settle under the preloader, drift
+ *   HeadingsTimeline      every section statement rises from a line mask
+ *   FramesTimeline        every image, with the reveal its section chose
+ *   IntroTimeline         editorial — the detail frame counter-drifts
+ *   JourneyTimeline       progressive — the insets follow, the week counter steps
+ *   PerformancesTimeline  energetic, restrained — lines from alternating sides
+ *   PhilosophyTimeline    a held breath on the protected sentence
+ *   FinaleTimeline        warm — the house lights come up behind the trial
  *
- * There is no batch reveal. Every appearance in this film is by light, and
- * `EmergeBatch` was removed with the rest of the fade-up vocabulary.
+ * There are no pins. The two pinned sequences this director used to run were
+ * retired in the client-review refinement.
  *
  * ## Why one director and not per-component effects
  *
@@ -46,18 +48,11 @@ import { reportDiagnostics, resetDiagnostics } from '@/lib/motion/diagnostics'
  * the work inside is asynchronous anyway — it is about *teardown ordering*.
  *
  * React defers passive (`useEffect`) cleanups until after the mutation phase has
- * already removed host nodes. Two of this film's sections are pinned, and
- * ScrollTrigger implements a pin by wrapping the pinned element in a
- * `pin-spacer` div. With a passive cleanup, React removed those sections from
- * `<main>` *before* `context.revert()` had unwrapped them — and threw
- * `NotFoundError: Failed to execute 'removeChild' on 'Node'` on every first
- * navigation off the homepage.
- *
- * A layout-effect cleanup runs synchronously during the mutation phase, and this
- * component is rendered before the pinned sections, so the spacers are unwrapped
- * before React reaches them. The wrappers in `page.tsx` are the primary,
- * ordering-independent guard; this is the second line and the correct place for
- * GSAP teardown regardless.
+ * already removed host nodes. When this director ran pinned sections, a passive
+ * cleanup let React remove them before `revert()` had unwrapped their
+ * `pin-spacer`s, throwing `NotFoundError` on navigation. There are no pins now,
+ * but `SplitText` rewrites heading DOM the same way, and a layout-phase cleanup
+ * reverts it before React reaches those nodes. Keep it a layout effect.
  *
  * ## Teardown is scoped to this film, never global
  *
@@ -143,15 +138,20 @@ export function FilmDirector() {
       const context = gsap.context(() => {})
       const light = createLight(gsap, context)
       const splits: InstanceType<typeof SplitText>[] = []
-      const filmContext = { gsap, ScrollTrigger, SplitText, Flip, light, splits }
+      const baseContext = { gsap, ScrollTrigger, SplitText, Flip, light, splits }
 
       /*
-       * matchMedia is the film's format.
+       * matchMedia is the format.
        *
-       * The pinned Journey is a widescreen shot: it needs a landscape viewport
-       * and a machine that can scrub. Below `lg` — or under any reduced-motion
-       * preference — the same story is told without a pin, because a pinned
-       * sequence on a phone is a trap rather than a shot.
+       * Both conditions require `prefers-reduced-motion: no-preference`, so
+       * nothing below ever registers for a visitor who asked for less motion.
+       * `cinema` (≥1024px) adds the scrubbed drift and the week counter;
+       * below it the same reveals run without scroll-linked movement, because
+       * scrubbed parallax on a phone costs frames and buys nothing.
+       *
+       * Timelines are created directly in the matchMedia callback — not in an
+       * outer context — so crossing 1024px reverts every tween, trigger and
+       * line split and registers the other format cleanly.
        */
       const mm = gsap.matchMedia()
 
@@ -162,28 +162,16 @@ export function FilmDirector() {
         },
         (mmContext) => {
           const { cinema } = mmContext.conditions as { cinema: boolean; handheld: boolean }
+          const filmContext = { ...baseContext, cinema }
 
-          context.add(() => {
-            film.OpeningTimeline(filmContext)
-            film.WingsTimeline(filmContext)
-            film.MemoryTimeline(filmContext)
-
-            /*
-             * Both pins are desktop-only. On handheld the walk is three plain
-             * swipe-height frames and the release is a static flash frame —
-             * "mobile is a re-cut, not a squeeze" (The Film.html §I). The
-             * static markup is what ships by default; the pin is the
-             * enhancement, so doing nothing here is the correct mobile cut.
-             */
-            if (cinema) {
-              film.WalkTimeline(filmContext)
-              film.ReleaseTimeline(filmContext)
-            }
-
-            film.HouselightsTimeline(filmContext)
-            film.WeeksTimeline(filmContext)
-            film.DeskTimeline(filmContext)
-          })
+          film.HeroTimeline(filmContext)
+          film.HeadingsTimeline(filmContext)
+          film.FramesTimeline(filmContext)
+          film.IntroTimeline(filmContext)
+          film.JourneyTimeline(filmContext)
+          film.PerformancesTimeline(filmContext)
+          film.PhilosophyTimeline(filmContext)
+          film.FinaleTimeline(filmContext)
 
           /*
            * Layout settles after images decode; triggers measured before that

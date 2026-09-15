@@ -1,9 +1,12 @@
 /**
- * The homepage, movement by movement.
- * Canonical spec: docs/approved-design/The Film.html
+ * The homepage, section by section, in narrative order.
  */
-export { Opening } from './Opening'
-export { Reframe } from './Reframe'
-export { TheWalk } from './TheWalk'
-export { TheRelease, HouseLightsReveal } from './TheRelease'
-export { Desk } from './Desk'
+export { HomeHero } from './HomeHero'
+export { Introduction } from './Introduction'
+export { ProgramsShowcase } from './ProgramsShowcase'
+export { LearningJourney } from './LearningJourney'
+export { PerformanceStory } from './PerformanceStory'
+export { Voices } from './Voices'
+export { Philosophy } from './Philosophy'
+export { HomeFaq } from './HomeFaq'
+export { HouseLights } from './HouseLights'

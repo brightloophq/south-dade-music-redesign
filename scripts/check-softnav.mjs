@@ -38,8 +38,10 @@
  *   3. no Next.js dev error overlay
  *   4. the destination visibly renders (real text, exactly one h1)
  *
- * Plus: after navigating back to `/`, the film must re-initialise — the pin
- * rebuilt, and the pinned sections sitting inside their React-owned wrappers.
+ * Plus: after navigating back to `/`, the motion layer must re-initialise —
+ * no pin-spacers anywhere (the refinement retired both pins), every masked
+ * heading split reverted to plain text once revealed, and no reveal left an
+ * image clipped shut.
  *
  * ## Usage
  *
@@ -99,29 +101,35 @@ async function errorOverlay(page) {
 
 const filmState = (page) =>
   page.evaluate(() => {
-    const walk = document.querySelector('[data-film="walk"]')
-    const release = document.querySelector('[data-film="release"]')
-    const wrapped = (el) => {
-      if (!el) return 'absent'
-      const parent = el.parentElement
-      if (!parent) return 'detached'
-      // Either React's wrapper, or GSAP's spacer sitting inside that wrapper.
-      if (parent.classList.contains('pin-spacer')) {
-        return parent.parentElement?.tagName === 'DIV' ? 'pin-spacer in wrapper' : 'pin-spacer at top level'
-      }
-      return parent.tagName === 'DIV' ? 'wrapper' : parent.tagName.toLowerCase()
-    }
+    const headings = [...document.querySelectorAll('main [data-reveal-lines]')]
     return {
       spacers: document.querySelectorAll('.pin-spacer').length,
-      walk: wrapped(walk),
-      release: wrapped(release),
+      sections: document.querySelectorAll('main [data-film]').length,
+      /* A heading still wrapped in SplitText masks after it has been revealed. */
+      splitLeft: headings.filter((h) => h.getBoundingClientRect().bottom < 0 && h.querySelector('div')).length,
+      /* Frames above the fold line whose clip never opened. */
+      clippedShut: [...document.querySelectorAll('main [data-frame]')].filter((f) => {
+        const r = f.getBoundingClientRect()
+        return r.bottom < window.innerHeight * 0.6 && /inset\((?!0%? 0%? 0%? 0%?\))/.test(getComputedStyle(f).clipPath)
+      }).length,
     }
   })
 
 async function clickLink(page, href) {
-  const links = page.locator(`a[href="${href}"]:visible`)
-  if (!(await links.count())) return { ok: false, why: `no visible <a href="${href}"> on ${new URL(page.url()).pathname}` }
-  const link = links.first()
+  /*
+    Visible links first (the header, anything above the fold). Otherwise the
+    first in-page or footer link, scrolled to the way a visitor would reach it:
+    homepage copy below the fold is held hidden until its reveal fires, and the
+    desktop menu's overview links live inside a closed (inert) sheet.
+  */
+  let link = page.locator(`a[href="${href}"]:visible`).first()
+  if (!(await link.count())) {
+    const candidate = page.locator(`main a[href="${href}"], footer a[href="${href}"]`).first()
+    if (!(await candidate.count())) return { ok: false, why: `no <a href="${href}"> on ${new URL(page.url()).pathname}` }
+    await candidate.scrollIntoViewIfNeeded({ timeout: 5000 }).catch(() => {})
+    await page.waitForTimeout(1400)
+    link = candidate
+  }
   try {
     await link.scrollIntoViewIfNeeded({ timeout: 5000 })
     await link.click({ timeout: 5000 })
@@ -184,7 +192,7 @@ for (const hop of HOPS) {
     line(`  ✗ ${label} ${rendered.words}w`)
     for (const p of problems) line(`      ${p}`)
   } else {
-    line(`  ✓ ${label} ${String(rendered.words).padStart(4)}w, 1 h1${before ? `   (left / with ${before.spacers} pins, walk in ${before.walk})` : ''}`)
+    line(`  ✓ ${label} ${String(rendered.words).padStart(4)}w, 1 h1${before ? `   (left / with ${before.sections} sections, ${before.spacers} pins)` : ''}`)
   }
 
   await context.close()
@@ -216,41 +224,30 @@ rule()
   await page.waitForTimeout(2600)
   const back = await filmState(page)
 
-  // Exercise the rebuilt pins.
+  // Exercise the rebuilt timelines: scroll the whole page so every reveal fires.
   await page.evaluate(async () => {
-    for (let y = 0; y < 7000; y += 600) {
+    const h = document.documentElement.scrollHeight
+    for (let y = 0; y < h; y += 500) {
       window.scrollTo(0, y)
-      await new Promise((r) => setTimeout(r, 40))
+      await new Promise((r) => setTimeout(r, 90))
     }
-    window.scrollTo(0, 0)
   })
-  await page.waitForTimeout(600)
+  await page.waitForTimeout(2200)
+  const scrolled = await filmState(page)
 
   const problems = []
-  /*
-    ONE PIN, NOT TWO — updated deliberately, not to make the check pass.
-
-    The film budgeted two pinned sequences: the Walk and the Release. The
-    Release pin was removed after the polish pass rebuilt that beat as a 52svh
-    composition (~797px) instead of a full screen. Pinning an element shorter
-    than the viewport made ScrollTrigger's spacer collapse and re-expand it,
-    measured at **CLS 1.75** on desktop against 0.003 on mobile where pins never
-    run. See the comment on `pin: false` in ReleaseTimeline.
-
-    The Walk remains the one pinned sequence, and this check still guards the
-    thing that matters: that the pin is built, torn down and rebuilt correctly
-    across client-side navigation.
-  */
-  if (first.spacers !== 1) problems.push(`first visit built ${first.spacers} pins, expected 1`)
+  if (first.spacers !== 0) problems.push(`first visit built ${first.spacers} pin-spacers, expected none`)
   if (away.spacers !== 0) problems.push(`${away.spacers} pin-spacers survived leaving the homepage`)
-  if (back.spacers !== 1) problems.push(`return visit rebuilt ${back.spacers} pins, expected 1`)
-  if (!/wrapper/.test(back.walk)) problems.push(`walk section is not inside its React wrapper (${back.walk})`)
-  if (!/wrapper/.test(back.release)) problems.push(`release section is not inside its React wrapper (${back.release})`)
+  if (back.spacers !== 0) problems.push(`return visit built ${back.spacers} pin-spacers, expected none`)
+  if (back.sections < 9) problems.push(`return visit rendered ${back.sections} homepage sections, expected 9`)
+  if (scrolled.splitLeft) problems.push(`${scrolled.splitLeft} revealed headings were never un-split`)
+  if (scrolled.clippedShut) problems.push(`${scrolled.clippedShut} frames scrolled past are still clipped shut`)
   if (pageErrors.length) problems.push(`errors during round trip: ${pageErrors[0]}`)
 
-  line(`  first visit : ${first.spacers} pins · walk ${first.walk} · release ${first.release}`)
+  line(`  first visit : ${first.sections} sections · ${first.spacers} pins`)
   line(`  after leave : ${away.spacers} pins (spacers must be fully reverted)`)
-  line(`  on return   : ${back.spacers} pins · walk ${back.walk} · release ${back.release}`)
+  line(`  on return   : ${back.sections} sections · ${back.spacers} pins`)
+  line(`  scrolled    : ${scrolled.splitLeft} headings still split · ${scrolled.clippedShut} frames clipped shut`)
 
   if (problems.length) {
     failures++
@@ -258,7 +255,7 @@ rule()
     for (const p of problems) line(`  ✗ ${p}`)
   } else {
     line()
-    line('  ✓ film torn down and rebuilt cleanly, pins inside their wrappers')
+    line('  ✓ motion torn down and rebuilt cleanly; every reveal resolved')
   }
 
   await context.close()
@@ -275,7 +272,7 @@ if (failures) {
 }
 line('  ALL SOFT-NAVIGATION CHECKS PASS')
 line()
-line('  Verified: React unmounts the pinned film without a removeChild fault ·')
-line('  every destination renders · the film rebuilds on return.')
+line('  Verified: React unmounts the homepage motion without a removeChild fault ·')
+line('  every destination renders · the timelines rebuild on return.')
 rule('═')
 line()

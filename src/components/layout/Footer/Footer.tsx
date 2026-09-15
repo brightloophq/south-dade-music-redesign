@@ -141,17 +141,22 @@ export function Footer({ className }: { className?: string }) {
 
         <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
           {/*
-            The authentic mark, small, above the colophon. Same first-party
-            asset as the header (census #76) at the 180px variant, because the
-            footer never needs the 720px file.
+            The authentic mark above the colophon, in its ivory colourway — the
+            same first-party asset the header uses over the photograph, because
+            the footer ground is dark.
+
+            ⚠️ `self-start` is load-bearing. In the mobile `flex-col` layout the
+            default `align-items: stretch` stretched the image to the full row
+            width, distorting the mark horizontally at every width below 480px.
           */}
           <Image
-            src="/brand/south-dade-music-small.png"
+            src="/brand/south-dade-music-light.png"
             alt=""
             aria-hidden="true"
-            width={180}
-            height={107}
-            className="mb-5 h-9 w-auto opacity-80"
+            width={720}
+            height={428}
+            sizes="96px"
+            className="h-12 w-auto self-start opacity-90"
           />
           <Text token="body-sm" className="text-n-400">
             © {year} {siteConfig.shortName}

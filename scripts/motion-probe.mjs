@@ -2,10 +2,10 @@
 /**
  * Motion runtime probe — development diagnostic tool.
  *
- * Drives the homepage in a real headless Chrome and asserts THE FILM — the six
- * named timelines, the two pinned sequences, the letterbox retracting at the
- * house lights, the grain stopping at the desk, the seam opening 3px→9px, and
- * the shout slot still being the typeset blank.
+ * Drives the homepage in a real headless Chrome and asserts the direction — the
+ * eight named timelines, that nothing is pinned, the letterbox and grain present
+ * over the opening and gone at the first light section, the header turning from
+ * overlay to solid on the same beat, and the week counter walking to 12.
  *
  * It samples the direction's own instruments rather than generic scroll
  * effects, so a regression in any of them is a regression in the direction.
@@ -171,16 +171,6 @@ const readState = () =>
       vignette: cs.getPropertyValue('--vignette').trim(),
       tint: cs.getPropertyValue('--atmos-tint').trim(),
       canvas: canvas ? { w: canvas.width, h: canvas.height, display: getComputedStyle(canvas).display } : null,
-      /*
-       * The shout ships as a typeset blank until the owner supplies the word.
-       * "empty" is the CORRECT state — if this ever reports text, someone
-       * invented the largest word on the site.
-       */
-      shoutSlot: (() => {
-        const el = document.querySelector('[data-shout-slot]')
-        if (!el) return 'missing'
-        return (el.textContent ?? '').trim() === '' ? 'empty' : 'FILLED'
-      })(),
       diag: window.__MOTION_DIAGNOSTICS__ ?? null,
       // Delivery-safety surface: what a visitor could actually observe.
       debugGlobals: Object.keys(window).filter((k) => /^__(MOTION|GSAP|NEXT_DEBUG)/.test(k)),
@@ -250,7 +240,7 @@ if (!diag && PRODUCTION_MODE) {
 // ---------------------------------------------------------------------------
 // Scroll the page and watch things actually change
 // ---------------------------------------------------------------------------
-head('STEP 4 — WALKING THE FILM')
+head('STEP 4 — WALKING THE PAGE')
 
 /*
  * Sample the film's own instruments rather than generic scroll effects: the
@@ -269,25 +259,25 @@ for (let i = 0; i <= 20; i += 1) {
 
   const s = await page.evaluate(() => {
     const root = getComputedStyle(document.documentElement)
-    const opening = document.querySelector('[data-film="opening"]')
     const grain = document.querySelector('[data-film-grain]')
+    const week = document.querySelector('[data-journey-week]')
+    const header = document.querySelector('[data-site-header]')
     const num = (v) => Number.parseFloat(v) || 0
     return {
       y: Math.round(window.scrollY),
       letterbox: num(root.getPropertyValue('--letterbox-h')),
       grain: grain ? Number.parseFloat(getComputedStyle(grain).opacity) : -1,
-      seam: opening ? num(getComputedStyle(opening).getPropertyValue('--seam-width')) : 0,
-      spill: opening ? num(getComputedStyle(opening).getPropertyValue('--seam-spill')) : 0,
-      lightIntensity: num(root.getPropertyValue('--light-intensity')),
+      week: week ? Number(week.textContent) : 0,
+      header: header?.getAttribute('data-site-header') ?? 'missing',
     }
   })
   samples.push(s)
 }
 
-line('     scrollY   letterbox   grain    seam   spill   light')
+line('     scrollY   letterbox   grain   week   header')
 for (const s of samples) {
   line(
-    `   ${String(s.y).padStart(7)}   ${s.letterbox.toFixed(1).padStart(9)}   ${s.grain.toFixed(3).padStart(5)}   ${s.seam.toFixed(1).padStart(5)}   ${String(Math.round(s.spill)).padStart(5)}   ${s.lightIntensity.toFixed(2).padStart(5)}`,
+    `   ${String(s.y).padStart(7)}   ${s.letterbox.toFixed(1).padStart(9)}   ${s.grain.toFixed(3).padStart(5)}   ${String(s.week).padStart(4)}   ${s.header}`,
   )
 }
 
@@ -309,7 +299,7 @@ if (routeNotFound.length) {
 
 const timelines = Object.values(before.diag?.timelines ?? {})
 const named = timelines.map((t) => t.name)
-const REQUIRED = ['Opening', 'Wings', 'Memory', 'Walk', 'Release', 'Houselights']
+const REQUIRED = ['Hero', 'Headings', 'Frames', 'Introduction', 'Journey', 'Performances', 'Philosophy', 'Finale']
 const missing = REQUIRED.filter((n) => !named.includes(n))
 const pinned = timelines.filter((t) => t.pinned).map((t) => t.name)
 
@@ -317,13 +307,12 @@ const letterboxMax = Math.max(...samples.map((s) => s.letterbox))
 const letterboxMin = Math.min(...samples.map((s) => s.letterbox))
 const grainMax = Math.max(...samples.map((s) => s.grain))
 const grainMin = Math.min(...samples.map((s) => s.grain))
-const seamMax = Math.max(...samples.map((s) => s.seam))
-const spillMax = Math.max(...samples.map((s) => s.spill))
+const weekMax = Math.max(...samples.map((s) => s.week))
+const headerStates = new Set(samples.map((s) => s.header))
 
 const instrumentationChecks = [
-  ['six timelines created', missing.length === 0, missing.length ? `missing ${missing.join(', ')}` : named.join(', ')],
-  ['exactly two pinned', pinned.length === 2, pinned.join(' + ') || 'none'],
-  ['the two pins are Walk + Release', pinned.includes('Walk') && pinned.includes('Release'), pinned.join(' + ')],
+  ['eight timelines created', missing.length === 0, missing.length ? `missing ${missing.join(', ')}` : named.join(', ')],
+  ['no pinned sequences', pinned.length === 0, pinned.join(' + ') || 'none'],
   ['all timelines found their trigger', timelines.every((t) => t.triggerFound), `${timelines.filter((t) => t.triggerFound).length}/${timelines.length}`],
 ]
 
@@ -343,11 +332,10 @@ const results = [
   // Grain is film-only: present in the dark, absent below the house lights.
   ['grain present in the film', grainMax >= 0.03, `max ${grainMax.toFixed(3)}`],
   ['grain absent at the desk', grainMin <= 0.005, `min ${grainMin.toFixed(3)}`],
-  // The seam is the whole reveal mechanism for the hero.
-  ['the seam opens to 9px', seamMax >= 8.5, `max ${seamMax.toFixed(1)}px`],
-  ['the amber spills', spillMax >= 200, `max ${Math.round(spillMax)}px`],
-  // The shout ships as a typeset blank until the owner supplies the word.
-  ['shout slot present and empty', before.shoutSlot === 'empty', String(before.shoutSlot)],
+  // The week counter steps to 12 as the journey is walked (desktop format).
+  ['week counter reaches 12', weekMax === 12, `max ${weekMax}`],
+  // The header floats over the hero and turns solid at the first light section.
+  ['header overlay → solid', headerStates.has('overlay') && headerStates.has('solid'), [...headerStates].join(' → ')],
 ]
 
 let failed = 0

@@ -39,6 +39,48 @@ import { trialOffer } from '@/content/pages'
  * "Contact us to schedule a lesson" with no link — which is why every route out
  * of this page is a real control.
  */
+/**
+ * The approved photograph of each instrument, as it appears in the academy's
+ * own portfolio. Every one shows the instrument the page teaches — a student
+ * at a piano, a bass on its stand, a violin scroll in a student's hand — so the
+ * opening is evidence rather than decoration. Keyed by `Instrument.id`.
+ */
+const INSTRUMENT_MEDIA: Record<string, { photo: string; alt: string; position?: string }> = {
+  piano: {
+    photo: 'event-holiday',
+    alt: 'A student playing a digital piano at a South Dade Music holiday recital under green light.',
+    position: '35% center',
+  },
+  guitar: {
+    photo: 'ensemble-guitars',
+    alt: 'Two South Dade Music students playing bass and electric guitar side by side on stage.',
+    position: '62% center',
+  },
+  drums: {
+    photo: 'stage-set-purple',
+    alt: 'A drum kit and keyboards set on the South Dade Music stage under purple light.',
+    position: '70% center',
+  },
+  bass: {
+    photo: 'bass-on-stand',
+    alt: 'A bass guitar resting on its stand beside balloons and a table set for a South Dade Music event.',
+  },
+  violin: {
+    photo: 'bass-hands',
+    alt: 'A student’s hand holding a violin upright, the scroll in focus.',
+    position: 'center 30%',
+  },
+  ukulele: {
+    photo: 'ukulele-wall',
+    alt: 'Ukuleles hanging on the wall of the South Dade Music teaching room.',
+  },
+  voice: {
+    photo: 'event-la-bamba',
+    alt: 'A singer performing La Bamba on the South Dade Music stage with young guitarists beside her.',
+    position: '40% center',
+  },
+}
+
 export function InstrumentLessonPage({ instrument }: { instrument: Instrument }) {
   const {
     name,
@@ -56,7 +98,12 @@ export function InstrumentLessonPage({ instrument }: { instrument: Instrument })
 
   return (
     <>
-      <PageIntro eyebrow="Music lessons" heading={`${name} lessons`} lead={description}>
+      <PageIntro
+        eyebrow="Music lessons"
+        heading={`${name} lessons`}
+        lead={description}
+        media={INSTRUMENT_MEDIA[instrument.id]}
+      >
         <div className="mt-10">
           <Button href="/contact/book-a-trial" size="lg" price={trialOffer.price}>
             Book a Trial
