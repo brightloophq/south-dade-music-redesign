@@ -39,17 +39,20 @@ export const stage = {
 /**
  * Spotlight is ONE light, not a ramp.
  *
- * `500` is the light itself. `700` is the amber-derived dark used where amber
- * must speak as text on a light ground — amber at full strength is 1.9:1 on
- * house and is banned as text.
+ * `500` is the light itself — the green of the South Dade wordmark — and is a
+ * fill, never text on a light ground (2.6:1 on house). `400` is the lifted
+ * value used for type and hover states on dark, `600` the pressed state, and
+ * `700` the dark green that may speak as text on the ivory ground (5.8:1).
  */
 export const spot = {
-  500: '#E9A23B',
-  700: '#8A5A1B',
+  400: '#6FC486',
+  500: '#4CAD67',
+  600: '#3D9155',
+  700: '#2E6B41',
 } as const
 
 /**
- * ⚠️ RETIRED. A second accent breaks the amber budget.
+ * ⚠️ RETIRED. A second accent breaks the spot budget.
  *
  * Kept only so stale references fail soft into the text colour rather than
  * throwing. Remove in cleanup once no component references them.
@@ -89,12 +92,12 @@ export const functional = {
 export const palette = { ground, stage, spot, velvet, neutral, ash, functional } as const
 
 /**
- * The amber ration — four uses on the entire homepage, fixed.
+ * The spot ration — four uses on the entire homepage, fixed.
  *
- * Amber is light, never decoration: not a border, not a hover, not a link
+ * The spot is light, never decoration: not a border, not a hover, not a link
  * colour. Exported as data so a review can assert against it by name.
  */
-export const amberUses = [
+export const spotUses = [
   'seam-of-light',
   'the-source',
   'release-flash',
@@ -129,17 +132,18 @@ export const semanticColors = {
 export const contrastContract = [
   { fg: ground.house, bg: ground.pitch, min: 7, note: 'body on dark — 18.1:1' },
   { fg: neutral[900], bg: ground.house, min: 7, note: 'body on house — 15.6:1' },
-  { fg: ground.stage, bg: spot[500], min: 7, note: 'CTA text on amber — 9.4:1' },
+  { fg: ground.pitch, bg: spot[500], min: 7, note: 'CTA text on the spot — 7.2:1' },
   { fg: ash, bg: ground.pitch, min: 4.5, note: 'ash on dark — 5.3:1' },
   { fg: neutral[500], bg: ground.house, min: 4.5, note: 'muted on house — 4.6:1' },
 ] as const
 
 /**
- * ⚠️ HARD RULE (Visual Specification.md §B): amber on house is **1.9:1** —
- * confirmed failing, never set as text. Amber is a fill or a light, never type.
+ * ⚠️ HARD RULE (Visual Specification.md §B, palette re-pointed to the wordmark
+ * green): the spot on house is **2.6:1** — confirmed failing, never set as
+ * text. The spot is a fill or a light, never type.
  */
 export const bannedCombinations = [
-  { fg: spot[500], bg: ground.house, reason: '1.9:1 — never as text' },
+  { fg: spot[500], bg: ground.house, reason: '2.6:1 — never as text' },
   { fg: spot[500], bg: neutral[0], reason: 'fails all text contrast' },
   { fg: spot[500], bg: ground.flash, reason: 'fails all text contrast' },
 ] as const

@@ -49,7 +49,7 @@ export function HouseLights() {
       <div
         aria-hidden="true"
         data-finale-glow
-        className="absolute inset-0 -z-10 bg-[radial-gradient(ellipse_60%_70%_at_18%_60%,rgba(233,162,59,0.16),transparent_70%)]"
+        className="absolute inset-0 -z-10 bg-[radial-gradient(ellipse_60%_70%_at_18%_60%,rgba(76,173,103,0.16),transparent_70%)]"
       />
 
       <FilmMargin wide>

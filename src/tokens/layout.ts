@@ -71,7 +71,7 @@ export type Breakpoint = keyof typeof breakpoints
  * The grid. Mirrors `--grid-margin` / `--grid-gutter` in tokens.css.
  *
  * The 150px margin at ≥1280px is **the film margin** — the line every
- * subtitle-hung line of type in movements 1–6 sits on, and the line the amber
+ * subtitle-hung line of type in movements 1–6 sits on, and the line the spot
  * seam travels along. It is not generic page padding; moving it breaks the
  * relationship between the light and the words.
  *

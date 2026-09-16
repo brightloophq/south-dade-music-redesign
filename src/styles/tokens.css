@@ -3,7 +3,7 @@
  * DROP-IN REPLACEMENT for src/styles/tokens.css.
  *
  * Canonical spec: Visual Specification.md + The Film.html (frozen 7 Aug 2026).
- * Direction: "The Film" — colour is a temperature arc, amber is light (4 uses),
+ * Direction: "The Film" — colour is a temperature arc, the spot is light (4 uses),
  * radius 0 (pill excepted), no drop shadows, Bricolage Grotesque + Newsreader.
  * TypeScript mirror src/tokens/*.ts must be updated together with this file.
  */
@@ -26,12 +26,17 @@
   --color-stage-700: #242c3d;  /* hairline on dark */
   --color-stage-600: #3a4256;
 
-  /* Spotlight is ONE light, not a ramp. 500 = the light. 700 = amber-derived
-     text on flash/house where amber must speak (9.4:1 on flash as fill-text). */
-  --color-spot-500: #e9a23b;
-  --color-spot-700: #8a5a1b;
+  /* THE SPOT — the academy's own green, taken from the wordmark.
+     500 is the light itself and is a FILL, never text on a light ground
+     (2.6:1 on house). 400 is the lifted value for type and hover states on
+     dark; 600 is the pressed state; 700 is the dark green that may speak as
+     text on the ivory ground (5.8:1). */
+  --color-spot-400: #6fc486;
+  --color-spot-500: #4cad67;
+  --color-spot-600: #3d9155;
+  --color-spot-700: #2e6b41;
 
-  /* Velvet is RETIRED as an accent — a second accent breaks the amber budget.
+  /* Velvet is RETIRED as an accent — a second accent breaks the spot budget.
      Tokens kept so old references fail soft into the text colour. */
   --color-velvet-500: #17120c;
   --color-velvet-600: #17120c;
@@ -174,7 +179,7 @@
   --shadow-elev-4: none;
   --shadow-dark-modal: none;
   --shadow-dark-lightbox: none;
-  --shadow-spotlight: 0 0 46px 12px rgba(233, 162, 59, 0.4);
+  --shadow-spotlight: 0 0 46px 12px rgba(76, 173, 103, 0.4);
 
   /* Motion — four curves, unchanged. No component invents its own. */
   --ease-stage: cubic-bezier(0.22, 1, 0.36, 1);
@@ -234,12 +239,18 @@
   --color-text-secondary: var(--color-n-600);
   --color-text-muted: var(--color-n-500);
   --color-action-primary-bg: var(--color-spot-500);
-  --color-action-primary-fg: var(--color-ground-stage);
+  /* Pitch, not stage: #05070B on the spot green is 7.18:1, where the stage
+     blue is 6.65:1 and misses the 7:1 floor the contrast contract enforces. */
+  --color-action-primary-fg: var(--color-ground-pitch);
   /* Secondary action is a no-fill underline treatment — velvet is retired */
   --color-action-secondary-bg: transparent;
   --color-action-secondary-fg: var(--color-n-900);
-  --color-link-default: var(--color-n-900);    /* links underline; never amber */
-  --color-focus-ring: var(--color-spot-500);
+  --color-link-default: var(--color-n-900);    /* links underline; never the spot */
+  /* The focus ring is the one place the spot must be legible as a LINE on the
+     ivory ground, so the light register uses the dark green (5.8:1) and the
+     dark register the lifted one (9.5:1). The retired amber managed 1.97:1 on
+     ivory, which is why this is register-aware now. */
+  --color-focus-ring: var(--color-spot-700);
   --color-focus-ring-offset: var(--color-n-50);
 }
 
@@ -256,7 +267,8 @@
   --color-text-primary: #f7f4ee;
   --color-text-secondary: var(--color-ash);
   --color-text-muted: var(--color-ash);
-  --color-link-default: #f7f4ee;   /* underline on hover; amber is never a link */
+  --color-link-default: #f7f4ee;   /* underline on hover; the spot is never a link */
+  --color-focus-ring: var(--color-spot-400);
   --color-focus-ring-offset: var(--color-ground-pitch);
 }
 

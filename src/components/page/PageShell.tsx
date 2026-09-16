@@ -19,7 +19,7 @@ import { cn } from '@/lib/utils/cn'
  *
  * What carries over from the film: the 150px margin, the hairline instead of a
  * card edge, radius 0, no shadows, Bricolage for structure and Newsreader for
- * voice, and amber reserved for the primary action.
+ * voice, and the spot reserved for the primary action.
  */
 
 /** The label that hangs in the left margin of every desk row. */

@@ -16,7 +16,7 @@ const LIFT_MS = 950
  * The house lights before the house lights.
  *
  * Pitch → the authentic mark develops → a hairline draws beneath it → one
- * restrained amber exposure behind it → the tagline → the curtain lifts and
+ * restrained green exposure behind it → the tagline → the curtain lifts and
  * the stage photograph is already settling underneath.
  *
  * ## The sequence (cold visit)
@@ -24,7 +24,7 @@ const LIFT_MS = 950
  *   0.00s  pitch
  *   0.30s  the mark develops out of the dark
  *   0.90s  the hairline draws
- *   1.20s  the amber exposure opens behind the mark
+ *   1.20s  the exposure opens behind the mark
  *   1.45s  "Build Community. Make Music."
  *   2.45s  the curtain begins to lift — `data-preloading` is cleared here, so
  *          the hero's push-in and line reveal start *under* the rising edge
@@ -144,7 +144,7 @@ export function Preloader() {
           className="absolute inset-0"
           style={{
             backgroundImage:
-              'radial-gradient(ellipse 70% 55% at 62% 52%, rgba(233,162,59,0.16), transparent 70%)',
+              'radial-gradient(ellipse 70% 55% at 62% 52%, rgba(76,173,103,0.16), transparent 70%)',
             animation: 'sdm-preload-expose 1000ms var(--ease-stage) 1200ms both',
           }}
         />

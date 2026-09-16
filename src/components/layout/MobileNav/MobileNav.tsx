@@ -93,7 +93,7 @@ export function MobileNav({ className }: { className?: string }) {
         className="pointer-events-none absolute inset-0"
         style={{
           backgroundImage:
-            'radial-gradient(ellipse 80% 50% at 100% 0%, rgba(233,162,59,0.10), transparent 70%)',
+            'radial-gradient(ellipse 80% 50% at 100% 0%, rgba(76,173,103,0.10), transparent 70%)',
         }}
       />
 

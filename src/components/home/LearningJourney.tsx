@@ -26,7 +26,7 @@ import { cn } from '@/lib/utils/cn'
  *
  * The Walk's best idea survives as the counter: scroll is still footsteps.
  * As each phase crosses the reading line the numeral steps 1 → 10, then 11,
- * then 12, and the twelve ticks fill in amber. It is decorative
+ * then 12, and the twelve ticks fill in the spot green. It is decorative
  * (`aria-hidden`) — the week bands themselves are real headings in the list.
  *
  * Each phase grows: I is a portrait, II opens wider, III takes the whole

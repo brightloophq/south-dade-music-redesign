@@ -20,7 +20,7 @@ export interface BadgeProps {
 const toneClass: Record<BadgeVariant, Record<BadgeTone, string>> = {
   solid: {
     neutral: 'bg-n-800 text-n-0',
-    /** Amber is a FILL here, never text on light — spot-500 on white is 2.0:1. */
+    /** The spot is a FILL here, never text on light — spot-500 on house is 2.6:1. */
     accent: 'bg-spot-500 text-stage-950',
     success: 'bg-success text-n-0',
     warn: 'bg-warn text-n-0',

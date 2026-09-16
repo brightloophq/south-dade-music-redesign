@@ -46,7 +46,7 @@ export const metadata: Metadata = buildMetadata({
  *
  * The homepage makes you *feel* the walk; this page makes you *understand* it.
  * Same vocabulary — ghost numerals, the film margin, stage language, rationed
- * amber, asymmetry — deliberately without replaying the film. There is no pin,
+ * the spot, asymmetry — deliberately without replaying the film. There is no pin,
  * no letterbox and no grain here: this is the desk.
  *
  * ## ⚠️ What still does not ship
@@ -345,7 +345,7 @@ export default function NinetyDayStageProgramPage() {
           />
           <GhostNumeral
             value="90"
-            color="rgba(233,162,59,0.14)"
+            color="rgba(76,173,103,0.14)"
             className="-right-[3vw] bottom-[-12%] leading-none"
           />
         </div>

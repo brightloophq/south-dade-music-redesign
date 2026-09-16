@@ -70,8 +70,8 @@ const base = cn(
 
 const variantClass: Record<ButtonVariant, string> = {
   /**
-   * The trial action. Amber pill, stage-blue text — 8.6:1.
-   * This is amber use №4 of 4, and the only rounded object on the site.
+   * The trial action. The spot-green pill, pitch text — 7.2:1.
+   * This is spot use №4 of 4, and the only rounded object on the site.
    */
   primary: cn(
     'rounded-(--radius-full) bg-spot-500 text-(--color-ground-stage)',
@@ -79,7 +79,7 @@ const variantClass: Record<ButtonVariant, string> = {
   ),
   /**
    * No fill, 1px underline on hover, no pill shape. Velvet is retired — a
-   * second accent breaks the amber budget.
+   * second accent breaks the spot budget.
    */
   secondary: cn(
     'bg-transparent text-(--color-text-primary)',
@@ -110,7 +110,7 @@ const variantClass: Record<ButtonVariant, string> = {
     'bg-spot-500 text-stage-950 shadow-spotlight',
     'transition-[background-color,box-shadow] duration-(--duration-base)',
     'pointer-fine:hover:bg-spot-400',
-    'pointer-fine:hover:shadow-[0_0_0_1px_var(--color-spot-500),0_12px_44px_rgba(245,165,36,0.42)]',
+    'pointer-fine:hover:shadow-[0_0_0_1px_var(--color-spot-500),0_12px_44px_rgba(76,173,103,0.42)]',
     'active:bg-spot-600 active:shadow-spotlight',
   ),
   /** Hero secondary, on dark grounds. */

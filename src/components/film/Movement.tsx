@@ -74,7 +74,7 @@ export function Movement({
  * The film margin.
  *
  * 150px at ≥1280px — the line every subtitle-hung line of type sits on, and the
- * line the amber seam travels along. Not generic page padding: moving it breaks
+ * line the spot seam travels along. Not generic page padding: moving it breaks
  * the relationship between the light and the words.
  *
  * Content occupies columns 2–8 through the film and opens to 2–11 at the desk

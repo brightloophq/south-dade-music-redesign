@@ -99,7 +99,7 @@
   }
 
   /*
-   * Selection inside the House register. The default amber-on-dark selection
+   * Selection inside the House register. The default spot-on-dark selection
    * is unreadable against `stage-950`; this keeps it legible in both rooms.
    */
   [data-register='house'] ::selection {
@@ -113,7 +113,7 @@
   }
 
   /*
-   * Selection is inverted ink, not amber. Amber is rationed to four light
+   * Selection is inverted ink, not the spot. The spot is rationed to four light
    * events (Visual Specification.md §B) and a selection highlight is not one
    * of them — it is generic UI decoration, which is exactly the use the
    * direction forbids.
@@ -247,7 +247,7 @@ section[data-register='house']::after {
   pointer-events: none;
   background: linear-gradient(
     to top,
-    rgb(245 165 36 / calc(0.07 + var(--atmos-warmth, 0.3) * 0.06)),
+    rgb(76 173 103 / calc(0.07 + var(--atmos-warmth, 0.3) * 0.06)),
     transparent
   );
 }
@@ -256,7 +256,7 @@ section[data-register='house']::after {
  * Cinematic image treatment.
  *
  * Atmospheric plates are graded rather than used raw: contrast pulled back so
- * blacks stay open, saturation eased so amber never turns orange, and a soft
+ * blacks stay open, saturation eased so the spot never turns acid, and a soft
  * edge falloff so nothing terminates at a hard rectangle. Together these are
  * the difference between a photograph placed on a page and one lit into it.
  *

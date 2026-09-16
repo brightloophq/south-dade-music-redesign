@@ -41,7 +41,7 @@ export const metadata: Metadata = buildMetadata({
  * ## What survived from "The Film"
  *
  * The temperature arc (dark → ivory → dark → ivory → dark), the letterbox and
- * grain over the opening, the single warm source house-right, amber rationed to
+ * grain over the opening, the single warm source house-right, the spot green rationed to
  * the trial buttons and the week counter, and the backstage clip — now the
  * weather behind the twelve weeks.
  *

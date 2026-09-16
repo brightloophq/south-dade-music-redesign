@@ -18,10 +18,10 @@ export const shadow = {
   darkModal: 'none',
   darkLightbox: 'none',
   /**
-   * The ONE glow. Not a shadow and not a CTA ring — it is the amber radial that
+   * The ONE glow. Not a shadow and not a CTA ring — it is the spot radial that
    * appears at the mark and at the release, and nowhere else.
    */
-  spotlight: '0 0 46px 12px rgba(233, 162, 59, 0.4)',
+  spotlight: '0 0 46px 12px rgba(76, 173, 103, 0.4)',
 } as const
 
 export type ShadowToken = keyof typeof shadow

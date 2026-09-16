@@ -76,7 +76,7 @@ export function HomeHero() {
       {/* One warm source, house right — the light every movement shares. */}
       <div
         aria-hidden="true"
-        className="absolute inset-0 -z-10 bg-[radial-gradient(ellipse_55%_60%_at_88%_30%,rgba(233,162,59,0.14),transparent_70%)]"
+        className="absolute inset-0 -z-10 bg-[radial-gradient(ellipse_55%_60%_at_88%_30%,rgba(76,173,103,0.14),transparent_70%)]"
       />
 
       {/*

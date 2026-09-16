@@ -17,7 +17,7 @@ import { cn } from '@/lib/utils/cn'
  * The numeral sits a few percent above whichever ground it is on, so its value
  * changes per movement — `#131824` on wing, `#141A2C` on stage, `#0C1018` on
  * pitch. Deriving that with `opacity` instead would let the grain and the
- * amber spill show through it, which reads as a translucent overlay rather
+ * spot spill show through it, which reads as a translucent overlay rather
  * than as something painted on the back wall.
  */
 

@@ -134,7 +134,7 @@ for (const s of ['elev-1', 'elev-2', 'elev-3', 'elev-4', 'dark-modal', 'dark-lig
   if (v !== 'none') fail(`shadow-${s} is "${v}", must be none (zero-shadow law)`)
 }
 const glow = cssVar('--shadow-spotlight')
-if (!glow || !/rgba\(233,\s*162,\s*59/.test(glow)) fail(`--shadow-spotlight must be the amber glow, got "${glow}"`)
+if (!glow || !/rgba\(76,\s*173,\s*103/.test(glow)) fail(`--shadow-spotlight must be the spot glow, got "${glow}"`)
 ok('shadows removed; --shadow-spotlight is the one glow')
 
 /** The three structural beats are non-negotiable lengths. */
@@ -178,7 +178,7 @@ const ratio = (a, b) => {
 const PAIRS = [
   ['#F7F4EE', '#05070B', 7, 'body on pitch'],
   ['#17120C', '#F7F4EE', 7, 'body on house'],
-  ['#0D1220', '#E9A23B', 7, 'CTA text on amber'],
+  ['#05070B', '#4CAD67', 7, 'CTA text on the spot'],
   ['#8A8578', '#05070B', 4.5, 'ash on pitch'],
   ['#746E61', '#F7F4EE', 4.5, 'muted on house'],
 ]
@@ -189,9 +189,19 @@ for (const [fg, bg, min, label] of PAIRS) {
 }
 
 /** The banned pair must genuinely fail — if it ever passes, the palette moved. */
-const banned = ratio('#E9A23B', '#F7F4EE')
-if (banned >= 4.5) fail(`amber on house now reads ${banned.toFixed(2)}:1 — the ban assumed it fails`)
-else ok(`amber on house ${banned.toFixed(2)}:1 — correctly banned as text`)
+const banned = ratio('#4CAD67', '#F7F4EE')
+if (banned >= 4.5) fail(`the spot on house now reads ${banned.toFixed(2)}:1 — the ban assumed it fails`)
+else ok(`the spot on house ${banned.toFixed(2)}:1 — correctly banned as text`)
+
+/** The focus ring must be legible as a line in BOTH registers. */
+for (const [ring, ground, label] of [
+  ['#2E6B41', '#F7F4EE', 'focus ring on house'],
+  ['#6FC486', '#05070B', 'focus ring on pitch'],
+]) {
+  const r = ratio(ring, ground)
+  if (r < 3) fail(`${label}: ${r.toFixed(2)}:1 below the 3:1 non-text floor`)
+  else ok(`${label}: ${r.toFixed(2)}:1 (≥3)`)
+}
 
 // ---------------------------------------------------------------------------
 // Report
